@@ -1,26 +1,24 @@
 %implementing document formatting:
-\input{preamble.tex}
+\input{preamble_ida14.tex}
 \input{macros.tex}
 \begin{document}
 
-%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-%|||||||				Example Inputs					 ||||||||
-%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-%|||||||												 ||||||||
-%	\input{rapportAfsnit/zExamples/aFigureSample.tex}	%||||||||
-%	\input{rapportAfsnit/zExamples/bTableSample.tex}	%||||||||
-%	\input{rapportAfsnit/zExamples/cEquationSample.tex}	%||||||||
-%|||||||												 ||||||||
-%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-%||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+%numbers the pages with Roman numeral - starts from "i":
+\frontmatter
 
+%the '*' allows the tableofcontents be excepted from the actual table of contents.
+\tableofcontents*
 
-%---------------------------INPUTS-------------------------------
+%numbers the pages with Arabic numeral - starts from 1.
+\mainmatter
 
-\input{rapportAfsnit/aIntroduktion/aIntroduktion}
-\input{rapportAfsnit/aIntroduktion/bEtEksempel}
-\input{rapportAfsnit/aIntroduktion/cTest}
- 
+\begingroup
+\raggedright
+\bibliographystyle{unsrtnat}
+\bibliography{kilder}
+\endgroup
 
-\printbibliography
+\begin{appendices}
+\end{appendices}
+
 \end{document}
