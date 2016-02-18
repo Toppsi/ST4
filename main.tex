@@ -1,3 +1,4 @@
+% !TeX spellcheck = da_DK
 %implementing document formatting:
 \input{preamble_ida14.tex}
 \input{macros.tex}
@@ -10,13 +11,18 @@
 \includepdf[pages={1}]{rapportAfsnit/pFormaliteter/synopsis.pdf} \clearpage 
 \chapter*{Forord og læsevejledning}
 \input{rapportAfsnit/pFormaliteter/Forord}
+\newpage
 
 %the '*' allows the tableofcontents be excepted from the actual table of contents.
 \tableofcontents*
 
 %numbers the pages with Arabic numeral - starts from 1.
 \mainmatter
-% Ting bare for at vise jer, at det virker
+\chapter{Indledning}
+\input{rapportAfsnit/bInitierende/indledning}
+% Problemanalyse
+\chapter{Problemanalyse}
+\input{rapportAfsnit/cProblemanalyse/Fysiologisk}
 
 
 \begingroup
