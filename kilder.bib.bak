@@ -22,6 +22,29 @@
   Timestamp                = {2016.02.22}
 }
 
+@Article{Berchtold2010,
+  Title                    = {Exercise and cognitive functioning},
+  Author                   = {Berchtold, Nicole C.},
+  Journal                  = {AccessScience},
+  Year                     = {2010},
+
+  Doi                      = {http://dx.doi.org.zorac.aub.aau.dk/10.1036/1097-8542.YB100072},
+  Owner                    = {josefinedamgade},
+  Timestamp                = {2016.02.22}
+}
+
+@Book{Bugge2015,
+  Title                    = {Forsøg med Læring i Bevægelse},
+  Author                   = {Bugge, Anna and Seelen, Jesper von and Herskind, Mia and Svendler, Charlotte and Thorsen, Anne Kær and Dam, Jørn and Tarp, Jakob and Sørensen, Mona Have and Olesen, Line Grønholt and Froberg, Karsten},
+  Editor                   = {Bugge, Anna and Froberg, Karsten},
+  Publisher                = {Institut for Idræt og Biomekanik, Syddansk Universitet},
+  Year                     = {2015},
+
+  Comment                  = {ISBN: 978-87-93192-28-7-8},
+  Owner                    = {josefinedamgade},
+  Timestamp                = {2016.02.22}
+}
+
 @Article{Hjort1997,
   Title                    = {Fysisk inaktivitet - den glemte risikofaktor},
   Author                   = {Hjort, Peter Fredrik},
