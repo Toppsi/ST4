@@ -45,6 +45,17 @@
   Timestamp                = {2016.02.22}
 }
 
+@Article{Ekelund2015,
+  Title                    = {Physical activity and all-cause mortality across levels of overall and abdominal adiposity in European men and women: the European Prospective Investigation into Cancer and Nutrition Study},
+  Author                   = {Ekelund, Ulf et. al.},
+  Journal                  = {the American Society for Nutrition},
+  Year                     = {2015},
+
+  Doi                      = {10.3945/ajcn.114.100065},
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22}
+}
+
 @Article{Hjort1997,
   Title                    = {Fysisk inaktivitet - den glemte risikofaktor},
   Author                   = {Hjort, Peter Fredrik},
