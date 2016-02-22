@@ -56,6 +56,16 @@
   Url                      = {http://www.annclinlabsci.org/content/42/3/320.full.pdf}
 }
 
+@Book{Martini2012,
+  Title                    = {Fundementals of Anatomy \& Physiology},
+  Author                   = {Martini, Frederic H. and Nath, Judi L. and Bartholomew, Edwin F.},
+  Publisher                = {Pearson},
+  Year                     = {2012},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22}
+}
+
 @Book{Mosby2009,
   Title                    = {Mosby's Medical Dictionary},
   Author                   = {Mosby},
@@ -67,6 +77,17 @@
   Url                      = {http://medical-dictionary.thefreedictionary.com/disuse+syndrome}
 }
 
+@Article{Nestle2014,
+  Title                    = {Obesity},
+  Author                   = {Nestle, Marion},
+  Journal                  = {AccessScience},
+  Year                     = {2014},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22},
+  Url                      = {http://www.accessscience.com.zorac.aub.aau.dk/content/obesity/463300}
+}
+
 @Article{Reshma2002,
   Title                    = {Physical inactivity a leading cause of disease and disability, warns WHO},
   Author                   = {Reshma, Prakash},
@@ -76,5 +97,15 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
+}
+
+@Book{Ahmad2014,
+  Title                    = {Obesity},
+  Editor                   = {Ahmad, Shamim I. and Imam, Syed Khalid},
+  Publisher                = {Springer},
+  Year                     = {2014},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22}
 }
 
