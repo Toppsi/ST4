@@ -56,6 +56,13 @@
   Timestamp                = {2016.02.22}
 }
 
+@Electronic{,
+  Title                    = {Fakta om kondition og puls},
+  Author                   = {Hjerteforeningen},
+  Organization             = {Hjerteforeningen},
+  Url                      = {https://www.hjerteforeningen.dk/files/Motion/Faktaark_om_konditioin_og_puls.pdf}
+}
+
 @Article{Hjort1997,
   Title                    = {Fysisk inaktivitet - den glemte risikofaktor},
   Author                   = {Hjort, Peter Fredrik},
@@ -148,6 +155,40 @@
   Author                   = {ObesityActionCoalition},
   Organization             = {ObesityActionCoalition},
   Url                      = {http://www.obesityaction.org/educational-resources/obesity-statistics-fact-sheets}
+}
+
+@Electronic{PowerAbout2015,
+  Title                    = {UNICEF Kid Power},
+  Author                   = {UNICEF Kid Power},
+  Organization             = {UNICEF},
+  Url                      = {http://schools.unicefkidpower.org/about/},
+  Year                     = {2015},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.22}
+}
+
+@Electronic{PowerManual2015,
+  Title                    = {Kid Power Band Manual (Kid Power Band 2.0)},
+  Author                   = {UNICEF Kid Power},
+  Month                    = {10},
+  Organization             = {UNICEF},
+  Url                      = {http://support.schools.unicefkidpower.org/hc/en-us/articles/206611105-Kid-Power-Band-Manual-Kid-Power-Band-2-0-},
+  Year                     = {2015},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.22}
+}
+
+@Electronic{PowerMission2015,
+  Title                    = {Go on Missions},
+  Author                   = {UNICEF Kid Power},
+  Organization             = {UNICEF},
+  Url                      = {http://unicefkidpower.org/missions},
+  Year                     = {2015},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.22}
 }
 
 @Article{Reshma2002,
