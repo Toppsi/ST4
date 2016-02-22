@@ -12,6 +12,16 @@
   Timestamp                = {2016.02.19}
 }
 
+@Book{Ahmad2014,
+  Title                    = {Obesity},
+  Author                   = {Ahmad, Shamim I. and Imam, Syed Khalid},
+  Publisher                = {Springer},
+  Year                     = {2014},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22}
+}
+
 @Article{Hjort1997,
   Title                    = {Fysisk inaktivitet - den glemte risikofaktor},
   Author                   = {Hjort, Peter Fredrik},
@@ -97,15 +107,5 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
-}
-
-@Book{Ahmad2014,
-  Title                    = {Obesity},
-  Editor                   = {Ahmad, Shamim I. and Imam, Syed Khalid},
-  Publisher                = {Springer},
-  Year                     = {2014},
-
-  Owner                    = {Cecilie},
-  Timestamp                = {2016.02.22}
 }
 
