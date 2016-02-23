@@ -1,5 +1,4 @@
-% This file was created with JabRef 2.10.
-% Encoding: UTF8
+% Encoding: UTF-8
 
 
 @Article{Academic2016,
@@ -10,6 +9,17 @@
 
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19}
+}
+
+@Electronic{Academic2016a,
+  Title                    = {Physical activity},
+  Author                   = {Britannica Academic},
+  Month                    = {Februar},
+  Organization             = {Encyclopædia Britannica Inc},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.22}
 }
 
 @Book{Ahmad2014,
@@ -43,6 +53,14 @@
   Comment                  = {ISBN: 978-87-93192-28-7-8},
   Owner                    = {josefinedamgade},
   Timestamp                = {2016.02.22}
+}
+
+@Article{COWI2015,
+  author =  {COWI},
+  title =   {Evaluering af ABC med fokus på samfundsøkonomiske effekter},
+  journal = {Cyklistforbundet},
+  year =    {2015},
+  number =  {1. udgave}
 }
 
 @Article{Ekelund2015,
@@ -191,6 +209,15 @@
   Timestamp                = {2016.02.22}
 }
 
+@Article{Reilly2006,
+  author =  {Reilly, J. J.},
+  title =   {Obesity in childhood and adolescence: evidence based clinical and public health perspectives},
+  journal = {Postgraduate Medical Journal},
+  year =    {2006},
+  doi =     {10.1136/pgmj.2005.043836},
+  url =     {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
+}
+
 @Article{Reshma2002,
   Title                    = {Physical inactivity a leading cause of disease and disability, warns WHO},
   Author                   = {Reshma, Prakash},
@@ -200,5 +227,29 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
+}
+
+@Electronic{SundhedsstyrrelsenFaktaark,
+  author = {Sundhedsstyrrelsen},
+  title =  {Overvægt blandt børn og unge i Danmark},
+  url =    {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx.}
+}
+
+@Book{Universitet2014,
+  title =     {Skolebørnsundersøgelsen 2014},
+  publisher = {Statens Institut for Folkesundhed},
+  year =      {2014},
+  author =    {Syddansk Universitet},
+  editor =    {Rasmussen, Mette and Pagh Pedersen, Trine and Due, Pernille},
+  edition =   {1. udgave},
+  review =    {ISBN: 978-87-7899-296-3}
+}
+
+@Electronic{Vindum2012,
+  author =       {Vindum, Anne},
+  year =         {2012},
+  title =        {Overvægtige børn og unge},
+  organization = {Dagbladet Information},
+  url =          {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge}
 }
 
