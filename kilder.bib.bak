@@ -1,4 +1,5 @@
-% Encoding: UTF-8
+% This file was created with JabRef 2.10.
+% Encoding: UTF8
 
 
 @Article{Academic2016,
@@ -56,11 +57,11 @@
 }
 
 @Article{COWI2015,
-  author =  {COWI},
-  title =   {Evaluering af ABC med fokus på samfundsøkonomiske effekter},
-  journal = {Cyklistforbundet},
-  year =    {2015},
-  number =  {1. udgave}
+  Title                    = {Evaluering af ABC med fokus på samfundsøkonomiske effekter},
+  Author                   = {COWI},
+  Journal                  = {Cyklistforbundet},
+  Year                     = {2015},
+  Number                   = {1. udgave}
 }
 
 @Article{Ekelund2015,
@@ -210,12 +211,13 @@
 }
 
 @Article{Reilly2006,
-  author =  {Reilly, J. J.},
-  title =   {Obesity in childhood and adolescence: evidence based clinical and public health perspectives},
-  journal = {Postgraduate Medical Journal},
-  year =    {2006},
-  doi =     {10.1136/pgmj.2005.043836},
-  url =     {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
+  Title                    = {Obesity in childhood and adolescence: evidence based clinical and public health perspectives},
+  Author                   = {Reilly, J. J.},
+  Journal                  = {Postgraduate Medical Journal},
+  Year                     = {2006},
+
+  Doi                      = {10.1136/pgmj.2005.043836},
+  Url                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
 }
 
 @Article{Reshma2002,
@@ -229,27 +231,70 @@
   Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
 }
 
+@Article{Smith1991,
+  Title                    = {Physical Activity Effects on Bone Metabolism},
+  Author                   = {Smith, Everett L. and Gilligan, Catherine},
+  Journal                  = {Calcified Tissue International},
+  Year                     = {1991},
+
+  Doi                      = {49:$50-$54},
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.23}
+}
+
+@Book{Stanfield2013,
+  Title                    = {Human Physiology},
+  Author                   = {Stanfield, Cindy L},
+  Publisher                = {Pearson},
+  Year                     = {2013},
+
+  Owner                    = {Cecilie},
+  Review                   = {0-321-81934-9},
+  Timestamp                = {2016.02.23}
+}
+
+@Book{StatensInstitutforFolkesundhed2007,
+  Title                    = {Folkesundhedsrapporten Danmark 2007},
+  Author                   = {Statens Institut for Folkesundhed, Syddansk Universitet},
+  Editor                   = {Kjøller, Mette and Juel, Knud and Kamper-Jørgensen, Finn},
+  Publisher                = {Statens Institut for Folkesundhed, Syddansk Universitet},
+  Year                     = {2007},
+
+  Review                   = {ISBN: 978-87-7899-121-8}
+}
+
+@Electronic{Sundhedsstyrelsen2016,
+  Title                    = {60 minutter om dagen ved moderat til høj intensitet},
+  Author                   = {Sundhedsstyrelsen},
+  Url                      = {https://sundhedsstyrelsen.dk/da/sundhed-og-livsstil/fysisk-aktivitet/anbefalinger/5-17-aar},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.23}
+}
+
 @Electronic{SundhedsstyrrelsenFaktaark,
-  author = {Sundhedsstyrrelsen},
-  title =  {Overvægt blandt børn og unge i Danmark},
-  url =    {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx.}
+  Title                    = {Overvægt blandt børn og unge i Danmark},
+  Author                   = {Sundhedsstyrrelsen},
+  Url                      = {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx.}
 }
 
 @Book{Universitet2014,
-  title =     {Skolebørnsundersøgelsen 2014},
-  publisher = {Statens Institut for Folkesundhed},
-  year =      {2014},
-  author =    {Syddansk Universitet},
-  editor =    {Rasmussen, Mette and Pagh Pedersen, Trine and Due, Pernille},
-  edition =   {1. udgave},
-  review =    {ISBN: 978-87-7899-296-3}
+  Title                    = {Skolebørnsundersøgelsen 2014},
+  Author                   = {Syddansk Universitet},
+  Editor                   = {Rasmussen, Mette and Pagh Pedersen, Trine and Due, Pernille},
+  Publisher                = {Statens Institut for Folkesundhed},
+  Year                     = {2014},
+  Edition                  = {1. udgave},
+
+  Review                   = {ISBN: 978-87-7899-296-3}
 }
 
 @Electronic{Vindum2012,
-  author =       {Vindum, Anne},
-  year =         {2012},
-  title =        {Overvægtige børn og unge},
-  organization = {Dagbladet Information},
-  url =          {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge}
+  Title                    = {Overvægtige børn og unge},
+  Author                   = {Vindum, Anne},
+  Organization             = {Dagbladet Information},
+  Url                      = {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge},
+  Year                     = {2012}
 }
 
