@@ -91,6 +91,28 @@
   Timestamp                = {2016.02.22}
 }
 
+@Electronic{Fuhu_tech2015,
+  Title                    = {Tech Specs},
+  Author                   = {Fuhu, inc.},
+  Organization             = {Nabi},
+  Url                      = {https://www.nabitablet.com/wearables/compete/specs},
+  Year                     = {2015},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.25}
+}
+
+@Electronic{Fuhu2015,
+  Title                    = {Nabi Compete},
+  Author                   = {Fuhu, inc.},
+  Organization             = {Nabi},
+  Url                      = {https://www.nabitablet.com/wearables/compete},
+  Year                     = {2015},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.25}
+}
+
 @Electronic{Hjerteforeningen,
   Title                    = {Fakta om kondition og puls},
   Author                   = {Hjerteforeningen},
@@ -110,6 +132,18 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.18},
   Url                      = {http://brage.bibsys.no/xmlui/bitstream/handle/11250/2377624/Hjort_1997_Fys242.pdf?sequence=1&isAllowed=y}
+}
+
+@Electronic{Ibitz_features2016,
+  Title                    = {Ibitz features},
+  Author                   = {Ibitz},
+  Month                    = {02},
+  Organization             = {Geopalz},
+  Url                      = {http://ibitz.com/features/},
+  Year                     = {2016},
+
+  Owner                    = {Line Hald},
+  Timestamp                = {2016.02.25}
 }
 
 @Article{Kaprio2008,
@@ -143,6 +177,18 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   Url                      = {http://www.annclinlabsci.org/content/42/3/320.full.pdf}
+}
+
+@Electronic{Leyland2007,
+  Title                    = {The Myth of the Fat-Burning Zone},
+  Author                   = {Leyland, Tony},
+  Month                    = {Februar},
+  Organization             = {CrossFit Journal Article},
+  Url                      = {http://norcalwaterpolo.com/downloads/54_07_Myth_Fat_Burn_Zone.pdf},
+  Year                     = {2007},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.25}
 }
 
 @Book{Martini2012,
@@ -316,5 +362,16 @@
   Organization             = {Dagbladet Information},
   Url                      = {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge},
   Year                     = {2012}
+}
+
+@Electronic{Heartratejournal2015,
+  Title                    = {The Myth of Losing Weight in Fat Burning Zones},
+  Month                    = {November},
+  Organization             = {Heart Rate Journal},
+  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
+  Year                     = {2015},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.25}
 }
 
