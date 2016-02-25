@@ -1,5 +1,4 @@
-% This file was created with JabRef 2.10.
-% Encoding: UTF8
+% Encoding: UTF-8
 
 
 @Electronic{Academic2016,
@@ -70,6 +69,17 @@
   Timestamp                = {2016.02.22}
 }
 
+@Article{Cotman2007,
+  Title                    = {Exercise builds brain health: key roles of growth factor cascades and inflammation},
+  Author                   = {Cotman, Carl W. and Berchtold, Nicole C. and Christie, Lori-Ann},
+  Journal                  = {ScienceDirect},
+  Year                     = {2007},
+
+  Doi                      = {10.1016/j.tins.2007.06.011},
+  Owner                    = {josefinedamgade},
+  Timestamp                = {2016.02.25}
+}
+
 @Article{COWI2015,
   Title                    = {Evaluering af ABC med fokus på samfundsøkonomiske effekter},
   Author                   = {COWI},
@@ -113,6 +123,17 @@
   Timestamp                = {2016.02.25}
 }
 
+@Electronic{Heartratejournal2015,
+  Title                    = {The Myth of Losing Weight in Fat Burning Zones},
+  Month                    = {November},
+  Organization             = {Heart Rate Journal},
+  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
+  Year                     = {2015},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.25}
+}
+
 @Electronic{Hjerteforeningen,
   Title                    = {Fakta om kondition og puls},
   Author                   = {Hjerteforeningen},
@@ -144,6 +165,15 @@
 
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
+}
+
+@Article{J.SebireJagoR.FoxEtAl2013,
+  author =  {J. Sebire, Simon and Jago, Russell and R. Fox, Kenneth and J. Edwards, Mark and L. Thompson, Janice},
+  title =   {Testing a self-determination theory model of children’s physical activity motivation: a cross-sectional study},
+  journal = {International Journal of Behavioral Nutrition and Physical Activity},
+  year =    {2013},
+  doi =     {10.1186/1479-5868-10-111},
+  url =     {http://ijbnpa.biomedcentral.com/articles/10.1186/1479-5868-10-111}
 }
 
 @Article{Kaprio2008,
@@ -297,6 +327,17 @@
   Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
 }
 
+@Article{Schmidt2015,
+  Title                    = {Delayed positive effects of an acute bout of coordinative exercise on children's attention},
+  Author                   = {Schmidt, Mirko and Egger, Fabienne and Conzelmann, Achim},
+  Journal                  = {Perceptual \& Motor Skills},
+  Year                     = {2015},
+
+  Doi                      = {10.2466/22.06.PMS.121c22x1},
+  Owner                    = {josefinedamgade},
+  Timestamp                = {2016.02.25}
+}
+
 @Article{Smith1991,
   Title                    = {Physical Activity Effects on Bone Metabolism},
   Author                   = {Smith, Everett L. and Gilligan, Catherine},
@@ -356,22 +397,20 @@
   Comment                  = {ISBN: 978-87-7899-296-3}
 }
 
+@Book{V.Brown2007,
+  title =     {Psychology of Motivation},
+  publisher = {Nova Science Pub Inc},
+  year =      {2007},
+  author =    {NOVA},
+  editor =    {V. Brown, Lois},
+  review =    {ISBN-13: 978-1600215988}
+}
+
 @Electronic{Vindum2012,
   Title                    = {Overvægtige børn og unge},
   Author                   = {Vindum, Anne},
   Organization             = {Dagbladet Information},
   Url                      = {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge},
   Year                     = {2012}
-}
-
-@Electronic{Heartratejournal2015,
-  Title                    = {The Myth of Losing Weight in Fat Burning Zones},
-  Month                    = {November},
-  Organization             = {Heart Rate Journal},
-  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
-  Year                     = {2015},
-
-  Owner                    = {Cecilie},
-  Timestamp                = {2016.02.25}
 }
 
