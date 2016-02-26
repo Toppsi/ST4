@@ -146,6 +146,14 @@
   Timestamp                = {2016.02.25}
 }
 
+@Electronic{GjensidigeForsikring2014,
+  Title                    = {Antallet af smartphones og tablets i skolen stiger og stiger},
+
+  Address                  = {https://www.gjensidige.dk/om-os/presse/_attachment/55079?_ts=147c4e28b98},
+  Author                   = {GjensidigeForsikring},
+  Year                     = {2014}
+}
+
 @Electronic{Hjerteforeningen,
   Title                    = {Fakta om kondition og puls},
   Author                   = {Hjerteforeningen},
@@ -220,6 +228,13 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   Url                      = {http://www.annclinlabsci.org/content/42/3/320.full.pdf}
+}
+
+@Article{Laub2011,
+  Title                    = {Danskernes motions- og sportsvaner 2011},
+  Author                   = {Laub, Trygve Buch},
+  Journal                  = {Idrættens analyseinstitut},
+  Year                     = {2011}
 }
 
 @Electronic{Leyland2007,
@@ -361,6 +376,14 @@
   Timestamp                = {2016.02.25}
 }
 
+@Electronic{Skovby2014,
+  Title                    = {Pubertet},
+  Author                   = {Skovby, Flemming},
+  Month                    = {09},
+  Url                      = {https://www.sundhed.dk/borger/sygdomme-a-aa/boern/sygdomme/vaekst-og-udvikling/pubertet/},
+  Year                     = {2014}
+}
+
 @Article{Smith1991,
   Title                    = {Physical Activity Effects on Bone Metabolism},
   Author                   = {Smith, Everett L. and Gilligan, Catherine},
@@ -401,6 +424,22 @@
 
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.23}
+}
+
+@Article{Sundhedsstyrelsen2006,
+  Title                    = {Fysisk aktivitet og evidens: Livsstilssygdomme, folkesygdomme og risikofaktorer mv.},
+  Author                   = {Sundhedsstyrelsen},
+  Journal                  = {Sundhedsstyrrelsen},
+  Year                     = {2006}
+}
+
+@Article{Sundhedsstyrelsen2016a,
+  Title                    = {Børn, unge og alkohol},
+  Author                   = {Sundhedsstyrelsen and Undervisnings ministeriet and Børnerådet and Komiteen for sundhedsoplysningen},
+  Journal                  = {Sundhedsstyrelsen},
+  Year                     = {2016},
+
+  Month                    = {02}
 }
 
 @Electronic{SundhedsstyrrelsenFaktaark,
