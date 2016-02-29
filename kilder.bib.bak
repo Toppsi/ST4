@@ -437,6 +437,17 @@
   Timestamp                = {2016.02.23}
 }
 
+@Electronic{Sundhedsstyrelsen2013,
+  Title                    = {"Get moving" - kampagne om fysisk aktivitet for børn og unge},
+  Author                   = {Sundhedsstyrelsen},
+  Month                    = {April},
+  Url                      = {https://sundhedsstyrelsen.dk/da/kampagner/get-moving},
+  Year                     = {2013},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.29}
+}
+
 @Article{Sundhedsstyrelsen2006,
   Title                    = {Fysisk aktivitet og evidens: Livsstilssygdomme, folkesygdomme og risikofaktorer mv.},
   Author                   = {Sundhedsstyrelsen},
