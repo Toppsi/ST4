@@ -248,13 +248,13 @@
 }
 
 @Book{JuelSoerensenBroennum-Hansen2006,
-  title =     {Risikofaktorer og folkesundhed i Danmark},
-  publisher = {Statens Institut for Folkesundhed},
-  year =      {2006},
-  author =    {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
-  editor =    {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
-  owner =     {Frederik},
-  review =    {ISBN: 87-7899-104-8}
+  Title                    = {Risikofaktorer og folkesundhed i Danmark},
+  Author                   = {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
+  Editor                   = {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
+  Publisher                = {Statens Institut for Folkesundhed},
+  Year                     = {2006},
+  Owner                    = {Frederik},
+  Review                   = {ISBN: 87-7899-104-8}
 }
 
 @Article{Kaprio2008,
@@ -479,6 +479,16 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
   URL                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
+}
+
+@Article{Rishoej2010,
+  Title                    = {Børns leg har ændret sig},
+  Author                   = {Rishøj, Ditte},
+  Journal                  = {Samvirke},
+  Year                     = {2010},
+  Month                    = {Marts},
+  Owner                    = {RanaHaddang},
+  URL                      = {http://samvirke.dk/sundhed/artikler/boerns-leg-aendret.html}
 }
 
 @Electronic{Romani2013,
