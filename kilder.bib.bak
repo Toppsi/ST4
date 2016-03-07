@@ -124,6 +124,18 @@
   Url                      = {http://www.abc-abc.dk/Laerer/~/media/ABC2013/Presse/COWI_Evaluering%20af%20ABC%20-%2031052013.ashx}
 }
 
+@Electronic{DiseaseControl2015,
+  Title                    = {About Child and Teen BMI},
+  Author                   = {Centers for Disease Control and Prevention},
+  Month                    = {Maj},
+  Organization             = {U.S. Department of Health and Human Services},
+  Url                      = {http://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/about_childrens_bmi.html},
+  Year                     = {2015},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.03.07}
+}
+
 @Article{Ekelund2015,
   Title                    = {Physical activity and all-cause mortality across levels of overall and abdominal adiposity in European men and women: the European Prospective Investigation into Cancer and Nutrition Study},
   Author                   = {Ekelund, Ulf et. al.},
