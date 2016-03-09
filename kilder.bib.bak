@@ -734,6 +734,16 @@
   Timestamp                = {2016.03.07}
 }
 
+@Electronic{Unicef2016,
+  Title                    = {UNICEF Kid Power Band - Blue},
+  Organization             = {Target International},
+  Url                      = {http://intl.target.com/p/unicef-kid-power-band-blue/-/A-50078493#prodSlot=_1_1},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.03.09}
+}
+
 @Electronic{Heartratejournal2015,
   Title                    = {The Myth of Losing Weight in Fat Burning Zones},
   Month                    = {November},
