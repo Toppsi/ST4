@@ -2,23 +2,31 @@
 \textit{Dette bilag beskriver pilotforsøget, som er nødvendigt i forhold til testmåling og design af aktivitetsmåleren. Der undersøges tre forskellige placeringer af sensoren i tre forskellige aktivitetsformer på fire forsøgspersoner.}
 
 \section{Teori}
+% Grundlæggende teori eller henvis tilbage bevægelsesanalysen (Hvis der er en)
 
 \section{Formål}
-For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er det nødvendigt at vide, hvordan forskellige aktivitetsformer påvirker sensoren. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget at undersøge følgende:
+For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er det nødvendigt at vide, hvordan forskellige aktivitetsformer påvirker sensoren. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
 \begin{itemize}
-	\item Hvordan påvirkes sensoren af gang, løb og cykling? 
-	\item Hvor mange g ændrer sensorens målinger sig alt efter placering på kroppen?
+	\item Bestemme hvordan sensoren påvirkes af gang, løb og cykling.
+	\item Undersøge hvor mange g sensorens målinger ændrer sig alt efter placering på kroppen.
+	\item Bestemme frekvensindholdet for signalet.
 \end{itemize}
 
 \section{Materiale}
 \begin{itemize}
-	\item Løbebånd med justerbar hastighed.
+	\item Løbebånd med justerbar hastighed. %Skal vi skrive, at vi også tilkobler forsøgspersonen til en sikkerhedssele?
 	\item Motionscykel.
 	\item Shimmer3 sensor.
-	\item Computer med Multi Shimmer Sync for Windows.
+	\item Computer med programmet Multi Shimmer Sync version ?.
 \end{itemize}
 
 \section{Fremgangsmåde}
+Inden forsøget skal computeren med programmet Multi Shimmer Sync forbindes via Bluetooth med Shimmer3 sensoren. Herefter kalibreres Shimmer3 accelerometeret ved hjælp af kalibreringsklodsen og samplingsfrekvensen indstilles til ? Hz.%Alle andre har indstillet til 1024 Hz, men kan ikke sige hvorfor.
+
+
+
+Selve forsøgets fremgangsmåde:
+Forsøget udføres med fire forsøgspersoner. Hver forsøgsperson skal henholdsvis gå, løbe og cykle med sensoren placeret på tre forskellige steder for hver aktivitet. Dette giver 9 målinger for hver forsøgsperson og derfor 36 målinger i alt. 
 
 \subsection{Databehandling}
 
