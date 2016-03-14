@@ -96,6 +96,15 @@
   Owner                    = {MortenLarsen}
 }
 
+@Electronic{CooperBlair2005,
+  author =       {Cooper, Kenneth H. and Blair, Steven N.},
+  year =         {2005},
+  title =        {Exercise, Heart related physical fitness},
+  organization = {Britannica Academic},
+  url =          {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/197976/exercise/25984/Health-related-physical-fitness},
+  owner =        {Frederik}
+}
+
 @Article{Cotman2007,
   Title                    = {Exercise builds brain health: key roles of growth factor cascades and inflammation},
   Author                   = {Cotman, Carl W. and Berchtold, Nicole C. and Christie, Lori-Ann},
