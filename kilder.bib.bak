@@ -405,6 +405,17 @@
   Timestamp                = {2016.03.07}
 }
 
+@Book{Miles2007,
+  Title                    = {Physical activity and health},
+  Author                   = {Miles, Lisa},
+  Publisher                = {British Nutrition Foundation: Nutrition Bulletin},
+  Year                     = {2007},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.03.14},
+  Url                      = {https://www.nutrition.org.uk/attachments/101_Physical%20activity%20and%20health.pdf}
+}
+
 @Book{Mosby2009,
   Title                    = {Mosby's Medical Dictionary},
   Author                   = {Mosby},
