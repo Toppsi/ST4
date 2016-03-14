@@ -1,11 +1,11 @@
-\chapter{Pilotforsøg}
+\chapter{Pilotforsøg}\vspace{-.75cm}
 \textit{Dette bilag beskriver pilotforsøget, som er nødvendigt i forhold til testmåling og design af aktivitetsmåleren. Der undersøges tre forskellige placeringer af sensoren i tre forskellige aktivitetsformer på fire forsøgspersoner.}
 
 \section{Teori}
 % Grundlæggende teori eller henvis tilbage bevægelsesanalysen (Hvis der er en)
 
 \section{Formål}
-For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er det nødvendigt at vide, hvordan forskellige aktivitetsformer påvirker sensoren. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
+For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er det nødvendigt at kende signalets frekvensindhold og vide, hvordan forskellige aktivitetsformer påvirker sensoren. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
 \begin{itemize}
 	\item Bestemme hvordan sensoren påvirkes af gang, løb og cykling.
 	\item Undersøge hvor mange g sensorens målinger ændrer sig alt efter placering på kroppen.
@@ -21,12 +21,11 @@ For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Pr
 \end{itemize}
 
 \section{Fremgangsmåde}
-Inden forsøget skal computeren med programmet Multi Shimmer Sync forbindes via Bluetooth med Shimmer3 sensoren. Herefter kalibreres Shimmer3 accelerometeret ved hjælp af kalibreringsklodsen og samplingsfrekvensen indstilles til ? Hz.%Alle andre har indstillet til 1024 Hz, men kan ikke sige hvorfor.
+Inden forsøget skal computeren med programmet Multi Shimmer Sync forbindes via Bluetooth med Shimmer3 sensoren. Herefter kalibreres Shimmer3 accelerometeret ved hjælp af kalibreringsklodsen og samplingsfrekvensen indstilles til ? Hz. %Alle andre har indstillet til 1024 Hz, men kan ikke sige hvorfor.
+Der oprettes en mappe for hver forsøgsperson, som yderligere inddeles i tre mapper efter aktivitetsform. Herunder navngives datafilerne fra målingerne i forhold til placering af sensor, som for eksempel "Forsoegsperson\_1 $\rightarrow$ Gang $\rightarrow$ Ankel".
+Der foretages en testmåling med sensoren, hvor den tændes kortvarigt mens den påvirkes med forskellige intensiteter. Hvis data fra denne testmåling optages og skildres korrekt er sensoren klar til forsøget.
 
-
-
-Selve forsøgets fremgangsmåde:
-Forsøget udføres med fire forsøgspersoner. Hver forsøgsperson skal henholdsvis gå, løbe og cykle med sensoren placeret på tre forskellige steder for hver aktivitet. Dette giver 9 målinger for hver forsøgsperson og derfor 36 målinger i alt. 
+Forsøget udføres med fire forsøgspersoner. Hver forsøgsperson skal henholdsvis gå, løbe og cykle med sensoren placeret på tre forskellige steder for hver aktivitet. Dette giver 9 målinger for hver forsøgsperson og derfor 36 målinger i alt. Gang defineres som 3 mph = 4.8 $\sfrac{km}{t}$, løb er 7mph = 11.3 $\sfrac{km}{t}$ og cykling er 13mph = 20.9 $\sfrac{km}{t}$\fxnote{Miles per hour omregnes til kilometer i timen ved at gange med 1.61} \citep{Miles2007}.
 
 \subsection{Databehandling}
 
@@ -36,15 +35,15 @@ Forsøget udføres med fire forsøgspersoner. Hver forsøgsperson skal henholdsv
 
 \section{Konklusion}
 
-Formål: 
-Hvordan påvirker gang, løb og cykling sensorene? 
-Kan man se forskel på dataene i forhold til hvilken bevægelse der udføres.
-Lav et forsøg som starter med langsom gang og så bliver hurtigere og hurtigere løb - for at se om der sker en markant ændring når man skifter fra gang til løb (i forhold til eks. G)
-Hvor stort et stød (G) er der alt efter hvor sensoren påsættes ved gang, løb og cykling?
-Ankel, midt på skinnebenet, under knæet.
-
-
-Fremgangsmåde
-Forskellige hastigheder inden for det at gå og løbe 
-^samme med cykling
-Placering af sensorer
+%Formål: 
+%Hvordan påvirker gang, løb og cykling sensorene? 
+%Kan man se forskel på dataene i forhold til hvilken bevægelse der udføres.
+%Lav et forsøg som starter med langsom gang og så bliver hurtigere og hurtigere løb - for at se om der sker en markant ændring når man skifter fra gang til løb (i forhold til eks. G)
+%Hvor stort et stød (G) er der alt efter hvor sensoren påsættes ved gang, løb og cykling?
+%Ankel, midt på skinnebenet, under knæet.
+%
+%
+%Fremgangsmåde
+%Forskellige hastigheder inden for det at gå og løbe 
+%^samme med cykling
+%Placering af sensorer

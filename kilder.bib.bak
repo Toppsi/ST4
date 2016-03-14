@@ -473,6 +473,16 @@
   Owner                    = {Frederik}
 }
 
+@Electronic{Perez2015,
+  Title                    = {Nabi Compete Is A New Fitness Tracker Designed For Kids},
+  Author                   = {Perez, Sarah},
+  Month                    = {2015},
+  Url                      = {http://techcrunch.com/2015/11/10/nabi-compete-is-a-new-fitness-tracker-designed-for-kids/},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.03.09}
+}
+
 @Electronic{PowerAbout2015,
   Title                    = {UNICEF Kid Power},
   Author                   = {UNICEF Kid Power},
@@ -732,6 +742,15 @@
   Comment                  = {ISBN 978-87-92705-05-1},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
+}
+
+@Electronic{Sqord2016,
+  Title                    = {Replacement Booster},
+  Url                      = {https://sqord.myshopify.com/},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.03.09}
 }
 
 @Electronic{Unicef2016,
