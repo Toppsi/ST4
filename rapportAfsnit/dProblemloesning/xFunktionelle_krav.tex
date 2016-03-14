@@ -1,40 +1,39 @@
 \section{Funktionelle krav}
-
-%Dette afsnit skal indeholde grundlæggende forventninger til systemet - for at vi kan løse den opstillede problemformulering.
-%
 %Problemformulering: Hvordan kan en aktivitetsmåler udvikles således at fysisk inaktive børn i aldersgruppen 9-12 år, motiveres til en mere aktiv livsstil?
-%
-Da inaktivitet hos børn i aldersgruppen 9-12 år er et stigende problem, med helbredsmæssige og socioøkonomiske følger, ønskes en løsning i form af en aktivitetsmåler som motiverer inaktive børn i denne aldersgruppe til en mere aktiv hverdag. 
-
-Måden hvorpå børn i denne aldersgruppe bliver motiveret er gennem leg og spil, det tyder dog også på at teknologi er en motiverende faktor, idet den teknologiske udbredelse i denne aldersgruppe er stigende.
-
-Mest muligt af børnenes daglige aktivitet skal indgå i deres totale aktivitet, hvorfor systemet skal kunne detektere gængse hverdagsaktiviteter i form af gang, løb og cykling. Hertil skal intensiteten af disse aktiviteter også registreres, da udbyttet af den fysiske aktivitet afhænger af intensiteten heraf. 
-
-Aktivitetsmåleren skal kunne monteres uden gene for barnet, idet gene kan føre til at barnet ikke bruger den.
 
 
-%En aktivitetsmåler til børn i denne aldersgruppe skal essentielt kunne:
-%\begin{itemize}
-%	\item Detektere gang, løb og cykling.
-%	\item Registrere aktivitetens intensitet.
-%	\item Motivere inaktive børn.
-%	\item Monteres uden gene.
-%\end{itemize}
 
-For at dette skal kunne opfyldes, skal systemet være i stand til detektere gang, løb og cykling, samt intensiteten af disse aktiviteter gennem puls. %Disse data skal trådløst kunne gemmes og omregnes til point, hvorved der kan udarbejdes et spil hvori børnene kan benytte pointene som de har optjent gennem fysisk aktivitet.
+Formålet med systemet er, at udvikle en aktivitetsmåler som motiverer børn til en mere aktiv hverdag. Dette i forsøg på at ændre den teknologiske udviklings påvirkning af børns aktivitetsvaner fra inaktivitet til aktivitet.
+Der ønskes derfor et analogt system som detekterer aktiviteterne gang, løb og cykling, da disse er gængse aktiviteter i et barns hverdag. Måden hvorpå et analogt system kan detektere disse aktiviteter kan ske gennem forskellige sensorer.
+Hertil skal intensiteten af aktiviteterne registreres igennem puls, da dette kan give en indikation af det fysiologiske udbytte, barnet får ud af en given aktivitet.
 
-Systemet skal være i stand til detektere gang, løb og cykling, samt intensiteten af disse aktiviteter gennem puls.
+Systemet skal kunne detektere børns aktivitet igennem en hel dag, uden at være til gene, hvorfor det skal kunne fungere uafhængigt af andre systemer. Det skal derfor være et trådløst system, hvorfor systemet skal være batteridrevet og kunne sende data til en ekstern enhed. Derudover skal det være elektrisk sikker, således at barnet ikke kan komme til skade på grund af aktivitetsmåleren. 
 
-Systemet skal kunne detektere børns aktivitet igennem en hel dag, uden at være til gene, hvorfor det skul kunne fungere uafhængigt af andre systemer. Det skal derfor være et trådløst system, som kan sende data til et eksternt system, som efterfølgende kan behandle og visualisere dataet, hvorigennem brugeren får feedback på sin præstation.  
+Den eksterne enhed skal efterfølgende kunne behandle og visualisere dataet, hvorigennem brugeren får feedback på sin præstation. Det analoge signal skal altså konverteres til digitale signer hvorefter systemet, gennem algoritmer, skal kunne adskille gang, løb og cykling. For at dataet tydeligt kan repræsenteres visuelt, skal det behandles digitalt, igennem det filtreres, for at fjerne uønskede signaler. 
 
-%
-%Detektere(registrere og adskille) gængse aktiviteter - gang, løb og cykling
-%Registrere intensiteten af en given aktivitet 
-%Monteres uden gene
-	%Videresende information trådløst (gennem bluetooth) (overførslen skal være trådløs)
-	%Systemet skal være batteridrevet
-%Elektrisk sikkert
-%De behandlede data/signaler skal kunne visualiseres på en ekstern enhed
-	%Kunne optage og visualisere al daglig aktivitet
-%Skal være en motiverende faktor for målgruppen
+Systemet skal have en motiverende brugerflade, således at børn ...
+
+
+
+
+
+
+De funktionelle krav til systemet, lyder derfor således: 
+\begin{itemize}
+	\item Systemet skal kunne detektere og adskille gang, løb og cykling.
+	\item Systemet skal kunne registrere intensiteten af de givne aktiviteter.
+	\item Systemet skal kunne monteres uden gene, hvorfor det trådløst skal kunne videresende signaler til en ekstern enhed og være batteridrevet.
+	\item Signalerne som er sendt til en ekstern enhed, skal behandles og repræsenteres visuelt.
+	\item Systemet skal være elektrisk sikkert for brugeren.
+	\item Systemet skal motivere børn i aldersgruppen 9-12 år. %hvordan har vi tænkt os at gøre dette??? 
+\end{itemize}
+
+
+
+
+
+
+
+
+
 
