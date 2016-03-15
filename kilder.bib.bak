@@ -5,9 +5,8 @@
   Title                    = {Obesity},
   Author                   = {Britannica Academic},
   Organization             = {Encyclopædia Britannica Inc},
-  Url                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/423747/obesity},
+  URL                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/423747/obesity},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19}
 }
@@ -17,9 +16,8 @@
   Author                   = {Britannica Academic},
   Month                    = {Februar},
   Organization             = {Encyclopædia Britannica Inc},
-  Url                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/458617/physical-activity},
+  URL                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/458617/physical-activity},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
 }
@@ -28,9 +26,8 @@
   Title                    = {Exercise},
   Author                   = {Britannica Academic},
   Organization             = {Encyclopædia Britannica Inc},
-  Url                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/197976/exercise},
+  URL                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/197976/exercise},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.25}
 }
@@ -40,7 +37,6 @@
   Author                   = {Ahmad, Shamim I. and Imam, Syed Khalid},
   Publisher                = {Springer},
   Year                     = {2014},
-
   Comment                  = {ISBN: 978-3-319-19820-0},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
@@ -50,7 +46,7 @@
   Title                    = {Opsporing af overvægt og tidlig indstats for børn og unge i skolealderen},
   Author                   = {Andersen, Lars Bo et al.},
   Organization             = {Sundhedsstyrelsen},
-  Url                      = {https://sundhedsstyrelsen.dk/da/udgivelser/2014/~/media/F7C0D97FB5F840C69CE9388A0BAB4E1B.ashx},
+  URL                      = {https://sundhedsstyrelsen.dk/da/udgivelser/2014/~/media/F7C0D97FB5F840C69CE9388A0BAB4E1B.ashx},
   Year                     = {2014}
 }
 
@@ -59,9 +55,8 @@
   Author                   = {Barud Thomsen, Rasmus},
   Journal                  = {Politikken},
   Year                     = {2007},
-
   Owner                    = {RanaHaddang},
-  Url                      = {http://politiken.dk/forbrugogliv/livsstil/familieliv/ECE326828/dovne-danskere-koster-samfundet-milliarder/}
+  URL                      = {http://politiken.dk/forbrugogliv/livsstil/familieliv/ECE326828/dovne-danskere-koster-samfundet-milliarder/}
 }
 
 @Article{Berchtold2010,
@@ -69,8 +64,7 @@
   Author                   = {Berchtold, Nicole C.},
   Journal                  = {AccessScience},
   Year                     = {2010},
-
-  Doi                      = {1097-8542.YB100072},
+  DOI                      = {1097-8542.YB100072},
   Owner                    = {josefinedamgade},
   Timestamp                = {2016.02.22}
 }
@@ -81,7 +75,6 @@
   Editor                   = {Bugge, Anna and Froberg, Karsten},
   Publisher                = {Institut for Idræt og Biomekanik, Syddansk Universitet},
   Year                     = {2015},
-
   Comment                  = {ISBN: 978-87-93192-28-7-8},
   Owner                    = {josefinedamgade},
   Timestamp                = {2016.02.22}
@@ -90,19 +83,18 @@
 @Electronic{CenterforDiseaseControlandPrevention2015,
   Title                    = {The Benefits of Physical Activity},
   Author                   = {CenterforDiseaseControlandPrevention},
-  Url                      = {http://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#ControlWeight},
+  URL                      = {http://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#ControlWeight},
   Year                     = {2015},
-
   Owner                    = {MortenLarsen}
 }
 
 @Electronic{CooperBlair2005,
-  author =       {Cooper, Kenneth H. and Blair, Steven N.},
-  year =         {2005},
-  title =        {Exercise, Heart related physical fitness},
-  organization = {Britannica Academic},
-  url =          {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/197976/exercise/25984/Health-related-physical-fitness},
-  owner =        {Frederik}
+  Title                    = {Exercise, Heart related physical fitness},
+  Author                   = {Cooper, Kenneth H. and Blair, Steven N.},
+  Organization             = {Britannica Academic},
+  URL                      = {http://academic.eb.com.zorac.aub.aau.dk/EBchecked/topic/197976/exercise/25984/Health-related-physical-fitness},
+  Year                     = {2005},
+  Owner                    = {Frederik}
 }
 
 @Article{Cotman2007,
@@ -110,8 +102,7 @@
   Author                   = {Cotman, Carl W. and Berchtold, Nicole C. and Christie, Lori-Ann},
   Journal                  = {ScienceDirect},
   Year                     = {2007},
-
-  Doi                      = {10.1016/j.tins.2007.06.011},
+  DOI                      = {10.1016/j.tins.2007.06.011},
   Owner                    = {josefinedamgade},
   Timestamp                = {2016.02.25}
 }
@@ -122,8 +113,7 @@
   Journal                  = {Cyklistforbundet},
   Year                     = {2015},
   Number                   = {1. udgave},
-
-  Url                      = {http://www.abc-abc.dk/Laerer/~/media/ABC2013/Presse/COWI_Evaluering%20af%20ABC%20-%2031052013.ashx}
+  URL                      = {http://www.abc-abc.dk/Laerer/~/media/ABC2013/Presse/COWI_Evaluering%20af%20ABC%20-%2031052013.ashx}
 }
 
 @Electronic{dansker,
@@ -139,9 +129,8 @@
   Author                   = {Centers for Disease Control and Prevention},
   Month                    = {Maj},
   Organization             = {U.S. Department of Health and Human Services},
-  Url                      = {http://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/about_childrens_bmi.html},
+  URL                      = {http://www.cdc.gov/healthyweight/assessing/bmi/childrens_bmi/about_childrens_bmi.html},
   Year                     = {2015},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
@@ -151,8 +140,7 @@
   Author                   = {Ekelund, Ulf et. al.},
   Journal                  = {the American Society for Nutrition},
   Year                     = {2015},
-
-  Doi                      = {10.3945/ajcn.114.100065},
+  DOI                      = {10.3945/ajcn.114.100065},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
 }
@@ -162,7 +150,6 @@
   Author                   = {Engelbreth, Jette and Estrup, Claus and Pöckel, Rasmus and Sig, Allen and Sørensen, Jan Kahr},
   Publisher                = {Systime},
   Year                     = {2010},
-
   Comment                  = {ISBN: 9788761627193},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.26}
@@ -173,7 +160,6 @@
   Author                   = {F. Sallis, James and G. Simons-Morton, Bruce and J. Stone, Elaine et al.},
   Journal                  = {Medicine and science in sports and exercise},
   Year                     = {1992},
-
   Owner                    = {Frederik}
 }
 
@@ -188,9 +174,8 @@
   Title                    = {Tech Specs},
   Author                   = {Fuhu, inc.},
   Organization             = {Nabi},
-  Url                      = {https://www.nabitablet.com/wearables/compete/specs},
+  URL                      = {https://www.nabitablet.com/wearables/compete/specs},
   Year                     = {2015},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
 }
@@ -199,20 +184,27 @@
   Title                    = {Nabi Compete},
   Author                   = {Fuhu, inc.},
   Organization             = {Nabi},
-  Url                      = {https://www.nabitablet.com/wearables/compete},
+  URL                      = {https://www.nabitablet.com/wearables/compete},
   Year                     = {2015},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
 }
 
 @Electronic{GjensidigeForsikring2014,
   Title                    = {Antallet af smartphones og tablets i skolen stiger og stiger},
-
   Address                  = {https://www.gjensidige.dk/om-os/presse/_attachment/55079?_ts=147c4e28b98},
   Author                   = {GjensidigeForsikring},
-  Url                      = {https://www.gjensidige.dk/om-os/presse/pressearkiv/_attachment/55079?_ts=147c4e28b98},
+  URL                      = {https://www.gjensidige.dk/om-os/presse/pressearkiv/_attachment/55079?_ts=147c4e28b98},
   Year                     = {2014}
+}
+
+@Article{Goodrich2013,
+  Title                    = {Accelerometers: What They Are \& How They Work},
+  Author                   = {Goodrich, Ryan},
+  Journal                  = {Livescience},
+  Year                     = {2013},
+  Owner                    = {RanaHaddang},
+  URL                      = {http://www.livescience.com/40102-accelerometers.html}
 }
 
 @Article{Guinhouya2009,
@@ -220,8 +212,7 @@
   Author                   = {Guinhouya, Benjamin C.},
   Journal                  = {Médecine Sciences},
   Year                     = {2009},
-
-  Doi                      = {http://dx.doi.org/10.1051/medsci/20092510827},
+  DOI                      = {http://dx.doi.org/10.1051/medsci/20092510827},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
@@ -230,9 +221,8 @@
   Title                    = {The Myth of Losing Weight in Fat Burning Zones},
   Month                    = {November},
   Organization             = {Heart Rate Journal},
-  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
+  URL                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
   Year                     = {2015},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.25}
 }
@@ -240,9 +230,8 @@
 @Electronic{Hjerteforeningen,
   Title                    = {Fakta om kondition og puls},
   Author                   = {Hjerteforeningen},
-  Url                      = {https://www.hjerteforeningen.dk/files/Motion/Faktaark_om_konditioin_og_puls.pdf},
+  URL                      = {https://www.hjerteforeningen.dk/files/Motion/Faktaark_om_konditioin_og_puls.pdf},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.24}
 }
@@ -252,10 +241,9 @@
   Author                   = {Hjort, Peter Fredrik},
   Journal                  = {Tidsskrift for den Norske lægeforening},
   Year                     = {1997},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.18},
-  Url                      = {http://brage.bibsys.no/xmlui/bitstream/handle/11250/2377624/Hjort_1997_Fys242.pdf?sequence=1&isAllowed=y}
+  URL                      = {http://brage.bibsys.no/xmlui/bitstream/handle/11250/2377624/Hjort_1997_Fys242.pdf?sequence=1&isAllowed=y}
 }
 
 @Electronic{Ibitz_features2016,
@@ -263,9 +251,8 @@
   Author                   = {Ibitz},
   Month                    = {02},
   Organization             = {Geopalz},
-  Url                      = {http://ibitz.com/features/},
+  URL                      = {http://ibitz.com/features/},
   Year                     = {2016},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
 }
@@ -275,8 +262,7 @@
   Author                   = {J. Sebire, Simon and Jago, Russell and R. Fox, Kenneth and J. Edwards, Mark and L. Thompson, Janice},
   Journal                  = {International Journal of Behavioral Nutrition and Physical Activity},
   Year                     = {2013},
-
-  Doi                      = {10.1186/1479-5868-10-111}
+  DOI                      = {10.1186/1479-5868-10-111}
 }
 
 @Book{JuelSoerensenBroennum-Hansen2006,
@@ -285,7 +271,6 @@
   Editor                   = {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
   Publisher                = {Statens Institut for Folkesundhed},
   Year                     = {2006},
-
   Owner                    = {Frederik},
   Review                   = {ISBN: 87-7899-104-8}
 }
@@ -295,10 +280,9 @@
   Author                   = {Kaprio, Jaakko and Pietiläinen, Kirsi H and Borg, Patrik and Plasqui, Guy and YkiJärvinen, Hannele and Kujala, Urho M. and Rose, Richard J. and Westerterp, Klaas R and Rissanen, Aila},
   Journal                  = {Pubmed.gov},
   Year                     = {2008},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.18},
-  Url                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2249563/pdf/nihms26744.pdf}
+  URL                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2249563/pdf/nihms26744.pdf}
 }
 
 @Article{Kemper2000,
@@ -306,8 +290,7 @@
   Author                   = {Kemper, H. C. G. and Twisk, J. W. R. and Van Mechelen, W. and Post, G. B. and Rpss, J. C. and Lips, P.},
   Journal                  = {Elsevier},
   Year                     = {2000},
-
-  Doi                      = {http://dx.doi.org/10.1016/S8756-3282(00)00397-5},
+  DOI                      = {http://dx.doi.org/10.1016/S8756-3282(00)00397-5},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.06}
 }
@@ -317,10 +300,9 @@
   Author                   = {Kiens, Bente and Beyer, Nina and Brage, Søren and Hyldstrup, Lars and Ottesen, Laila Susanne and Overgaard, Kristian and Pedersen, Bente Klarlund and Puggaard Lis},
   Journal                  = {Motions- og Ernæringsrådet, Sundhedsstyrrelsen},
   Year                     = {2007},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.18},
-  Url                      = {https://sundhedsstyrelsen.dk/publ/mer/2007/Fysisk_inaktivitet-konsekvenser_og_sammenhaenge2007.pdf}
+  URL                      = {https://sundhedsstyrelsen.dk/publ/mer/2007/Fysisk_inaktivitet-konsekvenser_og_sammenhaenge2007.pdf}
 }
 
 @Article{Knight2012,
@@ -328,10 +310,9 @@
   Author                   = {Knight, Joseph A},
   Journal                  = {Annals of Clinical \& Laboratory Science, vol. 42, no. 3},
   Year                     = {2012},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
-  Url                      = {http://www.annclinlabsci.org/content/42/3/320.full.pdf}
+  URL                      = {http://www.annclinlabsci.org/content/42/3/320.full.pdf}
 }
 
 @Article{Kohlhammer2006,
@@ -339,8 +320,7 @@
   Author                   = {Kohlhammer, Y. and Zutavern, A. and Rzehak, P. and Woelke, G. and Heinrich, J.},
   Journal                  = {Allergy},
   Year                     = {2006},
-
-  Doi                      = {10.1111/j.1398-9995.2006.01131.x},
+  DOI                      = {10.1111/j.1398-9995.2006.01131.x},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.06}
 }
@@ -351,8 +331,7 @@
   Editor                   = {L. Meyer, Aleta and P. Gullotta, Thomas},
   Publisher                = {Springer},
   Year                     = {2012},
-
-  Doi                      = {10.1007/978-1-4614-3606-5},
+  DOI                      = {10.1007/978-1-4614-3606-5},
   Owner                    = {Frederik},
   Review                   = {ISBN 978-1-4614-3605-8}
 }
@@ -369,9 +348,8 @@
   Author                   = {Leyland, Tony},
   Month                    = {Februar},
   Organization             = {CrossFit Journal Article},
-  Url                      = {http://norcalwaterpolo.com/downloads/54_07_Myth_Fat_Burn_Zone.pdf},
+  URL                      = {http://norcalwaterpolo.com/downloads/54_07_Myth_Fat_Burn_Zone.pdf},
   Year                     = {2007},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.25}
 }
@@ -383,10 +361,9 @@
   Year                     = {2012},
   Pages                    = {51-54},
   Volume                   = {Maclean's 125},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.04},
-  Url                      = {http://web.b.ebscohost.com/ehost/detail/detail?vid=4&sid=97370da7-1ec1-4280-ab32-1f3c8796913b%40sessionmgr102&hid=115&bdata=JnNpdGU9ZWhvc3QtbGl2ZQ%3d%3d#AN=82205734&db=buh}
+  URL                      = {http://web.b.ebscohost.com/ehost/detail/detail?vid=4&sid=97370da7-1ec1-4280-ab32-1f3c8796913b%40sessionmgr102&hid=115&bdata=JnNpdGU9ZWhvc3QtbGl2ZQ%3d%3d#AN=82205734&db=buh}
 }
 
 @Article{Marcelino2012,
@@ -394,10 +371,9 @@
   Author                   = {Marcelino, G. and Melich-Cerveira, J. and Paccaud, F. and Marques-Vidal, P.},
   Journal                  = {The Journal of Sports Medicine and Physical Fitness},
   Year                     = {2012},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.04},
-  Url                      = {http://search.proquest.com/docview/1220795167?accountid=8144}
+  URL                      = {http://search.proquest.com/docview/1220795167?accountid=8144}
 }
 
 @Book{Martini2012,
@@ -405,7 +381,6 @@
   Author                   = {Martini, Frederic H. and Nath, Judi L. and Bartholomew, Edwin F.},
   Publisher                = {Pearson},
   Year                     = {2012},
-
   Comment                  = {ISBN: 978-0321-70933-2},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
@@ -416,8 +391,7 @@
   Author                   = {J. Wesley McWhorter},
   Journal                  = {Journal of Pediatric Health Care Home},
   Year                     = {2003},
-
-  Doi                      = {10.1067},
+  DOI                      = {10.1067},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
@@ -427,10 +401,9 @@
   Author                   = {Miles, Lisa},
   Publisher                = {British Nutrition Foundation: Nutrition Bulletin},
   Year                     = {2007},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.14},
-  Url                      = {https://www.nutrition.org.uk/attachments/101_Physical%20activity%20and%20health.pdf}
+  URL                      = {https://www.nutrition.org.uk/attachments/101_Physical%20activity%20and%20health.pdf}
 }
 
 @Book{Mosby2009,
@@ -438,10 +411,9 @@
   Author                   = {Mosby},
   Publisher                = {Elsevier},
   Year                     = {2009},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
-  Url                      = {http://medical-dictionary.thefreedictionary.com/disuse+syndrome}
+  URL                      = {http://medical-dictionary.thefreedictionary.com/disuse+syndrome}
 }
 
 @Article{Nabe-NielsenSundhedsministerietetal.2005,
@@ -449,7 +421,6 @@
   Author                   = {Nabe-Nielsen, Søren and Indenrigs- og Sundhedsministeriet et al.},
   Journal                  = {Kræftens bekæmpelse},
   Year                     = {2005},
-
   Owner                    = {Frederik}
 }
 
@@ -458,10 +429,9 @@
   Author                   = {Nestle, Marion},
   Journal                  = {AccessScience},
   Year                     = {2014},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22},
-  Url                      = {http://www.accessscience.com.zorac.aub.aau.dk/content/obesity/463300}
+  URL                      = {http://www.accessscience.com.zorac.aub.aau.dk/content/obesity/463300}
 }
 
 @Article{Nichols2014,
@@ -469,8 +439,7 @@
   Author                   = {Nichols, Melanie and Townsend, Nick and Scarborough, Peter and Rayner, Mike},
   Journal                  = {European Heart Journal},
   Year                     = {2014},
-
-  Doi                      = {10.1093/eurheartj/ehu299},
+  DOI                      = {10.1093/eurheartj/ehu299},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
 }
@@ -479,7 +448,7 @@
   Title                    = {Obesity Statistics},
   Author                   = {ObesityActionCoalition},
   Organization             = {ObesityActionCoalition},
-  Url                      = {http://www.obesityaction.org/educational-resources/obesity-statistics-fact-sheets}
+  URL                      = {http://www.obesityaction.org/educational-resources/obesity-statistics-fact-sheets}
 }
 
 @Article{P.J.KremersBrug2008,
@@ -487,7 +456,6 @@
   Author                   = {P. J. Kremers, Stef and Brug, Johannes},
   Journal                  = {Pediatric Exercise Science},
   Year                     = {2008},
-
   Owner                    = {Frederik}
 }
 
@@ -495,8 +463,7 @@
   Title                    = {Nabi Compete Is A New Fitness Tracker Designed For Kids},
   Author                   = {Perez, Sarah},
   Month                    = {2015},
-  Url                      = {http://techcrunch.com/2015/11/10/nabi-compete-is-a-new-fitness-tracker-designed-for-kids/},
-
+  URL                      = {http://techcrunch.com/2015/11/10/nabi-compete-is-a-new-fitness-tracker-designed-for-kids/},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.09}
 }
@@ -505,9 +472,8 @@
   Title                    = {Anatomia Perna},
   Month                    = {Marts},
   Organization             = {Pinterest},
-  Url                      = {https://www.pinterest.com/arturrebelo3/anatomia-perna/},
+  URL                      = {https://www.pinterest.com/arturrebelo3/anatomia-perna/},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.14}
 }
@@ -516,9 +482,8 @@
   Title                    = {UNICEF Kid Power},
   Author                   = {UNICEF Kid Power},
   Organization             = {UNICEF},
-  Url                      = {http://schools.unicefkidpower.org/about/},
+  URL                      = {http://schools.unicefkidpower.org/about/},
   Year                     = {2015},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.22}
 }
@@ -528,9 +493,8 @@
   Author                   = {UNICEF Kid Power},
   Month                    = {10},
   Organization             = {UNICEF},
-  Url                      = {http://support.schools.unicefkidpower.org/hc/en-us/articles/206611105-Kid-Power-Band-Manual-Kid-Power-Band-2-0-},
+  URL                      = {http://support.schools.unicefkidpower.org/hc/en-us/articles/206611105-Kid-Power-Band-Manual-Kid-Power-Band-2-0-},
   Year                     = {2015},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.22}
 }
@@ -539,9 +503,8 @@
   Title                    = {Go on Missions},
   Author                   = {UNICEF Kid Power},
   Organization             = {UNICEF},
-  Url                      = {http://unicefkidpower.org/missions},
+  URL                      = {http://unicefkidpower.org/missions},
   Year                     = {2015},
-
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.22}
 }
@@ -551,9 +514,8 @@
   Author                   = {Reilly, J. J.},
   Journal                  = {Postgraduate Medical Journal},
   Year                     = {2006},
-
-  Doi                      = {10.1136/pgmj.2005.043836},
-  Url                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
+  DOI                      = {10.1136/pgmj.2005.043836},
+  URL                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
 }
 
 @Article{Reshma2002,
@@ -561,10 +523,9 @@
   Author                   = {Reshma, Prakash},
   Journal                  = {World Health Organization},
   Year                     = {2002},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.19},
-  Url                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
+  URL                      = {http://www.who.int/mediacentre/news/releases/release23/en/}
 }
 
 @Article{Rishoej2010,
@@ -572,19 +533,16 @@
   Author                   = {Rishøj, Ditte},
   Journal                  = {Samvirke},
   Year                     = {2010},
-
   Month                    = {Marts},
-
   Owner                    = {RanaHaddang},
-  Url                      = {http://samvirke.dk/sundhed/artikler/boerns-leg-aendret.html}
+  URL                      = {http://samvirke.dk/sundhed/artikler/boerns-leg-aendret.html}
 }
 
 @Electronic{Romani2013,
   Title                    = {Hvad forårsager overvægt og inaktivitet blandt skoleelever?: Redegørelse for forløb og test af resultater af Projekt 3A},
   Author                   = {Romani, A. Q.},
-  Url                      = {http://vbn.aau.dk/da/publications/hvad-foraarsager-overvaegt-og-inaktivitet-blandt-skoleelever%2853e453bf-9442-40d1-93ec-9b2a337d1d36%29.html},
+  URL                      = {http://vbn.aau.dk/da/publications/hvad-foraarsager-overvaegt-og-inaktivitet-blandt-skoleelever%2853e453bf-9442-40d1-93ec-9b2a337d1d36%29.html},
   Year                     = {2013},
-
   Comment                  = {ISBN: 978-87-90867-39-3},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
@@ -595,8 +553,7 @@
   Author                   = {Schmidt, Mirko and Egger, Fabienne and Conzelmann, Achim},
   Journal                  = {Perceptual \& Motor Skills},
   Year                     = {2015},
-
-  Doi                      = {10.2466/22.06.PMS.121c22x1},
+  DOI                      = {10.2466/22.06.PMS.121c22x1},
   Owner                    = {josefinedamgade},
   Timestamp                = {2016.02.25}
 }
@@ -605,26 +562,25 @@
   Title                    = {Shimmer3},
   Month                    = {Marts},
   Organization             = {Shimmer sensing},
-  Url                      = {http://www.shimmersensing.com/shop/shimmer3},
+  URL                      = {http://www.shimmersensing.com/shop/shimmer3},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.14}
 }
 
 @Article{SibleyEtnier2003,
-  author =  {Sibley, Benjamin A. and Etnier, Jennifer L.},
-  title =   {The relationship between physical activity and cognition in children: A meta-analysis},
-  journal = {Pediatric Exercise Science},
-  year =    {2003},
-  owner =   {Frederik}
+  Title                    = {The relationship between physical activity and cognition in children: A meta-analysis},
+  Author                   = {Sibley, Benjamin A. and Etnier, Jennifer L.},
+  Journal                  = {Pediatric Exercise Science},
+  Year                     = {2003},
+  Owner                    = {Frederik}
 }
 
 @Electronic{Skovby2014,
   Title                    = {Pubertet},
   Author                   = {Skovby, Flemming},
   Month                    = {09},
-  Url                      = {https://www.sundhed.dk/borger/sygdomme-a-aa/boern/sygdomme/vaekst-og-udvikling/pubertet/},
+  URL                      = {https://www.sundhed.dk/borger/sygdomme-a-aa/boern/sygdomme/vaekst-og-udvikling/pubertet/},
   Year                     = {2014}
 }
 
@@ -633,8 +589,7 @@
   Author                   = {Smith, Everett L. and Gilligan, Catherine},
   Journal                  = {Calcified Tissue International},
   Year                     = {1991},
-
-  Doi                      = {49:$50-$54},
+  DOI                      = {49:$50-$54},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.23}
 }
@@ -642,9 +597,8 @@
 @Electronic{Sqord_family2015,
   Title                    = {Parents \& Families},
   Author                   = {Sqord},
-  Url                      = {http://www.sqord.com/parents.php},
+  URL                      = {http://www.sqord.com/parents.php},
   Year                     = {2015},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
@@ -652,18 +606,16 @@
 @Electronic{Sqord_group2015,
   Title                    = {Schools, Teams, and Youth Organizations},
   Author                   = {Sqord},
-  Url                      = {http://www.sqord.com/groups.php},
+  URL                      = {http://www.sqord.com/groups.php},
   Year                     = {2015},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
 
 @Electronic{Sqord2016,
   Title                    = {Replacement Booster},
-  Url                      = {https://sqord.myshopify.com/},
+  URL                      = {https://sqord.myshopify.com/},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.09}
 }
@@ -673,7 +625,6 @@
   Author                   = {Stanfield, Cindy L},
   Publisher                = {Pearson},
   Year                     = {2013},
-
   Comment                  = {ISBN: 0-321-81934-9},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.23}
@@ -685,7 +636,6 @@
   Editor                   = {Kjøller, Mette and Juel, Knud and Kamper-Jørgensen, Finn},
   Publisher                = {Statens Institut for Folkesundhed, Syddansk Universitet},
   Year                     = {2007},
-
   Comment                  = {ISBN: 978-87-7899-121-8}
 }
 
@@ -693,18 +643,16 @@
   Title                    = {De samfundsøkonomiske konsekvenser af svær overvægt},
   Author                   = {Udenrigs- og Sundhedsministeriet},
   Month                    = {Maj},
-  Url                      = {http://www.sum.dk/~/media/Filer%20-%20Publikationer_i_pdf/2007/De%20samfundsøkonomiske%20konsekvenser%20af%20svær%20overvægt.ashx},
+  URL                      = {http://www.sum.dk/~/media/Filer%20-%20Publikationer_i_pdf/2007/De%20samfundsøkonomiske%20konsekvenser%20af%20svær%20overvægt.ashx},
   Year                     = {2007},
-
   Owner                    = {RanaHaddang}
 }
 
 @Electronic{Sundhedsstyrelsen2001,
   Title                    = {Fysisk aktivitet og sundhed - En litteraturgennemgang},
   Author                   = {Sundhedsstyrelsen},
-  Url                      = {http://www.sst.dk/publ/publ2001/fysisk_aktivitet_sundhed/kap04.htm},
+  URL                      = {http://www.sst.dk/publ/publ2001/fysisk_aktivitet_sundhed/kap04.htm},
   Year                     = {2001},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
 }
@@ -714,8 +662,7 @@
   Author                   = {Sundhedsstyrelsen},
   Organization             = {Sundhedsstyrelsen - National Board of Health},
   Year                     = {2003},
-
-  Url                      = {https://sundhedsstyrelsen.dk/da/sundhed-og-livsstil/fysisk-aktivitet/anbefalinger/~/media/31FF5ED226F643D0A6948B52948E5DB3.ashx}
+  URL                      = {https://sundhedsstyrelsen.dk/da/sundhed-og-livsstil/fysisk-aktivitet/anbefalinger/~/media/31FF5ED226F643D0A6948B52948E5DB3.ashx}
 }
 
 @Article{Sundhedsstyrelsen2006,
@@ -723,18 +670,16 @@
   Author                   = {Sundhedsstyrelsen},
   Journal                  = {Sundhedsstyrrelsen},
   Year                     = {2006},
-
   Comment                  = {ISBN: 87-7676-350-1},
-  Url                      = {https://sundhedsstyrelsen.dk/da/udgivelser/2006/~/media/05FBAED642E444D482D4126D94826B60.ashx}
+  URL                      = {https://sundhedsstyrelsen.dk/da/udgivelser/2006/~/media/05FBAED642E444D482D4126D94826B60.ashx}
 }
 
 @Electronic{Sundhedsstyrelsen2013,
   Title                    = {"Get moving" - kampagne om fysisk aktivitet for børn og unge},
   Author                   = {Sundhedsstyrelsen},
   Month                    = {April},
-  Url                      = {https://sundhedsstyrelsen.dk/da/kampagner/get-moving},
+  URL                      = {https://sundhedsstyrelsen.dk/da/kampagner/get-moving},
   Year                     = {2013},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.29}
 }
@@ -742,9 +687,8 @@
 @Electronic{Sundhedsstyrelsen2016,
   Title                    = {60 minutter om dagen ved moderat til høj intensitet},
   Author                   = {Sundhedsstyrelsen},
-  Url                      = {https://sundhedsstyrelsen.dk/da/sundhed-og-livsstil/fysisk-aktivitet/anbefalinger/5-17-aar},
+  URL                      = {https://sundhedsstyrelsen.dk/da/sundhed-og-livsstil/fysisk-aktivitet/anbefalinger/5-17-aar},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.23}
 }
@@ -754,14 +698,13 @@
   Author                   = {Sundhedsstyrelsen and Undervisnings ministeriet and Børnerådet and Komiteen for sundhedsoplysningen},
   Journal                  = {Sundhedsstyrelsen},
   Year                     = {2016},
-
   Month                    = {02}
 }
 
 @Electronic{SundhedsstyrrelsenFaktaark,
   Title                    = {Overvægt blandt børn og unge i Danmark},
   Author                   = {Sundhedsstyrrelsen},
-  Url                      = {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx}
+  URL                      = {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx}
 }
 
 @Article{trends,
@@ -769,16 +712,14 @@
   Author                   = {Fismen, Anne-Siri},
   Journal                  = {Plos One},
   Year                     = {2016},
-
   Owner                    = {Rana}
 }
 
 @Electronic{Unicef2016,
   Title                    = {UNICEF Kid Power Band - Blue},
   Organization             = {Target International},
-  Url                      = {http://intl.target.com/p/unicef-kid-power-band-blue/-/A-50078493#prodSlot=_1_1},
+  URL                      = {http://intl.target.com/p/unicef-kid-power-band-blue/-/A-50078493#prodSlot=_1_1},
   Year                     = {2016},
-
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.09}
 }
@@ -790,7 +731,6 @@
   Publisher                = {Statens Institut for Folkesundhed},
   Year                     = {2014},
   Edition                  = {1. udgave},
-
   Comment                  = {ISBN: 978-87-7899-296-3}
 }
 
@@ -800,7 +740,6 @@
   Editor                   = {V. Brown, Lois},
   Publisher                = {Nova Science Pub Inc},
   Year                     = {2007},
-
   Review                   = {ISBN-13: 978-1600215988}
 }
 
@@ -808,7 +747,7 @@
   Title                    = {Overvægtige børn og unge},
   Author                   = {Vindum, Anne},
   Organization             = {Dagbladet Information},
-  Url                      = {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge},
+  URL                      = {http://www.faktalink.dk/titelliste/overvaegtige-boern-og-unge},
   Year                     = {2012}
 }
 
@@ -817,7 +756,6 @@
   Author                   = {Wied, Mads Winsløv and Raffalt, Peter and Brix, Sven},
   Editor                   = {Madsen, Johannes},
   Publisher                = {Danmarks Idræts-Forbund},
-
   Comment                  = {ISBN 978-87-92705-05-1},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
