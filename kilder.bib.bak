@@ -594,6 +594,13 @@
   Timestamp                = {2016.02.23}
 }
 
+@Manual{Sparkfun,
+  Title                    = {Accelerometer Basics},
+  Author                   = {Sparkfun},
+  Owner                    = {RanaHaddang},
+  URL                      = {https://learn.sparkfun.com/tutorials/accelerometer-basics}
+}
+
 @Electronic{Sqord_family2015,
   Title                    = {Parents \& Families},
   Author                   = {Sqord},
@@ -759,5 +766,9 @@
   Comment                  = {ISBN 978-87-92705-05-1},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
+}
+
+@Article{,
+  Owner                    = {RanaHaddang}
 }
 
