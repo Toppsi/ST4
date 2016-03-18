@@ -50,6 +50,14 @@
   Year                     = {2014}
 }
 
+@Article{Asserhoej2013,
+  author =  {Asserhøj, Trygve Laub},
+  title =   {Danskernes motions- og sportsvaner 2011},
+  journal = {Idrættens analyseinstitut},
+  year =    {2013},
+  owner =   {Frederik}
+}
+
 @Article{BarudThomsen2007,
   Title                    = {Dovne danskere koster Samfundet milliarder},
   Author                   = {Barud Thomsen, Rasmus},
