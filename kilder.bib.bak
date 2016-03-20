@@ -143,6 +143,14 @@
   Timestamp                = {2016.03.07}
 }
 
+@Electronic{DTU2014,
+  author =       {DTU transport},
+  year =         {2014},
+  title =        {Transportvaneundersøgelsen},
+  organization = {DTU transport, Institut for transport},
+  owner =        {Frederik}
+}
+
 @Article{Ekelund2015,
   Title                    = {Physical activity and all-cause mortality across levels of overall and abdominal adiposity in European men and women: the European Prospective Investigation into Cancer and Nutrition Study},
   Author                   = {Ekelund, Ulf et. al.},
@@ -457,6 +465,15 @@
   DOI                      = {10.1093/eurheartj/ehu299},
   Owner                    = {Cecilie},
   Timestamp                = {2016.02.22}
+}
+
+@Electronic{NREL2011,
+  author =       {NREL},
+  year =         {2011},
+  title =        {Safety Hazards of Batteries},
+  organization = {National Renewable Energy Laboratory},
+  url =          {http://science.energy.gov/~/media/wdts/nsb/pdf/Lithium%20Ion%20Battery%20Kits%20Information/Safety-Hazards-of-Batteries.pdf},
+  owner =        {mortenlarsen}
 }
 
 @Electronic{ObesityActionCoalition,
