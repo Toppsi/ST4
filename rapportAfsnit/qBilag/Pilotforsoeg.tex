@@ -1,32 +1,46 @@
 \chapter{Pilotforsøg}\vspace{-.75cm}
-\textit{Dette bilag beskriver pilotforsøget, som er nødvendigt i forhold til testmåling og design af aktivitetsmåleren. Der undersøges tre forskellige placeringer af sensoren i tre forskellige aktivitetsformer på fire forsøgspersoner.}
+\textit{Dette bilag beskriver pilotforsøget, som undersøger en række essentielle faktorer i forhold til problemløsningens aspekter.}
 
 \section{Teori}
 \textbf{Grundlæggende teori eller henvis tilbage bevægelsesanalysen (Hvis der er en)}
 
 \section{Formål}
-For at kunne modificere og tilpasse softwaren til CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er det nødvendigt at kende signalets frekvensindhold og vide, hvordan forskellige aktivitetsformer påvirker systemet. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
+Formålet for pilotforsøget er at undersøge en række essentielle faktorer i forbindelse med gang, løb og cykling. De resultater som pilotforsøget medfører, skal benyttes til at konfigurere og tilpasse softwaren for CY8CKIT-043 PSoC 4 M-Series Prototyping Kit, således denne kan opfylde kravene beskrevet i \secref{succeskrav}. \newline
+Det sluttelige system skal dermed kunne registrere de enkelte aktiviter, samt adskille aktiviteterne automatisk. Til dette formål har det teoretiske afsnit, \secref{TEORI OM SENSOR}, vist, at et accelerometer og et gyroskop vil være fordelagtigt at benytte. I forlængelse af dette, undersøges det hvorvidt placeringen af sensorerne har en betydning for signalets udformning. Ydermere skal signalets frekvensområde bestemmes. \newline
+Formålet med pilotforsøget er dermed:
 \begin{itemize}
-	\item Bestemme hvordan sensoren påvirkes af gang, løb og cykling.
-	\item Undersøge hvor mange g-kræfter sensorens målinger ændrer sig alt efter placering på kroppen.
-	\item Undersøge bevægelsesmønstret i signalet i forhold til placering af sensor.
-	\item Bestemme frekvensindholdet for signalet.
+\item At undersøge signalernes udformning fra accelerometer og gyroskop ved aktiviteterne; gang, løb og cykling. 
+\item At undersøge 3 forudbestemte placeringer på underbenets betydning for signalernes udformning.
+\item At bestemme frekvensområdet for signalerne.
 \end{itemize}
 
-\section{Materiale}
+%er det nødvendigt at kende signalets frekvensindhold og vide, hvordan forskellige aktivitetsformer påvirker systemet. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
+%\begin{itemize}
+%	\item Bestemme hvordan sensoren påvirkes af gang, løb og cykling. (Undersøge signalets udformning for accelerometer og gyroskop ved aktiviteterne; løb, gang og cykling. 
+%		- Ligeledes at undersøge placeringen af sensoren ift. påvirkning af signalet.	
+%	\item Undersøge hvor mange g-kræfter sensorens målinger ændrer sig alt efter placering på kroppen.
+%	\item Undersøge bevægelsesmønstret i signalet i forhold til placering af sensor.
+%	\item Bestemme frekvensindholdet for signalet.
+%\end{itemize}
+
+\section{Metode}
+Forsøgets metode er bestemt og udført med hensyn til at opfylde de formål som er opstillet som pilotforsøgets formål. \newline
+Forsøgets metode involverer henholdsvis de materialer der skal benyttes samt den fremgangsmåde som ligger til grund for udførelsen.
+
+\subsection{Materialer}
 \begin{itemize}
 	\item Løbebånd med justerbar hastighed og sikkerhedsbæresele.
 	\item Motionscykel.
-	\item Shimmer3 sensor.
-	\item Computer med programmerne:
+	\item Shimmer3 sensor med tilhørende holder og strap.
+	\item (Sports)tape
+	\item Computer med følgende software:
 	\begin{itemize}
 		\item Labview.
 		\item Shimmer sensing.
-		\item NIVISA driver.
 	\end{itemize}
 \end{itemize}
 
-\section{Fremgangsmåde}
+\subsection{Fremgangsmåde}
 Inden forsøget skal computeren med programmet Multi Shimmer Sync forbindes via Bluetooth med Shimmer3 sensoren. Herefter kalibreres Shimmer3 accelerometeret ved hjælp af kalibreringsklodsen og samplingsfrekvensen indstilles til 500 Hz.\fxnote{Gyroskop trækker for meget, og systemet vil selv sige til, hvis frekvensen er for høj - sættes typisk til 1024 Hz, men derfor sættes den i dette tilfælde kun til 500 Hz}\fxnote{Skal det her slettes?} %Alle andre har indstillet til 1024 Hz, men kan ikke sige hvorfor.
 %Der oprettes en mappe for hver forsøgsperson, som yderligere inddeles i fire mapper efter aktivitetsform. Herunder navngives datafilerne fra målingerne i forhold til placering af sensor, som for eksempel "Forsoegsperson\_1 $\rightarrow$ Gang $\rightarrow$ Ankel".\fxnote{Diskuterres om det er for dybdegående - nogle er for og andre er imod} 
 Der foretages en testmåling med sensoren, hvor den tændes kortvarigt mens den påvirkes med 1 g. Hvis data fra denne testmåling optages og skildres korrekt er sensoren klar til forsøget.
