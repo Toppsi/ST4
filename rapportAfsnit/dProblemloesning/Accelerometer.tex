@@ -1,15 +1,13 @@
-\subsection{Accelerometer} 
-Accelerometer er et elektromekanisk apparat som anvendes til at måle accelerationskræfter. Det kan blandt andet registrere om et objekt bevæger sig opad, nedad og måle lineær acceleration\citep{Goodrich2013}. Enheden er målt i meter pr sekund i anden(m/s^2) eller i g-kræfter (g). En enkel g-kraft på jorden er tilsvarende til 9,8 m/s^2 , men det kan variere med elevation. \citep{Sparkfun}
-Hvis outputtet af en sensor er vendt opad vil kraften være +1g, hvis outputtet af en sensor er horisontal er det tilsvarende 0g og hvis outputtet er vendt nedad vil det være tilsvarende -1g, som illusteret på figur \label{fig:g}. citep\{Instruments}
-
+\section{Accelerometer} 
+Accelerometer er et elektromekanisk apparat som anvendes til at måle accelerationskræfter. Det kan blandt andet registrere om et objekt bevæger sig opad, nedad og måle lineær acceleration\citep{Goodrich2013}. Enheden er målt i meter pr sekund i anden($m/s^2$) eller i g-kræfter (g). En enkel g-kraft på jorden er tilsvarende til 9,8 $m/s^2$ , men det kan variere med elevation. \citep{Sparkfun}
+Hvis outputtet af en sensor er vendt opad vil kraften være +1g, hvis outputtet af en sensor er horisontal er det tilsvarende 0g og hvis outputtet er vendt nedad vil det være tilsvarende -1g, som illusteret på figur \figref{fig:g}. \citep{Instruments}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/aProblemløsning/g.png}
-	\caption{På figuren ses, antal af g afhængigt af hvilke retninger af accelerometeren måler\ . \citep{Instruments}}
+	\includegraphics[scale=0.25]{figures/bProblemloesning/g.png}
+	\caption{På figuren ses, antal af g afhængigt af hvilke retninger af accelerometeren måler. \citep{Instruments}}
 	\label{fig:g}
 \end{figure}
-
 
 Et accelerometer måler to former for acceleration, henholdsvis statisk og dynamisk, hvor de statiske kræfter inkluderer tyngdekraften og hvilken vinkelretning enheden bliver tiltet mod. De dynamiske kræfter inkluderer, hvilken retning enheden bevæger sig imod og dens vibrationer. \citep{Sparkfun,Engineering, Goodrich2013}
 
@@ -22,9 +20,4 @@ Man kan måle accelerationer i flere retninger ved af bruge flere end en acceler
 På trods af den accelerometerets lille størrelse, fungerer det på mange måder, hvor de mest anvendte er den piezoelektriske effekt og den kapacitance sensor. 
 Den piezoelektriske effekt er den mest almindelige form for accelerometer. Denne anvender mikroskopiske krystalstrukturer, som stresses på grund af accelererende kræfter. Disse krystaller skaber en spænding ud fra stressen, hvor accelerometeret fortolker denne spænding til at bestemme hastigheden og retningen.
 
-Den kapacistanse\fixmenote{Kapacitans er et mål for, hvor meget elektrisk ladning som gemmes (eller separeres) for en given elektrisk spændingsforskel} accelerometer, registrerer ændringer i kapacistans mellem mikrostrukturer, som er placeret ved siden af enheden. Hvis en accelererende kraft bevæger en af disse strukturer, så vil kapacitansen blive ændret og accelerometeret vil fortolke denne kapacitans som en spænding.  \citep{Goodrich2013}
-
-
-
-
-
+Den kapacistanse\fxnote{Kapacitans er et mål for, hvor meget elektrisk ladning som gemmes (eller separeres) for en given elektrisk spændingsforskel} accelerometer, registrerer ændringer i kapacistans mellem mikrostrukturer, som er placeret ved siden af enheden. Hvis en accelererende kraft bevæger en af disse strukturer, så vil kapacitansen blive ændret og accelerometeret vil fortolke denne kapacitans som en spænding.  \citep{Goodrich2013}
