@@ -50,7 +50,7 @@ Forsøget vil tage udgangspunkt i tre forudbestemte placeringer af enheden, Shim
 Fremgangsmåde
 Forsøgets fremgangsmåde er opdelt i to elementer. Første element indeholder en klargøring af Shimmer3 og det næste element indeholder fremgangsmåden ved optagelsen af data fra forsøget.
 
-\underline{Klargøring af Shimmer3}
+\underline{Klargøring af Shimmer3}\newline
 Shimmer3 forbindes til computeren gennem Bluetooth ved at indtaste adgangskoden ’1234’.  \newline
 Labview åbnes og forbindes til Shimmer3 gennem den pågældende COM port. Før optagelsen af data fra sensoren, benyttes Labview til at konfigurere sensoren. Shimmer3 indeholder en lang række af sensorer, derfor skal enheden indstilles til at benytte de sensorer som er nødvendige. Forsøget gør brug af et ’Widerange Accelerometer’ samt ’Gyroscope’. De sensorer som Shimmer3 skal optage data med er bestemt, derfor skal sensorerne konfigureres med henhold til arbejdsområde og samplingsfrekvens. Signalets amplitude er ikke kendt, derfor benyttes det maksimale arbejdsområde for henholdsvis accelerometer og gyroskop. De to sensorer konfigureres derfor til et arbejdsområde på henholdsvis $\pm$16 G og $\pm$2000 dps. Ydermere skal samplingsfrekvensen indstilles for Shimmer3. Dog er frekvensområdet for signaler endnu ikke kendt, derfor benyttes den højeste samplingshastighed ved brug af to sensorer. Det fremgår af databladet, at når ’Wirderange accelerometer’ og ’Gyroscope’ benyttes, da er den maksimale samplingsfrekvens 512 Hz. Samplingsfrekvens konfigureres derfor til 512 Hz. \newline
 Shimmer3 er nu konfigureret med henhold til de data som ønskes optaget. Det er dermed muligt at starte ’Stream’ for enheden i Labview, for derved at se realtime målinger fra Shimmer3. \newline
@@ -59,7 +59,7 @@ Først undersøges accelerometerets værdier ved at placere Shimmer3 på en flad
  \newline
 Shimmer3 er forbundet, konfigureret og undersøgt således forsøget efterfølgende kan gennemføres.
 
-\underline{Udførsel af fysiologiske del af forsøget}
+\underline{Udførsel af fysiologiske del af forsøget}\newline
 Forsøget udføres på fire forsøgspersoner, som alle skal udføre aktiviteterne gang, løb og cykling. Den nedenstående beskrivelse af forsøgets fremgangsmåde er gældende for én af de forudbestemte placeringer af Shimmer3. Dog benyttes den samme fremgangsmåde ydermere til de resterende to placeringer. \newline
  Inden målingerne, som involverer et løbebånd, er forsøgspersonen blevet fastgjort til sikkerhedsbæreselen. Ydermere er der foretaget en baseline måling af 10 sekunders varighed førend påbegyndelse af selve målingen af 45 sekunders varighed. Denne baseline måling vil senere blive benyttes i databehandlingen med henhold til at korrigere i signalets udformning i forhold til værdierne for baseline målingen. \newline
 For henholdsvis gang og løb skal forsøgspersonen stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen. Før cykling skal forsøgspersonen sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund. \newline
@@ -71,7 +71,7 @@ Sensoren skal placeres tre forskellige steder under hvert forsøg på forsøgspe
 	\centering
 	\includegraphics[scale=0.6]{figures/qBilag/Sensor_placering.png}
 	\caption{På figuren ses, hvor sensoren skal placeres under pilotforsøget. Placering A viser sensoren siddende proximalt over den laterale malleolus. Placering B illustrerer sensoren, når den er medialt på den ventrale side af tibia. I placering C er sensoren distalt for patella. (Modificeret fra \cite{Perna2016,Shimmer2016})}
-	\label{fig:sensor_placering}
+	\label{fig:sensor_placering2}
 \end{figure}
 
 
