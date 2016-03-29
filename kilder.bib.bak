@@ -51,11 +51,11 @@
 }
 
 @Article{Asserhoej2013,
-  author =  {Asserhøj, Trygve Laub},
-  title =   {Danskernes motions- og sportsvaner 2011},
-  journal = {Idrættens analyseinstitut},
-  year =    {2013},
-  owner =   {Frederik}
+  Title                    = {Danskernes motions- og sportsvaner 2011},
+  Author                   = {Asserhøj, Trygve Laub},
+  Journal                  = {Idrættens analyseinstitut},
+  Year                     = {2013},
+  Owner                    = {Frederik}
 }
 
 @Article{BarudThomsen2007,
@@ -94,6 +94,14 @@
   URL                      = {http://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#ControlWeight},
   Year                     = {2015},
   Owner                    = {MortenLarsen}
+}
+
+@Article{Chu,
+  Title                    = {Choosing the Right Type of Accelerometer},
+  Author                   = {Chu, Anthony},
+  Journal                  = {Engineer's Circle},
+  Owner                    = {RanaHaddang},
+  URL                      = {http://www.meas-spec.com/downloads/Choosing_the_Right_Type_of_Accelerometers.pdf}
 }
 
 @Electronic{CooperBlair2005,
@@ -144,11 +152,11 @@
 }
 
 @Electronic{DTU2014,
-  author =       {DTU transport},
-  year =         {2014},
-  title =        {Transportvaneundersøgelsen},
-  organization = {DTU transport, Institut for transport},
-  owner =        {Frederik}
+  Title                    = {Transportvaneundersøgelsen},
+  Author                   = {DTU transport},
+  Organization             = {DTU transport, Institut for transport},
+  Year                     = {2014},
+  Owner                    = {Frederik}
 }
 
 @Article{Ekelund2015,
@@ -280,6 +288,13 @@
   Timestamp                = {2016.02.25}
 }
 
+@Electronic{Inspire,
+  Title                    = {Accelerometers and how they work},
+  Organization             = {TI Inspire},
+  URL                      = {http://www2.usfirst.org/2005comp/Manuals/Acceler1.pdf},
+  Owner                    = {RanaHaddang}
+}
+
 @Article{J.Sebire2013,
   Title                    = {Testing a self-determination theory model of children’s physical activity motivation: a cross-sectional study},
   Author                   = {J. Sebire, Simon and Jago, Russell and R. Fox, Kenneth and J. Edwards, Mark and L. Thompson, Janice},
@@ -377,6 +392,14 @@
   Timestamp                = {2016.02.25}
 }
 
+@Article{LuingeVeltink2005,
+  Title                    = {Measuring orientation of human body segments using miniature gyroscopes and accelerometers},
+  Author                   = {Luinge, H. J. and Veltink, P.H},
+  Journal                  = {Signals Systems Group, Department of Electrical Engineering, University of Twente, Enschede,The Netherlands},
+  Year                     = {2005},
+  Owner                    = {RanaHaddang}
+}
+
 @Article{Lunau2012,
   Title                    = {Fat but fit},
   Author                   = {Lunau, Kate},
@@ -468,12 +491,12 @@
 }
 
 @Electronic{NREL2011,
-  author =       {NREL},
-  year =         {2011},
-  title =        {Safety Hazards of Batteries},
-  organization = {National Renewable Energy Laboratory},
-  url =          {http://science.energy.gov/~/media/wdts/nsb/pdf/Lithium%20Ion%20Battery%20Kits%20Information/Safety-Hazards-of-Batteries.pdf},
-  owner =        {mortenlarsen}
+  Title                    = {Safety Hazards of Batteries},
+  Author                   = {NREL},
+  Organization             = {National Renewable Energy Laboratory},
+  URL                      = {http://science.energy.gov/~/media/wdts/nsb/pdf/Lithium%20Ion%20Battery%20Kits%20Information/Safety-Hazards-of-Batteries.pdf},
+  Year                     = {2011},
+  Owner                    = {mortenlarsen}
 }
 
 @Electronic{ObesityActionCoalition,
@@ -791,14 +814,14 @@
 }
 
 @Book{Webster2011,
-  title =     {Medical Instrumentation, Application and Design},
-  publisher = {John Willey and Sons},
-  year =      {2011},
-  author =    {Webster, John G.},
-  editor =    {Webster, John G.},
-  edition =   {4},
-  doi =       {978-0471676003},
-  owner =     {mortenlarsen}
+  Title                    = {Medical Instrumentation, Application and Design},
+  Author                   = {Webster, John G.},
+  Editor                   = {Webster, John G.},
+  Publisher                = {John Willey and Sons},
+  Year                     = {2011},
+  Edition                  = {4},
+  DOI                      = {978-0471676003},
+  Owner                    = {mortenlarsen}
 }
 
 @Book{Wied2011,
