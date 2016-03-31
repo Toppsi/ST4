@@ -937,6 +937,16 @@
   Owner                    = {mortenlarsen}
 }
 
+@Book{Whittle1990,
+  title =     {Gait analysis - An introduction},
+  publisher = {Butterworth Heineman},
+  year =      {1990},
+  author =    {Whittle, Michael W.},
+  editor =    {Campbell, Siobhan},
+  edition =   {4. udgave},
+  owner =     {Frederik}
+}
+
 @Book{Wied2011,
   Title                    = {Aldersrelateret træning for børn og unge},
   Author                   = {Wied, Mads Winsløv and Raffalt, Peter and Brix, Sven},
