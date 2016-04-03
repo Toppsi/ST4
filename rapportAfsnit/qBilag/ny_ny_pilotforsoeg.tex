@@ -1,0 +1,129 @@
+\chapter{Pilotforsøg}\vspace{-.75cm}
+\section{Formål}
+Formålet for pilotforsøget er at undersøge en række essentielle faktorer i forbindelse med gang, løb og cykling. De resultater som pilotforsøget medfører, skal benyttes til at konfigurere og tilpasse softwaren for CY8CKIT-043 PSoC 4 M-Series Prototyping Kit, således denne kan opfylde kravene beskrevet i \secref{succeskrav}. \newline
+Til pilotforsøget anvendes Shimmer 3, hvilket er en enhed, som indeholder flere sensorer, hvor der til forsøget benyttes et accelerometer og et gyroskop. Med denne undersøges hvordan løb, gang og cykling påvirker de to forskellige sensorer. Dette gøres med henblik på at kunne lave algoritmer, som adskiller de tre forskellige aktivitetsformer. Ydermere undersøges signalernes frekvens samt hvilken indflydelse placering af sensoren har på signalets udformning.
+
+Formålet med pilotforsøget er dermed:\vspace{-3mm}
+\begin{itemize}
+\item At undersøge signalernes udformning fra accelerometer og gyroskop ved aktiviteterne; gang, løb og cykling. 
+\item At undersøge 3 forudbestemte placeringer på underbenets betydning for signalernes udformning.
+\item At bestemme frekvensområdet for signalerne.
+\end{itemize}
+
+%er det nødvendigt at kende signalets frekvensindhold og vide, hvordan forskellige aktivitetsformer påvirker systemet. Målingerne skal undersøges for at kunne lave en algoritme, som kan få sensoren til at skelne imellem de pågældende aktivitetsformer. Derudover skal det bestemmes, hvor sensoren skal placeres på kroppen for mest optimalt udbytte. Derfor er formålet med pilotforsøget følgende:
+%\begin{itemize}
+%	\item Bestemme hvordan sensoren påvirkes af gang, løb og cykling. (Undersøge signalets udformning for accelerometer og gyroskop ved aktiviteterne; løb, gang og cykling. 
+%		- Ligeledes at undersøge placeringen af sensoren ift. påvirkning af signalet.	
+%	\item Undersøge hvor mange g-kræfter sensorens målinger ændrer sig alt efter placering på kroppen.
+%	\item Undersøge bevægelsesmønstret i signalet i forhold til placering af sensor.
+%	\item Bestemme frekvensindholdet for signalet.
+%\end{itemize}
+
+\section{Metode}
+Forsøgets metode er bestemt og udført med henblik på at opfylde pilotforsøgets formål. Dette involverer henholdsvis de materialer der skal benyttes samt den fremgangsmåde som ligger til grund for udførelsen.
+
+Til forsøget medtages kun forsøgspersoner, som ikke lider af gener der forhindrer dem i at udføre aktiviteterne gang, løb og cykling. Er en person skadet eller syg, eksluderes denne dermed fra forsøget.  
+
+%Forsøget inkluderer udelukkende fuldt funktionsdygtige personer, hvormed ingen forsøgspersoner må have fysiske gener som kan medføre besvær ved udførsel af aktiviterne; gang, løb og cykling. Dermed sikres det, at forsøgets data indeholder normaliserede data som giver grundlag for et validt og repræsentativt datasæt for fysisk funktionsdygtige personer. 
+
+Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet af enheden, Shimmer3. Disse placeringer er udvalgt på baggrund af bevægelsesanalysen, hvor det ses at de største bevægelser optræder her i forbindelse med gang, løb og cykling. Accelerometet registrerer position og acceleration, og det forventes derfor at den største forskel vil kunne ses ved disse placeringer. \fxnote{måske noget om gyroskop + er det rigtigt i forhold til bevægelsesanalysen??}
+% med henhold til æstetiske og brugervenlige aspekter samt \secref{TEORI SENSORER}. \newline
+%\textit{Jeg ved ikke helt hvad jeg skal skrive vores begrundelse er ift. det teori om gyroskop, derfor skal de sidste linjer her skrives på senere. Ellers hvis en af jer ved nok om gyroskop til at skrive begrundelsen ;-)}
+ 
+
+\subsection{Materialer}
+\begin{itemize}
+	\item Løbebånd med justerbar hastighed og sikkerhedsbæresele.
+	\item Motionscykel.
+	\item Shimmer3 sensor med tilhørende holder og strap.
+	\item Sportstape.
+	\item Computer med følgende software:
+	\begin{itemize}
+		\item Labview.
+		\item Shimmer sensing.
+	\end{itemize}
+\end{itemize}
+
+\section{Fremgangsmåde}
+Forsøgets fremgangsmåde er opdelt i to elementer. Første element indeholder en klargøring af Shimmer3 og det næste element indeholder fremgangsmåden ved optagelsen af data fra forsøget.
+
+\subsubsection{Klargøring af Shimmer3 SUB}
+Før forsøgene kan udføres skal shimmer forbindes korrekt med computeren, og indstilles til at bruge de sensorer der ønskes i pilotforsøget. \vspace{-3mm}
+\begin{itemize}
+	\item Shimmer forbindes til programmet Labview gennem bluetooth.
+	\item Shimmer indeholder en række sensorer, hvorad føægende skal aktiveres: 
+		\begin{itemize}
+			\item Widerange Accelerometer.
+			\item Gyroscope.
+		\end{itemize}
+	\item De maksimale arbejdsområder på $\pm$16 G og $\pm$2000 dps vælges, da signalets amplitude endnu er ukendt.
+	\item Samplingsfrekvensen indstilles på 512 Hz, da signalets frekvens er ukendt, og denne samplingsfrekvens er den maksimale der kan vælges, når både gyroskopet og accelerometeret er i brug.  
+	\item Det er nu muligt at starte stream, og derefter realtime.
+	
+	 
+\end{itemize}
+
+
+
+%Shimmer3 undersøges nu for at kunne konkludere hvorvidt værdierne fra sensorerne er korrekte. Til denne undersøgelse skal akserne for accelerometeret og gyoskopet findes ved opslag i datablad for enheden. Når disse akser er bestemt, benyttes Labview til at optage målinger i. Der startes en ’Stream’ for at undersøge realtime målingerne.
+%Først undersøges accelerometerets værdier ved at placere Shimmer3 på en flad, fast overflade. Shimmer3 vendes i 6 forskellige positioner afhængigt af om det er den positive eller negative akse for x, y eller z som undersøges. Værdien for den positive akse for henholdsvis x, y og z skal vise cirka 9,8 m/s, og med negativt fortegn ved den negative akse for x, y og x. I tilfælde af at værdierne er cirka 9,8 m/s, da kan accelerometerets nøjagtighed godtages. Ydermere undersøges gyroskopet ved at spinne Shimmer3 rundt i en række forskellige retninger for at undersøge hvorvidt sensoren reagerer på dette. Hvis gyroskopet registrerer ændringerne, da godtages dennes nøjagtighed. 
+%Shimmer3 er forbundet, konfigureret og undersøgt således forsøget efterfølgende kan gennemføres.
+
+\subsection{Udførsel af fysiologiske del af forsøget}\newline
+Forsøget udføres på fire forsøgspersoner, som alle skal udføre aktiviteterne gang, løb og cykling. Den nedenstående beskrivelse af forsøgets fremgangsmåde er gældende for én af de forudbestemte placeringer af Shimmer3 på forsøgspersonens højre ben. Dog benyttes den samme fremgangsmåde til de resterende to placeringer. De tre placeringer kan ses på \figref{fig:sensor_placering} \newline
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/qBilag/Sensor_placering2.png}
+	\caption{På figuren ses, hvor sensoren skal placeres under pilotforsøget. Placering A: proximalt for den laterale malleolus. Placering B: medialt på den laterale side af tibia. Placering C: distalt for patella på den laterale side. (Modificeret fra \cite{Perna2016,Shimmer2016})}
+	\label{fig:sensor_placering}
+\end{figure}
+
+Inden forsøget skal forsøgspersonen fastspændes i en sikkerhedssele. Derudover skal forsøgspersonen inden hver måling fortælle hvor på borgskalaen denne befinder sig, og er det under 11\fxnote{var det 11?} kan målingen påbegyndes.
+
+Første måling er gang, hvor et middel gangtempo på 4,8 km/t er valgt\citep{Miles 2007}. \vspace{-3mm}
+\begin{itemize}
+		\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
+		\item Løbebåndet indstilles til 4,8 km/t, hvor forsøgspersonen går på løbebåndet indtil en homogen bevægelses-cyklus opnås. \item Forsøgspersonen indikerer når denne føler en homogen bevægelses-cyklus.
+		\item Målingen på 45 sekunder igangsættes.
+		\item Fremgangsmåden gentages for alle tre placeringer. 
+\end{itemize}
+ 
+Anden måling er løb, et middel løbetempo på 11,3 km/t er valgt\citep{Miles 2007}. \vspace{-3mm}
+\begin{itemize}
+	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
+	\item Løbebåndet indstilles til 11,3 km/t, hvor forsøgspersonen løber på løbebåndet indtil en homogen bevægelses-cyklus opnås. 
+	\item Forsøgspersonen indikerer når denne føler en homogen bevægelses-cyklus.
+	\item Målingen på 45 sekunder igangsættes.
+	\item Fremgangsmåden gentages for alle tre placeringer.
+\end{itemize}
+ 
+Tredje måling er cykling, hvor et cykeltempo på 20,9 km/t er valgt, hvilket er et højt cykeltempo\citep{Miles 2007}. Tempoet er dog underordnet, da der kun ønskes at se på forskellen i selve bevægelsen fra de andre aktivitetsformer. \vspace{-3mm}
+\begin{itemize}
+	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund.
+	\item Forsøgspersonen træder i pedalerne indtil denne opnår en homogen bevægelses-cyklus med en hastighed på 20,9 km/t ved en belastning på 35 W. 
+	\item Målingen på 45 sekunder igangsættes. 
+	\item Fremgangsmåden gentages for alle tre placeringer.
+\end{itemize}
+
+Sidste måling foretages på løbebåndet, hvor forsøgspersonen gradvist skal stige i tempo under hele forsøget. Der noteres under forsøget hvornår forsøgspersonen skifter fra gang til løb.  \vspace{-3mm}
+\begin{itemize}
+	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
+	\item Målingen igangsættes.
+	\item Løbebåndet indstilles til 2 km/t, hvor forsøgspersonen skal gå i 20 sekunder.  
+	\item Hastigheden stiger herefter med 2 km/t for hvert 20. sekund, indtil forsøgspersonen har opnået maksimal hastighed, eller løbebåndets maksimale hastighed. 
+	\item Målingen stoppes. 
+	\item Fremgangsmåden gentages for alle tre placeringer.
+\end{itemize}
+
+
+\section{Databehandling}
+
+\section{Resultater}
+
+\section{Diskussion}
+
+\section{Konklusion}
+
+%% Opgaver - rettelser
+% Man skal markere på forsøgspersonen med tush eller andet hvor sensoren skal placeres
