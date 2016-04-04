@@ -1,35 +1,32 @@
 \section{Accelerometer}
-Et accelerometer er et elektromekanisk apparat som anvendes til at måle accelerationskræfter, hvilket er ændringer i hastighed og position.\citep{Goodrich2013,TittertonWeston2004}. Enheden måles i meter per sekund i anden($m/s^2$) eller i g-kræfter (g).\fxnote{En g-kraft på jorden svarer til tyngdekræften på 9,8 $m/s^2$ , men varierer med elevation.}\citep{Sparkfun,TittertonWeston2004}
-Accelerationen beregnes ud fra Newtons anden lov $F=ma=mf+mg$, hvor F er den totale kraft, som virker på en masse, og f er accelerationen af kræfter opstået af andre grunde end tyngdekræften.\citep{TittertonWeston2004} \newline
-Simpelt kan accelerometeret beskrives som en kapsel hvori der er en indre masse spændt mellem to fjedre, hvilket kan ses på \figref{acc_simpelt}. Ændringen af den indre masse i den sensitive akse, kan dermed beskrive accelerationen af selve accelerometeret. Hvis accelerometeret kastes op i luften, vil både kapslen og den indre masse udelukkende påvirkes af tyngdekræften, og der vil derfor ikke registeres en acceleration.\citep{TittertonWeston2004} \newline
+Et accelerometer er et elektromekanisk apparat, som anvendes til at måle accelerationskræfter, hvilket er ændringer i hastighed og position \citep{Goodrich2013,TittertonWeston2004}. Enheden for dette er meter per sekund i anden ($m/s^2$) eller g-kræfter, da 1 g svarer til 9,82$m/s^2$ (g) \fxnote{En g-kraft på jorden svarer til tyngdekræften på 9,8 $m/s^2$ , men varierer med elevation.}\citep{Sparkfun,TittertonWeston2004}.
+Accelerationen beregnes ud fra Newtons anden lov $F=ma=mf+mg$, hvor F er den totale kraft, som påvirker en masse, og f er accelerationen af kræfter opstået af andre grunde end tyngdekræften.\citep{TittertonWeston2004} \newline
+Simpelt kan accelerometeret beskrives som en kapsel, hvori der er en indre masse spændt mellem to fjedre, hvilket kan ses på \figref{acc_simpelt}. Ændringen af den indre masse i den sensitive akse kan dermed beskrive accelerationen af selve accelerometeret. Hvis accelerometeret kastes op i luften, vil både kapslen og den indre masse udelukkende påvirkes af tyngdekræften, og der vil derfor ikke registeres en acceleration.\citep{TittertonWeston2004} \newline
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{figures/bProblemloesning/accelerometer_basic.png}
-	\caption{På figuren ses et simpelt accelerometers opbygning.\citep{TittertonWeston2004}(Modificeret)}
+	\includegraphics[scale=0.35]{figures/bProblemloesning/accelerometer_basic.png}
+	\caption{På figuren ses et simpelt accelerometers opbygning. \citep{TittertonWeston2004}(Modificeret)}
 	\label{acc_simpelt}
 \end{figure}
 
-Et accelerometer måler to former for acceleration: statisk og dynamisk. De statiske kræfter er tyngdekraften og  vinkelretning af accelerometeret. De dynamiske kræfter er hvilken retning acceleromeret bevæges og dets vibrationer. \citep{Sparkfun,Engineering, Goodrich2013}
+Et accelerometer måler to former for acceleration: statisk og dynamisk. De statiske kræfter er tyngdekraften og vinkelretning af accelerometeret. De dynamiske kræfter beskriver retningen af accelerometerets bevægelse og dets vibrationer. \citep{Sparkfun,Engineering, Goodrich2013} \\
+Der findes accelerometre, som har en, to eller tre måleakser. For at opnå det fulde udbytte af et accelerometer bør et tre-akse accelerometer benyttes eller tre single-akse accelerometre, som placeres vinkelret på hinanden.\citep{TittertonWeston2004} 
 
-Der findes accelerometre som måler i en, to eller tre akser. For at opnå det fulde udbytte af et accelerometer, bør der benyttes et tre-akse accelerometer, eller tre single-akse accelerometre, som ofte placeres vinkelret på hinanden.\citep{TittertonWeston2004}} 
+Accelerometre benyttes enten i en åben eller lukket kreds. I en åben kreds fastholdes den indre masse til et nulpunkt ved at være spændt mellem to fjedre. Ved acceleration af kapslen bevæges den indre masse væk fra nulpunktet, hvor ændringen for et single-akse accelerometer vil være proportional med kræften, der har påvirket systemet. I en lukket kreds fastholdes den indre masse til en nulpunkt ved hjælp af magnetiske kræfter. Oftest påmonteres en spole på den indre masse, hvormed magnetfeltet forstærkes. Det er muligt at foretage mere præcise målinger omkring nulpunktet end ved ændringerne. Accelerometre med den åbne kreds er derfor mere præcis end dem med den lukkede kreds. 
 
-Accelerometre benyttes enten i en åben eller lukket kreds. I en åben kreds fastholdes den indre masse til et nulpunkt ved af være spændt mellem to fjedre. Ved acceleration af kapslen bevæges den indre masse væk fra nulpunktet, hvor ændringen for et single-akse accelerometer vil være proportional med kraften der har påvirket systemet. I en lukket kreds fastholdes den indre masse til en nulpunkt ved hjælp af magnetiske kræfter. Oftest er der påmonteret spoler på den indre masse, hvormed megnetfeltet forstærkes. Det er muligt at foretage mere præcise målinger omkring nulpunktet end ved ændringerne. Accelerometeret med den åbne kreds er mere præcis end det med den lukkede kreds. 
-
-Der findes flere forskellige accelerometre, hvoraf tre er nævnt her. 
-\subsubsection{Pendul accelerometer}
-Pendul accelerometeret består af en kapsel, hvortil der er fastkoblet et pendul, som i enden har den indre masse. I enden af pendulet opfanges bevægelserne enten optisk, induktivt eller kapasitivt. Ved den optiske metode opfanges transmittansen\fxnote{gennemskinneligheden} af lys gennem en sprække i kapslen. Ved den induktive metode måles ændringen af nogle spoler, som er fastkoblet på kapslen, som interagerer med en flade på pendulet, hvilket påvirker induktansen af spolerne. Det er dermed afstanden til spolerne der udgør accelerationen i stedet for afstanden til pendulets nulpunkt. Ved den kapacitive metode, er to elektroder placeret tæt ved spidsen af pendulet. Ændringen af pendulet måles derved som et brokredsløb mellem pendulet og elektroderne\fxnote{brokredsløb = to dele forbundet-ofte parallelt-og en tredje del forbundet mellem dem}. Pendulet er forbundet i et lukket kredsløb, hvor der er en spole om pendulnålen, og to magneter, placeret tæt om den indre masse, for at holde den ved nulpunktet. 
-
-\subsubsection{Vbrationsaccelerometer}
-Til denne benyttes et åbent kredsløb ved brug af quartz krystalteknologi. Der er to krystaller placeret om den indre masse, hvormed den kan fastholdes nulpunktet. De to krystaller vibrer ved egenfrekvens, men ved bevægelse af accelerometeret vil begge krystaller vibrere ved den samme resonantfrekvens. Den ene af krystallerne udstrækkes, hvormed frekvensen stiger, og den anden sammenpresses hvormed frekvensen aftager. Ændringen af disse frekvenser er direkte proportional med accelerationen.
-
-\subsubsection{Akustisk overfladebølge accelerometre}
-\textbf{Den sidste er mere kompliceret at forstå - skriver den, hvis vi skal have eksemplerne med. }
-
-Til denne benyttes et åbent kredsløb. Der er et bølgemateriale af quartz krystaller på en overflade, og når accelerometeret påvirkes af kræfter, skubber disse til strukturene på overfladen. Det danner nogle bølger, som så kan måles som acceleration. 
-
-
-
+%Der findes flere forskellige accelerometre, hvoraf tre er nævnt her. 
+%\subsubsection{Pendul accelerometer}
+%Pendul accelerometeret består af en kapsel, hvortil der er fastkoblet et pendul, som i enden har den indre masse. I enden af pendulet opfanges bevægelserne enten optisk, induktivt eller kapasitivt. Ved den optiske metode opfanges transmittansen\fxnote{gennemskinneligheden} af lys gennem en sprække i kapslen. Ved den induktive metode måles ændringen af nogle spoler, som er fastkoblet på kapslen, som interagerer med en flade på pendulet, hvilket påvirker induktansen af spolerne. Det er dermed afstanden til spolerne der udgør accelerationen i stedet for afstanden til pendulets nulpunkt. Ved den kapacitive metode, er to elektroder placeret tæt ved spidsen af pendulet. Ændringen af pendulet måles derved som et brokredsløb mellem pendulet og elektroderne\fxnote{brokredsløb = to dele forbundet-ofte parallelt-og en tredje del forbundet mellem dem}. Pendulet er forbundet i et lukket kredsløb, hvor der er en spole om pendulnålen, og to magneter, placeret tæt om den indre masse, for at holde den ved nulpunktet. 
+%
+%\subsubsection{Vbrationsaccelerometer}
+%Til denne benyttes et åbent kredsløb ved brug af quartz krystalteknologi. Der er to krystaller placeret om den indre masse, hvormed den kan fastholdes nulpunktet. De to krystaller vibrer ved egenfrekvens, men ved bevægelse af accelerometeret vil begge krystaller vibrere ved den samme resonantfrekvens. Den ene af krystallerne udstrækkes, hvormed frekvensen stiger, og den anden sammenpresses hvormed frekvensen aftager. Ændringen af disse frekvenser er direkte proportional med accelerationen.
+%
+%\subsubsection{Akustisk overfladebølge accelerometre}
+%\textbf{Den sidste er mere kompliceret at forstå - skriver den, hvis vi skal have eksemplerne med. }
+%
+%Til denne benyttes et åbent kredsløb. Der er et bølgemateriale af quartz krystaller på en overflade, og når accelerometeret påvirkes af kræfter, skubber disse til strukturene på overfladen. Det danner nogle bølger, som så kan måles som acceleration. 
+%
 %Hvis accelerometeret vender opad, vil outputtet være +1 g. Tilsvarende vil accelerometerets output være -1 g hvis det vender nedad, og 0g hvis det er horisontalt. Accelerometerts retninger illustreres på \figref{fig:g}. \citep{Inspire}
 %
 %\begin{figure}[H]
