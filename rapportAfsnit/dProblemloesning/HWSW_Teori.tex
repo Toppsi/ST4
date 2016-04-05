@@ -1,2 +1,9 @@
-\section{Digital }
-Til dette projekt anvendes CY8CKIT-043 PSoC 4 M-Series Prototyping Kit, CY8CKIT-042-BLE Bluetooth® Low Energy (BLE) Pioneer Kit og programmet PSoC Creater til at opsamle det biologiske signal.
+\section{Digital Teori}
+Til dette projekt anvendes CY8CKIT-043 Programmable System on Chip (PSoC) 4 M-Series Prototyping Kit, CY8CKIT-042-BLE Bluetooth® Low Energy (BLE) Pioneer Kit og programmet PSoC Creater i den digitale del til at opsamle det biologiske signal.\\
+CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er en prototyping platform, der indeholder tre ARM mikroprocessorer. Den første ARM cortex-M3 baserede PSoC på stikket kan indeholde programmer, der kan hentes ind på en computer ved hjælp af USB stikket. Den bruges til at programmere og debug softwaren, hvorfor denne del kan knækkes af resten af stikket og fungere selvstændigt. Dette kræver dog, at softwaren først er programmeret på den anden mikroprocessorer, som er ARM cortex-M0 baserede PSoC. Denne fungerer som hovedcomputeren, der programmeres på igennem c koden. På bagsiden af stikket sidder ARM coretex-m0 BLE Programmable Radio on Chip (PRoC), hvilket ikke vil blive benyttet i dette projekt.\fxnote{Denne ARM har ikke lige så mange muligheder for afbenyttelse,  da BLE fylder så meget, så der er ikke plads til meget andet.} \citep{CYPRESS2016PSoC,Semiconductor2016} \\
+Denne prototyping Kit platform er veh hjælp af en computer med aktiv bluetooth i stand til at sende og modtage trådløs data fra Y8CKIT-042-BLE Bluetooth® Low Energy (BLE) Pioneer Kit platformen, som indeholder en PRoC.
+
+%CYPRESS2016BLE
+%CYPRESS2016PSoC
+%Semiconductor2016
+%Semiconductor2016BLE
