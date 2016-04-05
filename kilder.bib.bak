@@ -153,6 +153,15 @@
   Url                      = {http://www.meas-spec.com/downloads/Choosing_the_Right_Type_of_Accelerometers.pdf}
 }
 
+@Article{Cockcroft2011,
+  Title                    = {An evaluation of inertial motion capture technology for use in the analysis and optimization of road cycling kinematics},
+  Author                   = {Cockcroft, Stephen J.},
+  Journal                  = {Stellenbosch University},
+  Year                     = {2011},
+
+  Owner                    = {Frederik}
+}
+
 @Electronic{CooperBlair2005,
   Title                    = {Exercise, Heart related physical fitness},
   Author                   = {Cooper, Kenneth H. and Blair, Steven N.},
@@ -184,20 +193,20 @@
   Url                      = {http://www.abc-abc.dk/Laerer/~/media/ABC2013/Presse/COWI_Evaluering%20af%20ABC%20-%2031052013.ashx}
 }
 
-@Electronic{CYPRESS2016,
-  Title                    = {CY8CKIT-043 PSoC® 4 M-Series Prototyping Kit},
+@Electronic{CYPRESS2016BLE,
+  Title                    = {CY8CKIT-042-BLE Bluetooth® Low Energy (BLE) Pioneer Kit},
   Author                   = {CYPRESS},
-  Url                      = {http://www.cypress.com/documentation/development-kitsboards/cy8ckit-043-psoc-4-m-series-prototyping-kit},
+  Url                      = {http://www.cypress.com/documentation/development-kitsboards/cy8ckit-042-ble-bluetooth-low-energy-ble-pioneer-kit},
   Year                     = {2016},
 
   Owner                    = {Cecilie},
   Timestamp                = {2016.04.04}
 }
 
-@Electronic{CYPRESS2016a,
-  Title                    = {CY8CKIT-042-BLE Bluetooth® Low Energy (BLE) Pioneer Kit},
+@Electronic{CYPRESS2016PSoC,
+  Title                    = {CY8CKIT-043 PSoC® 4 M-Series Prototyping Kit},
   Author                   = {CYPRESS},
-  Url                      = {http://www.cypress.com/documentation/development-kitsboards/cy8ckit-042-ble-bluetooth-low-energy-ble-pioneer-kit},
+  Url                      = {http://www.cypress.com/documentation/development-kitsboards/cy8ckit-043-psoc-4-m-series-prototyping-kit},
   Year                     = {2016},
 
   Owner                    = {Cecilie},
@@ -498,6 +507,16 @@
   Url                      = {http://search.proquest.com/docview/1220795167?accountid=8144}
 }
 
+@Article{Marin-PerianuMarin-Perianu2013,
+  Title                    = {A performance analysis of a wireless body-area network monitoring system for professional cycling},
+  Author                   = {Marin-Perianu, Raluca and Marin-Perianu, Miahi et al.},
+  Journal                  = {Springer},
+  Year                     = {2013},
+
+  Doi                      = {10.1007/s00779-011-0486-x},
+  Owner                    = {Frederik}
+}
+
 @Book{Martini2012,
   Title                    = {Fundementals of Anatomy \& Physiology},
   Author                   = {Martini, Frederic H. and Nath, Judi L. and Bartholomew, Edwin F.},
@@ -729,7 +748,7 @@
   Url                      = {http://www.cypress.com/file/193101/download}
 }
 
-@Manual{Semiconductor2016a,
+@Manual{Semiconductor2016BLE,
   Title                    = {CY8CKIT-042-Bluetooth® Low Energy (BLE) Pioneer Kit Guide},
   Author                   = {Cypress Semiconductor},
   Year                     = {2016},
@@ -784,6 +803,17 @@
 
   Owner                    = {Cecilie},
   Timestamp                = {2016.04.03}
+}
+
+@Book{Springer2014,
+  Title                    = {Biomechanics of cycling},
+  Author                   = {Springer},
+  Editor                   = {Bini, Rodrigo R. and Carpes, Felipe P.},
+  Publisher                = {Springer},
+  Year                     = {2014},
+
+  Owner                    = {Frederik},
+  Review                   = {ISBN 978-3-319-05538-1}
 }
 
 @Electronic{Sqord_family2015,
