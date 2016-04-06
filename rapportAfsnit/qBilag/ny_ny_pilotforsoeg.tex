@@ -1,7 +1,9 @@
 \chapter{Pilotforsøg}\vspace{-.75cm}
 \section{Formål}
-Pilotforsøget udføres med henblik at kunne designe et system der kan adskille aktivitetsformerne gang, løb og cykling, som beskrevet i \secref{??}.\newline 
-Aktiviteterne gang, løb og cykling med Shimmer 3. Dette er en enhed, som indeholder flere sensorer, hvor der til forsøget benyttes et accelerometer og et gyroskop. Med Shimmer 3 undersøges hvordan løb, gang og cykling påvirker de to forskellige sensorer. Dette gøres med henblik på at kunne lave algoritmer, som adskiller de tre forskellige aktivitetsformer og for at undersøge hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om signalerne kan adskilles uanset hvilken af de tre placeringer der vælges. 
+Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinger med accelerometer og gyroskop, som adskiller de tre forskellige aktivitetsformer gang, løb og cykling. Det undersøges derudover hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om signalerne kan adskilles uanset hvilken af de tre placeringer der vælges.
+
+Til opsamling af data, anvendes en Shimmer 3. Dette er en enhed, som indeholder flere sensorer, hvor der til forsøget benyttes et accelerometer og et gyroskop. 
+
 
 %Resultaterne fra pilotforsøget bruges til at designe det endelige system, hvor softwaren for CY8CKIT-043 PSoC 4 M-Series Prototyping Kit skal konfigureres og tilpasses.
 
@@ -47,7 +49,7 @@ Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet a
 \end{itemize}
 
 \section{Fremgangsmåde}
-Forsøgets fremgangsmåde er opdelt i to elementer. Første element indeholder en opsætning af Shimmer3 og det næste element indeholder fremgangsmåden ved optagelsen af data fra forsøget.
+Forsøgets fremgangsmåde i to dele. Første del indeholder en opsætning af Shimmer3, mens den anden del er fremgangsmåden for optagelse af data fra forsøget.
 
 \subsubsection{Opsætning af Shimmer3 SUB}
 Før forsøgene kan udføres skal shimmer forbindes korrekt med computeren, og indstilles til at bruge de sensorer der ønskes i pilotforsøget. \vspace{-3mm}
@@ -110,8 +112,8 @@ Anden måling er løb, et middel løbetempo på 11,3 km/t er valgt\citep{Miles 2
  
 Tredje måling er cykling, hvor et cykeltempo på 20,9 km/t er valgt, hvilket er et højt cykeltempo\citep{Miles 2007}. Tempoet er dog underordnet, da der kun ønskes at se på forskellen i selve bevægelsen fra de andre aktivitetsformer. \vspace{-3mm}
 \begin{itemize}
-	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund.
-	\item Forsøgspersonen træder i pedalerne indtil denne opnår en homogen bevægelses-cyklus med en hastighed på 20,9 km/t ved en belastning på 35 W. 
+	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund. Denne position er valgt, da den er mulig at lave tilnærmelsesvis ens for alle forsøgspersoner, hvormed de får den samme baseline.
+	\item Forsøgspersonen træder i pedalerne indtil denne opnår en homogen bevægelses-cyklus med en hastighed på 20,9 km/t ved en belastning på 35 W. Dermed sikres det at alle forsøgspersoner bruger den samme belastning gennem forsøget.  
 	\item Målingen på 45 sekunder igangsættes. 
 	\item Fremgangsmåden gentages for alle tre placeringer.
 \end{itemize}
