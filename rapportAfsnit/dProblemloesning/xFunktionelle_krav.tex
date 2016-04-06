@@ -1,21 +1,21 @@
 \section{Funktionelle krav}
 Formålet med systemet er, at udvikle en aktivitetsmåler som har potentialet til at reducere antallet af inaktive børn i aldersgruppen 9-12 år. Dette gøres med henblik på at ændre den teknologiske udviklings påvirkning af børns aktivitetsvaner fra inaktivitet til aktivitet.
-Der ønskes derfor et analogt system som detekterer aktiviteterne gang, løb og cykling, da disse er gængse aktiviteter i et barns hverdag. Måden hvorpå et analogt system kan detektere disse aktiviteter kan ske gennem forskellige sensorer.\fxnote{skriver vi noget om dette i aktivitetsmåler afsnittet, kan nogle pointer evt. benyttes her}
+Der ønskes derfor et analogt system som detekterer aktiviteterne gang, løb og cykling, da disse er gængse aktiviteter i et barns hverdag. Måden hvorpå et analogt system kan detektere disse aktiviteter kan ske gennem accelerometre og gyroskoper, hvorefter systemet, gennem algoritmer, skal kunne adskille gang, løb og cykling.
 Hertil skal intensiteten af aktiviteterne registreres igennem puls, da dette giver en indikation af det fysiologiske udbytte, barnet får ud af en given aktivitet. Herved vil det blandt andet kunne registreres om barnet er aktiv med høj intensitet i de anbefalede 30 minutter tre gang om ugen, som beskrevet i \secref{subsec:fysio_aktivitet}. \newline
 For at systemet har en motiverende effekt på børn, skal der være en brugerflade som børnene finder interessant. Denne skal give feedback på dagens samlede præstationer samt progressionen i aktivitetsniveauet.
 
-Systemet skal kunne detektere børns aktivitet igennem en hel dag, uden at være til gene, hvorfor det skal kunne fungere uafhængigt af andre systemer. Det skal derfor være et trådløst system, som er batteridrevet og kan sende data til en ekstern enhed. Derudover skal det være elektrisk sikkert, således at barnet ikke kan komme til skade som følge af aktivitetsmålerens design. 
+Systemet skal kunne detektere børns aktivitet igennem en hel dag, uden at være til gene, hvorfor det skal kunne fungere uafhængigt af andre systemer. Det skal derfor være et trådløst system, som kan sende data til en ekstern enhed og er batteridrevet med en levetid på en hel dag\fxnote{opg: red denne sætning}. Derudover skal det være elektrisk sikkert, således at barnet ikke kan komme til skade som følge af aktivitetsmålerens design. 
 
-Brugeren får feedback på sin præstation gennem en visualisering af dataet fra aktivitetsmåleren, hvorfor dataet behandles i den eksterne enhed.
-De analoge signaler skal altså konverteres til digitale signer, hvor uønskede signaler frafiltreres. Systemet skal derefter, gennem algoritmer, kunne adskille gang, løb og cykling.
+Brugeren får feedback på sin præstation gennem en visualisering af dataet fra aktivitetsmåleren, hvorfor dataet behandles i den eksterne enhed. \newline
+Før dataet kan blive behandlet og sendt til den eksterne enhed, skal det konverteres fra analoge signaler til digitale signer. 
 
-De funktionelle krav til systemet, lyder derfor således: 
+På baggrund af ovenstående, udformes de funktionelle krav til systemet, således: 
 \begin{itemize}
 	\item Systemet skal gennem sensorer kunne detektere aktiviteterne gang, løb og cykling.
 	\item Systemet skal gennem algoritmer i softwaren kunne adskille gang, løb og cykling.
 	\item Systemet skal kunne registrere intensiteten af de givne aktiviteter igennem puls.
-	\item Systemet skal være komfortabelt, hvorfor det trådløst skal kunne videresende signaler til en ekstern enhed og være batteridrevet.
-	\item Signalerne som er sendt til en ekstern enhed, skal behandles og repræsenteres visuelt.
+	\item Systemet skal være komfortabelt, hvorfor det trådløst skal kunne videresende signaler til en ekstern enhed og være batteridrevet over en hel dag.
 	\item Systemet skal være elektrisk sikkert for brugeren.
+	\item Signalerne som er sendt til en ekstern enhed, skal behandles og repræsenteres visuelt.
 	\item Systemet skal motivere børn i aldersgruppen 9-12 år. 
 \end{itemize}
