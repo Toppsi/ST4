@@ -1,6 +1,6 @@
 \chapter{Pilotforsøg}\vspace{-.75cm}
 \section{Formål}
-Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinger med accelerometer og gyroskop, som adskiller de tre forskellige aktivitetsformer gang, løb og cykling. Det undersøges derudover hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om signalerne kan adskilles uanset hvilken af de tre placeringer der vælges.
+Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinger med et accelerometer og gyroskop, som adskiller de tre forskellige aktivitetsformer gang, løb og cykling. Det undersøges derudover hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system og for at kende nyquistfrekvensen. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om signalerne kan adskilles uanset hvilken af de tre placeringer der vælges.
 
 Til opsamling af data, anvendes en Shimmer 3. Dette er en enhed, som indeholder flere sensorer, hvor der til forsøget benyttes et accelerometer og et gyroskop. 
 
@@ -26,11 +26,14 @@ Formålet med pilotforsøget er dermed:\vspace{-3mm}
 \section{Metode}
 %Forsøgets metode er bestemt og udført med henblik på at opfylde pilotforsøgets formål. Dette involverer henholdsvis de materialer der skal benyttes samt den fremgangsmåde som ligger til grund for udførelsen.
 
-Til forsøget medtages kun forsøgspersoner, som ikke lider af gener der forhindrer dem i at udføre aktiviteterne gang, løb og cykling. Er en person skadet eller syg, eksluderes denne dermed fra forsøget. Der udføres kun forsøg på gruppemedlemmer, og det er derfor ikke muligt at udføre forsøget på en person fra målgruppen, som er på 8-12 år. 
+Til forsøget medtages kun forsøgspersoner, som ikke lider af gener der forhindrer dem i at udføre aktiviteterne gang, løb og cykling. Er en person skadet eller syg, eksluderes denne dermed fra forsøget. Der udføres kun forsøg på gruppemedlemmer, og det er derfor ikke muligt at udføre forsøget på en person fra målgruppen, som er på 8-12 år. Resultaterne kan dermed variere i forhold til målgruppen, da disses vægt og højde vil varierer fra forsøgspersonerne. 
 
 %Forsøget inkluderer udelukkende fuldt funktionsdygtige personer, hvormed ingen forsøgspersoner må have fysiske gener som kan medføre besvær ved udførsel af aktiviterne; gang, løb og cykling. Dermed sikres det, at forsøgets data indeholder normaliserede data som giver grundlag for et validt og repræsentativt datasæt for fysisk funktionsdygtige personer. 
 
-Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet af enheden, Shimmer3. Disse placeringer er udvalgt på baggrund af bevægelsesanalysen, hvor det ses at de største bevægelser optræder her i forbindelse med gang, løb og cykling. Accelerometet registrerer position og acceleration, og det forventes derfor at den største forskel vil kunne ses ved disse placeringer, da det især er denne del af benet, der bevæges under gang og løb. I databehandlingen behandles kun data fra accelerometerets x- og y-akse. Dette vælges på baggrund af bevægelsesanalysen, hvor det blev udledt at den primære bevægelse af  benet ved de tre aktivitetsformer gang, løb og cykling i x- og y-aksens retning \citep{kilde}. \fxnote{måske noget om gyroskop + er det rigtigt i forhold til bevægelsesanalysen??}
+Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet af enheden, Shimmer3. Disse placeringer er udvalgt på baggrund af bevægelsesanalysen, hvor det ses at de største bevægelser optræder her i forbindelse med gang, løb og cykling. Accelerometet registrerer position og acceleration, og det forventes derfor at den største forskel vil kunne ses ved disse placeringer, da det især er denne del af benet, der bevæges under gang og løb. I databehandlingen behandles kun data fra accelerometerets x- og y-akse, da det kun er placering B der påvirkes af z-aksen ved aktiviteten gang, hvormed det formodes at samme påvirkning gælder for løb\citep{RueterboriesSpaichLarsenEtAl2010}. Ud fra bevægelsesanalysen i \secref{bevaegelse}, udledes det ligeledes at alle tre aktiviteter primært er i disse to retninger. 
+% Dette vælges på baggrund af bevægelsesanalysen, hvor det blev udledt at den primære bevægelse af  benet ved de tre aktivitetsformer gang, løb og cykling i x- og y-aksens retning \citep{kilde}. \fxnote{måske noget om gyroskop + er det rigtigt i forhold til bevægelsesanalysen??}
+
+
 % med henhold til æstetiske og brugervenlige aspekter samt \secref{TEORI SENSORER}. \newline
 %\textit{Jeg ved ikke helt hvad jeg skal skrive vores begrundelse er ift. det teori om gyroskop, derfor skal de sidste linjer her skrives på senere. Ellers hvis en af jer ved nok om gyroskop til at skrive begrundelsen ;-)}
  
@@ -105,7 +108,7 @@ Anden måling er løb, et middel løbetempo på 11,3 km/t er valgt\citep{Miles 2
 \begin{itemize}
 	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
 	\item Løbebåndet indstilles til 11,3 km/t, hvor forsøgspersonen løber på løbebåndet indtil en konstant hastighed på løbebåndet opnås. 
-	\item Forsøgspersonen indikerer når denne føler en homogen bevægelses-cyklus.
+%	\item Forsøgspersonen indikerer når denne føler en homogen bevægelses-cyklus.
 	\item Målingen på 45 sekunder igangsættes.
 	\item Fremgangsmåden gentages for alle tre placeringer.
 \end{itemize}
@@ -113,7 +116,7 @@ Anden måling er løb, et middel løbetempo på 11,3 km/t er valgt\citep{Miles 2
 Tredje måling er cykling, hvor et cykeltempo på 20,9 km/t er valgt, hvilket er et højt cykeltempo\citep{Miles 2007}. Tempoet er dog underordnet, da der kun ønskes at se på forskellen i selve bevægelsen fra de andre aktivitetsformer. \vspace{-3mm}
 \begin{itemize}
 	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund. Denne position er valgt, da den er mulig at lave tilnærmelsesvis ens for alle forsøgspersoner, hvormed de får den samme baseline.
-	\item Forsøgspersonen træder i pedalerne indtil denne opnår en homogen bevægelses-cyklus med en hastighed på 20,9 km/t ved en belastning på 35 W. Dermed sikres det at alle forsøgspersoner bruger den samme belastning gennem forsøget.  
+	\item Forsøgspersonen træder i pedalerne indtil denne opnår en konstant hastighed på 20,9 km/t ved en belastning på 35 W. Dermed sikres det at alle forsøgspersoner bruger den samme belastning gennem forsøget.  
 	\item Målingen på 45 sekunder igangsættes. 
 	\item Fremgangsmåden gentages for alle tre placeringer.
 \end{itemize}
