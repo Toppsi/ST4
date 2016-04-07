@@ -115,7 +115,7 @@
   Timestamp                = {2016.02.22}
 }
 
-@Article{,
+@Article{Brasca2011,
   Title                    = {A Parallel Tester Architecture for Accelerometer and Gyroscope MEMS Calibration and Test},
   Author                   = {Brasca, Lyl and Bernardi, Peolo and Reorda, Matteo et. al.},
   Journal                  = {Journal of Electronic Testing: Theory and Applications},
