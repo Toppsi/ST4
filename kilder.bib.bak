@@ -801,7 +801,7 @@
   Url                      = {http://www.cypress.com/file/138606/download}
 }
 
-@Book{,
+@Book{Serway2010,
   Title                    = {Physics for Scientists and Engineers with Modern Physics},
   Author                   = {Serway, Raymond A. and Jewett, John W.},
   Editor                   = {Julet, Michelle},
