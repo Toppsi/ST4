@@ -1,24 +1,76 @@
 \section{Kravsspecifikationer}
-• Intro hvor man lige summer op på hvad kravspecifikationerne egentlig er til for
-	o Herunder skal der være et afsnit som redegører for de mest væsentlige resultater fra pilotforøget
+Formålet med aktivitetsmåleren er, at kunne registrere og adskille aktivitetsformerne; gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software bestående af henholdsvis en dataopsamling og digital signalbehandling. Disse elementer skal samlet have et potentiale til at opfylde de opstillede succeskriterier for den optimale aktivitetesmåler, beskrevet i \secref{succeskrav}. \newline
+Endvidere vil nedenstående kravsspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg beskrevet i \appref{PILOT} \fxnote{Sæt reference ind!}.
 
-\subsection{Krav til analogt system/signalopsamling/hardware}
-Accelerometer
-	o Fulde område for g-påvirkning (25 g er vist max)
-	o Skal kunne overholde samplingsfrekvens (Nyquist ift. fft på pilotforsøg)
-	o	
-Gyroskop
-	o Antal grader fra pilotforsøg
-	o Skal kunne overholde samplingsfrekvens (Nyquist ift. fft på pilotforsøg)
-(Pulsmåler)
-	o D
-Spændingsforsyning
-				Denne del skal komme efter acc og gryoskop, da databladene for de ting viser hvilken spænding der skal tilføres dem.
-	o Maxwell CR2032 H, 3 V, DC (det der ligger i kassen)
-	o Tjekke op på hvor meget microcontrolleren skal have
-	o Skal kunne give 1,9 V til breakout boardet (-0,3 til 4,8 V)
-ADC
-	o d
+\subsection{Krav til hardware}
+Aktivitetsmålerens hardware består af sensorer, spændingsforsyning og en analog-til-digital konvertering (ADC). Disse elementer benyttes til en signalopsamling, hvoraf signalet efterfølende bliver behandlet i forbindelse med aktivitetsmålerens software.
+
+\subsubsection{Accelerometer}
+Et accelerometer kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding fra et knapcelle batteri. Der vil blive benyttet et knapcelle batteri, med hensyn til brugervenlig og mobilitet for aktivitetsmåleren.\newline
+Ydermere skal accelerometeret være i stand til at have et output som ikke overstiger den følgende komponents arbejdsområde.  
+
+Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensores er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
+Pilotforsøget viste en maksimal acceleration på 25,7 g ($\pm$~12,85 g). Denne maksimale acceleration antages derfor som værende den største acceleration, som acceleromteret vil blive påvirket af. Dette skyldes, at pilotforsøget er udført på en forsøgspopulation (n=4) med voksne mennesker, hvilken gennemsnitligt har en højere vægt end målgruppens aldersgruppe. 
+
+
+\textbf{Krav til accelerometer} \newline 
+Accelerometeret skal:
+\begin{itemize}
+\item Være operativ ved en DC spænding fra knapcelle batteri.
+\item Have et output som ikke overstiger næste komponents arbejdsområde.
+\item Have et arbejdsområde på mindst $\pm$12,85 g.
+\end{itemize}
+
+
+\subsubsection{Gyroskop} 
+
+
+\textbf{Krav til gyroskop} \newline
+Gyroskopet skal:
+\begin{itemize}
+\item Være operativ ved en DC spænding fra knapcelle batteri.
+\item noget med antal grader fra pilotforsøg.
+\end{itemize}
+
+
+\subsubsection{Pulsmåler}
+
+\textbf{Krav til pulsmåler} \newline
+Pulsmåleren skal:
+\begin{itemize}
+\item Bla bla
+\item Bla bla
+\end{itemize}
+
+\subsubsection{Spændingsforsyning}
+%	o Maxwell CR2032 H, 3 V, DC (det der ligger i kassen)
+%	o Tjekke op på hvor meget microcontrolleren skal have
+%	o Skal kunne give 1,9-3,6 V til breakout boardet (-0,3 til 4,8 V)
+%- fngerer ned til 1,9 V
+
+\textbf{Krav til spændingsforsyning} \newline
+Spændingsforsyningen skal:
+\begin{itemize}
+\item Bla bla
+\item Bla bla
+\end{itemize}
+
+
+
+\subsubsection{ADC}
+
+
+\textbf{Krav til ADC} \newline
+ADC'en skal:
+\begin{itemize}
+\item Bla bla
+\item Bla bla
+\end{itemize}
+
+
+
+
+
 
 
 
