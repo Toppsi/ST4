@@ -400,6 +400,16 @@
   Doi                      = {10.1186/1479-5868-10-111}
 }
 
+@Electronic{Jimb02016,
+  Title                    = {LSM9DS1 Breakout Hookup Guide},
+  Author                   = {Jimb0},
+  Organization             = {sparkfun},
+  Url                      = {https://learn.sparkfun.com/tutorials/lsm9ds1-breakout-hookup-guide#lsm9ds1-overview},
+  Year                     = {2016},
+
+  Owner                    = {LineSofie}
+}
+
 @Book{JuelSoerensenBroennum-Hansen2006,
   Title                    = {Risikofaktorer og folkesundhed i Danmark},
   Author                   = {Juel, Knud and Sørensen, Jan and Brønnum-Hansen, Henrik},
@@ -759,6 +769,17 @@
   Comment                  = {ISBN: 978-87-90867-39-3},
   Owner                    = {Cecilie},
   Timestamp                = {2016.03.07}
+}
+
+@Article{Rueterbories2010,
+  Title                    = {Methods for gait event detection and analysis in ambulatory systems},
+  Author                   = {Rueterbories, Jan AND Spaich, Erika G. AND Larsen, Birgit AND Andersen, Ole K.},
+  Journal                  = {Elsevier},
+  Year                     = {2010},
+
+  Doi                      = {10.1016/j.medengphy.2010.03.007},
+  Owner                    = {Josefine},
+  Timestamp                = {2016.04.07}
 }
 
 @Article{RueterboriesSpaichLarsenEtAl2010,
