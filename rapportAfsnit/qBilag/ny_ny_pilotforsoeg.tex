@@ -138,21 +138,120 @@ Sidste måling foretages på løbebåndet, hvor forsøgspersonen gradvist skal s
 
 \subsection{Kalibrering af shimmer}
 Forud for pilotforsøgets målinger blev shimmer kalibreret og testet. For at undersøge hvorvidt kalibreringen af shimmer fungerede optimalt, blev der opsamlet data til at be-, eller afkræfte dette. Data fra henholdsvis de positive og negative akser blev opsamlet og behandlet. \\
-Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør blive påvirket med 1 G. 
+Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm 1~G$.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.75]{figures/bProblemloesning/kalibreringsdata}
-	\caption{På figuren ses kalibreringsdataene fra shimmers akserne fem zoner for kroppens reaktion i forhold til pulsraten. Der ses, at de fem zoner har hver sin påvirkning på kroppen. Det er dog også anbefalet, at varigheden i hver zone bliver lavere desto hårdere aktiviteten er. \citep{Heartratejournal2015}}
-	\label{fig:PA_Procentpuls}
+	\includegraphics[scale=0.55]{figures/bProblemloesning/kalibreringsdata}
+	\caption{På figuren ses kalibreringsdataene tilhørende accelerometerets x, y og z-akse.}
+	\label{fig:Ap_Kalibrering}
 \end{figure}
 
-\subsection{Baseline af gang, løb og cykling}
+For hver akse blev den gennemsnitlige værdi for henholdsvis den positive- og negative akse beregnet. Dette resulterede i at x-aksen gennemsnitlig afveg med 3,5\%, y-aksen gennemsnitlig afveg med 1,6\% og z-aksen gennemsnitlig afveg med 16,8\%. 
 
+\subsection{Baseline af gang, løb og cykling}
+Forud for hver enkel måling blev der foretaget en baselinemåling som kan indikere hvorvidt shimmer fungerede forud for aktiviteten. Dataene skal afspejle en tilnærmelsesvis fuldstændig tyngdekraftpåvirkning på accelerometerets y-akse, som resultat af shimmers placering på benet.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		{\color[HTML]{333333} Forsøgsperson} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering A, \\ y-akse {[}G{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering B,\\ y-akse {[}G{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering C,\\ y-akse {[}G{]}\end{tabular}} \\ \hline
+		F1 & 0,98 & 0,99 & 0,97 \\ \hline
+		F2 & 1 & 0,99 & 0,96 \\ \hline
+		F3 & 0,98 & 0,98 & 0,98 \\ \hline
+		F4 & 0,97 & 0,99 & 0,95 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses de gennemsnitlige baseline resultater fra accelerometerets y-akse forud for gang.}
+	\label{fig:Ap_baselinegang}
+\end{table}\vspace{-0.5cm}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		{\color[HTML]{333333} Forsøgsperson} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering A, \\ y-akse {[}G{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering B,\\ y-akse {[}G{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering C,\\ y-akse {[}G{]}\end{tabular}} \\ \hline
+		F1 & 0,99 & 0,99 & 0,97 \\ \hline
+		F2 & 0,99 & 0,99 & 0,96 \\ \hline
+		F3 & 0,97 & 0,98 & 0,98 \\ \hline
+		F4 & 0,97 & 0,99 & 0,95 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses de gennemsnitlige baseline resultater fra accelerometerets y-akse forud for løb.}
+	\label{fig:Ap_baselineloeb}
+\end{table}\vspace{-0.5cm}
+Som forventet er G påvirkningen ikke 1G, hvilket er et resultat af at shimmer ikke er placeret ortogonalt på y-aksen. Resultaterne af ovenstående tabeller indikerer altså hvorvidt shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 1G. 
+
+Resultatet af at cykling skal detekteres som en roterende bevægelse omkring z-aksen, benyttes gyroskopets data. Enheden af dataet heraf er grader pr. sekund, og dermed bør baselinedataene befinde sig omkring nul.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		{\color[HTML]{333333} Forsøgsperson} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering A, \\ z-akse {[}dps{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering B,\\ z-akse {[}dps{]}\end{tabular}} & {\color[HTML]{333333} \begin{tabular}[c]{@{}c@{}}Placering C,\\ z-akse {[}dps{]}\end{tabular}} \\ \hline
+		F1 & -0,98 & -0,83 & -0,87 \\ \hline
+		F2 & -0,90 & -0,79 & -0,77 \\ \hline
+		F3 & -0,68 & -0,58 & -0,99 \\ \hline
+		F4 & -0,89 & -0,92 & -0,85 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses de gennemsnitlige baseline resultater fra gyroskopets z-aksen forud for cykling.}
+	\label{fig:Ap_baselinecykling}
+\end{table}\vspace{-0.5cm}
+Som forventet befinder resultaterne som omkring nul, hvilket er et resultat af at shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad. Resultaterne af ovenstående tabeller indikerer altså hvorvidt shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps. 
 
 \subsection{Maksimal g-påvirkning under gang og løb}
 
 
+\begin{table}[H]
+	\centering
+		\begin{tabular}{ccccc}
+			\hline
+			\rowcolor[HTML]{C0C0C0} 
+			Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} \\ \hline
+			F1 & (x), (x), (x) & 2,41 & 2,32 & 3,68 \\ \hline
+			F2 & (x), (x), (x) & 3,38 & 3,48 & 3,81 \\ \hline
+			F3 & (x), (x), (x) & 3,77 & 3,77 & 2,70 \\ \hline
+			F4 & (x), (x), (x) & 2,90 & 3,91 & 4,01 \\ \hline
+		\end{tabular}%
+	\caption{I tabellen ses de maksimale peak-to-peak resultater fra accelerometerets y-akse som resultat af gang. Den maksimale peak-to-peak er fundet for både placering a,b og c. Baseline neutral (x) indikerer at baselinemålingen var som forventet, forud for målingen.}
+	\label{fig:Ap_maxggang}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} \\ \hline
+		F1 & (x), (x), (x) & 10,6 & 7,87 & 7,43 \\ \hline
+		F2 & (x), (x), (x) & 6,32 & 8,64 & 11,0 \\ \hline
+		F3 & (x), (x), (x) & 7,68 & 7,43 & 8,06 \\ \hline
+		F4 & (x), (x), (x) & 9,90 & 11,4 & 11,8 \\ \hline
+	\end{tabular}%
+	\caption{I tabellen ses de maksimale peak-to-peak resultater fra accelerometerets y-akse som resultat af løb. Den maksimale peak-to-peak er fundet for både placering a,b og c. Baseline neutral (x) indikerer at baselinemålingen var som forventet, forud for målingen.}
+	\label{fig:Ap_maxgloeb}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-Peak:\\ Placering A {[}G{]}\end{tabular} \\ \hline
+		F1 & (x), (x), (x) & 11,2 & 10,9 & 13,6 \\ \hline
+		F2 & (x), (x), (x) & 14,1 & 15,0 & 17,2 \\ \hline
+		F3 & (x), (x), (x) & 15,4 & 17,7 & 14,3 \\ \hline
+		F4 & (x), (x), (x) & 25,8 & 23,8 & 23,4 \\ \hline
+	\end{tabular}%
+	\caption{I tabellen ses de maksimale peak-to-peak resultater fra accelerometerets y-akse som resultat af hastighed. Den maksimale peak-to-peak er fundet for både placering a,b og c. Baseline neutral (x) indikerer at baselinemålingen var som forventet, forud for målingen.}
+	\label{fig:Ap_maxghastighed}
+\end{table}
+
+
+\subsection{Frekvens}
+
+\subsection{title}
 
 
 \section{Resultater}
