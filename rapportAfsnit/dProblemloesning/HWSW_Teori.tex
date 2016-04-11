@@ -19,18 +19,15 @@ Når mikrokontrolleren er tilsluttet computeren og debugger igennem PSoC Creater
 
 \subsection{Mikrokontrollerens target CPU}
 Target CPU'en på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er 4200M, som besidder en ARM cortex-M0 processer og har produktnavnet CY8C4247AZI-M485. Denne er basseret på Instruction set architecture (ISA) kategorien Reduced Instruction Set Computer (RISC). ISA beskriver\fxnote{processor design teknikken}, hvordan processoren vil bearbejde dens instruktioner. ISA's kategorier kan blandt andet være complex instrucion set computer (CISC) eller RISC. En CISC baseret computer vil udføre opgaver med så få linjer som muligt. Processorens hardware opbygget til at forstå og udføre komplekse instruktioner, hvilket kræver flere transistorer end RISC metoden. RISC processorer benytter simple instruktioner, som kan forløbe inden for en clock cycle\fxnote{dansk? I så fald klok omgang?}. Derimod kræver dette mere RAM, fordi hver opgave hentes ned og gemmes indtil færdiggjort. Denne metode tillader dog pipelinning, hvilket gør at flere instruktioner kan køre samtidig.\fxnote{fetch - decode - exicute. Mere laves samtidig} Sammenlignet er RISC processen hurtigere end CISC, men CISC computere kan udføre flere komplekse instruktioner på færre linjer end RISC. \citep{CYPRESS2016Cortexm0,Semiconductor20164200M,Yadav2016}\\
-CPU'en i Cortex-M0 er en del af det 32-bit microcontroller unit (MCU) delsystem, som optimerer energibesparende drift ved hjælp af clock gating\fxnote{Clock gating saves power by adding more logic to a circuit to prune the clock tree. Pruning the clock disables portions of the circuitry so that the flip-flops in them do not have to switch states. Switching states consumes power. When not being switched, the switching power consumption goes to zero, and only leakage currents are incurred}.  \citep{Semiconductor20164200M}
+CPU'en i Cortex-M0 er en del af det 32-bit microcontroller unit (MCU) delsystem, som optimerer energibesparende drift ved hjælp af clock gating\fxnote{Clock gating saves power by adding more logic to a circuit to prune the clock tree. Pruning the clock disables portions of the circuitry so that the flip-flops in them do not have to switch states. Switching states consumes power. When not being switched, the switching power consumption goes to zero, and only leakage currents are incurred}. %% Noget om deep sleep / low power mode (Hvis den har det), hvor mange registre den har og hvis nogen af dem har dedikerede funktioner
+CPU'en har en flash hukommelse på 128 kB og en 16 kB RAM. Algoritmen og dermed programmet for mikrokontrolleren gemmes i flash, da RAM hukommelsen kræver konstant strøm og slettes dermed, hvis strømtilførslen til mikrokontrolleren slukkes. \citep{Semiconductor20164200M}
 
-
-RISC / SISC CPU? Bits?Low power mode?
-processor
-hukommelse - ram og flash
 tilgængelige pins - tilkobling af perifære moduler, som f.eks. en sensor
-Mere om ADC'en 12-bits SAR ADC (se end tial forcing - biofeedback til apopleksi)
-oscillatorer - styrer hastigheden på clocks, afhænger af spændingsfrosyning, low power mode (forklar om dette, meget relevant)
+Mere om ADC'en 12-bits SAR ADC med 1 mega sample pr sekund (Msps) konverterings rate. (se end tial forcing - biofeedback til apopleksi). men ADC virker ikke under deep sleet mode, fordi den kræver høj hastighed clock
+oscillatorer - styrer hastigheden på clocks, afhænger af spændingsfrosyning, men der er en 32 kHz (ILO Clock) low power mode (forklar om dette, meget relevant)
 output - (se end tial forcing)
 
-%%%%%%%%%% Interrups
+\subsection{Interrupts}
 - Detektion af diafragma
 
 %%%%%%%%%% Clocks
