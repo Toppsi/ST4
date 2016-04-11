@@ -3,8 +3,7 @@
 
 \subsection{CY8CKIT-043 PSoC 4-M og PSOC Creater}
 Til dette projekt anvendes CY8CKIT-043 Programmable System on Chip (PSoC) 4 M-Series Prototyping Kit og programmet PSoC Creater i den digitale del til at opsamle det biologiske signal.\\
-CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er en prototyping platform, der indeholder tre mikroprocessorer: to Programmable System-on-Chips (PSoC) og en Programmable Radio on Chip (PRoC)% Advanced RISC\fxnote{REDUCED INSTRUCTION SET COMPUTER - RISK kan load/store og har pipelinable instructions, hbvilket betyder, at vi ikke behøver vente på, at en instruktion bliver færdig før vi starter med den næste. Fetch - decode - exicude, laver mere på samme tid. (kilde - slide første forelæsning)} Machines (ARM) mikroprocessorer
-, hvilket ses på \figref{fig:PSoC}. Den første PSoC LP5 på mikrokontrolleren sidder på KitProg boardet og kan indeholde programmer, der kan indlæses på en computer ved hjælp af USB stikket. Den bruges til at programmere og debug softwaren på target boardet af mikrokontrolleren, hvorfor denne del kan knækkes af resten af stikket og fungere selvstændigt. Dette kræver dog, at softwaren først er programmeret på den anden mikroprocessorer, som er PSoC 4200M. Denne fungerer som hovedcomputeren, der programmeres på igennem c koden, og muliggøre eksempelvis høj-performans analog til digital konvertering igennem sin 12-bits SAR ADC. På bagsiden af mikrokontrolleren sidder en PRoC med Bluetooth Low Energy(BLE). Denne PRoC har ikke lige så mange muligheder for afbenyttelse i forhold til PRoC 4200M, da BLE optager meget plads, hvorfor der ikke er plads til meget andet. \citep{CYPRESS2016PSoC,Semiconductor2016,CYPRESS2016Cortexm0}
+CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er en prototyping platform, der indeholder tre mikroprocessorer: to Programmable System-on-Chips (PSoC) og en Programmable Radio on Chip (PRoC), hvilket ses på \figref{fig:PSoC}. Den første PSoC LP5 på mikrokontrolleren sidder på KitProg boardet og kan indeholde programmer, der kan indlæses på en computer ved hjælp af USB stikket. Den bruges til at programmere og debug softwaren på target boardet af mikrokontrolleren, hvorfor denne del kan knækkes af resten af stikket og fungere selvstændigt. Dette kræver dog, at softwaren først er programmeret på den anden mikroprocessorer, som er PSoC 4200M. Denne fungerer som hovedcomputeren, der programmeres på igennem c koden, og muliggøre eksempelvis høj-performans analog til digital konvertering igennem sin 12-bits SAR ADC. På bagsiden af mikrokontrolleren sidder en PRoC med Bluetooth Low Energy(BLE). Denne PRoC har ikke lige så mange muligheder for afbenyttelse i forhold til PRoC 4200M, da BLE optager meget plads, hvorfor der ikke er plads til meget andet. \citep{CYPRESS2016PSoC,Semiconductor2016,CYPRESS2016Cortexm0}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.15]{figures/bProblemloesning/PSoC3.jpg}
@@ -16,12 +15,31 @@ Mellem PSoC LP5 og PSoC 4200M samt mellem PSoC 4200M og PRoC findes blandt andet
 Mikrokontrolleren kræver en ekstern strømkilde for at kunne fungere. Igennem USB porten adapteres tilslutningen til 5V, men det er muligt at tilkoble en strømkilde til boardets lav-volt applikation, hvilket gør den trådløs. 3,3V til 5,5V tilsluttes VDD fra en reguleret forsyning, hvilket er yderst essentielt, da boardet ikke besidder en elektrostatisk afladnings beskyttelse (ESD). Hvis en ekstern strømforsyning til VDD er for ustabil eller af dårlig kvalitet, kan mikrokontrollerens kredsløb blive forstyrret og vil derved ikke fungere optimalt. \citep{Semiconductor2016}
 
 Programmet PSoC Creater kan designe hardware og software til mikrokontrolleren. Herigennem bliver rekonfigurerbare analoge blokke og digital programmerbar logik kombineret\fxnote{kan den fysiske hardware opbygges digitalt}, hvorved softwaren kan tilpasses de fysiske komponenter direkte igennem kodedesign. Programmet indeholder forskellige komponenter og kodeeksempler, hvilket kan blive behjælpeligt under algoritmedesignet. \citep{Semiconductor2016} \\
-Når mikrokontrolleren er tilsluttet computeren og debugger igennem PSoC Creater, kan matlab fungere som et grafisk bruger interface (GUI). Dette muliggør live visualisering af den data, som eksempelvis en master mikrokontroller modtager fra en slave mikrokontroller. \fxnote{Hvis der skal skrives mere til, så undersøg CPU'en mere i dybden ift. 4200M, skriv om , interrups, clocs, LPM - inspiration i Detektion af Diafragmatisk Udtrætning af bla. Johannes.}
+Når mikrokontrolleren er tilsluttet computeren og debugger igennem PSoC Creater, kan matlab fungere som et grafisk bruger interface (GUI). Dette muliggør live visualisering af den data, som eksempelvis en master mikrokontroller modtager fra en slave mikrokontroller.
 
 \subsection{Mikrokontrollerens target CPU}
-Target CPU'en på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er 4200M, hvis produktnavn er CY8C4247AZI-M485. 
+Target CPU'en på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er 4200M, som besidder en ARM cortex-M0 processer og har produktnavnet CY8C4247AZI-M485. Denne er basseret på Instruction set architecture (ISA) kategorien Reduced Instruction Set Computer (RISC). ISA beskriver\fxnote{processor design teknikken}, hvordan processoren vil bearbejde dens instruktioner. ISA's kategorier kan blandt andet være complex instrucion set computer (CISC) eller RISC. En CISC baseret computer vil udføre opgaver med så få linjer som muligt. Processorens hardware opbygget til at forstå og udføre komplekse instruktioner, hvilket kræver flere transistorer end RISC metoden. RISC processorer benytter simple instruktioner, som kan forløbe inden for en clock cycle\fxnote{dansk? I så fald klok omgang?}. Derimod kræver dette mere RAM, fordi hver opgave hentes ned og gemmes indtil færdiggjort. Denne metode tillader dog pipelinning, hvilket gør at flere instruktioner kan køre samtidig.\fxnote{fetch - decode - exicute. Mere laves samtidig} Sammenlignet er RISC processen hurtigere end CISC, men CISC computere kan udføre flere komplekse instruktioner på færre linjer end RISC. \citep{CYPRESS2016Cortexm0,Semiconductor20164200M,Yadav2016}\\
+CPU'en i Cortex-M0 er en del af det 32-bit microcontroller unit (MCU) delsystem, som optimerer energibesparende drift ved hjælp af clock gating\fxnote{Clock gating saves power by adding more logic to a circuit to prune the clock tree. Pruning the clock disables portions of the circuitry so that the flip-flops in them do not have to switch states. Switching states consumes power. When not being switched, the switching power consumption goes to zero, and only leakage currents are incurred}.  \citep{Semiconductor20164200M}
 
-12-bits SAR ADC
+
+RISC / SISC CPU? Bits?Low power mode?
+processor
+hukommelse - ram og flash
+tilgængelige pins - tilkobling af perifære moduler, som f.eks. en sensor
+Mere om ADC'en 12-bits SAR ADC (se end tial forcing - biofeedback til apopleksi)
+oscillatorer - styrer hastigheden på clocks, afhænger af spændingsfrosyning, low power mode (forklar om dette, meget relevant)
+output - (se end tial forcing)
+
+%%%%%%%%%% Interrups
+- Detektion af diafragma
+
+%%%%%%%%%% Clocks
+- detektion af diafragma, spilbaseret
+
+%%%%%%%%%% Trådløs kommunikation - Bluetooth
+radiomoduler - (Aktivitetsmåler til monitorering)
+
+UART (Aktivitetsmåler til monitorering)
 
 
 
