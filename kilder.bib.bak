@@ -822,6 +822,16 @@
   Url                      = {http://www.cypress.com/file/193101/download}
 }
 
+@Manual{Semiconductor20164200M,
+  Title                    = {PSoC® 4: PSoC 4200M Family Datasheet},
+  Author                   = {Cypress Semiconductor},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.11},
+  Url                      = {http://www.mouser.com/ds/2/100/PSoC_4_PSoC_4200M_Family_Datasheet%20-535434.pdf}
+}
+
 @Manual{Semiconductor2016BLE,
   Title                    = {CY8CKIT-042-Bluetooth® Low Energy (BLE) Pioneer Kit Guide},
   Author                   = {Cypress Semiconductor},
@@ -1120,6 +1130,17 @@
 
   Owner                    = {Cecilie},
   Timestamp                = {2016.04.03}
+}
+
+@Electronic{Yadav2016,
+  Title                    = {Difference between RISC and CISC architecture},
+  Author                   = {Yadav, Manoj Kumar and Rohilla, Mohit},
+  Organization             = {Firmcodes},
+  Url                      = {http://www.firmcodes.com/difference-risc-sics-architecture/},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.11}
 }
 
 @Electronic{Inspire,
