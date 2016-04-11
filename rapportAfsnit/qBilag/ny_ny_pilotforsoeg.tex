@@ -137,8 +137,8 @@ Sidste måling foretages på løbebåndet, hvor forsøgspersonen gradvist skal s
 
 
 \subsection{Kalibrering af shimmer}
-Forud for pilotforsøgets målinger blev Shimmer kalibreret og testet. For at undersøge hvorvidt kalibreringen af Shimmer fungerede optimalt, blev der opsamlet data til at be-, eller afkræfte dette. Data fra henholdsvis de positive og negative akser blev behandlet. \\
-Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm 1$G, og akserne der ikke bliver påvirket med 0G.
+Forud for pilotforsøgets målinger blev Shimmer kalibreret og testet. For at undersøge hvorvidt kalibreringen af Shimmer fungerede optimalt, blev der opsamlet data til at be-, eller afkræfte dette. Data fra de tre akser, x, y og z blev behandlet. \\
+Når Shimmer er placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm 1$G, mens de resterende akser ikke bør påvirkes.
 
 \begin{figure}[H]
 	\centering
@@ -147,7 +147,7 @@ Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv 
 	\label{fig:Ap_Kalibrering}
 \end{figure}
 
-For hver akse blev den gennemsnitlige værdi for henholdsvis den positive- og negative akse beregnet. Dette resulterede i at x-aksen gennemsnitlig afveg med 3,5\%, y-aksen gennemsnitlig afveg med 1,6\% og z-aksen gennemsnitlig afveg med 16,8\%. 
+For hver akse blev den gennemsnitlige værdi for henholdsvis den positive- og negative akse beregnet. Dette resulterede i at x-aksen gennemsnitlig afveg henholdsvis 3,5\% i den negative akse og -2,2\% i den positive akse. Y-aksen afveg gennemsnitligt -2,6\% i den negative akse og -0,6\% i den positive akse. Z-aksen afveg  gennemsnitligt med 8,8\% i den negative akse og 8,0\% i den positive akse.
 
 \subsection{Baseline af gang, løb og cykling}
 Forud for hver enkelt måling blev der foretaget en baselinemåling som indikation for hvorvidt Shimmer fungerede forud for aktiviteten. Dataene skal afspejle en tilnærmelsesvis fuldstændig tyngdekraftpåvirkning på accelerometerets y-akse, som resultat af Shimmers placering på benet.
@@ -182,7 +182,7 @@ Forud for hver enkelt måling blev der foretaget en baselinemåling som indikati
 	\label{fig:Ap_baselineloeb}
 \end{table}\vspace{-0.5cm}
 
-Resultatet af at cykling skal detekteres som en roterende bevægelse omkring z-aksen, benyttes gyroskopets data hertil. Enheden af dataet heraf er grader per sekund (dps), og dermed bør baselineresultaterne befinde sig omkring nul.
+Ved cykling benyttes gyroskopets data, da cykling detekteres som en roterende bevægelse omkring z-aksen. Enheden af dataet heraf er grader per sekund (dps), og dermed bør baselineresultaterne ligge omkring nul.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{cccc}
@@ -246,6 +246,9 @@ Dataene fra aktiviteterne, gang, løb og hastighed blev alle behandlet med henbl
 	\label{fig:Ap_maxghastighed}
 \end{table}
 
+I \secref{app:maxg} bestemmes det at resterende databehandling udelukkende omhandler placering A.
+
+
 \subsection{Frekvensindhold}
 Dataene fra aktiviteterne, gang og løb blev behandlet for at bestemme signalernes frekvensindhold, med henblik på bestemmelsen af samplingsfrekvensen. Der blev foretaget en frekvensdomæne analyse, hvilket muliggør visualisering af signalets magnitude ved forskellige frekvenser. 
 
@@ -255,7 +258,7 @@ Dataene fra aktiviteterne, gang og løb blev behandlet for at bestemme signalern
 	\caption{På figuren ses frekvensdomænet af aktiviteten løb for forsøgsperson 1.}
 	\label{fig:Ap_FFt}
 \end{figure}
-Frekvensdomæneanalysen vises blot for denne forsøgsperson da frekvensspektrummet var størst heraf.
+Frekvensdomæneanalysen vises kun for denne forsøgsperson da frekvensspektrummet var størst heraf. Dette gøres da systemets samplingsfrekvens bestemmes med i forhold til på den højeste frekvens.
 
 \subsection{Filtrering af gang, løb og hastighed}
 \textbf{ikke lavet endnu}
@@ -263,18 +266,18 @@ Frekvensdomæneanalysen vises blot for denne forsøgsperson da frekvensspektrumm
 \section{Resultater}
 \textit{Indledning}
 \subsection{Kalibrering af shimmer}
-Resultatet af databehandlingen bevirker at kalibreringen af Shimmer antages at være tilstrækkelig. Dette antages at være tilstrækkeligt, da y-aksen blot afviger med 1,6\% fra den teoretiske værdi. En eventuel fejlkilde til at denne fejlmargin forekom, kunne være at bordet hvorpå Shimmer var placeret, ikke var i vatter.
+Resultatet af databehandlingen bevirker at kalibreringen af Shimmer antages at være tilstrækkelig. Dette antages at være tilstrækkeligt, da y-aksen  afviger med 1,6\% fra den teoretiske værdi. En eventuel fejlkilde til at denne fejlmargin forekom, kunne være at bordet hvorpå Shimmer var placeret, ikke var i vatter.
 
 \subsection{Baseline af gang, løb og cykling}
 Baselinemålingerne for henholdsvis gang og løb resulterede i en enslignende påvirkning. Som forventet var G påvirkningen ikke 1G, hvilket er et resultat af at Shimmer ikke er placeret ortogonalt på y-aksen, på benet. Resultaterne fra disse målinger indikerer altså Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 1G. 
 
-Resultaterne fra baselinemålingerne vedrørende cykling befinder sig som forventet omkring nul, hvilket er et resultat af at Shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad, da benet ikke bevæges. Resultaterne af disse målinger indikerer altså Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps. 
+Resultaterne fra baselinemålingerne vedrørende cykling ligger som forventet omkring nul, hvilket er et resultat af at Shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad, da benet ikke bevæges. Resultaterne af disse målinger indikerer at Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps. 
 
-\subsection{Maksimal g-påvirkning under gang, løb og hastighed}
+\subsection{Maksimal g-påvirkning under gang, løb og hastighed} \label{app:maxg}
 Resultatet af databehandlingen vedrørende de tre aktiviteter med henblik på bestemmelsen af den maksimale G påvirkning, medførte at hastigheds aktiviteten havde den største påvirkning. Resultaterne fra placering A, B eller C overskrider ikke $\pm 16G$, hvoraf den mest fordelagtige placering frit kan vælges. Med baggrund i \secref{succeskrav} og \secref{funktionellekrav} skal placeringen ikke være til gene for barnet, den skal altså nemt af-, og påmonteres, hvoraf placering A er valgt. Dette medfører at den videre resultatbehandling tager udgangspunkt i placering A. 
 
 \subsection{Frekvensindhold}
-Databehandlingen af frekvensindholdet fra gang og løb medførte at det største frekvensspektrum befandt sig mellem 0 og 45Hz. Dette bevirker at det endelige systems samplingsfrekvens kan bestemmes. I følge Nyquist skal samplingsfrekvensen være dobbelt så stor som signalets maksimale frekvens. Dette er en teoretisk værdi, og i praksis skal samplingsfrekvensen være 20 gange større. \citep{} \\
+Databehandlingen af frekvensindholdet fra gang og løb medførte at det største frekvensspektrum lå mellem 0 og 45Hz. Dette medfører at det endelige systems samplingsfrekvens kan bestemmes. I følge Nyquist skal samplingsfrekvensen være dobbelt så stor som signalets maksimale frekvens. Dette er en teoretisk værdi, og i praksis bør samplingsfrekvensen være 20 gange større. \\
 Det endelige system skal altså have en samplingsfrekvens på 900Hz.
 
 \subsection{Filtrering af gang, løb og hastighed}
