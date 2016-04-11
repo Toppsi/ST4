@@ -28,9 +28,11 @@ oscillatorer - styrer hastigheden på clocks, afhænger af spændingsfrosyning, 
 output - (se end tial forcing)
 
 \subsection{Interrupts}
-Interrupt er en funktion, som kan afbryde main filen for CPU'en, hvis en bestemt hændelse sker eller  - Detektion af diafragma \citep{Badiger2016}
+Interrupt er en funktion, som kan afbryde CPU'ens main fil, hvis en bestemt hændelse sker eller en timer har talt op til et bestemt niveau. Dette kan være behjælpeligt for CPU'en, da den herved ikke skal tjekke konstant for, om en bestemt hændelse sker. \citep{Badiger2016} \\
+En PSoC 4 besidder 32 interrupt linjer, IRQ[0] til IRQ[31], som kan prioriteres efter fire niveauer. Derudover findes en wakeup interrupt controller (WIC), som vækker processoren op fra deep slepp mode. Når et interrupt finder sted, vil CPU'en modtage en specifik funktion, som kaldes Interrupt Service Routine (ISR). Denne kan indeholde kode ligesom main filen, der bliver eksekveret, hvorefter main filen fortsættes. \citep{Badiger2016}\\
+Der findes to typer kilder til PSoC 4 interrupts: Fixed-function interrupt sources eller Universal Digital Block (UDB). Fixed-function interrupts er definerede interruptskilder fra on-chip perifert udstyr, som kan udløse manuelt. Herimod kan ethvert digitalt signal, som er genereret i en UDB, udløse et interrupt. Disse to typer er begge programmerbare eksterne interrupts, som i ARM Cortex M0 mikroprocessoren har lavest prioritet. Der findes fem yderligere interrupts, som kaldes undtagelser og er prioriteret højere end de programmerbare eksterne interrupts. Disse eksisterer for blandt andet at genstarte processoren i tilfælde af softwarefejl\fxnote{Watch Dog timeren genstarter og har aller højest prioritet af alle interrupts}. \citep{Badiger2016}\\
 
-%%%%%%%%%% Clocks
+\subsection{Clocks}
 - detektion af diafragma, spilbaseret
 
 %%%%%%%%%% Trådløs kommunikation - Bluetooth
