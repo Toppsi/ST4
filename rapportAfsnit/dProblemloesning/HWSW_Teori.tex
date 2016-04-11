@@ -1,9 +1,10 @@
 \section{Digital Teori}
 \textit{Noget om denne section?}
 
+\subsection{CY8CKIT-043 PSoC 4-M og PSOC Creater}
 Til dette projekt anvendes CY8CKIT-043 Programmable System on Chip (PSoC) 4 M-Series Prototyping Kit og programmet PSoC Creater i den digitale del til at opsamle det biologiske signal.\\
 CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er en prototyping platform, der indeholder tre mikroprocessorer: to Programmable System-on-Chips (PSoC) og en Programmable Radio on Chip (PRoC)% Advanced RISC\fxnote{REDUCED INSTRUCTION SET COMPUTER - RISK kan load/store og har pipelinable instructions, hbvilket betyder, at vi ikke behøver vente på, at en instruktion bliver færdig før vi starter med den næste. Fetch - decode - exicude, laver mere på samme tid. (kilde - slide første forelæsning)} Machines (ARM) mikroprocessorer
-, hvilket ses på \figref{fig:PSoC}. Den første PSoC LP5 på mikrokontrolleren sidder på KitProg boardet og kan indeholde programmer, der kan indlæses på en computer ved hjælp af USB stikket. Den bruges til at programmere og debug softwaren på target boardet af mikrokontrolleren, hvorfor denne del kan knækkes af resten af stikket og fungere selvstændigt. Dette kræver dog, at softwaren først er programmeret på den anden mikroprocessorer, som er PSoC 4200M. Denne fungerer som hovedcomputeren, der programmeres på igennem c koden, og muliggøre eksempelvis høj-performans analog til digital konvertering (SAR ADC) . På bagsiden af mikrokontrolleren sidder en PRoC med Bluetooth Low Energy(BLE). Denne PRoC har ikke lige så mange muligheder for afbenyttelse i forhold til PRoC 4200M, da BLE optager meget plads, hvorfor der ikke er plads til meget andet. \citep{CYPRESS2016PSoC,Semiconductor2016}
+, hvilket ses på \figref{fig:PSoC}. Den første PSoC LP5 på mikrokontrolleren sidder på KitProg boardet og kan indeholde programmer, der kan indlæses på en computer ved hjælp af USB stikket. Den bruges til at programmere og debug softwaren på target boardet af mikrokontrolleren, hvorfor denne del kan knækkes af resten af stikket og fungere selvstændigt. Dette kræver dog, at softwaren først er programmeret på den anden mikroprocessorer, som er PSoC 4200M. Denne fungerer som hovedcomputeren, der programmeres på igennem c koden, og muliggøre eksempelvis høj-performans analog til digital konvertering igennem sin 12-bits SAR ADC. På bagsiden af mikrokontrolleren sidder en PRoC med Bluetooth Low Energy(BLE). Denne PRoC har ikke lige så mange muligheder for afbenyttelse i forhold til PRoC 4200M, da BLE optager meget plads, hvorfor der ikke er plads til meget andet. \citep{CYPRESS2016PSoC,Semiconductor2016,CYPRESS2016Cortexm0}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.15]{figures/bProblemloesning/PSoC3.jpg}
@@ -16,6 +17,14 @@ Mikrokontrolleren kræver en ekstern strømkilde for at kunne fungere. Igennem U
 
 Programmet PSoC Creater kan designe hardware og software til mikrokontrolleren. Herigennem bliver rekonfigurerbare analoge blokke og digital programmerbar logik kombineret\fxnote{kan den fysiske hardware opbygges digitalt}, hvorved softwaren kan tilpasses de fysiske komponenter direkte igennem kodedesign. Programmet indeholder forskellige komponenter og kodeeksempler, hvilket kan blive behjælpeligt under algoritmedesignet. \citep{Semiconductor2016} \\
 Når mikrokontrolleren er tilsluttet computeren og debugger igennem PSoC Creater, kan matlab fungere som et grafisk bruger interface (GUI). Dette muliggør live visualisering af den data, som eksempelvis en master mikrokontroller modtager fra en slave mikrokontroller. \fxnote{Hvis der skal skrives mere til, så undersøg CPU'en mere i dybden ift. 4200M, skriv om , interrups, clocs, LPM - inspiration i Detektion af Diafragmatisk Udtrætning af bla. Johannes.}
+
+\subsection{Mikrokontrollerens target CPU}
+Target CPU'en på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er 4200M, hvis produktnavn er CY8C4247AZI-M485. 
+
+12-bits SAR ADC
+
+
+
 %
 %
 % I pdf'en for mikrokontrolleren - se side 23
