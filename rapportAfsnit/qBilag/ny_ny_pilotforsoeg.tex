@@ -138,7 +138,7 @@ Sidste måling foretages på løbebåndet, hvor forsøgspersonen gradvist skal s
 
 \subsection{Kalibrering af shimmer}
 Forud for pilotforsøgets målinger blev Shimmer kalibreret og testet. For at undersøge hvorvidt kalibreringen af Shimmer fungerede optimalt, blev der opsamlet data til at be-, eller afkræfte dette. Data fra henholdsvis de positive og negative akser blev behandlet. \\
-Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm 1G$.
+Shimmer placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm 1$G, og akserne der ikke bliver påvirket med 0G.
 
 \begin{figure}[H]
 	\centering
@@ -247,10 +247,21 @@ Dataene fra aktiviteterne, gang, løb og hastighed blev alle behandlet med henbl
 \end{table}
 
 
-\subsection{Frekvens}
+\subsection{Frekvensindhold}
+Dataene fra aktiviteterne, gang og løb blev behandlet for at bestemme signalernes frekvensindhold, med henblik på bestemmelsen af samplingsfrekvensen. Der blev foretaget en frekvensdomæne analyse, hvilket muliggør visualisering af signalets magnitude ved forskellige frekvenser. 
 
-\subsection{title}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.55]{figures/bProblemloesning/fft_f1_loeb}
+	\caption{På figuren ses frekvensdomænet af aktiviteten løb for forsøgsperson 1.}
+	\label{fig:Ap_FFt}
+\end{figure}
 
+Frekvensdomæneanalysen vises blot for denne forsøgsperson da frekvensspektrummet var størst heraf.
+
+
+\subsection{Filtrering af gang, løb og hastighed}
+ss
 
 \section{Resultater}
 \textit{Indledning}
@@ -263,12 +274,14 @@ Baselinemålingerne for henholdsvis gang og løb resulterede i en enslignende p�
 Resultaterne fra baselinemålingerne vedrørende cykling befinder sig som forventet omkring nul, hvilket er et resultat af at Shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad. Resultaterne af disse målinger indikerer altså Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps. 
 
 \subsection{Maksimal g-påvirkning under gang, løb og hastighed}
-Resultatet af databehandlingen vedrørende de tre aktiviteter med henblik på bestemmelsen af den maksimale G påvirkning, medførte at hastigheds aktiviteten havde den største påvirkning. Resultaterne fra placering A,B eller C overskrider ikke $\pm 16G$, hvoraf den mest fordelagtige placering frit kan vælges. Med baggrund i \secref{succeskrav} og 
+Resultatet af databehandlingen vedrørende de tre aktiviteter med henblik på bestemmelsen af den maksimale G påvirkning, medførte at hastigheds aktiviteten havde den største påvirkning. Resultaterne fra placering A, B eller C overskrider ikke $\pm 16G$, hvoraf den mest fordelagtige placering frit kan vælges. Med baggrund i \secref{succeskrav} og \secref{funktionellekrav} skal placeringen ikke være til gene for barnet, den skal altså nemt af-, og påmonteres, hvoraf placering A er valgt. Dette medfører at den videre resultatbehandling tager udgangspunkt i placering A. 
 
+\subsection{Frekvensindhold}
+Databehandlingen af frekvensindholdet fra gang og løb medførte at det største frekvensspektrum heraf befandt sig mellem 0 og 45Hz. Dette bevirker at det endelige systems samplingsfrekvens kan bestemmes. I følge Nyquist skal samplingsfrekvensen være dobbelt så stor som signalets maksimale frekvens. Dette er en teoretisk værdi, og i praksis skal samplingsfrekvensen være 10 gange større. \citep{} \\
+Det endelige system skal altså have en samplingsfrekvens på 450Hz.
 
-
-
-
+\subsection{Filtrering af gang, løb og hastighed}
+d
 \section{Diskussion}
 
 \section{Konklusion}
