@@ -45,16 +45,13 @@ Clock systemet for PSoC 4200M består af en Watch Crystal Oscillator (WCO), der 
 %http://www.hardwaresecrets.com/how-a-cpu-works/2/
 
 \subsection{Trådløs kommunikation - BLE} 
-PRoC'ens CPU på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er EZ_BLE PRoC Module, som besidder en ARM cortex-M0 processer og har produktnavnet CYBLE-022001-00. Denne CPU har en 2,4 GHz BLE radio med en chip antenne med frekvens rækkevidde på 2400-2500 MHz. Rundt om antennen, som sender og modtager data, er der fri plads, fordi den larmer meget og vil dermed ødelægge radioens funktion samt data. \citep{Semiconductor2016PRoC,Semiconductor2016BLEdyb}\\
-Bluetooth er en radiobølge teknologi, som hovedsageligt er designet til trådløs kommunikation imellem enheder. Radiobølgerne bliver sendt og modtaget i bånd af 79 forskellige frekvenser, som kandes kanaler og er centreret om 2,4 GHz, og bliver modificeret af enheden, således radiobølgerne opfattes som et signal. Når to enheder forbindes med hinanden, vælger de en tilfældig kanal, men for at mindske risikoen for interferens fra andre enheder skifter de to enheder kanal op til tusinde gange i sekundet. \citep{Sauter2011} \\
-BLE er en videreudvikling og kaldes også Bluetooth version 4.1
-
-\citep{Cho2015,Semiconductor2016PRoC,Semiconductor2016BLEdyb}
-%radiomoduler - (Aktivitetsmåler til monitorering)
+PRoC'ens CPU på CY8CKIT-043 PSoC 4 M-Series Prototyping Kit er EZ_BLE PRoC Module, som besidder en ARM cortex-M0 processer og har produktnavnet CYBLE-022001-00. Denne CPU har en 2,4 GHz BLE radio med en chip antenne, som kan transmittere data ved radiofrekvens mellem 2400-2500 MHz. Rundt om antennen, som sender og modtager data, er der fri plads, fordi den larmer meget og vil dermed ødelægge radioens funktion samt data. \citep{Semiconductor2016PRoC,Semiconductor2016BLEdyb}\\
+Bluetooth er en radiobølge teknologi, som hovedsageligt er designet til trådløs kommunikation imellem enheder. Radiobølgerne bliver sendt og modtaget i bånd af 79 forskellige frekvenser, som kandes kanaler og er centreret om 2,4 GHz, og bliver modificeret af enheden, således radiobølgerne opfattes som et signal. Når to enheder forbindes med hinanden, danner de et netværk kaldet en piconet. Enheden, som skaber forbindelsen, vil automatisk være masteren og kan for eksempel kontrollere afsendelsen af data fra slaven samt styre varigheden af forbindelsen. Tilsammen vælger masteren og slaven en tilfældig kanal, men for at mindske risikoen for interferens fra andre enheder skifter de to kanal op til tusinde gange i sekundet. \citep{Sauter2011} \\
+BLE er en videreudvikling og kaldes også Bluetooth version 4.0. BLE kræver mindre strøm for at fungere, fordi enheden er slukket / i sove mode størstedelen af tiden. Når data skal sendes, vil den aktivere og overføre så hurtigt som muligt for igen at deaktivere. Dette opnås ved, at BLE kun benytter 40 forskellige kanaler, hvor nogle for eksempel er specielt dedikeret til at skabe forbindelse\fxnote{3 kanaler - alm bluetooth gar 32} mellem enheder og andre til at sende data. Derved sikres en driftscyklus\fxnote{ratio mellem enheden er slukket og tændt} som er tæt på nul. Et BLE modul kan dog ikke skifte undervejs mellem master og slave rollen, hvilket betyder, at når en forbindelse er skabt, vil der være en fast master og en fast slave. Dette simplificerer designet yderligere, hvorved der ligeledes spares strøm. \citep{Gupta2013}
 
 \subsection{UART kommunikation} %(Aktivitetsmåler til monitorering)
 % RX TX
-
+%
 %
 %
 % I pdf'en for mikrokontrolleren - se side 23
