@@ -188,6 +188,17 @@
   Owner                    = {MortenLarsen}
 }
 
+@Article{Cho2015,
+  Title                    = {Performance analysis of device discovery of Bluetooth Low Energy (BLE) networks},
+  Author                   = {Cho, Keuchul and Park, Gisu and Cho, Wooseong and Seo, Jihun and Han, Kijun},
+  Journal                  = {Elsevier},
+  Year                     = {2015},
+
+  Doi                      = {10.1016/j.comcom.2015.10.008},
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.12}
+}
+
 @Article{Chu,
   Title                    = {Choosing the Right Type of Accelerometer},
   Author                   = {Chu, Anthony},
@@ -1057,6 +1068,17 @@
   Title                    = {Overvægt blandt børn og unge i Danmark},
   Author                   = {Sundhedsstyrrelsen},
   Url                      = {http://sundhedsstyrelsen.dk/~/media/5DCF1754460545F881F054B176C14817.ashx}
+}
+
+@Book{Tanenbaum2006,
+  Title                    = {Structured computer organization},
+  Author                   = {Tanenbaum, Andrew S.},
+  Publisher                = {Pearson},
+  Year                     = {2006},
+
+  Comment                  = {ISBN: 978-0132916523},
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.11}
 }
 
 @Book{TittertonWeston2004,
