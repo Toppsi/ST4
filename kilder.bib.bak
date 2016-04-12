@@ -399,6 +399,17 @@
   Timestamp                = {2016.03.07}
 }
 
+@Book{Gupta2013,
+  Title                    = {Inside Bluetooth Low Energy},
+  Author                   = {Gupta, Naresh},
+  Publisher                = {Artech House},
+  Year                     = {2013},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.12},
+  Url                      = {ISBN: 978-1608075799}
+}
+
 @Electronic{Hjerteforeningen,
   Title                    = {Fakta om kondition og puls},
   Author                   = {Hjerteforeningen},
