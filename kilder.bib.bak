@@ -873,6 +873,26 @@
   Url                      = {http://www.cypress.com/file/138606/download}
 }
 
+@Manual{Semiconductor2016BLEdyb,
+  Title                    = {CYBL10X6X Family Datasheet PRoC BLE},
+  Author                   = {Cypress Semiconductor},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.12},
+  Url                      = {http://www.cypress.com/file/139841/download}
+}
+
+@Manual{Semiconductor2016PRoC,
+  Title                    = {CYBLE-022001-00 EZ-BLE PRoC Module},
+  Author                   = {Cypress Semiconductor},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.04.12},
+  Url                      = {http://www.cypress.com/file/140791/download}
+}
+
 @Book{Serway2010,
   Title                    = {Physics for Scientists and Engineers with Modern Physics},
   Author                   = {Serway, Raymond A. and Jewett, John W.},
