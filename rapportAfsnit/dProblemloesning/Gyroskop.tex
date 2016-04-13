@@ -1,5 +1,5 @@
 \subsection{Gyroskop}
-Et gyroskop er et elektromekanisk apparat, som anvendes til at måle omdrejninger per sekund eller vinkelhastighed om en given akse, hvilket illustreres på \figref{fig:gyro}. Enhederne på data fra et gyroskop er henholdsvis revolutions per second (RPS) og $^\circ$/sekund. \newline
+Et gyroskop er et elektromekanisk apparat, som anvendes til at måle omdrejninger per sekund eller vinkelhastighed om en given akse, hvilket illustreres på \figref{fig:gyro}. Enhederne på data fra et gyroskop er henholdsvis omdrejninger per sekund (RPS) eller grader per sekund (DPS). \newline
 Et gyropskop kan give information om orienteringen eller navigationen af objektet, som sensoren optager data fra. Hvis et gyroskop eksempelvis drejes én omgang om egen akse i sekundet, vil den registrere en vinkelhastighed på 360 grader pr sekund. \citep{Sparkfun_gyro,Barbour2014}
 \begin{figure}[H]
 	\centering
@@ -7,7 +7,6 @@ Et gyropskop kan give information om orienteringen eller navigationen af objekte
 	\caption{På figuren ses et gyroskops måling af rotation omkring x-, y- og z-aksen. \citep{Sparkfun_gyro} (Modificeret)}
 	\label{fig:gyro}
 \end{figure}
-
 Alt afhængigt af formålet med at benyttes et gyroskop, findes der en række forskellige gyroskoper heriblandt vibrations-, elektrostatiske- og kernemagnetisk resonans gyroskoper. \citep{LuingeVeltink2005,TittertonWeston2004} Et gyroskop kan for eksempel registrere vinkelhastighed ved at anvende tyngdekræften og en lille indre masse \citep{Sparkfun_gyro,Barbour2014}. Hvis et gyroskop eksempelvis opsamler data ved cykling, mens det er placeret proximalt for den laterale malleolus, vil massen blive udsat for en roterende bevægelse omkring den horisontale akse. Massen vil blive henholdsvis tungere og lettere i processen på grund af ydre påvirkende kræfter, hvorfor outputtet vil komme til udtryk som en sinus-bølge. Outputtet er afhængig af tyngdekræftens påvirkning af massen, hvorfor et varierende output kræver en bevægelse.% Gyroskopet vil, uafhængigt af placering, have et fast output, som det vil vende tilbage til efter en bevægelse.
 %Et gyroskop fungere ved at anvende inerti egenskaberne der opstår når et hjul spindes med en høj hastighed. Ved at hjulet fastholder den samme retning omkring aksen, kan impulsmomentmomentet, dets inertiprodukt samt hastighed være med til at definere en referenceretning. 
 %De fundementale principper bag virkningen af et gyroskop er blandt andet det gyroskopiske inerti, som er når hjulet drejer om sin egen akse og står vinkelret på aksen. impulsmomentet som er fordelingen af en masse på et rotor, hvor vinkelhastigheden også har en betydning, og præcession som er rotationen omkring egen akse. 
