@@ -1,4 +1,8 @@
 \subsection{Universal Asynchronous Receiver Transmitter(UART)}
+En UART er et led mellem et parallelt og serielt interface, der både modtager data (RX) og sender data (TX). Dataen sendes som bit, og kan både sendes serielt eller parallelt.\citep{Jimb02016a}\newline 
+Parallelt bliver flere bit overført på samme tid, hvormed et 8-bit system har 8 ledninger hvor der i den ene ende er en RX kobling og den anden er TX kobling.\citep{Jimb02016a}\newline
+Den serielle kommunikation foregår asynkront, og kan foregå med ned til én ledning, da kun en bit overføres af gangen. Det er nødvendigt at sætte en baudrate, da TX sender i forhold til denne og RX sampler i forhold til den forventede baudrate\fxnote{baudrate = Hvor hurtigt der sendes data (bits per sekund[bps])}. Det modtagne data gemmes ofte i en buffer, som efterfølgende videregives i form af firs-in-first-out (FIFO) princippet.\citep{Jimb02016a,Chun-zhiYin-shuiLun-yao2011}\newline 
+Overførsel af data sker asynkront, som det ses på \figref{fig:asynkron}. Ved denne kommunikationsform opererer RX og TX ved to forskellige klokker. For at kunne lave dataen synkront, sættes et startbit og et stopbit. UARTens opgave er at læse data fra FIFO parallel data, som laves om til seriel data. Denne data kan sendes til andre enheder. Når RX i en anden enhed modtager en startbit, laves data om fra seriel til parallel data, hvorefter data kan skrives til modtager-FIFO.\citep{Jimb02016a,Chun-zhiYin-shuiLun-yao2011} 
 
 \begin{figure}[H]
 	\centering
@@ -7,3 +11,4 @@
 	\label{fig:asynkron}
 \end{figure}
 
+Nogle enheder indeholder mere end en seriel-linje, og kan enten fungere som fuld-duplex eller halv-duplex. De enheder der er fuld-duplex, kan både sende og modtage data på samme tid. Ved halv-duplex, skal dette foregå på skift.\citep{Jimb02016a}
