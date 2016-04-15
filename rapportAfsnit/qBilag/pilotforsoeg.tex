@@ -263,6 +263,25 @@ Frekvensdomæneanalysen vises kun for denne forsøgsperson da frekvensspektrumme
 \subsection{Filtrering af gang, løb og hastighed}
 \textbf{ikke lavet endnu}
 
+\subsection{Maksimal omdrejninger per sekund under cykling}
+Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af den maksimale amplitude fra gyroskopet. Dette blev bestemt ved at beregne den maksimale peak-to-peak, under udførelsen af cykling. Dataene blev kun behandlet med henblik på gyroskopets z-akse, som resultat af \secref{bevaegelse}. Enheden for et gyroskop forekommer i grader per sekund.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Baseline neutral & Peak-to-Peak {[}dps{]} \\ \hline
+		F1 & (x) & 235,4 \\ \hline
+		F2 & (x) & 216,5 \\ \hline
+		F3 & (x) & 305,3 \\ \hline
+		F4 & (x) & 320,4 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses de maksimale peak-to-peak resultater fra gyroskopets z-akse som resultat af cykling. Baseline neutral (x) indikerer at baselinemålingen var som forventet forud for målingen.}
+	\label{app:cyklingmaxdps}
+\end{table}
+
+
 \section{Resultater}
 \textit{Indledning}
 \subsection{Kalibrering af shimmer}
@@ -282,6 +301,11 @@ Det endelige system skal altså have en samplingsfrekvens på 900Hz.
 
 \subsection{Filtrering af gang, løb og hastighed}
 ikke lavet. 
+
+\subsection{Maksimal omdrejninger per sekund under cykling}
+Resultatet af databehandlingen vedrørende cykling resulterede maksimalt i 320,4 omdrejninger per sekund. Dette er medbestemmende vedrørende valg af endeligt gyroskop, heraf skal dets arbejdsområde værre væsentligt større end 320,4 dps. 
+
+
 \section{Diskussion}
 
 \section{Konklusion}
