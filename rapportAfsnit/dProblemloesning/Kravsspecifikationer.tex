@@ -5,75 +5,74 @@ Endvidere vil nedenstående kravsspecifikationer tage udgangspunkt i de opnåede
 \subsection{Krav til hardware}
 Aktivitetsmålerens hardware består af sensorer, spændingsforsyning og en analog-til-digital konvertering (ADC). Disse elementer benyttes til en signalopsamling, hvoraf signalet efterfølende bliver behandlet i forbindelse med aktivitetsmålerens software.
 
-\subsubsection{Accelerometer}
-Et accelerometer kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding fra et knapcelle batteri. Der vil blive benyttet et knapcelle batteri, med hensyn til brugervenlig og mobilitet for aktivitetsmåleren.\newline
+\subsubsection{Spændingsforsyning}
+Det samlede system vil benytte aktive komponenter, hvoraf en spændingsforsyning er nødvendig. Det kræves at spændingsforsyningen tager hensyn til mobilitet samt brugersikkerhed. Heraf er størrelsen af batteriet samt dets totale spænding begrænset.
 
-Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensores er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
-Pilotforsøget viste en maksimal acceleration på 25,7 g ($\pm$~12,85 g). Denne maksimale acceleration antages derfor som værende den største acceleration, som acceleromteret vil blive påvirket af. Dette skyldes, at pilotforsøget er udført på en forsøgspopulation (n=4) med voksne mennesker, hvilken gennemsnitligt har en højere vægt end målgruppens aldersgruppe. 
+\textbf{Krav til spændingsforsyning} \newline 
+Spændingsforsyningen skal:
+\begin{itemize}
+	\item Levere en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Muliggør spændingsopsætning af systemet udenom elnettet, og være elektrisk sikkert.
+	\item Være mobil.
+\end{itemize}
+
+\subsubsection{Accelerometer}
+Et accelerometer kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
+Pilotforsøget viste en maksimal acceleration på 25,7 g ($\pm$~12,85 g). Denne maksimale acceleration antages derfor som værende den største acceleration, som acceleromteret vil blive påvirket af. Dette skyldes, at pilotforsøget er udført på en forsøgspopulation (n=4) med voksne mennesker, og heraf antages det at den gennemsnitlige vægt er højere end målgruppens. Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
 
 
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
-\item Være operativ ved en DC spænding fra knapcelle batteri.
+\item Være operativ ved en DC spændingsforsyning.
 \item Have et arbejdsområde på mindst $\pm$12,85 g.
+\item Placeres ud for den laterale malleolus.
 \end{itemize}
 
-\textbf{SKAL DER VÆRE NOGET OM AT PLACERINGEN SKAL VÆRE VED ANKLEN, JF. PILOTFORSØG}
-
 \subsubsection{Gyroskop} 
-Et accelerometer kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding fra et knapcelle batteri. Der vil blive benyttet et knapcelle batteri, med hensyn til brugervenlig og mobilitet for aktivitetsmåleren.\newline
-
-Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget. Pilotforsøget viste at gyroskopet maksimalt blev udsat for $\pm$160 grader/sekund. Denne værdi blev bestemt for en given frekvens ved cykling, derfor bør gyroskopet have et større arbejdsområde for dermed at tage forbehold for en højere frekvens af omdrejninger på cyklen. 
+Et gyroskop kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget. Pilotforsøget viste at gyroskopet maksimalt blev udsat for $\pm$160 dps. Denne værdi blev bestemt for en given frekvens ved cykling, derfor bør gyroskopet have et større arbejdsområde for dermed at tage forbehold for en højere frekvens af omdrejninger på cyklen. Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
 
 
 \textbf{Krav til gyroskop} \newline
 Gyroskopet skal:
 \begin{itemize}
-\item Være operativ ved en DC spænding fra knapcelle batteri.
-\item Have et arbejdsområde på mindst $\pm$160 grader/sekund.
+\item Være operativ ved en DC spændingsforsyning.
+\item Have et arbejdsområde på mindst $\pm$160 dps.
+\item Placeres ud for den laterale malleolus.
 \end{itemize}
 
-\textbf{SKAL DER VÆRE NOGET OM AT PLACERINGEN SKAL VÆRE VED ANKLEN, JF. PILOTFORSØG}
-
 \subsubsection{Pulsmåler}
-Pulsmåleren skal kunne optage data ved at være forsynet med en DC spænding fra et knapcelle batteri. \newline
-Yderligere skal pulsmåleren kunne bestemme brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
+En pulsmåler kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Yderligere skal pulsmåleren kunne bestemme brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
 
 \textbf{Krav til pulsmåler} \newline
 Pulsmåleren skal:
 \begin{itemize}
-\item Være operativ ved en DC spænding fra knapcelle batteri.
+\item Være operativ ved en DC spændingsforsyning.
 \item Kunne bestemme brugerens puls.
 \end{itemize}
-
-\subsubsection{Spændingsforsyning}
-%	o Maxwell CR2032 H, 3 V, DC (det der ligger i kassen)
-%	o Tjekke op på hvor meget microcontrolleren skal have
-%	o Skal kunne give 1,9-3,6 V til breakout boardet (-0,3 til 4,8 V)
-%- fngerer ned til 1,9 V
-
-\textbf{Krav til spændingsforsyning} \newline
-Spændingsforsyningen skal:
-\begin{itemize}
-\item Bla bla
-\item Bla bla
-\end{itemize}
-
-
-
+%\subsubsection{Spændingsforsyning}
+%%	o Maxwell CR2032 H, 3 V, DC (det der ligger i kassen)
+%%	o Tjekke op på hvor meget microcontrolleren skal have
+%%	o Skal kunne give 1,9-3,6 V til breakout boardet (-0,3 til 4,8 V)
+%%- fngerer ned til 1,9 V
+%
+%\textbf{Krav til spændingsforsyning} \newline
+%Spændingsforsyningen skal:
+%\begin{itemize}
+%\item Bla bla
+%\item Bla bla
+%\end{itemize}
 \subsubsection{ADC}
-Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt at detektere den givne aktivitet.\newline
-Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet for gang og løb for accelerometeret. Pilotforsøget viste, at frekvensområdet for et accelerometer ved gang og løb maksimalt havde en frekvens af XXXX Hz. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed som er dobbelt så stor som det maksimale frekvensområde, med henhold til samplingsfrekvensen for accelerometeret.\newline
-
-Gyroskopet vil blive benyttet til at detektere aktiviteten, cykling. Derfor undersøgtes pilotforsøget ydermere med henblik på at bestemme frekvensområdet for gyroskopet ved cykling. Det fremgik heraf, at det maksimale frekvensområde var XXX Hz. Samplingsfrekvensen i ADC'en, for gyroskopet, skal derfor være dobbelt så stor som frekvensområdet med henhold til Nyquist. 
-
+Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
+Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet heraf. Pilotforsøget viste, at frekvensområdet for et accelerometer ved gang og løb maksimalt havde en frekvens af 45 Hz. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed som er dobbelt så stor som det maksimale frekvensområde, men i praksis 10 gange større. Derfor skal ADC'en sample accelerometerets data med 450 Hz.\newline
+Gyroskopet vil blive benyttet til at detektere aktiviteten, cykling, hvoraf dets frekvensområde igennem pilotforsøget blev undersøgt. Det fremgik heraf, at det maksimale frekvensområde var 6 Hz. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed som er dobbelt så stor som det maksimale frekvensområde, men i praksis 10 gange større. Derfor skal ADC'en sample gyroskopets data med 60 Hz.
 
 \textbf{Krav til ADC} \newline
 ADC'en skal:
 \begin{itemize}
-\item Sample accelerometerets output med XXX Hz.
-\item Sample gyroskopets output med XXX Hz. 
+\item Sample accelerometerets output med 450 Hz.
+\item Sample gyroskopets output med 60 Hz. 
+\item Være en SAR ADC. 
 \end{itemize}
 
 
@@ -90,6 +89,3 @@ Aktivitetsmålerens software skal:
 \item Gemme en hel dags aktiviteter. 
 \item 
 \end{itemize}
- 
-
-
