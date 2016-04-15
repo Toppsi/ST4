@@ -37,12 +37,14 @@ Gyroskopet skal:
 \textbf{SKAL DER VÆRE NOGET OM AT PLACERINGEN SKAL VÆRE VED ANKLEN, JF. PILOTFORSØG}
 
 \subsubsection{Pulsmåler}
+Pulsmåleren skal kunne optage data ved at være forsynet med en DC spænding fra et knapcelle batteri. \newline
+Yderligere skal pulsmåleren kunne bestemme brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
 
 \textbf{Krav til pulsmåler} \newline
 Pulsmåleren skal:
 \begin{itemize}
-\item Bla bla
-\item Bla bla
+\item Være operativ ved en DC spænding fra knapcelle batteri.
+\item Kunne bestemme brugerens puls.
 \end{itemize}
 
 \subsubsection{Spændingsforsyning}
@@ -61,26 +63,31 @@ Spændingsforsyningen skal:
 
 
 \subsubsection{ADC}
-Frekvensindhold for accelerometer, gyroskop og måske pulsmåler.
+Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt at detektere den givne aktivitet.\newline
+Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet for gang og løb for accelerometeret. Pilotforsøget viste, at frekvensområdet for et accelerometer ved gang og løb maksimalt havde en frekvens af XXXX Hz. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed som er dobbelt så stor som det maksimale frekvensområde, med henhold til samplingsfrekvensen for accelerometeret.\newline
+
+Gyroskopet vil blive benyttet til at detektere aktiviteten, cykling. Derfor undersøgtes pilotforsøget ydermere med henblik på at bestemme frekvensområdet for gyroskopet ved cykling. Det fremgik heraf, at det maksimale frekvensområde var XXX Hz. Samplingsfrekvensen i ADC'en, for gyroskopet, skal derfor være dobbelt så stor som frekvensområdet med henhold til Nyquist. 
 
 
 \textbf{Krav til ADC} \newline
 ADC'en skal:
 \begin{itemize}
-\item Bla bla
-\item Bla bla
+\item Sample accelerometerets output med XXX Hz.
+\item Sample gyroskopets output med XXX Hz. 
 \end{itemize}
 
 
 
 \subsection{Krav til software}
+
+
 Aktivitetsmålerens software skal:
 \begin{itemize}
 \item Kunne arbejde med DC spænding fra knapcelle batteri.
 \item Anvende digitale filtre til filtrering.
 \item Detektere og adskille aktiviteterne; gang, løb og cykling. 
 \item Trådløs overførsel.
-\item Logging (gemme) en hel dags aktiviteter. 
+\item Gemme en hel dags aktiviteter. 
 \item 
 \end{itemize}
  
