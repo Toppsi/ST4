@@ -79,13 +79,31 @@ ADC'en skal:
 
 \subsection{Krav til software}
 
+Notes: 
+- Trådløs overførsel af data
+	- BLE
+	- Mellem GAP Central og GAP Peripheral
+- Algoritmedesign 
+	- Aktivitet
+		- Detektere skridt
+		- Detektere gang 
+		- Detektere løb
+		- Detektere cykling
+		- Adskillese af ovenstående
+		- Digital filtrering 
+	- Strømbesparelse 
+		- Lowpower mode
+		- Gyroskop vs. accelerometer
+- MATLAB GUI
+	- Afspejling af en eventuel motiverende faktor, 
+	- Vise data fra en hel dag. 
+		
+
 
 Aktivitetsmålerens software skal:
 \begin{itemize}
-\item Kunne arbejde med DC spænding fra knapcelle batteri.
 \item Anvende digitale filtre til filtrering.
 \item Detektere og adskille aktiviteterne; gang, løb og cykling. 
 \item Trådløs overførsel.
 \item Gemme en hel dags aktiviteter. 
-\item 
 \end{itemize}
