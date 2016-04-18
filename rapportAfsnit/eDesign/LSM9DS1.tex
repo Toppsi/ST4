@@ -21,3 +21,4 @@ Accelerometeret kan både bruges med en SPI og en I$^{2}$C, og mikrocontrolleren
 	\label{IC_pins}
 \end{figure}
 
+I LSM9DS1 bruger gyroskopet 4mA og accelerometeret bruger 600$\textmu$A, og det er derfor væsentligt at gyroskopet bruges minimalt. Det er muligt enten at benytte accelerometeret alene eller både accelerometeret og gyroskopet sammen hvor de har samme mængde output af data, og derudover er det muligt at slukke for begge sensorer. Der kan yderligere spares strøm ved brug af gyroskopet, alt efter hvor hurtigt et signal skal samples. Gyroskopet har tre forskellige funktioner: slukket, lav power og normal power. For at gyroskopet kan være i lav power, skal outputtet af data være 14,9-119Hz, og over dette output vil det automatisk gå i normal power. 
