@@ -1,14 +1,14 @@
 \subsection{Power mode for PSoC 4 moduler}
-Alle PSoC 4 moduler besidder fem forskellige power modes: aktiv, sleep, deep-sleep, hibernate og stop. Strømforbruget samt tiden det tager at vågne op fra denne tilstand ses i \tabref{tab:Powermode}. \citep{Semiconductor2016PowerMode}
+Alle PSoC 4 moduler besidder fem forskellige power modes: active, sleep, deep-sleep, hibernate og stop. Strømforbruget samt tiden det tager at vågne op fra denne tilstand ses i \tabref{tab:Powermode}. \citep{Semiconductor2016PowerMode}
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc} \hline
 		\rowcolor[HTML]{C0C0C0} 
-		Power Mode & \begin{tabular}[c]{@{}c@{}}Strømområde\\(Vdd = 3,3V til 5,0V) {[}g{]}\end{tabular} &  \begin{tabular}[c]{@{}c@{}}Vågn op tid\\ for PSoC 4200M {[}g{]}\end{tabular} \\ \hline
-		Aktiv & 1,3mA til 14 mA & \\ \hline
-		Sov & 1,0mA til 3mA & 0 \\ \hline
-		Dyb søvn & 1,3$\mu$A til 15$\mu$A & 25$\mu$s \\ \hline
-		Dvale & 150 nA til 1$\mu$A & 0,7 ms \\ \hline
+		Power Mode & \begin{tabular}[c]{@{}c@{}}Strømområde\\(Vdd = 3,3V til 5,0V) \end{tabular} &  \begin{tabular}[c]{@{}c@{}}Opvågningstid\\ for PSoC 4200M \end{tabular} \\ \hline
+		Active & 1,3mA til 14 mA & - \\ \hline
+		Sleep & 1,0mA til 3mA & 0 \\ \hline
+		Deep-sleep & 1,3$\mu$A til 15$\mu$A & 25$\mu$s \\ \hline
+		Hibernate & 150 nA til 1$\mu$A & 0,7 ms \\ \hline
 		Stop & 20 nA til 80 nA & 2 ms \\ \hline
 	\end{tabular}%
 	\caption{På figuren ses strømforbruget samt opvågningstiden for PSoC 4200M, som er den valgte mikrokontrollers target processor. (Modificeret) \citep{Semiconductor2016PowerMode}}
@@ -16,6 +16,4 @@ Alle PSoC 4 moduler besidder fem forskellige power modes: aktiv, sleep, deep-sle
 \end{table}\vspace{-0.2cm}
 Det kan ses på \tabref{tab:Powermode}, at hvis der benyttes et batteri til at forsyne mikrokontrolleren, kan det være fordelagtigt at køre i en lav strømforbrugende tilstand. Power moden har indflydelse på mikroprocessorens funktioner, hvorfor det ikke altid er fordelagtigt at fokusere for meget på lavt strømforbrug. For eksempel er mikroprocessorens CPU kun aktiv, når power moden er indstillet til aktiv. Derudover er eksempelvis ADCen kun aktiv under de to power modes aktiv og sleep.\fxnote{Der findes en hel tabel inde på kilden over ting, som er aktive eller slukkede under de forskellige modes. Er det fint bare med disse to eksempler, som står i teksten, eller er der behov for at tabellen skal indsættes?} %Noget med funktionaliteten også afhænger af power moden, fordi nogle ting bliver slukket. Tabel 2 i URL link. Skriv det ind, så det hænger sammen med de andre steder i teksten, hvor der er nævnt noget med dens tilstand.
 \citep{Semiconductor2016PowerMode}
-
-\subsection{Power mode for LIS331}
 % https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf
