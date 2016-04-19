@@ -34,14 +34,12 @@ Resultatet af filterdesignet er typisk en overføringsfunktion i z-donæmet\fxno
 
 \subsubsection{FIR filtre}
 FIR filtre er defineret som digitale filtre med et endeligt antal impuls responser.
-
 \begin{flalign}
 	Y[n] = \sum_{m=0}^{m} b_m X[n-m]
 	\label{eq:fir}
 \end{flalign}
-
 Denne filtertype kan designes med en lineær fase, mens IIR filtre kun tilnærmelsesvis kan designes lineære.
---> dette er grunden til at FIR i nogle tilfælde foretrækkes.
+Dette er grunden til at FIR i nogle tilfælde foretrækkes.
 Når der designes et FIR filter med lineær fase, benyttes ofte Fourier serier
 
 Der findes to typer af FIR filtre for symmetrisk impuls respons; type 1 som har lige orden, men ulige længde, og type 2 som har en ulige orden, men en lige længde. Disse kan skrives som en sum af cosinus funktioner.
