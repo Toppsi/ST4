@@ -1,18 +1,19 @@
 \section{LSM9DS1}
-Der benyttes en IC (LSM9DS1), som både indeholder magnometer, gyroskop og accelerometer, hvor der benyttes accelerometeret og gyroskopet. Det er muligt at indstille accelerometeret til $\pm$1, 4, 8 eller 16 g, og gyroskopet kan måle $\pm$245, 500 eller 2000 grader per sekund.\citep{Jimb02016} \newline
-LSM9DS1 har ni frihedsgrader, hvormed det måler i x-, y- og z-aksen for både magnometeret, gyroskopet og accelerometeret, hvilket kan ses på \figref{vores_IC}. Akserne for gyroskopet og accelerometeret internt følger højrehåndsreglen.\citep{Jimb02016}\newline
-Accelerometeret og gyroskopet bruger ikke lige meget strøm, accelerometeret bruger 600$\mu$A, mens gyroskopet bruger 4mA. Denne store forskel i forbrug medfører at gyroskopet kun skal tændes når der skal detekteres cykling. 
+Der benyttes et integrated circuit (IC) af typen LSM9DS1, som både indeholder magnometer, gyroskop og accelerometer, hvoraf magnometret ikke benyttes. Det er muligt at indstille accelerometeret til $\pm$1, $\pm$4, $\pm$8 eller $\pm$16 g, og gyroskopet kan indstilles til $\pm$245, $\pm$500 eller $\pm$2000 grader per sekund. \citep{Jimb02016} \newline
+LSM9DS1 har ni frihedsgrader, hvilket betyder, at den måler i x-, y- og z-aksen for både magnometret, gyroskopet og accelerometeret, som kan ses på \figref{vores_IC}. %Akserne for gyroskopet og accelerometeret internt følger højrehåndsreglen.
+\citep{Jimb02016}\newline 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/LSM9DS1.png}
-	\caption{På figuren ses akserne fra IC'en LSM9DS1, hvor magnometerets (til venstre) akse i realiteten er flippet i forhold til gyroskopet (i midten) og accelerometeret (til højre).\citep{Jimb02016}}
+	\caption{På figuren ses akserne fra LSM9DS1. Til venstre ses magnometret, hvis akser er drejet én omgang i forhold til de to andre sensorer. I midten ses gyroskopet med sine roterende akser og til højre ses accelerometerets akser.\citep{Jimb02016}}
 	\label{vores_IC}
 \end{figure}
-Accelerometeret kan både bruges med en SPI og en I$^{2}$C, og mikrocontrolleren har begge dele. Der ønskes at benytte I$^{2}$C funktionen, da der både skal sendes data, men også modtages data om hvorvidt gyroskopet skal tændes eller slukkes. For at benytte punktionen sættes pinnen CS\_AG sættes høj, og de fire pinne SDO og CS benyttes ikke. Alle pins kan ses på \figref{IC_pins}
+Accelerometeret kan både bruges med en SPI og en I$^{2}$C styrefunktion, og mikrokontrolleren besidder begge. Der ønskes at benytte I$^{2}$C funktionen, da IC'en både skal sende og modtage data.\fxnote{Modtage om gyroskopet skal tændes eller slukkes.} For at benytte I$^{2}$C funktionen sættes pin CS\_AG høj, og de fire pins SDO og CS benyttes ikke. Alle pins kan ses på \figref{IC_pins}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.35]{figures/cDesign/accelerometeret.png}
-	\caption{På figuren ses Udgangene fra IC'en.\citep{Jimb02016}}
+	\caption{På figuren ses udgangene fra IC'en.\citep{Jimb02016}}
 	\label{IC_pins}
 \end{figure}
-I LSM9DS1 bruger gyroskopet 4mA og accelerometeret bruger 600$\mu$A, og det er derfor væsentligt at gyroskopet bruges minimalt. Det er muligt enten at benytte accelerometeret alene eller både accelerometeret og gyroskopet sammen hvor de har samme mængde output af data, og derudover er det muligt at slukke for begge sensorer. Der kan yderligere spares strøm ved brug af gyroskopet, alt efter hvor hurtigt et signal skal samples. Gyroskopet har tre forskellige funktioner: slukket, lav power og normal power. For at gyroskopet kan være i lav power, skal outputtet af data være 14,9-119Hz, og over dette output vil det automatisk gå i normal power. 
+I LSM9DS1 bruger gyroskopet 4 mA og accelerometeret bruger 600$\mu$ A. Det er derfor væsentligt, at gyroskopet bruges minimalt, når systemet skal være batteridrevet. Det er muligt enten at slukke begge sensorer, at benytte accelerometeret alene eller benytte både accelerometeret og gyroskopet sammen, hvor de har samme mængde output af data. Der kan yderligere spares strøm ved brug af gyroskopet, hvis der vælges en lavere samplerate. % alt efter hvor hurtigt et signal skal samples. 
+Gyroskopet har tre forskellige power modes: slukket, low power og normal power. For at gyroskopet kan være i low power, skal outputtet af data være på 14,9-119 Hz. Hvis outputsignalet er over dette, vil gyroskopet automatisk gå i normal power. 
