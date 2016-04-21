@@ -1,105 +1,63 @@
 \subsection{Digitale filtre}
-% IIR 
-% FIR
-% Moving average
-% threathold 
+%Digitale filtre kan opnå tusinde gange bedre resultat end analoge filtre.
+
+Digitale filtre benyttes grundlæggende af to grunde; til at adskille signaler og til at genskabe signaler. 
+Signaladskillelse benyttes til at adskille signaler fra hinanden, hvilket ofte er i forbindelse med filtrere støj fra det ønskede signal.\fxnote{eksempelvis ved ekg eller hjertelyd, hvor vejrtrækning og andre kropssignaler/lyde skal fjernes} 
+Signalgenskabelse benyttes hvis signalet er blevet beskadiget eller forvrænget.\fxnote{eksempelvis ved rystelser hvis måleudstyret er dårligt eller hvis ikke vi får sat den ordentlig fast på forsøgspersonen.} \citep{Smith1997}
+
+Ethvert lineært filter har en impulsrespons, steprespons og en frekvensrespons. Disse responser indeholder information om filteret på forskellig vis, og udgør tilsammen information om hvordan filteret vil agerer i forskellige situationer.\fxnote{hvis en af disse er oplyst eller defineret for filteret, kan de to andre udregnes matematisk.} \citep{Smith1997} \newline
+Et filter designes ud fra dets responser. Den mest ligetil metode er, at summere signalets inputs med filterets impulsrespons, denne metode kaldes filter kernen eller Finite Impulse Response filtre (FIR). En anden metode er at benytte tidligere outputværdier sammen med inputtet, hvilket kaldes et rekursivt filter. For at finde impulsresponsen for et rekursivt filter, indsendes en impuls, hvor impulsresponsen er det output, der fås. Denne impulsrespons er en sum af sinuser som eksponentielt falder i amplitude, hvilket resulterer i at impulsresponsen bliver uendelig lang, hvorfor denne filtertype også kaldes Infinite Impulse Response filter (IIR). \citep{Smith1997,Blandford2013} \newline
+Andre metoder at designe et filter er ud fra dets steprespons eller frekvensrespons sammenholdt med filterets impulsrespons. Stepresponsen er integralet af impulsresponsen, en anden metode at finde stepresponsen på er, ved at indsende en stepbølge i filteret, hvorefter outputtet vil være stepresponsen. Frekvensresponsen kan findes ved at finde diskret Fourier transformationen (DFT) eller Fast Fourier transformationen (FFT) af impulsresponsen. \citep{Smith1997}
+
+%Resultatet af filterdesignet er typisk en overføringsfunktion i z-donæmet\fxnote{frekvensdomænet}. Ud fra denne kan filteret analyseres med henblik på at bestemme impulsresponsen, filterets stabilitet, steady-state frekvensrespons, differensformlen og responsen til et arbitrært input. \citep{Blandford2013} 
+%I designfasen for filtre, startes der med at blive set på signalets frekvensspektrum, hvorved det vælges om der er behov for et lavpas-, højpas-, båndstop- eller båndpasfilter, og hertil også knækfrekvenserne for dem. Ud fra signalets frekvens, vælges også samplingshastigheden i henhold til Nyquist\fxnote{2 gange signalets frekvens}. Herefter vælges hvilken filtertype der egner sig bedst til systemet. \citep{Blandford2013}
 
 
-Et filter har typisk til formål at frafiltrere uønskede frekvenser fra signalet\fxnote{opg: andre formål}. Ønskes det at fjerne høje frekvenser, anvendes et lavpasfilter, som lader frekvenser under en valgt værdi passere, mens der, hvis man ønsker de lave frekvenser fjernet, anvendes et højpasfilter, som lader de høje frekvenser over en valgt værdi passere. Disse to filtertyper kan kombineres alt efter om man vil fjerne frekvenser udenfor et bestemt spektrum, båndpasfilter, eller kun vil fjerne en lille del af spektret, båndstopfilter, hvilket er illustreret på \figref{fig:filtre}\fxnote{opg: skal figuren være der?}. Ved en sammensætning hvor lavpasfilteret dæmper efter højpasfilteret, og højpasfilteret dæmper før lavpasfilteret, fås et båndpasfilter. Sammensættes de to filtre modsat med et lavpasfilter som dæmper før højpasfilteret mens højpasfilteret efter lavpasfilteret, fås et båndstopfilter.
-\citep{Ramsden2001}
+\subsubsection{Finite Impulse Response filtre}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.2]{figures/bProblemloesning/filtre.png}
-	\caption{På figuren ses ... \citep{Aasvik2016} (Modificeret)}
-	\label{fig:filtre}
-\end{figure}
-
-FILTERTYPER
-
-Infinite impulse response (IIR)
-- Butterworth
-- chebyshev 
-- ect. 
-Finite impulse response (FIR)
-- Parks-McClellan algorithm
-- Frequency sampling
-- window type
-- ??
-
-\subsubsection{Filterdesign}
-I designfasen for filtre, startes der med at blive set på signalets frekvensspektrum, hvorved det vælges om der er behov for et lavpas-, højpas-, båndstop- eller båndpasfilter, og hertil også knækfrekvenserne for dem. Ud fra signalets frekvens, vælges også samplingshastigheden i henhold til Nyquist\fxnote{2 gange signalets frekvens}. Herefter vælges hvilken filtertype der egner sig bedst til systemet. 
-
-Resultatet af filterdesignet er typisk en overføringsfunktion i z-donæmet\fxnote{frekvensdomænet}. Ud fra denne kan filteret analyseres med henblik på at bestemme impuls responsen, filterets stabilitet, steady-state frekvens respons\fxnote{opg: hvad er dette}, differensformlen og responsen til et arbitrært input. \citep{Blandford2013}
-
-\subsubsection{FIR filtre}
-FIR filtre er defineret som digitale filtre med et endeligt antal impuls responser.
+FIR filtre er, som tidligere nævnt, defineret som digitale filtre med et endeligt antal impulsresponser. Dette vil sige at filteret har en impulsrespons med et endeligt antal ikke-nulværdier\fxnote{nonzeros}, dermed kan filteret designes stabilt og med en lineær fase. \citep{Blandford2013} \newline
+Det fremgår af den generelle formel for FIR filtre, \eqref{eq:fir}, at filteret benytter tidligere og nutidige inputs, hvilket gør at det har et endeligt antal impulsresponser. 
+\space
 \begin{flalign}
 	Y[n] = \sum_{m=0}^{m} b_m X[n-m]
 	\label{eq:fir}
 \end{flalign}
-Denne filtertype kan designes med en lineær fase, mens IIR filtre kun tilnærmelsesvis kan designes lineære.
-Dette er grunden til at FIR i nogle tilfælde foretrækkes.
-Når der designes et FIR filter med lineær fase, benyttes ofte Fourier serier
+\space
+FIR filtre inddeles i fire typer impulsrespons funktioner. Type 1 har en lige orden og ulige længde, hvilket betyder at den er centreret omkring den midterste impuls. Denne type er symmetrisk, hvilket vil sige at hele impulsresponsen ligger på den samme side af x-aksen. Type 2 har er ligeledes symmetrisk, men har en ulige orden og lige længde, hvilket resulterer i at den er centreret mellem de to midterste impulser.
+%Disse kan skrives som en sum af cosinus funktioner.
+Type 3 har en lige orden og ulige længde, på samme vis som type 1, men er asymmetrisk, hvilket i modsætning til type 1 og 2, gør at impulsresponsen ligger på begge sider af x-aksen. Type 4 har, ligeledes med type 2, en ulige orden og lige længde, men er ligeledes med type 3 asymmetrisk. %Disse kan skrives som en sum af sinus funktioner.
+\citep{Blandford2013} \newline
+De forskellige impulsrespons funktioner benyttes til valg af filtertype, hvor de egner sig til forskellige konfigurationer, alt efter om der ønskes et lavpas-, højpas-, båndpas- eller båndstopfilter. \citep{Blandford2013} \newline
+FIR filtre optræder ligeledes som forskellige konfigurationer, heriblandt Parks-McClellan algoritmen, frekvens sampling, window type og moving average.\citep{Blandford2013}
 
-Der findes to typer af FIR filtre for symmetrisk impuls respons; type 1 som har lige orden, men ulige længde, og type 2 som har en ulige orden, men en lige længde. Disse kan skrives som en sum af cosinus funktioner.
-Der findes ligeledes to typer af FIR filtre for asymmetrisk impuls respons; type 3 som har lige orden, men ulige længde, og type 2 som har en ulige orden, men en lige længde. Disse kan skrives som en sum af sinus funktioner.
-De forskellige typer egner sig hver i sær bedst til forskellige filtre, som det ses i \tabref{tab:FIR_typer}. \citep{Blandford2013}
-
-\begin{table}[H]
-	\centering
-	\caption{Tabellen illustrerer hvilke FIR typer som egner sig bedst til forskellige filtre. \citep{Blandford2013} (modeficeret)}
-	\begin{tabular}{cccc}
-		Type & Symmetri                                                           & Forbehold                                                       & Egner sig til                                                                \\
-		1    & \begin{tabular}[c]{@{}c@{}}Ulige længde\\ Symmetrisk\end{tabular}  & Ingen                                                           & \begin{tabular}[c]{@{}c@{}}Lavpas\\ Højpas\\ Båndpas\\ Båndstop\end{tabular} \\
-		2    & \begin{tabular}[c]{@{}c@{}}Lige længde\\ Symmetrisk\end{tabular}   & $H(f_s/2)=0$                                                    & \begin{tabular}[c]{@{}c@{}}Lavpas\\ Højpas\end{tabular}                      \\
-		3    & \begin{tabular}[c]{@{}c@{}}Ulige længde\\ Asymmetrisk\end{tabular} & \begin{tabular}[c]{@{}c@{}}$H(0)=0$\\ $H(f_s/2)=0$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Højpas\\ Differentiator\end{tabular}              \\
-		4    & \begin{tabular}[c]{@{}c@{}}Lige længde\\ Asymmetrisk\end{tabular}  & $H(0)=0$                                                        & \begin{tabular}[c]{@{}c@{}}Højpas\\ Differentiator\end{tabular}             
-	\end{tabular}
-	\label{tab:FIR_typer}
-\end{table}
-
-FIR filtre optræder som forskellige konstruktioner, blandt andet Parks-McClellan algoritmen, Frekvens sampling og window type \fxnote{opg: hvilke andre?}.
-
-Windowing:
-Når der benyttes Fourier serier til at lave et ideelt FIR filter, fås en række koefficienter mellem minus uendelig og plus uendelig. Da et uendelig langt filter ikke kan implementeres, forkortes antallet af koefficienter til et antal som kan implementeres og stadig tilnærmelsesvis giver et ideelt filter. Matematisk sker dette ved at gange impulsresponsen med et rektangulært window. 
-
-Diskret fourier transformation (DFT) af et rektangulært window i tidsdomænet, giver en sinusfunktion i frekvensdomænet.
-
-\begin{flalign}
-Y[n] = H*W = \sum_{k=0}^{\infty} H[k] \cdot W[n-k]
-\label{eq:window}
-\end{flalign}
+%Windowing:
+%Når der benyttes Fourier serier til at lave et ideelt FIR filter, fås en række koefficienter mellem minus uendelig og plus uendelig. Da et uendelig langt filter ikke kan implementeres, forkortes antallet af koefficienter til et antal som kan implementeres og stadig tilnærmelsesvis giver et ideelt filter. Matematisk sker dette ved at gange impulsresponsen med et rektangulært window. 
+%
+%Diskret fourier transformation (DFT) af et rektangulært window i tidsdomænet, giver en sinusfunktion i frekvensdomænet.
+%
+%\begin{flalign}
+%Y[n] = H*W = \sum_{k=0}^{\infty} H[k] \cdot W[n-k]
+%\label{eq:window}
+%\end{flalign}
+%
+%
+%Derudover kan filtrene implementeres på forskellig vis, alt efter deres formål. Moving average filtre benyttes til at udglatte signalet, ved at finde gennemsnitsværdien for et bestemt antal samples. Herved får en eventuel støj får mindre betydning for signalets udformning.
+%
+%\begin{flalign}
+%	avg = \frac{1}{N} \sum_{i=1}^{N} x_i
+%	\label{eq:mavg}
+%\end{flalign}
 
 
-Derudover kan filtrene implementeres på forskellig vis, alt efter deres formål. Moving average filtre benyttes til at udglatte signalet, ved at finde gennemsnitsværdien for et bestemt antal samples. Herved får en eventuel støj får mindre betydning for signalets udformning.
-
-\begin{flalign}
-	avg = \frac{1}{N} \sum_{i=1}^{N} x_i
-	\label{eq:mavg}
-\end{flalign}
-
-
-
-
-
-
-
-
-\subsubsection{IIR filtre}
-IIR filtre er defineret som digitale filtre med uendeligt mange impuls responser. 
-
+\subsubsection{Infinite Impulse Response filtre}
+Som tidligere nævnt, er IIR filtre defineret som digitale filtre med uendelig mange impulsresponser. Dette har i modsætning til FIR filtre en impulsrespons med uendeligt mange nulværdier\fxnote{zeros}, hvilket gør at filterets impulsresponsen falder eksponentielt i amplitude og resulterer i en uendelig respons. Dette gør at filteret kun tilnærmelsesvis kan designes med en lineær fase, hvorfor det kan risikere at være ustabilt. Idet IIR filtre benytter tidligere outputs, er det et feedback filter, hvorfor dette er udregningseffektivt.\fxnote{nemmere at udregne} \citep{Blandford2013} \newline
+Af den generelle formel for IIR filtre, \eqref{eq:iir}, fremgår det, at filteret benytter tidligere og nutidige inputs men også tidligere outputs, hvormed det får uendeligt mange impulsresponser. 
+\space
 \begin{flalign}
 	Y[n] = \sum_{k=1}^{k} a_k Y[n-k] + \sum_{m=0}^{m} b_m X[n-m]
 	\label{eq:iir}
 \end{flalign}
-
-
-
-
-Infinite impulse response (IIR)
-- Butterworth
-- chebyshev 
-- ect. 
+\space 
+IIR filtre optræder som forskellige filterkonfigurationer, heriblandt Butterworth, Chebyshev og elliptisk. Disse kan alle benyttes til lavpas-, højpas-, båndpas- eller båndstopfilter, og designes ud fra krav om ripples, linearitet, dæmpningsgrad og faseforskydelse. \citep{Blandford2013}
 
 
