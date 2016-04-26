@@ -4,29 +4,29 @@
 Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, som er beskrevet i \appref{pilot}.
 
 \subsection{Krav til hardware}
-Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling, hvoraf signalet efterfølgende bliver behandlet af aktivitetsmålerens software.
+Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling og -konvertering, hvoraf det digitale signal efterfølgende bliver behandlet af aktivitetsmålerens software.
 
 \subsubsection{Spændingsforsyning}
-Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
+MCU'en kræver en spændingsforsyning for at kunne fungere, hvilket enten kan ske igennem USB porten eller tilføres fra en mobil enhed. Spændingsforsyningen skal kunne forsyne MCU'en i en hel dag samt være sikkert for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
 
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71 V og maks 5,5 V\fxnote{Alle mikroprocessorer kræver 1,71-5,5 V for at kunne fungere, selvom der står 3,3-5,5 V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
-	\item Muliggøre spændingsopsætning af systemet udenom elnettet og være elektrisk sikkert.
-	\item Være mobil.
+	\item Levere mindst 1,71 V og maks 5,5 V til MCU'en\fxnote{Alle mikroprocessorer kræver 1,71-5,5 V for at kunne fungere, selvom der står 3,3-5,5 V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5 V i mindre end 15 timer.
+	%\item Muliggøre spændingsopsætning af systemet udenom elnettet og	være elektrisk sikkert.
+	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
 \end{itemize}
 
 \subsubsection{Accelerometer}
 Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
-Pilotforsøget viste en maksimal acceleration på 25,7 peak-to-peak g. Denne maksimale acceleration antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dette skyldes, at pilotforsøget er udført på en forsøgspopulation (n=4) med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens. %Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
-
+Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation (n=4) med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med over 16 g. %Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
 
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
-\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde på mindst 25,7 peak-to-peak g.
+\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
+\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har at arbejdsområde på under $\pm$16 g.
 \end{itemize}
 
 \subsubsection{Gyroskop} 
@@ -37,31 +37,21 @@ Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, de
 Gyroskopet skal:
 \begin{itemize}
 \item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde på mindst $\pm$160 dps.
+\item Have et arbejdsområde x.
 \end{itemize}
 
 \subsubsection{Pulsmåler}
-En pulsmåler kræver en given spænding for at kunne optage data. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Yderligere skal pulsmåleren kunne opfange brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
+En pulsmåler kræver en given spænding for at kunne optage data, som tilføres fra MCU'en. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
+Yderligere skal pulsmåleren kunne opfange brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
 
 \textbf{Krav til pulsmåler} \newline
 Pulsmåleren skal:
 \begin{itemize}
-\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulsmåleren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-\item Kunne opfange brugerens puls under fysisk aktivitet.
+\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulsmåleren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
+\item Kunne opfange brugerens puls under fysisk aktivitet. Der accepteres ikke, at pulsmåleren opfanger ukorrekt eller ikke tydelig puls under fysisk aktivitet.
 \end{itemize}
-%\subsubsection{Spændingsforsyning}
-%%	o Maxwell CR2032 H, 3 V, DC (det der ligger i kassen)
-%%	o Tjekke op på hvor meget microcontrolleren skal have
-%%	o Skal kunne give 1,9-3,6 V til breakout boardet (-0,3 til 4,8 V)
-%%- fngerer ned til 1,9 V
-%
-%\textbf{Krav til spændingsforsyning} \newline
-%Spændingsforsyningen skal:
-%\begin{itemize}
-%\item Bla bla
-%\item Bla bla
-%\end{itemize}
-\subsubsection{ADC}
+
+\subsubsection{Analog-to-Digital Converter}
 %Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
 Accelerometret i LSM9DS1 skal benyttes til at opfange gang, mens gyroskopet i LSM9DS1 skal benyttes til at opfange cykling. For at begge sensorer skal være i stand til dette, er det essentielt at vide det analoge signals frekvensområde. %Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet heraf. 
 Pilotforsøget viste, at frekvensområdet for signalet ved gang og løb er 45 Hz, når det optages af et accelerometer. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde, men i praksis 10 gange større. Derfor skal ADC'en sample besidde en samplingshastighed på mindst 450 Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \newline
@@ -70,38 +60,79 @@ Frekvensområdet for signalet under cykling ved benyttelse af gyroskop blev unde
 \textbf{Krav til ADC} \newline
 ADC'en skal:
 \begin{itemize}
-\item Sample accelerometerets output med mindst 450 Hz.
-\item Sample gyroskopets output med mindst 60 Hz. 
+\item Sample accelerometerets output med mindst 450 Hz. Der accepteres ikke en samplingsfrekvens under denne værdi.
+\item Sample gyroskopets output med mindst 60 Hz. Der accepteres ikke en samplingsfrekvens under denne værdi.
 \item Repræsentere det analoge signal med maksimalt 5\% afvigelse. 
 \end{itemize}
 
 \subsection{Krav til software}
+Aktivitetsmålerens software består af algoritmedesign til MCU'ens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAB central og GAB peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
-Notes: 
-- Trådløs overførsel af data
-	- BLE
-	- Mellem GAP Central og GAP Peripheral
-- Algoritmedesign 
-	- Aktivitet
-		- Detektere gang 
-			- (Detektere skridt)
-		- Detektere løb
-			- (Detektere skridt)
-		- Detektere cykling
-		- Detektere puls 
-		- Adskillese af ovenstående
-		- Digital filtrering 
-	- Strømbesparelse 
-		- Lowpower mode
-		- Gyroskop vs. accelerometer
-- MATLAB GUI
-	- Afspejling af en eventuel motiverende faktor, 
-	- Vise data fra en hel dag. 
+\subsubsection{Algoritmedesign}
+Designet af de fire algoritmer ligger til grund for hele funktionaliteten af systemet. \\
+Algoritmen på PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCU'en til en GAB peripheral. Den skal indeholde elementer, som henvender sig til IC'en, da gyroskopet skal deaktiveres hvis ikke i brug. Hvert tiende sekund skal algoritmen få gyroskopet aktiveret, som skal tracke om aktiviteten er cykling. Hvis ikke skal gyroskopet deaktiveres igen og spørges igen om 10 sekunder. Desuden skal algoritmen aktivere ADC'en, således signalerne af IC'en kan modtages. Algoritmen skal gøre mikroprocessoren i stand til at kunne detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter skal algoritmen vække EZ-BLE PRoC fra power moden stop og den gemte data overføres hertil via UART kommunikation.\\
+Algoritmen til EZ-BLE PRoC på GAB peripheral skal sørge for, at enheden er i power moden stop med mindre, at den modtager et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAB central via BLE. \\
+Algoritmen på EZ-BLE PRoC på GAB central skal få enheden til at modtage data fra EZ-BLE PRoC på GAB peripheral. Denne data skal sendes til PSoC 4200M på GAB central via UART kommunikation. \\
+Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCU'en til en GAB central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAB central og videreføre dette til en GUI på en PC via USB porten.
 
-Aktivitetsmålerens software skal:
+\textbf{Krav til algoritmedesign} \newline 
+Algoritmedesignet skal:
 \begin{itemize}
-\item Anvende digitale filtre til filtrering.
-\item Detektere og adskille aktiviteterne; gang, løb og cykling. 
-\item Trådløs overførsel.
-\item Gemme en hel dags aktiviteter. 
+	\item gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulsmåleren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
+	\item aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
+	\item gøre PSoC 4200M på GAB peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
+	\item gøre, at PSoC 4200M på GAB peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAB peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item få EZ-BLE PRoC på GAB peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item gøre, at EZ-BLE PRoC på GAB central kan modtage data fra EZ-BLE PRoC på GAB peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAB central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item PSoC 4200M på GAB central i stand til at modtage data fra EZ-BLE PRoC på GAB central og overføre dette til en PC via USB port. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
 \end{itemize}
+
+\subsubsection{Trådløs kommunikation}
+Den trådløse kommunikation imellem GAP Central og GAP Peripheral skal foregå over BLE. Dette kan give problematikker, da BLE's efffektivitet afhænger af distancen imellem enhederne\fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
+
+\textbf{Krav til den trådløse kommunikation} \newline 
+Den trådløse kommunikation skal:
+\begin{itemize}
+	\item Foregå via BLE imellem de to MCU enheder. Der accepteres ikke andre former for trådløs kommunikation.
+	\item Være i stand til at sende korrekt data i 3 meters afstand. Der accepteres ikke, at under 3 meters afstand imellem enhederne får en effekt på data.
+\end{itemize}
+
+\subsubsection{Grafisk Bruger Interface}
+GUI'en skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til øget fysisk aktivitet. Den skal visualisere tidsforbruget på og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. Hvert 15. minutter kan interfacet opdateres, da GAB peripheral afsender data til GAB central i dette tidsinterval.
+
+\textbf{Krav til GUI} \newline 
+GUI'en skal:
+\begin{itemize}
+	\item Kunne visualisere tidsforbruget og intensiteten af henholdsvis gang, løb og cykling. Der accepteres ikke, at GUI'en er skyld i, at dette ikke kan lade sig gøre.
+	\item være i stand til at opdatere interfacet hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
+\end{itemize}
+
+%Afspejling af en eventuel motiverende faktor, 
+%	- Vise data fra en hel dag. 
+%Notes: 
+%- Trådløs overførsel af data
+%	- BLE
+%	- Mellem GAP Central og GAP Peripheral
+%- Algoritmedesign 
+%	- Aktivitet
+%		- Detektere gang 
+%			- (Detektere skridt)
+%		- Detektere løb
+%			- (Detektere skridt)
+%		- Detektere cykling
+%		- Detektere puls 
+%		- Adskillese af ovenstående
+%		- Digital filtrering 
+%	- Strømbesparelse 
+%		- Lowpower mode
+%		- Gyroskop vs. accelerometer
+%- MATLAB GUI
+%	- Afspejling af en eventuel motiverende faktor, 
+%	- Vise data fra en hel dag. 
+%Aktivitetsmålerens software skal:
+%\begin{itemize}
+%\item Anvende digitale filtre til filtrering.
+%\item Detektere og adskille aktiviteterne; gang, løb og cykling. 
+%\item Trådløs overførsel.
+%\item Gemme en hel dags aktiviteter. 
+%\end{itemize}
