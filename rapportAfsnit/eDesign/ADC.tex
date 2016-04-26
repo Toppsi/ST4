@@ -1,0 +1,3 @@
+\section{Analog til digital konvertering}
+\subsection{Design}
+I mikrokontrolleren findes en 12 bits 1 mega sample per sekund (Msps) SAR ADC. Mikrokontrollerens 12 bits ADC kan inddele det analoge signal i $2^{12} = 4096$ spændingsniveauer og skal bruge 18 clocks for at fuldføre en 12 bits konvertering af data med samplingsfrekvens på 18.000.000 Hz, hvilket er dens maksimale samplingsfrekvens. Den understøtter både single ended og differential inputs og kan skanne alle 16 kanaler automatisk. \citep{Semiconductor20164200M,Moore2004}
