@@ -40,15 +40,15 @@ Gyroskopet skal:
 \item Have et arbejdsområde x.
 \end{itemize}
 
-\subsubsection{Pulsmåler}
-En pulsmåler kræver en given spænding for at kunne optage data, som tilføres fra MCU'en. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
-Yderligere skal pulsmåleren kunne opfange brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
+\subsubsection{Pulssensor}
+En pulssensor kræver en given spænding for at kunne optage data, som tilføres fra MCU'en. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
+Yderligere skal pulssensoren kunne opfange brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
 
-\textbf{Krav til pulsmåler} \newline
+\textbf{Krav til pulssensor} \newline
 Pulsmåleren skal:
 \begin{itemize}
-\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulsmåleren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
-\item Kunne opfange brugerens puls under fysisk aktivitet. Der accepteres ikke, at pulsmåleren opfanger ukorrekt eller ikke tydelig puls under fysisk aktivitet.
+\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
+\item Kunne opfange brugerens puls under fysisk aktivitet. Der accepteres ikke, at pulssensoren opfanger ukorrekt eller ikke tydelig puls under fysisk aktivitet.
 \end{itemize}
 
 \subsubsection{Analog-to-Digital Converter}
@@ -78,7 +78,7 @@ Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes t
 \textbf{Krav til algoritmedesign} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
-	\item gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulsmåleren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
+	\item gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulssensoren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
 	\item aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
 	\item gøre PSoC 4200M på GAB peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
 	\item gøre, at PSoC 4200M på GAB peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAB peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
