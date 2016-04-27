@@ -1,0 +1,23 @@
+\section{Mikrokontroller}
+\textit{I dette afsnit beskrives designet, implementeringen og testen af MCU'en som spændingsforsyning til IC og pulssensor.}
+
+\subsection{Design}
+En batteridreven spændingsforsyning sidder til MCU'en, hvilket gør den funktionel, men MCU'en skal også fungere som en spændingsforsyning for accelerometret, gyroskopet og pulssensoren. MCU'en har tre output spænding og ground pins \citep{Semiconductor2016}. Alle disse par vil blive benyttet til henholdsvis forsyning af MCU'en fra ekstern spændingsforsyning, MCU'ens spændingsforsyning til MCU'en og til pulssensoren. MCU'en leverer en spænding på mellem 4,5 og 4,8 V fra hvert output, hvorfor dette skal justeres og tilpasses IC'en.
+
+\subsection{Implementering}
+VDDIO og GND fra J1 pinrækken benyttes til spændingsforsyning og ground til IC'en, mens VDDD og GND fra J2 pinrækken benyttes til spændingsforsyning og ground til pulssensoren. Outputspændingen fra pinrække J2 er acceptabel, mens pinrække J1 skal justeres til 3,3 V, hvilket gøres ved hjælp af et 5K pedometer. En ledning trækkes fra VDDIO over til inputspænding i pedometret på et breadboard, som kan skrues på for at indstille korrekt spænding. Ground fra J1 pinrækken trækkes til pedometrets ground, og en ledning trækkes fra pedometrets output, som måles med et multimeter.
+
+\subsection{Test}
+Mikrokontrollerens outputspændinger skal testes, således output pins i J1 og J2 rækken henholdsvis leverer 3,3 V og mellem 3 - 5 V. Resultatet fra testen beskrives i \tabref{tab:design_mikrokonsp}:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc} \hline
+		\rowcolor[HTML]{C0C0C0} 
+		Outputpin & Spænding inden pedometer [V] &  Spænding efter pedometer [V] & \begin{tabular}[c]{@{}c@{}}Afvigelse fra\\ønsket værdi [\%] \end{tabular} [\%] \\ \hline
+		VDDIO & 4,663 & 3,341 & 1,24 \\ \hline
+		VDDD & 4,666 & & 0 \\ \hline
+	\end{tabular}%
+	\caption{I tabellen ses det, at multimetret nedsætter spændingen, som skal forsyne IC'en. Derudover ses det, at spændingsforsyningen fra MCU'en derved overholder kravene.}
+	\label{tab:design_mikrokonsp}
+\end{table}\vspace{-0.2cm}
+MCU'ens spændingsforsyning til IC'en er hermed justeret ved hjælp af et pedometer, således IC'en i teorien er funktionel. Derudover overholder MCU'ens spænding fra VDDD kravet til pulssensoren. MCU'en er derfor klar til at blive benyttet i det samlede system som spændingsforsyning til IC og pulssensor.
