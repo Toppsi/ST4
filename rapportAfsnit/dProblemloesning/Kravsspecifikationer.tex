@@ -18,26 +18,36 @@ Spændingsforsyningen skal:
 	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
 \end{itemize}
 
+\subsection{Mikrokontroller}
+Vi har fået udleveret en specifik MCU, som skal benyttes til projektet. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCU'en fungere som spændingsforsyning til IC samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+
+\textbf{Krav til mikrokontrolleren} \newline 
+Mikrokontrolleren skal:
+\begin{itemize}
+	\item Levere 3,3 V til IC'en. Der accepteres en afvigelse på 5\%.
+	\item Levere mellem 3 V og 5 V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+\end{itemize}
+
 \subsection{Accelerometer}
-Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
+% Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
 Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation (n=4) med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med over 16 g. %Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
 
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
-\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
+%\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har at arbejdsområde på under $\pm$16 g.
 \end{itemize}
 
 \subsection{Gyroskop} 
-Et gyroskop kræver en given spænding for at kunne optage data. Gyroskopet i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav.
+%Et gyroskop kræver en given spænding for at kunne optage data. Gyroskopet i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav.
 Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte $\pm$160 dps som maksimalværdierne. Dette blev bestemt for en given frekvens ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere frekvens. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
 
 \textbf{Krav til gyroskop} \newline
 Gyroskopet skal:
 \begin{itemize}
-\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde x.
+%\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
+\item Have et arbejdsområde på x.
 \end{itemize}
 
 \subsection{Pulssensor}
@@ -47,7 +57,7 @@ Yderligere skal pulssensoren kunne opfange brugerens puls, med henblik på at be
 \textbf{Krav til pulssensor} \newline
 Pulsmåleren skal:
 \begin{itemize}
-\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
+%\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
 \item Kunne opfange brugerens puls under fysisk aktivitet. Der accepteres ikke, at pulssensoren opfanger ukorrekt eller ikke tydelig puls under fysisk aktivitet.
 \end{itemize}
 
