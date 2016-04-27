@@ -11,8 +11,18 @@ Efter UART og ADC er konfigureret i topdesignet, skal de korrekte pins indstille
 
 Igennem et matlab program er det muligt at visualisere pulsen ved hjælp af en GUI. I det samlede system skal denne GUI ikke være tilgængelig her i processen, da GAB peripheral modtager pulsdata og sender dette videre sammen med IC data til GAB central, som skal visualisere data i en endelig GUI.\\
 I matlabscriptet vælges den pågældende port for MCU'en i computeren, således PC'en kan registrere hvor det visualiserede data skal komme fra. Herefter startes scriptet og en figur tvinges i front med pulsen, hvor et bestemt antal sekunders vindue visualiseres
+
 \subsection{Test}
-Pulssensoren skal testes for, om den modtaget mellem 3 og 5 V fra MCU'en
+Pulssensoren skal testes for, om den kan opfange brugerens puls under fysisk aktivitet uden ukorrekt eller ikke tydelig puls. Dette gøres ved, at der optages to målinger henholdsvis med og uden fysisk aktivitet, hvor sensoren placeres på den distale phalanges på højre hånds pegefinger. Ud fra matlab scriptet og tilhørende optagede data vurderes det, om pulsen visualiseres korrekt, således den korrekte puls kan kalkuleres.\\
+Den fysiske aktivitet bestod af gang på et løbebånd. Hver måling optages i 10 sekunder, hvilket ses på \figref{fig:puls_m_u}.\\
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/ToPulser.png}
+	\caption{På figuren ses to plots for hver test af pulssensoren. På figur 1 til venstre står forsøgspersonen helt stille i 10 sekunder, hvorimod vedkommende går i en subjektiv vurdering af normal gang på figur 2 til højre. Der ses en tydelig puls på figur 1, hvorimod pulsen ikke fremgår på figur 2.}
+	\label{fig:puls_m_u}
+\end{figure}
+Matlab scriptet udregnede
+
 % Test af krav
 
 
