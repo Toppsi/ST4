@@ -2,38 +2,13 @@
 \textit{I dette afsnit udarbejdes en algoritme som har til formål at adskille aktiviteterne gang, løb og cykling... }
 
 \subsection{Design}
-%Pseudo kode  (Flowcharts)
-%Timers, interrupts, clocks, powermodes
-%Clocks: tæller tid...
-%interrupt: start/stop ny funktion
-%Databehandling/filtrering
-%Tjek om det er cykling - hvis ja, start gyro
-%Delay → send data til GAP central hvert 15. minut
-
 For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyroskop som er beskrevet i \secref{LSM9DS1}\fxnote{opg: tjek op på denne reference}. Herunder vil gyroskopet blive benyttet til at detektere cykling, mens løb og gang detekteres ved brug af accelerometeret. For at kunne detektere og adskille disse aktiviteter, behandles inputtet fra sensorerne gennem forskellig signalbehandling, hvorefter algoritmer afgør om de pågældende signaler repræsenterer gang, løb, cykling eller ingen aktivitet. 
 
 \subsubsection{Algoritme til gang og løb}
-%%%%% Behandling af accelerometer data %%%%%
+Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 100 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 8 og kvadreres. Resultatet heraf betyder at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
+Afslutningsvis vil signalet blive filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag i signalet ikke opfattes, og signalets hælnedslag vil være pænt og tydeligt. \\
+Resultatet af ovenstående signalbehandling medfører at der findes et udtryk for gang og løbs amplitude forhold. Ud fra denne behandling af pilotforsøgets data vurderes det, at amplituden for hælnedslag ved løb er over 0,65 og ved gang er over 0,04, hvorfor signaler med amplituder under 0,04 ikke vurderes som værende aktivitet.
 
-Før en algoritme kan detektere og adskille aktiviteterne gang og løb, skal signet som nævn ovenfor behandles. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 100 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 8 og kvadreres. Dette vil resultere i at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, således at denne kan detekteres.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
-Afslutningsvist vil der være et moving average filter som udglatter signalet, hvilket resulterer i at små udslag i signalet ikke opfattes, og signalets hælnedslag vil være pænt og tydeligt. 
-
-Accelerometerdata er i \appref{pilot} blevet behandlet på ovenstående metode. Ud fra disse resultater vurderes det, at amplituden for hælnedslag ve løb er over 0,65 og ved gang er over 0,04 hvorfor signaler med amplituder under 0,04 ikke vurderes som værende aktivitet. For at en algoritme skal kunne detektere og adskille gang og løb, designes to thresholds, en ved 0,65 og en ved 0,04. Disse skal gennem interrupts og clocks gemme den tid brugeren udfører en given aktivitet.
-
-Behandlingen af data og algoritmen skal derfor foregå i følgende rækkefølge:
-\begin{enumerate}
-	\item Rå data filtreres med elliptisk filter.
-	\item (1) divideres med 8 og kvadreres.
-	\item Moving average filtrering af (2). 
-	\item Threshold analyse af (3). 
-	\begin{enumerate}
-		\item Er der signalindhold med en amplitude >0,65 \textrightarrow optag tid og gem i flash hukommelse for løb.
-		\item Er der signalindhold med en amplitude 0,65>0,04 \textrightarrow optag tid og gem i flash hukommelse for gang.
-		\item Er der signalindhold med en amplitude <0,04 \textrightarrow ingen aktivitet, gør derfor intet.
-	\end{enumerate}
-\end{enumerate}
-
-Algoritmen som skal adskille gang og løb opbygges i steps, som vist på nedenstående figur:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/algoritme_gl.png}
@@ -41,9 +16,14 @@ Algoritmen som skal adskille gang og løb opbygges i steps, som vist på nedenst
 	\label{fig:algoritme}
 \end{figure}
 
+\textbf{Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Hvis løb detekteres skal en counter starte og først stoppe når cykling ikke længere detekteres. Når counteren stopper gemmes varigheden af counteren i et array tilhørende udført cykling. Hvis cykling ikke detekteres skal gyroskopet gå i LPM i 10 sekunder før algoritmen køres igen. 
+} 
+
+\textbf{Ovenstående forklaring til figur er ikke færdig.!!!}
+
 \subsection{Cykling}
-Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første step i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over to sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvoraf andet step indledes. Dette step finder den maksimale magnitude med tilhørende frekvens. Tredje step består af to integraler, første integrale integrer FFT'en fra den frekvens hvor den største magnitude befandt sig $\pm 1$Hz. Andet integrale integrer FFT'en fra 1 til 20 Hz. Disse integraler indleder fjerde og sidste step, som omregner hvor stor en procentdel første integrale udgør af signalets totale energi. \\
-Resultatet af ovenstående signalbehandling medfører at der opstilles et udtryk for signalets spredning af energi. Det gør sig gældende at cykling har en spredning af energi fordelt nært frekvensen med den største amplitude. Data fra gyroskopets z-akse vedrørende cykling blev for alle forsøgspersoner, behandlet med ovenstående metode. Dette resulterede i at 84,2\% til 88,4\% af energien lå $\pm 1$Hz omkring den fundne frekvens. Følgende blev ligeledes behandlet for gang og løb, for at sikre disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling, kan fastsættes.  Dette resulterede i at ved gang befandt energien omkring den fundne frekvens sig mellem 47,2\% til 55,4\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42\% til 50,6\%. \\
+Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første step i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvoraf andet step indledes. Dette step finder den maksimale magnitude med tilhørende frekvens. Tredje step består af to summeringer, første summering summerer FFT'en fra den frekvens hvor den største magnitude befandt sig $\pm 1$Hz. Anden summering summerer FFT'en fra 1 til 20 Hz. Disse integraler indleder fjerde og sidste step, som omregner hvor stor en procentdel første integrale udgør af signalets totale energi. \\
+Resultatet af ovenstående signalbehandling medfører at der opstilles et udtryk for signalets spredning af energi. Det gør sig gældende at cykling har en spredning af energi fordelt nært frekvensen med den største amplitude. Data fra gyroskopets z-akse vedrørende cykling blev for alle forsøgspersoner, behandlet med ovenstående metode. Dette resulterede i at 84,5\% til 91,9\% af energien lå $\pm 1$Hz omkring den fundne frekvens. Følgende blev ligeledes behandlet for gang og løb, for at sikre disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling, kan fastsættes.  Dette resulterede i at ved gang befandt energien omkring den fundne frekvens sig mellem 35,9\% til 48,5\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. \\
 Resultatet af at energien omkring den fundne frekvens med den største amplitude er $\approx$30\% større ved cykling end ved gang og løb, fastsættes tærskelværdien til 70\%. For at detektere cykling skal outputtet fra databehandlingen være større end 70\%.
 
 \begin{figure}[H]
@@ -54,20 +34,6 @@ Resultatet af at energien omkring den fundne frekvens med den største amplitude
 \end{figure}
 
 Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres skal en counter starte og først stoppe når cykling ikke længere detekteres. Når counteren stopper gemmes varigheden af counteren i et array tilhørende udført cykling. Hvis cykling ikke detekteres skal gyroskopet gå i LPM i 10 sekunder før algoritmen køres igen. 
-
-%%%%%% Behandling af gyro data %%%%% ---> indsæt fra Morten
-%\begin{enumerate}
-%	\item Gyro sleep i 10 sek - vækkes af interrupt.
-%	\item Opsaml data i 2 sek.
-%	\item FFT af rå data.
-%	\item Find max y af (1)
-%	\item Find arrayplads (x) for (2) \textrightarrow omregn til Hz : (2)/(antal samples/fs)
-%	\item Integrer (1) fra (3)-1 til (3)+1.
-%	\item Integrer (1) over 20 samples.
-%	\item Udregn hvor stor en del af (5) som består af (4) \textrightarrow (4)/(5)*100 = anden i \%.
-%	\item Threshold: cykling = > 70\% \textrightarrow optag og gem i flash, < 70\% \textrightarrow optag accelerometer. 
-%\end{enumerate}
-
 
 
 
