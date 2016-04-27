@@ -78,12 +78,12 @@ Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes t
 \textbf{Krav til algoritmedesign} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
-	\item gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulssensoren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
-	\item aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
-	\item gøre PSoC 4200M på GAB peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
-	\item gøre, at PSoC 4200M på GAB peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAB peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-	\item få EZ-BLE PRoC på GAB peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-	\item gøre, at EZ-BLE PRoC på GAB central kan modtage data fra EZ-BLE PRoC på GAB peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAB central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulssensoren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
+	\item Aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
+	\item Gøre PSoC 4200M på GAB peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
+	\item Gøre, at PSoC 4200M på GAB peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAB peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Få EZ-BLE PRoC på GAB peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Gøre, at EZ-BLE PRoC på GAB central kan modtage data fra EZ-BLE PRoC på GAB peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAB central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
 	\item PSoC 4200M på GAB central i stand til at modtage data fra EZ-BLE PRoC på GAB central og overføre dette til en PC via USB port. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
 \end{itemize}
 
@@ -94,7 +94,7 @@ Den trådløse kommunikation imellem GAP Central og GAP Peripheral skal foregå 
 Den trådløse kommunikation skal:
 \begin{itemize}
 	\item Foregå via BLE imellem de to MCU enheder. Der accepteres ikke andre former for trådløs kommunikation.
-	\item Være i stand til at sende korrekt data i 3 meters afstand. Der accepteres ikke, at under 3 meters afstand imellem enhederne får en effekt på data.
+	\item Være i stand til at sende korrekt data i 3 meters afstand. Der accepteres ikke, at under 3 meters afstand imellem enhederne får en effekt på dataoverførslen.
 \end{itemize}
 
 \subsection{Grafisk Bruger Interface}
@@ -104,7 +104,7 @@ GUI'en skal være en motiverende faktor for brugeren, da denne netop skal motive
 GUI'en skal:
 \begin{itemize}
 	\item Kunne visualisere tidsforbruget og intensiteten af henholdsvis gang, løb og cykling. Der accepteres ikke, at GUI'en er skyld i, at dette ikke kan lade sig gøre.
-	\item være i stand til at opdatere interfacet hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
+	\item Være i stand til at opdatere interfacet hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
 \end{itemize}
 
 %Afspejling af en eventuel motiverende faktor, 
