@@ -1,7 +1,7 @@
 \section{Algoritme til detektering af gang, løb og cykling}
-\textit{kursiv indledning...}
+\textit{I dette afsnit udarbejdes en algoritme som har til formål at adskille aktiviteterne gang, løb og cykling... }
 
-\subsection{Design og implementering}
+\subsection{Design}
 %Pseudo kode  (Flowcharts)
 %Timers, interrupts, clocks, powermodes
 %Clocks: tæller tid...
@@ -10,44 +10,59 @@
 %Tjek om det er cykling - hvis ja, start gyro
 %Delay → send data til GAP central hvert 15. minut
 
+For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyroskop som er beskrevet i \secref{LSM9DS1}\fxnote{opg: tjek op på denne reference}. Herunder vil gyroskopet blive benyttet til at detektere cykling, mens løb og gang detekteres ved brug af accelerometeret. For at kunne detektere og adskille disse aktiviteter, behandles inputtet fra sensorerne gennem forskellig signalbehandling, hvorefter algoritmer afgør om de pågældende signaler repræsenterer gang, løb, cykling eller ingen aktivitet. 
 
-%%%%% Behandling af gyro data %%%%%
-\begin{enumerate}
-	\item Gyro sleep i 10 sek - vækkes af interrupt.
-	\item Opsaml data i 2 sek.
-	\item FFT af rå data.
-	\item Find max y af (1)
-	\item Find arrayplads (x) for (2) \textrightarrow omregn til Hz : (2)/(antal samples/fs)
-	\item Integrer (1) fra (3)-1 til (3)+1.
-	\item Integrer (1) over 20 samples.
-	\item Udregn hvor stor en del af (5) som består af (4) \textrightarrow (4)/(5)*100 = anden i \%.
-	\item Threshold: cykling = > 70\% \textrightarrow optag og gem i flash, < 70\% \textrightarrow optag accelerometer. 
-\end{enumerate}
-
-
-
-
+\subsubsection{Algoritme til gang og løb}
 %%%%% Behandling af accelerometer data %%%%%
+
+Før en algoritme kan detektere og adskille aktiviteterne gang og løb, skal signet som nævn ovenfor behandles. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 100 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 8 og kvadreres. Dette vil resultere i at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, således at denne kan detekteres.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
+Afslutningsvist vil der være et moving average filter som udglatter signalet, hvilket resulterer i at små udslag i signalet ikke opfattes, og signalets hælnedslag vil være pænt og tydeligt. 
+
+Accelerometerdata er i \appref{pilot} blevet behandlet på ovenstående metode. Ud fra disse resultater vurderes det, at amplituden for hælnedslag ve løb er over 0,65 og ved gang er over 0,04 hvorfor signaler med amplituder under 0,04 ikke vurderes som værende aktivitet. For at en algoritme skal kunne detektere og adskille gang og løb, designes to thresholds, en ved 0,65 og en ved 0,04. Disse skal gennem interrupts og clocks gemme den tid brugeren udfører en given aktivitet.
+
+Behandlingen af data og algoritmen skal derfor foregå i følgende rækkefølge:
 \begin{enumerate}
-	\item Elliptisk filter af rå data.
-	\item Divider (1) med 8 og kvadrer.
-	\item Moving average på (2). 
-	\item Plot (3) med thresholds: løb = >0,65 , gang = 0,65>0,04 , ingen aktivitet = >0,04 \textrightarrow optag og gem i flash.
+	\item Rå data filtreres med elliptisk filter.
+	\item (1) divideres med 8 og kvadreres.
+	\item Moving average filtrering af (2). 
+	\item Threshold analyse af (3). 
+	\begin{enumerate}
+		\item Er der signalindhold med en amplitude >0,65 \textrightarrow optag tid og gem i flash hukommelse for løb.
+		\item Er der signalindhold med en amplitude 0,65>0,04 \textrightarrow optag tid og gem i flash hukommelse for gang.
+		\item Er der signalindhold med en amplitude <0,04 \textrightarrow ingen aktivitet, gør derfor intet.
+	\end{enumerate}
 \end{enumerate}
 
-
-
-
-%%%%% Pseudo kode (Flowcharts) %%%%%
-
-
-
+Algoritmen som skal adskille gang og løb opbygges altså på følgende måde:
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/algoritme.png}
-	\caption{Flowchart over algoritmen}
+	\includegraphics[scale=0.5]{figures/cDesign/algoritme_gl.png}
+	\caption{Flowchart over algoritmen til detektering af gang og løb}
 	\label{fig:algoritme}
 \end{figure}
+
+
+
+%%%%%% Behandling af gyro data %%%%% ---> indsæt fra Morten
+%\begin{enumerate}
+%	\item Gyro sleep i 10 sek - vækkes af interrupt.
+%	\item Opsaml data i 2 sek.
+%	\item FFT af rå data.
+%	\item Find max y af (1)
+%	\item Find arrayplads (x) for (2) \textrightarrow omregn til Hz : (2)/(antal samples/fs)
+%	\item Integrer (1) fra (3)-1 til (3)+1.
+%	\item Integrer (1) over 20 samples.
+%	\item Udregn hvor stor en del af (5) som består af (4) \textrightarrow (4)/(5)*100 = anden i \%.
+%	\item Threshold: cykling = > 70\% \textrightarrow optag og gem i flash, < 70\% \textrightarrow optag accelerometer. 
+%\end{enumerate}
+
+
+
+
+
+
+
+\subsection{Implementering}
 
 
 
