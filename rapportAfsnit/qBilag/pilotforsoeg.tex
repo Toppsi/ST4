@@ -1,8 +1,8 @@
 \chapter{Pilotforsøg}\vspace{-.75cm}\label{pilot}
 \section{Formål}
-Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinger med et accelerometer og gyroskop, som adskiller de tre forskellige aktivitetsformer gang, løb og cykling. Det undersøges derudover hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system og for at kende nyquistfrekvensen. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om signalerne kan adskilles uanset hvilken af de tre placeringer der vælges.
+Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinger med et accelerometer og gyroskop, som adskiller de tre forskellige aktivitetsformer gang, løb og cykling. Det undersøges derudover hvilke af accelerometerets akser der er essentielle at lave algoritmer ud fra. Ydermere undersøges signalernes frekvens for at undgå aliasing i det endelige system og for at kende nyquistfrekvensen. Sidst undersøges hvilken indflydelse placering af sensoren har på signalets udformning. Dette gøres så det endelige systems signal ikke går i mætning på grund af for stor kraftpåvirkning, og for at undersøge om placering har indflydelse på signalernes udformning.
 
-Til opsamling af data, anvendes en Shimmer 3. Dette er en enhed, som indeholder flere sensorer, hvor der til forsøget benyttes et accelerometer og et gyroskop. 
+Til opsamling af data, anvendes en Shimmer 3. Dette er en enhed, som indeholder en række sensorer\fxnote{accelerometer, gyroskop, tryksensor, magnometer, højdemåler}, hvor der til forsøget udelukkende benyttes et accelerometer og et gyroskop. 
 
 
 %Resultaterne fra pilotforsøget bruges til at designe det endelige system, hvor softwaren for CY8CKIT-043 PSoC 4 M-Series Prototyping Kit skal konfigureres og tilpasses.
@@ -30,7 +30,9 @@ Til forsøget medtages kun forsøgspersoner, som ikke lider af gener der forhind
 
 %Forsøget inkluderer udelukkende fuldt funktionsdygtige personer, hvormed ingen forsøgspersoner må have fysiske gener som kan medføre besvær ved udførsel af aktiviterne; gang, løb og cykling. Dermed sikres det, at forsøgets data indeholder normaliserede data som giver grundlag for et validt og repræsentativt datasæt for fysisk funktionsdygtige personer. 
 
-Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet af enheden, Shimmer3. Disse placeringer er udvalgt på baggrund af bevægelsesanalysen, hvor det ses at de største bevægelser optræder her i forbindelse med gang, løb og cykling. Accelerometet registrerer position og acceleration, og det forventes derfor at den største forskel vil kunne ses ved disse placeringer, da det især er denne del af benet, der bevæges under gang og løb. I databehandlingen behandles kun data fra accelerometerets x- og y-akse, da det kun er placering B der påvirkes af z-aksen ved aktiviteten gang, hvormed det formodes at samme påvirkning gælder for løb\citep{RueterboriesSpaichLarsenEtAl2010}. Ud fra bevægelsesanalysen i \secref{bevaegelse}, udledes det ligeledes at alle tre aktiviteter primært er i disse to retninger. 
+Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet af enheden, Shimmer3, hvilke kan ses på \figref{fig:sensor_placering}. Disse placeringer er udvalgt på baggrund af afsnit \secref{bevaegelse}, hvor det ses at de største bevægelser optræder her i forbindelse med gang, løb og cykling. Accelerometet registrerer position og acceleration, og det forventes derfor at den største forskel vil kunne ses ved disse placeringer, da det især er distalt for patella, der bevæges under gang og løb. I databehandlingen behandles kun data fra accelerometerets y-akse, da denne på baggrund af \secref{bevaegelse} bør have den største kraftpåvirkning.
+
+%Det er kun placering B der påvirkes af z-aksen ved aktiviteten gang\citep{sabas kilde}, hvormed det formodes at samme påvirkning gælder for løb\citep{RueterboriesSpaichLarsenEtAl2010}. Ud fra bevægelsesanalysen i \secref{bevaegelse}, udledes det ligeledes at alle tre aktiviteter primært er i disse to retninger. 
 % Dette vælges på baggrund af bevægelsesanalysen, hvor det blev udledt at den primære bevægelse af  benet ved de tre aktivitetsformer gang, løb og cykling i x- og y-aksens retning \citep{kilde}. \fxnote{måske noget om gyroskop + er det rigtigt i forhold til bevægelsesanalysen??}
 
 
@@ -52,7 +54,7 @@ Forsøget vil tage udgangspunkt i tre forudbestemte placeringer på underbenet a
 \end{itemize}
 
 \section{Fremgangsmåde}
-Forsøgets fremgangsmåde i to dele. Første del indeholder en opsætning af Shimmer3, mens den anden del er fremgangsmåden for optagelse af data fra forsøget.
+Forsøgets fremgangsmåde er opdelt i to dele. Første del indeholder en opsætning af Shimmer3, mens den anden del er fremgangsmåden for optagelse af data fra forsøget.
 
 \subsubsection{Opsætning af Shimmer3 SUB}
 Før forsøgene kan udføres skal Shimmer forbindes korrekt med computeren, og indstilles til at bruge de sensorer der ønskes i pilotforsøget. \vspace{-3mm}
@@ -86,7 +88,7 @@ Forsøget udføres på fire forsøgspersoner, som alle skal udføre aktivitetern
 	\label{fig:sensor_placering}
 \end{figure}
 
-Inden forsøget skal forsøgspersonen fastspændes i en sikkerhedssele, så der ikke opstår skader hvis personen snubler på løbebåndet. Derudover skal forsøgspersonen inden hver måling fortælle hvor på borgskalaen denne befinder sig og er det under 11 kan målingen påbegyndes. Denne værdi er valgt for at forsøgspersonen ikke allerede har det som om kroppen er i gang med træning, og det dermed sikres at alle forsøgspersoner har samme startbetingelser for alle forsøg. Borgskalaen der benyttes til pilotforsøget kan ses på \figref{fig:borgskala}. 
+Inden forsøget skal forsøgspersonen fastspændes i en sikkerhedssele, så der ikke opstår skader hvis personen snubler på løbebåndet. Derudover skal forsøgspersonen inden hver måling fortælle hvor på borgskalaen denne befinder sig og er det under 11 kan målingen påbegyndes. Borgskalaen kan ses på \figref{fig:borgskala}. Denne værdi er valgt for at forsøgspersonen ikke allerede har det som om kroppen er i gang med træning, og det dermed sikres at alle forsøgspersoner har samme startbetingelser for alle forsøg. Borgskalaen der benyttes til pilotforsøget kan ses på \figref{fig:borgskala}. 
 
 \begin{figure}[H]
 	\centering
@@ -95,7 +97,7 @@ Inden forsøget skal forsøgspersonen fastspændes i en sikkerhedssele, så der 
 	\label{fig:borgskala}
 \end{figure}
 
-Første måling er gang, hvor et middel gangtempo på 4,8 km/t er valgt\citep{Miles2007}. \vspace{-3mm}
+Første måling er gang, hvor et gangtempo på 4,8 km/t er valgt\citep{Miles2007}. \vspace{-3mm}
 \begin{itemize}
 		\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
 		\item Løbebåndet indstilles til 4,8 km/t, hvor forsøgspersonen går på løbebåndet indtil en konstant hastighed på løbebåndet opnås. 
@@ -103,7 +105,7 @@ Første måling er gang, hvor et middel gangtempo på 4,8 km/t er valgt\citep{Mi
 		\item Målingen på 45 sekunder igangsættes.
 \end{itemize}
  
-Anden måling er løb, et middel løbetempo på 11,3 km/t er valgt\citep{Miles2007}. \vspace{-3mm}
+Anden måling er løb, et løbetempo på 11,3 km/t er valgt\citep{Miles2007}. \vspace{-3mm}
 \begin{itemize}
 	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
 	\item Løbebåndet indstilles til 11,3 km/t, hvor forsøgspersonen løber på løbebåndet indtil en konstant hastighed på løbebåndet opnås. 
@@ -116,11 +118,11 @@ Tredje måling foretages på løbebåndet, hvor forsøgspersonen gradvist skal s
 	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal stå oprejst med ret ryg og fødderne placeret parallelt og kigge ligefrem ved baseline målingen.
 	\item Målingen igangsættes.
 	\item Løbebåndet indstilles til 2 km/t, hvor forsøgspersonen skal gå i 20 sekunder.  
-	\item Hastigheden stiger herefter med 2 km/t for hvert 20. sekund, indtil forsøgspersonen har opnået maksimal hastighed, eller løbebåndets maksimale hastighed. 
+	\item Hastigheden stiger herefter med 2 km/t for hvert 20. sekund, indtil forsøgspersonen har opnået maksimal hastighed, eller løbebåndets maksimale hastighed på 18 km/t. 
 	\item Målingen stoppes. 
 \end{itemize}
 
-Sidste måling er cykling, hvor et cykeltempo på 20,9 km/t er valgt, hvilket er et højt cykeltempo\citep{Miles2007}. Tempoet er dog underordnet, da der kun ønskes at se på forskellen i selve bevægelsen fra de andre aktivitetsformer. \vspace{-3mm}
+Sidste måling er cykling, hvor et cykeltempo på 20,9 km/t er valgt, hvilket er et højt cykeltempo\citep{Miles2007}. Tempoet er dog underordnet, da der kun ønskes at se på forskellen i selve bevægelsen fra de andre aktivitetsformer, men der er valgt et fast tempo for at få et ensformigt signal. \vspace{-3mm}
 \begin{itemize}
 	\item Der foretages en baseline på 10 sekunder, hvor forsøgspersonen skal sidde i en naturlig cykelposition på motionscyklen med begge fødder på pedalerne, hvoraf den højre pedal skal være helt i bund. Denne position er valgt, da den er mulig at lave tilnærmelsesvis ens for alle forsøgspersoner, hvormed de får den samme baseline.
 	\item Forsøgspersonen træder i pedalerne indtil denne opnår en konstant hastighed på 20,9 km/t ved en belastning på 35 W. Dermed sikres det at alle forsøgspersoner bruger den samme belastning gennem forsøget.  
@@ -139,10 +141,11 @@ Når Shimmer er placeret i en kalibreringsboks på et bord med henblik på en re
 	\label{fig:Ap_Kalibrering}
 \end{figure}
 
-For hver akse blev den gennemsnitlige værdi for henholdsvis den positive- og negative akse beregnet. Dette resulterede i at x-aksen gennemsnitlig afveg henholdsvis 3,5\% i den negative akse og -2,2\% i den positive akse. y-aksen afveg gennemsnitligt -2,6\% i den negative akse og -0,6\% i den positive akse. z-aksen afveg  gennemsnitligt med 8,8\% i den negative akse og 8,0\% i den positive akse.
+For hver akse blev den gennemsnitlige værdi, for henholdsvis den positive- og negative akse, beregnet og sammenholdt med $\pm 1$g. Dermed blev den procentmæssige afvigelse fra tyngdeaccelerationen fundet. Dette resulterede i at x-aksen gennemsnitlig afveg henholdsvis 3,5\% i den negative akse og -2,2\% i den positive akse. y-aksen afveg gennemsnitligt -2,6\% i den negative akse og -0,6\% i den positive akse. z-aksen afveg  gennemsnitligt med 8,8\% i den negative akse og 8,0\% i den positive akse. \newline
+Kalibreringen blev foretaget for at sikre at et offset ikke var til stede. 
 
 \subsection{Baseline af gang, løb og cykling}
-Forud for hver enkelt måling blev der foretaget en baselinemåling som indikation for hvorvidt Shimmer fungerede forud for aktiviteten. Dataene skal afspejle en tilnærmelsesvis fuldstændig tyngdekraftpåvirkning på accelerometerets y-akse, som resultat af Shimmers placering på benet.
+Forud for hver enkelt måling blev der foretaget en baselinemåling som indikation for hvorvidt Shimmer fungerede forud for aktiviteten. Dataene skal afspejle en tilnærmelsesvis fuldstændig tyngdekraftpåvirkning på accelerometerets y-akse, som resultat af Shimmers placering på benet. Baseline blev foretaget for at sikre at shimmer tilnærmelsesvis blev placeret ens på alle forsøgspersoner, hvormed data kunne sammenholdes. 
 
 \begin{table}[H]
 	\centering
@@ -191,82 +194,87 @@ Ved cykling benyttes gyroskopets data, da cykling detekteres som en roterende be
 \end{table}\vspace{-0.5cm}
 
 \subsection{Minimum og maksimum g-påvirkning under gang, løb og hastighed}
-Dataene fra aktiviteterne, gang, løb og hastigheds stigning blev alle behandlet med henblik på bestemmelse af den maksimale g påvirkning heraf. Dette blev bestemt af minimum og maksimum påvirkning, for alle aktiviteter samt placeringer. Dataene blev kun behandlet med henblik på accelerometerets y-akse, som resultat af \secref{bevaegelse}.
+Dataene fra aktiviteterne, gang, løb og hastigheds stigning blev alle behandlet med henblik på bestemmelse af den maksimale g påvirkning heraf. Dette blev bestemt af minimum og maksimum påvirkning, for alle aktiviteter samt placeringer. Dataene blev kun behandlet med henblik på accelerometerets y-akse, som resultat af \secref{bevaegelse}. Før forsøgene blev baseline målt inden hvert forsøg. Den største afvigelse fra tyngdeaccelerationen var på 0.9969\%, hvormed der vurderes at alle baselines har ligget neutralt. 
 
-\textit{Gang:}
+Nedstående tabel viser resultaterne fra gang.
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{ccccc}
+		\begin{tabular}{cccc}
 			\hline
 			\rowcolor[HTML]{C0C0C0} 
 			Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering A {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering B {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering C {[}g{]}\end{tabular} \\ \hline
-			F1 & (x), (x), (x) & 0,09 ; 2,51 & 0,00 ; 2,32 & -2,51 ; 3,33 \\ \hline
-			F2 & (x), (x), (x) & -0,19 ; 3,19 & -0,43 ; 3,04 & -0,97 ; 2,84 \\ \hline
-			F3 & (x), (x), (x) & -0,24 ; 3,52 & -0,39 ; 3,38 & -0,20 ; 2,51 \\ \hline
-			F4 & (x), (x), (x) & -0,04 ; 2,84 & -0,29 ; 3,62 & -0,50 ; 3,52 \\ \hline
+			F1 &  0,09 ; 2,51  & 0,00 ; 2,32  & -2,51 ; 3,33 \\ \hline
+			F2 &  -0,19 ; 3,19 & -0,43 ; 3,04 & -0,97 ; 2,84 \\ \hline
+			F3 &  -0,24 ; 3,52 & -0,39 ; 3,38 & -0,20 ; 2,51 \\ \hline
+			F4 &  -0,04 ; 2,84 & -0,29 ; 3,62 & -0,50 ; 3,52 \\ \hline
 		\end{tabular}%
 	}
 	\caption{I tabellen ses minimum og maksimum resultaterne fra accelerometerets y-akse som resultat af gang. Minimum og maksimum er fundet for både placering A, B og C. Baseline neutral (x) indikerer at baselinemålingen var som forventet forud for målingen.}
 	\label{fig:Ap_maxggang}
 \end{table}
+Det ses dermed at den maksimale påvirkning af accelerometerts y-akse under gang ved 4,8 km/t var 3,015 $\pm$0,505 for placering A, 3,095 $\pm$0,53 for placering B og 3,05 $\pm$0,47 for placering C.\newline
+Den minimale påvirkning af accelerometerets y-akse under gang ved 4,8 km/t var 0,018 $\pm$0,88 for placering A, -0,28 $\pm$0,28 for placering B og -1,05 $\pm$0,85 for placering C. 
 
-\textit{Løb:}
+På samme måde blev baseline fundet for løb ved en hastighed på 11,3 km/t, som maksimalt afveg med 0,9930\%. Det vurderes derfor at baseline for alle forsøgspersoner inden løb ligger neutralt. Herefter blev der fundet maksimum og minnimum værdier for løb, som kan ses i nedstående tabel.  
 \begin{table}[H]
 	\centering
 		\resizebox{\textwidth}{!}{%
-	\begin{tabular}{ccccc}
+	\begin{tabular}{cccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering A {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering B {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering C {[}g{]}\end{tabular} \\ \hline
-		F1 & (x), (x), (x) & -2,03 ; 8,59 & -2,80 ; 5,07 & -4,10 ; 3,33 \\ \hline
-		F2 & (x), (x), (x) & -0,97 ; 5,35 & -2,51 ; 6,13 & -4,44 ; 6,52 \\ \hline
-		F3 & (x), (x), (x) & -2,12 ; 5,55 & -1,83 ; 5,60 & -2,46 ; 5,60 \\ \hline
-		F4 & (x), (x), (x) & -3,48 ; 6,42 & -4,63 ; 6,76 & -3,52 ; 8,30 \\ \hline
+		F1 &  -2,03 ; 8,59 & -2,80 ; 5,07 & -4,10 ; 3,33 \\ \hline
+		F2 &  -0,97 ; 5,35 & -2,51 ; 6,13 & -4,44 ; 6,52 \\ \hline
+		F3 &  -2,12 ; 5,55 & -1,83 ; 5,60 & -2,46 ; 5,60 \\ \hline
+		F4 &  -3,48 ; 6,42 & -4,63 ; 6,76 & -3,52 ; 8,30 \\ \hline
 	\end{tabular}%
 	}
 	\caption{I tabellen ses minimum og maksimum resultaterne fra accelerometerets y-akse som resultat af løb. Minimum og maksimum er fundet for både placering A, B og C. Baseline neutral (x) indikerer at baselinemålingen var som forventet forud for målingen.}
 	\label{fig:Ap_maxgloeb}
 \end{table}
+Det ses dermed at den maksimale påvirkning af accelerometerts y-akse under gang ved 11,3 km/t var 6,48 $\pm$2,11 for placering A, 5,89 $\pm$0,87 for placering B og 5,94 $\pm$2,36 for placering C.\newline
+Den minimale påvirkning af accelerometerets y-akse under gang ved 11,3 km/t var -2,15 $\pm$1,18 for placering A, -2,94 $\pm$1,11 for placering B og -3,63 $\pm$1,17 for placering C. 
 
+Slutvis blev accelerometerets y-akse undersøgt ved forsøget hvor forsøgspersonerne gradvist steg i tempo. Baseline for disse målinger afveg med 0,9954\% hvormed det vurderes at baseline for alle målinger var neutrale. Minimum og maksimum værdierne der blev detekteret under hastighedsstigningen kan ses i nedstående tabel. 
 \textit{Hastigheds stigning:}
 \begin{table}[H]
 	\centering
 		\resizebox{\textwidth}{!}{%
-	\begin{tabular}{ccccc}
+	\begin{tabular}{cccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Forsøgsperson & Baseline neutral & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering A {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering B {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}}Minimum og maksimum:\\ Placering C {[}g{]}\end{tabular} \\ \hline
-		F1 & (x), (x), (x) & -3,04 ; 8,20 & -4.59 ; 6,28 & -6,66 ; 7,10 \\ \hline
-		F2 & (x), (x), (x) & -3,19 ; 10,96 & -3,19 ; 10,48 & -7,58  ; 9,61 \\ \hline
-		F3 & (x), (x), (x) & -4,92 ; 10,48 & -4,92 ; 13,13 & -4,63 ; 9,70 \\ \hline
-		F4 & (x), (x), (x) & -8,83 ; 16,95 & -8,83 ; 16,32 & -8,01 ; 15,35 \\ \hline
+		F1 &  -3,04 ; 8,20  & -4.59 ; 6,28  & -6,66 ; 7,10 \\ \hline
+		F2 &  -3,19 ; 10,96 & -3,19 ; 10,48 & -7,58  ; 9,61 \\ \hline
+		F3 &  -4,92 ; 10,48 & -4,92 ; 13,13 & -4,63 ; 9,70 \\ \hline
+		F4 &  -8,83 ; 16,95 & -8,83 ; 16,32 & -8,01 ; 15,35 \\ \hline
 	\end{tabular}%
 }
-	\caption{I tabellen ses minimum og maksimum resultaterne fra accelerometerets y-akse som resultat af hastigheds stigning. Minimum og maksimum er fundet for både placering A, B og C. Baseline neutral (x) indikerer at baselinemålingen var som forventet forud for målingen.}
+	\caption{I tabellen ses minimum og maksimum resultaterne fra accelerometerets y-akse som resultat af hastigheds stigning. Minimum og maksimum er fundet for både placering A, B og C.}
 	\label{fig:Ap_maxghastighed}
 \end{table}
-
-Denne databehandling vil senere i afsnittet vedrørende fortolkning af databehandlingen resultere i at placering A opfylder kravene hertil. I takt med at kravene opfyldes vil dette medfører, at den resterende databehandling blot tager udgangspunkt i placering A. 
+Det ses dermed at den maksimale værdi m¨lt på accelerometerets y-akse under hastighedsstigningen var 11,65 $\pm$5,3 ved placering A, 11,55 $\pm$4,77 for placering B og 10,44 $\pm$4,91 for placerinng C. \newline
+Den minimale målte værdi for accelerometerets y-akse under hastighedsstigningen var -5,00 $\pm$1,96 for placering A, -5,38 $\pm$2,19 for placering B og -6,72 $\pm$2,09 for placering C. fxnote{Data er MEGET ens for minimal placering A og B?}\newline
+Denne databehandling vil senere i afsnittet vedrørende fortolkning af databehandlingen resultere i at placering A opfylder kravene hertil. I takt med at kravene opfyldes vil dette medfører, at den resterende databehandling blot tager udgangspunkt i placering A. \fxnote{den er da meget over 16?? jeg tror vi skal gå med placering C?}
 
 \subsection{Maksimal omdrejninger per sekund under cykling}
-Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af den maksimale amplitude fra gyroskopet. Dette blev bestemt ved at beregne den maksimale peak-to-peak, under udførelsen af cykling. Dataene blev kun behandlet med henblik på gyroskopets z-akse, som resultat af \secref{bevaegelse}.
-
+Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af den maksimale amplitude fra gyroskopet. Dette blev bestemt ved at beregne den maksimale peak-to-peak, under udførelsen af cykling. Dataene blev kun behandlet med henblik på gyroskopets z-akse, som resultat af \secref{bevaegelse}. Inden dataopsamling for cykling, blev der målt en baseline. Den maksimale afvigelse fra nul var -0,9979\%, hvormed det vurderes at alle målinger havde en neutral baseline. Dataene fra forsøget kan ses i nedstående tabel. \fxnote{er dette placering A? Hvorfor vælger vi A her. Vi burde vel også have haft et krav til gyroskopet om at det ikke måtte overskrive dens maks? Vi bør vel ligeledes have alle tre placeringer for cykling?}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc}
+	\begin{tabular}{cc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Forsøgsperson & Baseline neutral & Peak-to-Peak {[}dps{]} \\ \hline
-		F1 & (x) & 235,4 \\ \hline
-		F2 & (x) & 216,5 \\ \hline
-		F3 & (x) & 305,3 \\ \hline
-		F4 & (x) & 320,4 \\ \hline
+		F1 &  235,4 \\ \hline
+		F2 &  216,5 \\ \hline
+		F3 &  305,3 \\ \hline
+		F4 &  320,4 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses de maksimale peak-to-peak resultater fra gyroskopets z-akse som resultat af cykling. Baseline neutral (x) indikerer at baselinemålingen var som forventet forud for målingen.}
 	\label{app:cyklingmaxdps}
 \end{table}
-
+Det ses dermed at den maksimale påvirkning af gyroskopet under cykling ved en hastighed på 20,9 var 269,4 $\pm$51,0 for placering A
 \subsection{Frekvensindhold af gang, løb og cykling}
 Dataene fra aktiviteterne, gang og løb blev behandlet for at bestemme signalernes frekvensindhold. Resultatet af dette muliggør bestemmelsen af samplingsfrekvensen vedrørende accelerometeret og gyroskopet. Der blev foretaget en frekvensdomæne analyse, hvilket muliggør visualisering af signalets magnitude ved forskellige frekvenser, hvoraf energien af signalet kommer til udtryk.
 
@@ -331,20 +339,20 @@ Dataene fra aktiviteterne gang, løb og cykling, blev behandlet med henblik på 
 	\label{fig:Ap_cykling}
 \end{figure}
 
-\section{Fortolkning af databehandling}
+\section{Diskussion}
 \subsection{Kalibrering af Shimmer}
 Resultatet af databehandlingen bevirker at kalibreringen af Shimmer antages at være tilstrækkelig. Dette antages at være tilstrækkeligt, da y-aksen  afviger med henholdsvis -2,6\% i den negative akse og -0,6\% i den positive akse, fra den teoretiske værdi. En eventuel fejlkilde til at denne fejlmargin forekom, kunne være at bordet hvorpå Shimmer var placeret, ikke var i vatter.
 
 \subsection{Baseline af gang, løb og cykling}
 Baselinemålingerne for henholdsvis gang og løb resulterede i en enslignende påvirkning. Som forventet var g påvirkningen ikke 1 g, hvilket kan være et resultat af at Shimmer ikke er placeret ortogonalt på y-aksen, på benet. I og med Shimmer ikke var placeret ortogonalt på benet, kan der være opstået en lille hældning, hvorfor y-aksen ikke påvirkes med præcist 1 g. Resultaterne fra disse målinger indikerer at Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 1 g. 
 
-Resultaterne fra baselinemålingerne vedrørende cykling ligger som forventet omkring nul, hvilket er et resultat af at Shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad, da benet ikke bevæges. Resultaterne af disse målinger indikerer at Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps. 
+Resultaterne fra baselinemålingerne vedrørende cykling ligger som forventet omkring nul, hvilket er et resultat af at Shimmer ikke er blevet påvirket i z-aksen i nogen væsentlig grad, da benet ikke bevæges. Resultaterne af disse målinger indikerer at Shimmer har optaget data som stemmer overens med antagelsen om den tilnærmelsesvise påvirkning på 0 dps\fxnote{maksimal afvigelse på -0,9979}. 
 
 \subsection{Maksimal g-påvirkning under gang, løb og hastighed} \label{app:maxg}
 Resultatet af databehandlingen vedrørende de tre aktiviteter med henblik på bestemmelsen af den maksimale g påvirkning, medførte at hastigheds aktiviteten havde den største påvirkning. Resultaterne fra placering A, B eller C fra F1, F2, F4 overskrider  ikke $\pm 16g$, hvoraf den mest fordelagtige placering vælges. Med baggrund i \secref{succeskrav} og \secref{funktionellekrav} skal placeringen ikke være til gene for barnet, den skal altså nemt af-, og påmonteres, hvoraf placering A er valgt. Dette medfører at den videre resultatbehandling udelukkende tager udgangspunkt i placering A. 
 
 \subsection{Maksimal omdrejninger per sekund under cykling}
-Resultatet af databehandlingen vedrørende maksimal omdrejninger ved cykling resulterede i et spænd mellem 216,5 dps og 320,4 dps. Dette kan være et resultat af at forsøgspersonerne ikke har holdt samme hastighed, hvoraf en pludselig acceleration kan betyde en ændring som ikke er relateret til cykling ved 20,9 km/t. I takt med at der maksimalt blev registreret 320,4 dps, er dette medbestemmende vedrørende valg af et endeligt gyroskop. Et gyroskop til det endelige system skal heraf have et arbejdsområde som er væsentligt større end 320,4 dps.  
+Resultatet af databehandlingen vedrørende maksimal omdrejninger ved cykling resulterede i et spænd mellem 216,5 dps og 320,4 dps. Dette kan være et resultat af at forsøgspersonerne ikke har holdt samme hastighed, hvoraf en pludselig acceleration kan betyde en ændring som ikke er relateret til cykling ved 20,9 km/t. I takt med at der maksimalt blev registreret 320,4 dps, er dette medbestemmende vedrørende valg af et endeligt gyroskop. Et gyroskop til det endelige system skal heraf have et arbejdsområde som er væsentligt større end 320,4 dps.\fxnote{dte kan vi ikke sige når vi ikke har prøvet hastighedsstigningen her?}
 
 \subsection{Frekvens indhold af løb og cykling}
 Databehandlingen af frekvensindholdet fra gang og løb medførte at det største frekvensspektrum lå mellem 0 og 45Hz. Dette medfører at samplingsfrekvensen vedrørende data fra accelerometeret kan bestemmes. 
@@ -352,7 +360,7 @@ Databehandlingen af frekvensindholdet fra gang og løb medførte at det største
 Databehandling af frekvensindholdet fra cykling medførte at det største frekvensspektrum lå mellem 0 og 6 Hz. Dette medfører at samplingsfrekvensen vedrørende data fra gyroskopets kan bestemmes. 
 
 \subsection{Accelerometer karakteristika vedrørende gang og løb}
-Databehandlingen vedrørende accelerometerets karakteristika af gang og løb resulterede i en sammenligning af dataene. Dataene fra gang viser to events hvor peaks fremstår. Disse har en relativ kort afstand til hinanden, efterfulgt af en længere pause. Heraf antages det at de to events er henholdsvis hælnedslag og tåafsæt. Ligeledes for løb var der forskellige events, dog forekom der et harmonisk peak som var betydeligt større end de andre events. Dette antages dermed for at være hælnedslag fra løb. Yderligere behandling af aktiviteternes data med anerkendte algoritmer kan være nødvendig, men databehandlingen medførte at gang og løbs karakteristika kan bestemmes og heraf adskilles. Dette er muligt idet varigheden mellem de antagede hælnedslag forekommer $\approx$~0,43 sekunder hurtigere ved løb end ved gang.
+Databehandlingen vedrørende accelerometerets karakteristika af gang og løb resulterede i en sammenligning af dataene. Dataene fra gang viser to events hvor peaks fremstår. Disse har en relativ kort afstand til hinanden, efterfulgt af en længere pause, hvilket flere figurer i \secref{bevaegelse} viser som henholdsvis hælnedslag og tåafsæt. Ligeledes for løb var disse forskellige events, som også antages værende hælnedslag og tåafsæt. Der forekom dog yderligere et harmonisk peak som var betydeligt større end de andre events. Yderligere behandling af aktiviteternes data med anerkendte algoritmer kan være nødvendig, men databehandlingen medførte at gang og løbs karakteristika kan bestemmes og heraf adskilles. Dette er muligt idet varigheden mellem de antagede hælnedslag forekommer $\approx$~0,43 sekunder hurtigere ved løb end ved gang.
 
 \subsection{Gyroskop karakteristika vedrørende gang, løb og cykling}
 Databehandlingen af gyroskopets karakteristika vedrørende gang, løb og cykling resulterede i en sammenligning heraf. Resultatet af dette tyder på, at data fra et gyroskops z-akse tilhørende cykling, tilnærmelsesvis kan afspejles som en sinus-bølge, samt at gang og løb antageligvis ikke kan forveksles heraf. Dette muliggør algoritmedesign med henblik på detektering af cykling. Det kan antages at resultater fra cykling ved forskellige hastigheder vil påvirke signalet i en grad hvor frekvens og amplitude ændres.
