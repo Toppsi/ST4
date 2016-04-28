@@ -6,20 +6,15 @@ For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyro
 
 \subsubsection{Algoritme til gang og løb}
 Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 100 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 8 og kvadreres. Resultatet heraf betyder at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
-Afslutningsvis vil signalet blive filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag i signalet ikke opfattes, og signalets hælnedslag vil være pænt og tydeligt. \\
+Afslutningsvis vil signalet blive filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag i signalet ikke opfattes, og signalets hælnedslag vil fremstå tydeligere. \\
 Resultatet af ovenstående signalbehandling medfører at der findes et udtryk for gang og løbs amplitude forhold. Ud fra denne behandling af pilotforsøgets data vurderes det, at amplituden for hælnedslag ved løb er over 0,65 og ved gang er over 0,04, hvorfor signaler med amplituder under 0,04 ikke vurderes som værende aktivitet.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/algoritme_gl.png}
 	\caption{Flowchart over algoritmen til detektering af gang og løb}
 	\label{fig:algoritme}
 \end{figure}
-
-\textbf{Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Hvis løb detekteres skal en counter starte og først stoppe når cykling ikke længere detekteres. Når counteren stopper gemmes varigheden af counteren i et array tilhørende udført cykling. Hvis cykling ikke detekteres skal gyroskopet gå i LPM i 10 sekunder før algoritmen køres igen. 
-} 
-
-\textbf{Ovenstående forklaring til figur er ikke færdig.!!!}
+Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Hvis dette ikke er tilfældet og løb detekteres skal en counter starte og først stoppe når løb ikke længere detekteres. Når counteren stopper gemmes varigheden for counteren i et array tilhørende udført løb. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en counter starte og først stoppe når gang ikke længere detekteres. Når counteren stopper gemmes varigheden for counteren i et array tilhørende udført gang. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra.
 
 \subsection{Cykling}
 Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første step i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvoraf andet step indledes. Dette step finder den maksimale magnitude med tilhørende frekvens. Tredje step består af to summeringer, første summering summerer FFT'en fra den frekvens hvor den største magnitude befandt sig $\pm 1$Hz. Anden summering summerer FFT'en fra 1 til 20 Hz. Disse integraler indleder fjerde og sidste step, som omregner hvor stor en procentdel første integrale udgør af signalets totale energi. \\
