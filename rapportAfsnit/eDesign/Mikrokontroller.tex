@@ -1,8 +1,13 @@
 \section{Mikrokontroller}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af MCU'en som spændingsforsyning til IC og pulssensor.}
+\textit{I dette afsnit beskrives designet, implementeringen og testen af GAP peripheral som spændingsforsyning til IC og pulssensor.}
 
 \subsection{Design}
-En batteridreven spændingsforsyning sidder til MCU'en, hvilket gør den funktionel, men MCU'en skal også fungere som en spændingsforsyning for accelerometret, gyroskopet og pulssensoren. MCU'en har tre output spænding og ground pins \citep{Semiconductor2016}. Alle disse par vil blive benyttet til henholdsvis forsyning af MCU'en fra ekstern spændingsforsyning, MCU'ens spændingsforsyning til MCU'en og til pulssensoren. MCU'en leverer en spænding på mellem 4,5 og 4,8 V fra hvert output, hvorfor dette skal justeres og tilpasses IC'en.
+GAP peripheral er placeret, således denne MCU er tilkoblet en ekstern spændingsforsyning. Ydermere vil systemets IC og pulssensor være tilkoblet denne MCU, hvorfor disse komponenter vil have MCUen som deres spændingsforsyning. \newline
+MCUen har 
+
+SPÆNDING TIL IC OG PULSSENSOR --> SE I DATABLAD
+
+En batteridreven spændingsforsyning sidder til MCUen, hvilket gør den funktionel, men MCUen skal også fungere som en spændingsforsyning for accelerometret, gyroskopet og pulssensoren. MCUen har tre output spænding og ground pins \citep{Semiconductor2016}. Alle disse par vil blive benyttet til henholdsvis forsyning af MCUen fra ekstern spændingsforsyning, MCUens spændingsforsyning til MCUen og til pulssensoren. MCUen leverer en spænding på mellem 4,5 og 4,8 V fra hvert output, hvorfor dette skal justeres og tilpasses IC'en.
 
 \subsection{Implementering}
 VDDIO og GND fra J1 pinrækken benyttes til spændingsforsyning og ground til IC'en, mens VDDD og GND fra J2 pinrækken benyttes til spændingsforsyning og ground til pulssensoren. Outputspændingen fra pinrække J2 er acceptabel, mens pinrække J1 skal justeres til 3,3 V, hvilket gøres ved hjælp af et 5K pedometer. En ledning trækkes fra VDDIO over til inputspænding i pedometret på et breadboard, som kan skrues på for at indstille korrekt spænding. Ground fra J1 pinrækken trækkes til pedometrets ground, og en ledning trækkes fra pedometrets output, som måles med et multimeter.
