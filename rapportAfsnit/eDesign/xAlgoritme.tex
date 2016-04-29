@@ -40,4 +40,23 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 
 \subsection{Test}
 
+Test filter:\\
+- Lav en rx-tx forbindelse mellem PS og PSoC\\
+- send et hvid-støj signal ind (indeholder alle frekvenser)\\
+- Det vi får tilbage bør kun indeholde de frekvenser vi gerne vil have/have dæmpet udenfor pasbåndet. \\
 
+eller send en sinus ind med en given frekvens (5 Hz), tjekker dæmpning af den givne frekvens\\
+
+signal m hvid støj : help rand --> "rand" genererer hvid støj\\
+
+
+
+
+
+
+
+%%%%%%%%%%%%
+
+Rettelser:
+løb = >0.5
+gang = 0.5 > 0.05
