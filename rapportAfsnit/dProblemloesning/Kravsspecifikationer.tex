@@ -12,20 +12,20 @@ MCU'en kræver en spændingsforsyning for at kunne fungere, hvilket enten kan sk
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71 V og maks 5,5 V til MCU'en\fxnote{Alle mikroprocessorer kræver 1,71-5,5 V for at kunne fungere, selvom der står 3,3-5,5 V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
-	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5 V i mindre end 15 timer.
+	\item Levere mindst 1,71~V og maks 5,5~V til MCU'en\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
 	%\item Muliggøre spændingsopsætning af systemet udenom elnettet og	være elektrisk sikkert.
 	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
 \end{itemize}
 
 \subsection{Mikrokontroller}
-Vi har fået udleveret en specifik MCU, som skal benyttes til projektet. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCU'en fungere som spændingsforsyning til IC samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+Vi har fået udleveret en specifik MCU, som skal benyttes til projektet. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til IC samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
 
 \textbf{Krav til mikrokontrolleren} \newline 
 Mikrokontrolleren skal:
 \begin{itemize}
-	\item Levere 3,3 V til IC'en. Der accepteres en afvigelse på 5\%.
-	\item Levere mellem 3 V og 5 V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 \end{itemize}
 
 \subsection{Accelerometer}

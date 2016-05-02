@@ -17,7 +17,7 @@ Pulssensoren designes således pulsen (BPM) beregnes for brugeren og overføres 
 
 Pulssensor opfanger pulssignalet fra brugeren, hvorefter dette signal sendes ind i PSoC 4200M på GAP peripheral. Der vil her forekomme en signalbehandling, som bestemmer gennemsnitspulsen for brugeren, hvilket ses på \figref{fig:puls_pseudo}. For at sikre at der overføres en valid puls til flash hukommelsen, da skal pulsen være <208 BPM. Dette skyldtes, idet en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
 \begin{equation}
-220 [BPM] - alder [År] = Maksimale puls [BPM]
+220~[BPM] - alder~[$År$] = $Maksimale puls$~[BPM]
 \end{equation}
 
 Målgruppens højeste alder er 12 år, derfor vil målgruppens maksimale puls antageligt være <208 BPM. Systemet vil derfor kun godkende en puls der er <208 BPM, ellers vil den forrige gennemsnitspuls blive sendt til flash hukommelsen for PSoC 4200M.

@@ -9,17 +9,21 @@ Systemets IC indeholder et accelerometer og et gyroskop, hvoraf hele enheden på
 Ydermere kræver pulssensoren, som også er tilkoblet MCUen, en spændingsforsyning i intervallet 3~V til 5~V \citep{Murphy2016}.
 
 \subsection{Implementering}
-Spændingsoutputtet for MCUen er undersøgt, og har påvist et spændingsoutput på 3,14~V ved en tilkobling af en ekstern spændingsforsyning. Dermed overholder spændingsoutputtet 
+Spændingsoutputtet for MCUen er undersøgt, og har påvist et spændingsoutput på 3,14~V ved en tilkobling af en ekstern spændingsforsyning. Dermed overholder spændingsoutputtet fra MCUen, det spændingsinterval som systemets IC påkræver. Spændingsoutputtet overholder desuden intervallet for pulssensorens spændingstilkobling. \newline
 
-HERNEDE KOMMER UNDERSØGELSEN AF HVOR STORT SPÆNDINGSOUTPUTTET ER FRA MCU
+Spændingsforsyningen til pulssensoren og ICen vil blive forbundet ved brug af række J2 på targetboardet. VDDA og GND benyttes til at forsyne ICen, men VDDD og GND fra J2 pinrækken benyttes til spændingsforsyning og ground til pulssensoren. \newline
+%Ydermere konfigureres det pågældende pins i PSoC Creator, således den pågældende sensor vil blive forbundet med de rigitge pins i forhold til spændingstilkoblingen.
 
-spænding: 3,14 V --> MCU output spænding: 3,16 V
-
-
-
-VDDIO og GND fra J1 pinrækken benyttes til spændingsforsyning og ground til IC'en, mens VDDD og GND fra J2 pinrækken benyttes til spændingsforsyning og ground til pulssensoren. Outputspændingen fra pinrække J2 er acceptabel, mens pinrække J1 skal justeres til 3,3 V, hvilket gøres ved hjælp af et 5K pedometer. En ledning trækkes fra VDDIO over til inputspænding i pedometret på et breadboard, som kan skrues på for at indstille korrekt spænding. Ground fra J1 pinrækken trækkes til pedometrets ground, og en ledning trækkes fra pedometrets output, som måles med et multimeter.
 
 \subsection{Test}
+
+\begin{itemize}
+	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+\end{itemize}
+
+UNDERSØGE HVORVIDT DE GIVNE PINS OVERHOLDER KRAVENE
+
 Mikrokontrollerens outputspændinger skal testes, således output pins i J1 og J2 rækken henholdsvis leverer 3,3 V og mellem 3 - 5 V. Resultatet fra testen beskrives i \tabref{tab:design_mikrokonsp}:
 \begin{table}[H]
 	\centering
