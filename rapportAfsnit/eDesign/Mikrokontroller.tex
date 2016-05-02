@@ -1,9 +1,11 @@
 \section{Mikrokontroller}
 \textit{I dette afsnit beskrives designet, implementeringen og testen af GAP peripheral som spændingsforsyning til IC og pulssensor.}
 
+Design, implementering og test af mikrokontrolleren som spændingsforsyning, udføres med hensyn til de krav som er opstillet i \secref{krav_mikro_spaending}. Mikrokontrolleren skal derfor kunne levere en spænding til ICen og pulssensoren som overholder spændingsintervallerne for de pågældende komponeneter.
+
 \subsection{Design}
 GAP peripheral er placeret, således denne MCU er tilkoblet en ekstern spændingsforsyning. Ydermere vil systemets IC og pulssensor være tilkoblet denne MCU, hvorfor disse komponenter vil have MCUen som deres spændingsforsyning. \newline
-MCUen har tre pins hvor der er muligt at tilkoble spænding fra en ekstern spændingsforsyning eller tilkoble kombonenters spændingsforsyning. Yderligere har MCUen tre pins hvor ground kan tilkobles. \citep{Semiconductor2016} \newline
+MCUen har tre pins hvor der er muligt at tilkoble spænding fra en ekstern spændingsforsyning eller tilkoble kombonenters spændingsforsyning. Yderligere har MCUen tre pins hvor ground kan tilkobles. \citep{Semiconductor2016} 
 
 Systemets IC indeholder et accelerometer og et gyroskop, hvoraf hele enheden påkræver en spændingsforsyning på 1,9~V til 3,6~V \citep{Jimb02016}.
 Ydermere kræver pulssensoren, som også er tilkoblet MCUen, en spændingsforsyning i intervallet 3~V til 5~V \citep{Murphy2016}.
@@ -16,24 +18,19 @@ Spændingsforsyningen til pulssensoren og ICen vil blive forbundet ved brug af r
 
 
 \subsection{Test}
+Spændingsoutputtet fra MCUen testes ved at have tilkoblet en ekstern spændingsforsyning til targetboardet. Herefter bliver spændingsoutputtet på henholdsvis pin VDDA og VDDD testet.  \newline
+Testen viser, at spændingen på pin VDDA er 3,12~V og på pin VDDD er spændingen 3,11~V. Dermed overholder MCUen spændingsintervallerne for de benyttede komponenter. Det kan yderligere antages, at spændingsoutput vil være konstant og overholde kravene sålænge spændingsforsyningen til MCUen overholder de opstillede krav i \secref{krav_spaendingsf}.
 
-\begin{itemize}
-	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-\end{itemize}
-
-UNDERSØGE HVORVIDT DE GIVNE PINS OVERHOLDER KRAVENE
-
-Mikrokontrollerens outputspændinger skal testes, således output pins i J1 og J2 rækken henholdsvis leverer 3,3 V og mellem 3 - 5 V. Resultatet fra testen beskrives i \tabref{tab:design_mikrokonsp}:
-\begin{table}[H]
-	\centering
-	\begin{tabular}{cccc} \hline
-		\rowcolor[HTML]{C0C0C0} 
-		Outputpin & Spænding inden pedometer [V] &  Spænding efter pedometer [V] & \begin{tabular}[c]{@{}c@{}}Afvigelse fra\\ønsket værdi [\%] \end{tabular} [\%] \\ \hline
-		VDDIO & 4,663 & 3,341 & 1,24 \\ \hline
-		VDDD & 4,666 & & 0 \\ \hline
-	\end{tabular}%
-	\caption{I tabellen ses det, at multimetret nedsætter spændingen, som skal forsyne IC'en. Derudover ses det, at spændingsforsyningen fra MCU'en derved overholder kravene.}
-	\label{tab:design_mikrokonsp}
-\end{table}\vspace{-0.2cm}
-MCU'ens spændingsforsyning til IC'en er hermed justeret ved hjælp af et pedometer, således IC'en i teorien er funktionel. Derudover overholder MCU'ens spænding fra VDDD kravet til pulssensoren. MCU'en er derfor klar til at blive benyttet i det samlede system som spændingsforsyning til IC og pulssensor.
+%Mikrokontrollerens outputspændinger skal testes, således output pins i J1 og J2 rækken henholdsvis leverer 3,3 V og mellem 3 - 5 V. Resultatet fra testen beskrives i \tabref{tab:design_mikrokonsp}:
+%\begin{table}[H]
+%	\centering
+%	\begin{tabular}{cccc} \hline
+%		\rowcolor[HTML]{C0C0C0} 
+%		Outputpin & Spænding inden pedometer [V] &  Spænding efter pedometer [V] & \begin{tabular}[c]{@{}c@{}}Afvigelse fra\\ønsket værdi [\%] \end{tabular} [\%] \\ \hline
+%		VDDIO & 4,663 & 3,341 & 1,24 \\ \hline
+%		VDDD & 4,666 & & 0 \\ \hline
+%	\end{tabular}%
+%	\caption{I tabellen ses det, at multimetret nedsætter spændingen, som skal forsyne IC'en. Derudover ses det, at spændingsforsyningen fra MCU'en derved overholder kravene.}
+%	\label{tab:design_mikrokonsp}
+%\end{table}\vspace{-0.2cm}
+%MCU'ens spændingsforsyning til IC'en er hermed justeret ved hjælp af et pedometer, således IC'en i teorien er funktionel. Derudover overholder MCU'ens spænding fra VDDD kravet til pulssensoren. MCU'en er derfor klar til at blive benyttet i det samlede system som spændingsforsyning til IC og pulssensor.

@@ -1,16 +1,34 @@
 \section{Spændingsforsyning}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af spændingsforsyningen til MCU'en.}
+\textit{I dette afsnit beskrives designet, implementeringen og testen af spændingsforsyningen til MCUen, GAP peripheral.}
+
+Design, implementering og test af spændingsforsyningen, udføres med hensyn til de krav som er opstillet i \secref{krav_spaendingsf}. \newline
+Denne komponent skal derfor kunne levere et spændingsoutput som overholder MCUens arbejdsområde, samtidig med at komponenten overholder krav til mobilitet og brugersikkerhed. Ydermere skal spændingsforsyningen kunne levere den påkrævede spænding i mindst 15 timer. \newline
+Den eksterne spændingsforsyning er en udleveret komponent, hvormed denne del blot vil blive implementeret, og derfor vil komponentens hardware ikke blive designet.
+
+%-	Levere mindst 1,71 V og maks 5,5 V til MCU'en21. Der accepteres ikke en spænding
+%under minimumsgrænsen eller over maksimumsgrænsen.
+%-	Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at
+%spændingsforsyningen leverer under 1,71 V eller over 5,5 V i mindre end 15 timer.
+%-	Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere
+%elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke
+%være mobilt.
 
 \subsection{Design}
-MCuen er funktionel ved en spændingstilførsel fra USB porten, hvilket er tilfældet for GAP central. Derimod vil GAP peripheral være placeret således, denne MCU påkræver en ekstern spændingstilkobling. Denne type spændingstilførsel til MCUen skal være i intervallet 3,3-5~V for at sikre optimale ydeevne for systemet. Ydermere vil det blot være MCUens targetboard som er funktionel ved en ekstern spændingsforsyning. \newline
+Den eksterne spændingsforsyning er en batteriholder til to AAA 1,5~V batterier, som har tilkoblet jord og spændingsoutput. Denne komponent er dermed ikke tilkoblet elnettet, hvorfor der er minimal risiko for et farligt elektrisk shock. Yderligere er spændingsforsyningen en mindre kombonent, hvilket gør den mobil og anvendeligt i et mobilt system.
 
+MCuen er funktionel ved en spændingstilførsel fra USB porten, hvilket er tilfældet for GAP central. Derimod vil GAP peripheral være placeret således, denne MCU påkræver en ekstern spændingstilkobling. Denne type spændingstilførsel til MCUen skal være i intervallet 1,71-5,5~V for at sikre optimale ydeevne for systemet. Ydermere vil det blot være MCUens targetboard som er funktionel ved en ekstern spændingsforsyning.
 
 \subsection{Implementering}
-BILLEDE AF BATTERIHOLDER OG LEDNINGSFØRING TIL MCU
-- beskrivelse af ovenstående
+For at kunne forsyne targetboardet på GAP peripheral med spænding, skal pins fra spændingsforsyningen forbindes med pins på MCUen. 
+Spændingsforsyningens to pins (GND og V_out) bliver tilkoblet pinrække J1 på targeboardet, hvor pin VDD og GND bliver benyttet.
 
 \subsection{Test} 
+Testen udføres med henblik på at overholde de opstillede krav med henhold til de opstillede afvigelser. 
 
-batteri leverer: 3,146 V
+Det undersøges hvilket spændingsoutput den udleverede komponent har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at komponenten har et spændingsoutput på 3,17~V ved disse betingelser.\newline
+Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V. 
+\fxnote{Vi skal have lavet en test hvor komponenterne er sat til, og man derefter noterer hvor meget spænding batterierne taber undervejs. Testen skal fx vare 10 minutter. }
+
+
 
 
