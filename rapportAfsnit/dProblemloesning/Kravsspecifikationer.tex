@@ -1,7 +1,7 @@
 \section{Kravspecifikationer}
 \textit{I det følgende afsnit opstilles krav samt tolerancer hertil for hver del i det samlede system. Det sikres herved, at hver enhed kan fungere efter hensigten.}
 
-Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, som er beskrevet i \appref{pilot}.
+Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, som er beskrevet i \appref{pilot} og kort opsummeret i \secref{opsamling_pilot}.
 %
 %\subsection{Krav til hardware}
 %Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling og -konvertering, hvoraf det digitale signal efterfølgende bliver behandlet af aktivitetsmålerens software.
@@ -36,7 +36,7 @@ Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksi
 Accelerometeret skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har at arbejdsområde på under $\pm$16 g.
+\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
 \end{itemize}
 
 \subsection{Gyroskop} 
@@ -47,7 +47,7 @@ Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, de
 Gyroskopet skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde på x.
+\item Have et arbejdsområde på mindst 320~dps.
 \end{itemize}
 
 \subsection{Pulssensor}
@@ -85,25 +85,25 @@ ADC'en skal:
 \end{itemize}
 %
 %\subsection{Krav til software}
-%Aktivitetsmålerens software består af algoritmedesign til MCU'ens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAB central og GAB peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
+%Aktivitetsmålerens software består af algoritmedesign til MCU'ens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
 \subsection{Algoritmedesign}
 Designet af de fire algoritmer ligger til grund for hele funktionaliteten af systemet. \\
-Algoritmen på PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCU'en til en GAB peripheral. Den skal indeholde elementer, som henvender sig til IC'en, da gyroskopet skal deaktiveres hvis ikke i brug. Hvert tiende sekund skal algoritmen få gyroskopet aktiveret, som skal tracke om aktiviteten er cykling. Hvis ikke skal gyroskopet deaktiveres igen og spørges igen om 10 sekunder. Desuden skal algoritmen aktivere ADC'en, således signalerne af IC'en kan modtages. Algoritmen skal gøre mikroprocessoren i stand til at kunne detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter skal algoritmen vække EZ-BLE PRoC fra power moden stop og den gemte data overføres hertil via UART kommunikation.\\
-Algoritmen til EZ-BLE PRoC på GAB peripheral skal sørge for, at enheden er i power moden stop med mindre, at den modtager et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAB central via BLE. \\
-Algoritmen på EZ-BLE PRoC på GAB central skal få enheden til at modtage data fra EZ-BLE PRoC på GAB peripheral. Denne data skal sendes til PSoC 4200M på GAB central via UART kommunikation. \\
-Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCU'en til en GAB central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAB central og videreføre dette til en GUI på en PC via USB porten.
+Algoritmen til PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCU'en til en GAP peripheral. Den skal indeholde elementer, som henvendes til IC'en, da gyroskopet skal deaktiveres hvis det ikke er i brug. Hvert tiende sekund aktiveres gyroskopet, som skal tracke aktiviteten cykling. Hvis der ikke udføres aktiviteten cykling, slukkes gyroskopet, hvorefter det ti sekunder senere vågner igen. Algoritmen skal gøre mikroprocessoren i stand til at detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter vækkes EZ-BLE PRoC fra stop power mode og den gemte data overføres hertil via UART kommunikation.\\
+Algoritmen til EZ-BLE PRoC på GAP peripheral sørger for, at enheden er i stop power mode med mindre, der modtages et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAP central via BLE. \\
+Algoritmen på EZ-BLE PRoC på GAP central skal få enheden til at modtage data fra EZ-BLE PRoC på GAP peripheral. Denne data skal sendes til PSoC 4200M på GAP central via UART kommunikation. \\
+Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCU'en til en GAP central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAP central og videreføre dette til en GUI på en PC via USB porten.
 
 \textbf{Krav til algoritmedesign} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
-	\item Gøre PSoC 4200M på GAB peripheral i stand til at sample signalet fra sensoren og pulssensoren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
+	\item Gøre PSoC 4200M på GAP peripheral i stand til at sample signalet fra sensoren og pulssensoren samt behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
 	\item Aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
-	\item Gøre PSoC 4200M på GAB peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
-	\item Gøre, at PSoC 4200M på GAB peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAB peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-	\item Få EZ-BLE PRoC på GAB peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-	\item Gøre, at EZ-BLE PRoC på GAB central kan modtage data fra EZ-BLE PRoC på GAB peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAB central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-	\item PSoC 4200M på GAB central i stand til at modtage data fra EZ-BLE PRoC på GAB central og overføre dette til en PC via USB port. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Gøre PSoC 4200M på GAP peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
+	\item Gøre, at PSoC 4200M på GAP peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAP peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Få EZ-BLE PRoC på GAP peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Gøre, at EZ-BLE PRoC på GAP central kan modtage data fra EZ-BLE PRoC på GAP peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAP central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item PSoC 4200M på GAP central i stand til at modtage data fra EZ-BLE PRoC på GAP central og overføre dette til en PC via USB port. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
 \end{itemize}
 
 \subsection{Trådløs kommunikation}
@@ -117,7 +117,7 @@ Den trådløse kommunikation skal:
 \end{itemize}
 
 \subsection{Grafisk Bruger Interface}
-GUI'en skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til øget fysisk aktivitet. Den skal visualisere tidsforbruget på og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. Hvert 15. minutter kan interfacet opdateres, da GAB peripheral afsender data til GAB central i dette tidsinterval.
+GUI'en skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til øget fysisk aktivitet. Den skal visualisere tidsforbruget på og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. Hvert 15. minutter kan interfacet opdateres, da GAP peripheral afsender data til GAP central i dette tidsinterval.
 
 \textbf{Krav til GUI} \newline 
 GUI'en skal:
