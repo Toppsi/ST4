@@ -3,15 +3,20 @@
 
 \subsection{Design}
 GAP peripheral er placeret, således denne MCU er tilkoblet en ekstern spændingsforsyning. Ydermere vil systemets IC og pulssensor være tilkoblet denne MCU, hvorfor disse komponenter vil have MCUen som deres spændingsforsyning. \newline
-MCUen har tre pins hvor der er muligt at tilkoble spænding fra en ekstern spændingsforsyning eller tilkoble kombonenters spændingsforsyning. Yderligere har MCUen tre pins hvor ground kan tilkobles. \citep{Semiconductor2016}
+MCUen har tre pins hvor der er muligt at tilkoble spænding fra en ekstern spændingsforsyning eller tilkoble kombonenters spændingsforsyning. Yderligere har MCUen tre pins hvor ground kan tilkobles. \citep{Semiconductor2016} \newline
 
-SPÆNDING TIL IC OG PULSSENSOR --> SE I DATABLAD
-IC: 3,3 V
-Puls: 3-5 V
-
-En batteridreven spændingsforsyning sidder til MCUen, hvilket gør den funktionel, men MCUen skal også fungere som en spændingsforsyning for accelerometret, gyroskopet og pulssensoren. MCUen har tre output spænding og ground pins \citep{Semiconductor2016}. Alle disse par vil blive benyttet til henholdsvis forsyning af MCUen fra ekstern spændingsforsyning, MCUens spændingsforsyning til MCUen og til pulssensoren. MCUen leverer en spænding på mellem 4,5 og 4,8 V fra hvert output, hvorfor dette skal justeres og tilpasses IC'en.
+Systemets IC indeholder et accelerometer og et gyroskop, hvoraf hele enheden påkræver en spændingsforsyning på 1,9~V til 3,6~V \citep{Jimb02016}.
+Ydermere kræver pulssensoren, som også er tilkoblet MCUen, en spændingsforsyning i intervallet 3~V til 5~V \citep{Murphy2016}.
 
 \subsection{Implementering}
+Spændingsoutputtet for MCUen er undersøgt, og har påvist et spændingsoutput på 3,14~V ved en tilkobling af en ekstern spændingsforsyning. Dermed overholder spændingsoutputtet 
+
+HERNEDE KOMMER UNDERSØGELSEN AF HVOR STORT SPÆNDINGSOUTPUTTET ER FRA MCU
+
+spænding: 3,14 V --> MCU output spænding: 3,16 V
+
+
+
 VDDIO og GND fra J1 pinrækken benyttes til spændingsforsyning og ground til IC'en, mens VDDD og GND fra J2 pinrækken benyttes til spændingsforsyning og ground til pulssensoren. Outputspændingen fra pinrække J2 er acceptabel, mens pinrække J1 skal justeres til 3,3 V, hvilket gøres ved hjælp af et 5K pedometer. En ledning trækkes fra VDDIO over til inputspænding i pedometret på et breadboard, som kan skrues på for at indstille korrekt spænding. Ground fra J1 pinrækken trækkes til pedometrets ground, og en ledning trækkes fra pedometrets output, som måles med et multimeter.
 
 \subsection{Test}
