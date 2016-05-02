@@ -15,17 +15,13 @@ Pulssensoren designes således pulsen (BPM) beregnes for brugeren og overføres 
 	\label{fig:puls_pseudo}
 \end{figure}
 
-Pulssensor opfanger pulssignalet fra brugeren, hvorefter dette signal sendes ind i PSoC 4200M på GAP peripheral. Der vil her forekomme en signalbehandling, som bestemmer gennemsnitspulsen for brugeren, hvilket ses på \figref{fig:puls_pseudo}. For at sikre at der overføres en valid puls til flash hukommelsen, da skal pulsen være <208 BPM. Dette skyldtes, idet en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
-\begin{equation}
-220~[BPM] - alder~[$År$] = $Maksimale puls$~[BPM]
-\end{equation}
-
-Målgruppens højeste alder er 12 år, derfor vil målgruppens maksimale puls antageligt være <208 BPM. Systemet vil derfor kun godkende en puls der er <208 BPM, ellers vil den forrige gennemsnitspuls blive sendt til flash hukommelsen for PSoC 4200M.
+Pulssensor opfanger pulssignalet fra brugeren, hvorefter dette signal sendes ind i PSoC 4200M på GAP peripheral. Der vil her forekomme en signalbehandling, som bestemmer gennemsnitspulsen for brugeren, hvilket ses på \figref{fig:puls_pseudo}. \\
+Målgruppens højeste alder er 12 år, derfor vil målgruppens maksimale puls antageligt være <208 BPM, som det fremgår af \secref{krav_adc}. Systemet vil derfor kun godkende en puls der er <208 BPM, ellers vil den forrige gennemsnitspuls blive sendt.
 
 
 \subsection{Implementering}
 Sensoren har 3 pins til henholdsvis spændingsforsyning, ground og outputsignal. Disse pins kobles til hver sin pin på GAP peripheral. Outputsignalets pin skal designes i programmet PSoC Creator, således MCU'en modtager pulssensorens signale fra den pågældende pin. Dette gøres ved at indsætte henholdsvis en UART serie kommunikationsblok (SCB) og SAR ADC i topdesignet. UART'en bruges for at sensoren og MCU'en kan kommunikere. Standardindstillingerne for denne blok benyttes til konfigurationen af MCUen. \newline
-Outputsignalet fra sensoren er et analogt signal, hvormed dette signal skal gennem en ADC, for at skabe en konvertering til et digitalt signal. ADCens design skal derfor konfigurers således denne bearbejder én single ended kanal, inputtet fra pulssensoren. Yderligere indstilles sampleraten for ADcen for den pågældende kanal. Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <208, hvilket beskrives i \secref{sec_design_puls}. Denne puls svarer til cirka 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35 Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal.\newline
+Outputsignalet fra sensoren er et analogt signal, hvormed dette signal skal gennem en ADC, for at skabe en konvertering til et digitalt signal. ADCens design skal derfor konfigurers således denne bearbejder én single ended kanal, inputtet fra pulssensoren. Yderligere indstilles sampleraten for ADcen for den pågældende kanal til 35~Hz, jævnfør \secref{krav_adc}. \\
 Efter konfigurering af UART og ADC i Topdesignet, skal de korrekte pins indstilles i pinopsætning. UART tildeles interne pins, hvorimod ADC'ens inputpin skal indstilles til den plads, som outputtet fra sensoren er, hvilket i dette tilfælde er pin 2.0. 
 
 %Igennem et MATLAB program er det muligt at visualisere pulsen ved hjælp af en GUI. I det samlede system skal denne GUI ikke være tilgængelig her i processen, da GAB peripheral modtager pulsdata og sender dette videre sammen med IC data til GAB central, som skal visualisere data i en endelig GUI.\\
