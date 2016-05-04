@@ -6,7 +6,7 @@ For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyro
 
 
 \subsubsection{Algoritme til gang og løb}
-Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 100 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 8 og kvadreres. Resultatet heraf medfører at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
+Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Måden hvorpå dataet vil blive behandlet er først ved at fjerne støj ved brug af et elliptisk filter. Dette skal være et 4. ordens lavpas elliptisk filter med et pasbånd fra 20 til 50 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Efterfølgende divideres det filtrerede signal med 4 og kvadreres. Resultatet heraf medfører at signaler som ikke relaterer sig til hælnedslaget minimeres kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.}
 Afslutningsvis vil signalet blive filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag ikke opfattes, og signalets hælnedslag vil fremstå tydeligere. \\
 Resultatet af ovenstående signalbehandling medfører at der findes et udtryk for gang og løbs amplitude forhold. Ud fra denne behandling af pilotforsøgets data vurderes det, at amplituden for hælnedslag ved løb overstiger 0,65 og ved gang overstiger 0,04, hvorfor signaler med amplituder under 0,04 ikke vurderes som værende aktivitet.
 \begin{figure}[H]
@@ -34,11 +34,17 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 
 
 \subsection{Implementering}
+Interrupt service rutiner
+
+Det elliptiske filter er lavet som et IIR filter, ud fra filterkoefficienter fra matlab.
 
 
 
 
 \subsection{Test}
+
+Shimmer data ganges med 16
+
 
 Test filter:\\
 - Lav en rx-tx forbindelse mellem PS og PSoC\\
@@ -55,8 +61,12 @@ signal m hvid støj : help rand --> "rand" genererer hvid støj\\
 
 
 
+
+
+
+
 %%%%%%%%%%%%
 
 Rettelser:
-løb = >0.5
-gang = 0.5 > 0.05
+løb = >2.5
+gang = 2.5 > 0.5
