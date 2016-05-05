@@ -6,7 +6,7 @@ For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyro
 
 
 \subsubsection{Gang og løb}
-Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Første trin i denne signalbehandling er, at fjerne støj ved brug af et elliptisk filter. Dette skal være et elliptisk 4. ordens båndpasfilter med et pasbånd fra 20 til 50 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Båndpasfilterets knækfrekvenser er tildels bestemt gennem pilotforsøget. Knækfrekvensen omkring 20 Hz er enebestemmende for at bibeholde signalets hælnedslag, hvoraf frekvensen befandt sig omkring 20 Hz. Knækfrekvensen omkring 50 Hz er bestemt ligeledes bestemt på baggrund af pilotforsøget, hvoraf signalets frekvensindhold stopper herefter. Andet trin i signalbehandlingen, består af, at det filtrede signal divideres to. Dette er tilfældet da signalets amplituder bliver formindsket, og de mindste amplituder nærmer sig nul i større grad end hælnedslaget. Tredje trin i signalbehandlingen består i at det filtrerende og dividerede signal bliver kvadreret. Resultatet heraf medfører at amplituder som er lave ikke forstærkes i stor grad, og større amplituder forstærkes i stor grad. Dermed minimeres events som ikke relateres til hælnedslaget kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.} Fjerde og sidste trin i signalbehandlingen, bliver signalet filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag ikke opfattes, og signalets hælnedslag vil fremstå som et enkelt event. \\
+Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere og adskille gang fra løb. Første trin i denne signalbehandling er, at fjerne støj ved brug af et elliptisk filter. Dette skal være et fjerde ordens elliptisk båndpasfilter med et pasbånd fra 20 til 50 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples}. Båndpasfilterets knækfrekvenser er tildels bestemt gennem pilotforsøget. Knækfrekvensen omkring 20 Hz er enebestemmende for at bibeholde signalets hælnedslag, hvoraf frekvensen befandt sig omkring 20 Hz. Knækfrekvensen omkring 50 Hz er bestemt ligeledes bestemt på baggrund af pilotforsøget, hvoraf signalets frekvensindhold stopper herefter. Andet trin i signalbehandlingen, består af, at det filtrede signal divideres to. Dette er tilfældet da signalets amplituder bliver formindsket, og de mindste amplituder nærmer sig nul i større grad end hælnedslag. Tredje trin i signalbehandlingen består i at det filtrerende og dividerede signal bliver kvadreret. Resultatet heraf medfører at amplituder som er lave ikke forstærkes i stor grad, og større amplituder forstærkes i større grad. Dermed minimeres events som ikke relateres til hælnedslaget kraftigt, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.} Fjerde og sidste trin i signalbehandlingen, bliver signalet filtreret med et moving average filter som udglatter signalet, hvilket resulterer i at små udslag ikke opfattes, og signalets hælnedslag vil fremstå som et enkelt event. \\
 
 Førend ovenstående signalbehandling kan overføres til at fastsætte en tærskelværdi skal dataet fra pilotforsøgets data omregnes til LSM9DS1' arbejdsområde: 
 \begin{equation}
@@ -42,27 +42,50 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 
 \subsection{Implementering}
 \subsubsection{Gang og løb}
-Implementeringen af algoritmen for detektering af gang og løb består grundlæggende af to delelementer. Først signalbehandling, hvorefter selve algoritmen implementeres- Signal behandlingen er blevet implementeret som enestående funktioner, hvoraf signalet bliver behandlet med fire funktion førend data bliver behandlet med algoritmen. \\
-Igennem design blev det bestemt at signalet først skal filtreres med et elliptisk båndpasfilter. Dette blev implementeret på MCU'en som et IIR filter, med filterkoefficienter udregnet gennem MATLAB. Derefter blev signalet divideret, kvadreret og moving average filtreret. 
+Implementeringen af algoritmen for detektering af gang og løb består grundlæggende af to delelementer. Først signalbehandling, hvorefter selve algoritmen implementeres. Signal behandlingen er blevet implementeret som enestående funktioner, hvoraf signalet bliver behandlet med fire funktioner førend data bliver kørt igennem algoritmen.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/algoritme_cykling.png}
-	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling. \textbf{DETTE SKAL LAVES OM EFTER VI HAR LAVET ALGORITMEN}}
+	\includegraphics[scale=0.8]{figures/cDesign/signalbehandling_psoc.png}
+	\caption{På figuren ses de fire signalbehandlingsfunktioners effekt på rå accelerometer data fra løb. Den sorte kurve på de fire figurer er det rå signal, og den røde er det behandlede output.}}
 	\label{fig:algoritme_cykling}
 \end{figure}
 
-bla 
+Det behandlede output er data som er repræsentativt for hvordan PSoC vil behandle data når det endelige system er færdigt. Dette er tilfældet da det er data fra pilotforsøget, som er blevet behandlet igennem PSoC. Data fra pilotforsøget er for alle forsøgspersoner blevet behandlet med ovenstående signalbehandling med henblik på fastsættelse af tærskelværdier. 
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Tærskelværdi for gang & Tærskelværdi for løb \\ \hline
+		\rowcolor[HTML]{FFFFFF} 
+		F1 & x & x \\ \hline
+		\rowcolor[HTML]{FFFFFF} 
+		F2 & x & x \\ \hline
+		\rowcolor[HTML]{FFFFFF} 
+		F3 & x & x \\ \hline
+		\rowcolor[HTML]{FFFFFF} 
+		F4 & x & x \\ \hline
+	\end{tabular}
+	\caption{My caption}
+	\label{tab:individuel_taerskel}
+\end{table}
+  
+blablalbla 
+dermed denne fælles
 
-
-
-
-Interrupt service rutiner
-
-Det elliptiske filter er lavet som et IIR filter, ud fra filterkoefficienter fra matlab.
-
-
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{}ccc@{}}
+		\toprule
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Tærskelværdi for gang & Tærskelværdi for løb \\ \midrule
+		Fælles & x & x \\ \bottomrule
+	\end{tabular}
+	\caption{My caption}
+	\label{tab:faelles_taerskel}
+\end{table}
 
 
 \subsection{Test}
