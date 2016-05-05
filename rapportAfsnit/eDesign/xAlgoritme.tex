@@ -42,7 +42,20 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 
 \subsection{Implementering}
 \subsubsection{Gang og løb}
-Forud for at tærskelværdierne fastsættes og benyttes til at detekterer aktiviteterne gang, løb og cykling, signalbehandles accelerometerets data. Igennem design blev det valgt at signalet først skal filtreres med et elliptisk båndpasfilter. Dette blev implementeret på MCU'en som et IIR filter, med filterkoefficienter udregnet gennem MATLAB. 
+Implementeringen af algoritmen for detektering af gang og løb består grundlæggende af to delelementer. Først signalbehandling, hvorefter selve algoritmen implementeres- Signal behandlingen er blevet implementeret som enestående funktioner, hvoraf signalet bliver behandlet med fire funktion førend data bliver behandlet med algoritmen. \\
+Igennem design blev det bestemt at signalet først skal filtreres med et elliptisk båndpasfilter. Dette blev implementeret på MCU'en som et IIR filter, med filterkoefficienter udregnet gennem MATLAB. Derefter blev signalet divideret, kvadreret og moving average filtreret. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/algoritme_cykling.png}
+	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling. \textbf{DETTE SKAL LAVES OM EFTER VI HAR LAVET ALGORITMEN}}
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+bla 
+
+
+
 
 
 Interrupt service rutiner
