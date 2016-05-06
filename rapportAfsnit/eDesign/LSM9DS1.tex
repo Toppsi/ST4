@@ -14,7 +14,7 @@ LSM9DS1 har ni frihedsgrader, hvilket betyder, at den måler i x-, y- og z-aksen
 Sensoren besidder fire pins på sin venstre side, som vil blive benyttet i dette projekt. Disse kan ses på \figref{fig:IC_pins}. GND og VDD er jord og strømforsyningspins, mens SDA er I$^2$C datapin, hvor al data bliver sendt og modtaget igennem, og SCL er en seriel clock, der blandt andet sørger for synkron datasampling.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{figures/cDesign/accelerometeret.png}
+	\includegraphics[scale=0.3]{figures/cDesign/accelerometeret.png}
 	\caption{På figuren ses pinkonfigurationen af LSM9DS1. \citep{Jimb02016}}
 	\label{fig:IC_pins}
 \end{figure}
@@ -23,8 +23,8 @@ LSM9DS1 er en digital sensor, hvormed de analoge signaler konverteres til digita
 Det digitaliserede signal kan både bruges med en SPI og en I$^{2}$C styrefunktion, hvor mikrokontrolleren CY8CKIT-043 PSoC 4-M besidder begge. Der ønskes at benytte I$^{2}$C funktionen, da ICen dermed både skal sende og modtage data.\fxnote{Modtage om gyroskopet skal tændes eller slukkes.} For at gøre dette skal koden i algoritmedesignet benytte I$^2$C metoden til at skrive til et bestemt registor. På \figref{Fig:master_slave} ses kommunikationen mellem en master og slave, hvoraf slaven i dette tilfælde er ICen og masteren er MCUen.\fxnote{Og dette kan ikke vendes om, ICen vil ALTID være slaven} Der ses, at MCUen skriver en start kode til ICen for at starte kommunikationen. Herefter skriver masteren én bit til slaven, som skal godkende, at dette er modtaget. Så vil masteren give en adresse til slaven, som bestemmer hvorfra sensoren skal give data. Når slaven har godkendt dette, skriver masteren til slaven, at den gerne vil læse fra slaven, hvilket tillades og data hentes over på masteren. Afslutningsvist skriver masteren en stop kode til slaven, hvorefter kommunikationen er afbrudt. %For at benytte I$^{2}$C funktionen sættes pin CS\_AG høj, og de fire pins SDO og CS benyttes ikke. Alle pins kan ses på \figref{IC_pins}. Før et signal kan registreres kobles pinnen GND til jord, og på benet VDD skal der leveres mellem 1,9 V og 3,6 V.\fxnote{skriv resten af opsætningen efter at have snakket med John}. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/Sensor_write_read.png}
-	\caption{På figuren ses fire forskellige metoder for kommunikation imellem slave og master enhed, der afhænger af, om man vil henholdsvis læse eller skrive en eller flere bits.\citep{STMicroelectronics2016}}
+	\includegraphics[scale=0.75]{figures/cDesign/Sensor_write_read2.png}
+	\caption{På figuren ses metoden for kommunikation imellem slave og master enhed. Denne kan udvides og gøres mere kompleks i tilfælde at, om masteren vil henholdsvis læse eller skrive en eller flere bits.\citep{STMicroelectronics2016}}
 	\label{Fig:master_slave}
 \end{figure}
 I LSM9DS1 forbruger gyroskopet 4 mA og accelerometeret 600 $\mu$A ved normale betingelser\fxnote{hvor Vdd er forsynet med 2,2V og temperaturen er 25 grader}. Det er derfor essentielt, at gyroskopet bruges så lidt som muligt, når systemet skal være batteridrevet og kun benytter accelerometret til datasampling. Det er muligt enten at slukke begge sensorer, at benytte accelerometeret alene eller benytte både accelerometeret og gyroskopet sammen, hvor begge har samme mængde output af data. Der kan yderligere spares strøm ved brug af gyroskopet, hvis der vælges en lavere samplerate.\\ % alt efter hvor hurtigt et signal skal samples. 
@@ -42,11 +42,27 @@ Gyroskopet har tre forskellige power modes: slukket, low power og normal power. 
 %Ved kontinuert-til-FIFO tilstand skifter tilstanden alt efter de bit der modtages i interruptet for accelerometeret og gyroskopet. Hvis der modtages et bit på 1 vil den være i FIFO tilstand, og modtages der et bit på 0, vil den være i kontinuert tilstand. 
 %I bypass-til-kontinuert tilstand skiftes der ligeledes mellem bypass og kontinuert tilstand alt efter det modtagne interrups for accelerometeret og gyroskopet. Hvis der modtages et bit på 1, er den i kontinuert tilstand, og modtages der en bit på 0, nulstilles den ved at gå i bypass tilstand. 
 \subsection{Implementering}
+For at kunne implementere sensoren således at MCUen kan modtage data fra den, skal MCUen besidde en algoritme, der får sensoren til at sende data. MCUen skal skrive til hex adressen 6B, som er registeradressen for gyroskopet og accelerometer. Således kan MCUen som master skrive til selve accelerometret eller gyroskopet. Via hexkoderne A8 og 79 indstilles accelerometret og gyroskopet til de valgte indstillinger, som er sampling på 476 Hz og 16 g måling for accelerometret og sampling på 119 Hz og 2000 grader pr sekunds målinger for gyroskopet. De binære koder for korrekt indstilling af sensorerne kan findes i databladet. \citep{STMicroelectronics2016}\\
+I PSoC Programmer indhentes det analoge komponent I2CM. Denne skaber en I$^2$C forbindelse imellem MCUen og ICen samtidig med, at den indstiller MCUen til at være master. Når PSoC Programmer benyttes til test af sensoren er der ikke behov for flere komponenter, men hvis dataen skal sendes ind i eksempelvis matlab, kræver det en UART. I2CM modulet skal indstilles til korrekte pins i topdesignet af algoritmen, således sensorens SDA og SCL pins kobles korrekt til MCUen.
+% SKRIV NOGET OM GROUND OG VDD FORBINDELSEN, FOR PT FÅR DET JO IKKE STRØM FRA MCUEN
+\subsection{Test}
+Accelerometret er indstillet til $\pm$16 g igennem algoritmedesignet, hvorfor det antages, at den kan opsamle op til $\pm$16 g. Ifølge accelerometrets andet krav i \secref{sec:krav} skal det angive korrekt g påvirkning med en maks afvigelse på 5\%. Dette testes ved at påvirke sensorens y akse med $\pm$1 g, da denne akse på accelerometret benyttes til detektering af gang og løb, se \secref{bevaegelse}. Gyroskopet antages at måle korrekt, da projektgruppen ikke er i besiddelse af korrekt måleudstyr, der har konstant acceleration.\\
+ICens accelerometer har en sensitivitet på 0,732 mg per LSB \citep{STMicroelectronics2016}. Outputtet fra sensoren igennem MCUen er LSB, da den optager low og high byte for hver akse. Igennem bitskift af high byte og addition af de to bytes giver sensoren LSB i output. 
 
-
-
-
-
+Inden test tjekkes bordet med vaterpas for at sikre, at accelerometrets y akse ikke påvirkes af den grund. Herefter placeres accelerometret vandret på bordet. Når accelerometret vendes i $\pm$90$^\circ$ på y aksen, påvirkes denne af henholdsvis $\pm$1 g. I \tabref{tab:test_sensor} ses resultatet fra testen.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc} \hline
+		\rowcolor[HTML]{C0C0C0} 
+		Teoretisk & \begin{tabular}[c]{@{}c@{}} Output fra MCU \\ (LSB) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Omregnet \\ (g) \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procent afvigelse \\ (\%) \end{tabular} \\ \hline
+		0 g påvirkning & 19 & 19$\times$0,000732 = 0,014 g & 1,4\\ \hline
+		-1 g påvirkning & 1368 & 1368$\times$0,000732 = 1,003 g & 0,3\\ \hline
+		+1 g påvirkning & -1356 & -1356$\times$0,000732 = 0,993 g & 0,7\\ \hline
+	\end{tabular}%
+	\caption{I tabellen ses resultatet fra testen af accelerometrets y akse.}
+	\label{tab:test_sensor}
+\end{table}\vspace{-0.2cm}
+Det ses i \tabref{tab:test_sensor}, at accelerometret overholder kravene fra \secref{sec:krav}. Denne enhed accepteres derfor og er klar til videre implementering.
 %Accelerometrets sensitivitet ved 16 g målinger: 0,732 mg/LSB
 %Hvor LSB er 2*16/2^16 = 0.0078125
 %(Man får et output på ca. 1350 fra acc, hvilket giver næsten 1 ganget med 0,732 mg/LSB)
@@ -54,4 +70,3 @@ Gyroskopet har tre forskellige power modes: slukket, low power og normal power. 
 %Gyroskopets sensitivitet med 2000 dps målinger: 70 mdps/LSB
 %Hvor LSB er 2*2000/2^16 = 0.97656
 %()
-
