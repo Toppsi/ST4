@@ -23,7 +23,8 @@ Resultatet af ovenstående signalbehandling medfører at der findes et udtryk fo
 	\label{fig:algoritme}
 \end{figure}
 
-Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført løb og max peak registreres og gemmes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført gang og max peak registeres og gemmes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra.
+Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført løb og max peak registreres og gemmes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført gang og max peak registeres og gemmes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra. \\
+Fælles for både detektering af gang og løb er at første målte peak og eller efterfulgt at inaktivitet kasseres. Dette er tilfældet da dette sikre at en periode med inaktivitet ikke summeres som faktisk gang eller løb. 
 
 \subsection{Cykling}
 Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvorefter andet trin indledes. Dette trin finder den maksimale magnitude med tilhørende frekvens. Tredje trin består af to summeringer, første summering summerer FFT'en fra den frekvens hvor den største magnitude befandt sig $\pm$1 Hz. Anden summering summerer FFT'en fra 1 til 20 Hz. Resultaterne af disse, benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering udgør af den anden summering. \\
@@ -74,7 +75,6 @@ Det behandlede output antages som værende repræsentativt for hvordan PSoC vil 
   
 De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf antages det at tærskelværdierne bør være dækkende for hele målingen, da forsøgspersonerne udførte aktiviteterne ved konstant hastighed.   
 
-
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -88,32 +88,98 @@ De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf a
 \end{table}
 
 
+
+
 \subsection{Test}
-
-Shimmer data ganges med 16
-
-
-Test filter:\\
-- Lav en rx-tx forbindelse mellem PS og PSoC\\
-- send et hvid-støj signal ind (indeholder alle frekvenser)\\
-- Det vi får tilbage bør kun indeholde de frekvenser vi gerne vil have/have dæmpet udenfor pasbåndet. \\
-
-eller send en sinus ind med en given frekvens (5 Hz), tjekker dæmpning af den givne frekvens\\
-
-signal m hvid støj : help rand --> "rand" genererer hvid støj\\
+For at teste hvorvidt algoritmen 
 
 
+Gang:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_gang.png}
+	\caption{Tiddetektering }
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_peak_gang.png}
+	\caption{peak}
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
+		Gang & 512 - 512 & 125 - 125 \\ \hline
+	\end{tabular}
+	\caption{praktisk}
+	\label{my-label}
+\end{table}
+
+Løb
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_loeb.png}
+	\caption{Tiddetektering }
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_peak_loeb.png}
+	\caption{peak}
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
+		Løb & 512 - 512 & 1150 - 1150 \\ \hline
+	\end{tabular}
+	\caption{praktisk}
+	\label{my-label}
+\end{table}
+
+Inaktivitet
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_inaktiv.png}
+	\caption{Tiddetektering }
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/test_peak_inaktiv.png}
+	\caption{peak}
+	\label{fig:algoritme_cykling}
+\end{figure}
+
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
+		Gang & 512 - 512 - 512 - 512 & 400 - 400 - 1300 - 1300 \\ \hline
+	\end{tabular}
+	\caption{praktisk}
+	\label{my-label}
+\end{table}
 
 
 
 
 
 
-
-
-
-%%%%%%%%%%%%
-
-Rettelser:
-løb = >2.5
-gang = 2.5 > 0.5
