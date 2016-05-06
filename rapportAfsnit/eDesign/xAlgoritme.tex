@@ -46,12 +46,12 @@ Implementeringen af algoritmen for detektering af gang og løb består grundlæg
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{figures/cDesign/signalbehandling_psoc.png}
-	\caption{På figuren ses de fire signalbehandlingsfunktioners effekt på rå accelerometer data fra løb. Den sorte kurve på de fire figurer er det rå signal, og den røde er det behandlede output.}}
+	\includegraphics[scale=0.3]{figures/cDesign/signalbehandling_psoc.png}
+	\caption{På figuren ses de fire signalbehandlingsfunktioners effekt på rå accelerometer data fra løb. Den sorte kurve på de fire figurer er det rå signal, og den røde er det behandlede output.}
 	\label{fig:algoritme_cykling}
 \end{figure}
 
-Det behandlede output er data som er repræsentativt for hvordan PSoC vil behandle data når det endelige system er færdigt. Dette er tilfældet da det er data fra pilotforsøget, som er blevet behandlet igennem PSoC. Data fra pilotforsøget er for alle forsøgspersoner blevet behandlet med ovenstående signalbehandling med henblik på fastsættelse af tærskelværdier. 
+Det behandlede output antages som værende repræsentativt for hvordan PSoC vil behandle data når det endelige system er færdigt. Dette er tilfældet, da det er data fra pilotforsøget, som er blevet behandlet igennem PSoC, og derefter plottet. Data fra pilotforsøget er for alle forsøgspersoner blevet behandlet med ovenstående signalbehandling med henblik på fastsættelse af tærskelværdier. 
 
 \begin{table}[H]
 	\centering
@@ -60,30 +60,30 @@ Det behandlede output er data som er repræsentativt for hvordan PSoC vil behand
 		\rowcolor[HTML]{C0C0C0} 
 		Forsøgsperson & Tærskelværdi for gang & Tærskelværdi for løb \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F1 & x & x \\ \hline
+		F1 & 100 & 3000 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F2 & x & x \\ \hline
+		F2 & 120 & 1100 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F3 & x & x \\ \hline
+		F3 & 100 & 1100 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F4 & x & x \\ \hline
+		F4 & 500 & 2400 \\ \hline
 	\end{tabular}
-	\caption{My caption}
+	\caption{I tabellen ses tærskelværdierne for forsøgspersonerne vedrørende aktiviteterne gang og løb.}
 	\label{tab:individuel_taerskel}
 \end{table}
   
-blablalbla 
-dermed denne fælles
+De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf antages det at tærskelværdierne bør være dækkende for hele målingen, da forsøgspersonerne udførte aktiviteterne ved konstant hastighed.   
+
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{@{}ccc@{}}
-		\toprule
+	\begin{tabular}{ccc}
+		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Forsøgsperson & Tærskelværdi for gang & Tærskelværdi for løb \\ \midrule
-		Fælles & x & x \\ \bottomrule
+		Tærskelværdi for inaktivitet & Tærskelværdi for gang & Tærskelværd for løb \\ \hline
+		x \textless 100 & x \textgreater 100 \& x \textless 1100 & x \textgreater 1100 \\ \hline
 	\end{tabular}
-	\caption{My caption}
+	\caption{I tabellen ses de tærskelværdier som for alle forsøgspersoner vil kunne adskille gang og løb fra hinanden.}
 	\label{tab:faelles_taerskel}
 \end{table}
 
