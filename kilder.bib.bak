@@ -190,6 +190,16 @@
   Timestamp                = {2016.02.22}
 }
 
+@Electronic{Burrus2016,
+  Title                    = {FIR Digital Filters},
+  Author                   = {Burrus, C. Sidney},
+  Organization             = {OpenStax CNX},
+  Url                      = {https://cnx.org/contents/EpJ-P35G@2/FIR-Digital-Filters},
+  Year                     = {2016},
+
+  Owner                    = {LineSofie}
+}
+
 @Electronic{CenterforDiseaseControlandPrevention2015,
   Title                    = {The Benefits of Physical Activity},
   Author                   = {CenterforDiseaseControlandPrevention},
@@ -1216,6 +1226,17 @@
   Year                     = {2007},
 
   Comment                  = {ISBN: 978-87-7899-121-8}
+}
+
+@Manual{STMicroelectronics2016,
+  Title                    = {LSM9DS1},
+  Author                   = {STMicroelectronics},
+  Organization             = {STlife.augmented},
+  Year                     = {2016},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.05.06},
+  Url                      = {https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf}
 }
 
 @Electronic{Sundhedsministeriet2007,
