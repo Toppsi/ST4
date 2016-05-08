@@ -52,7 +52,7 @@ FIR filtre optræder ligeledes som forskellige konfigurationer, heriblandt Parks
 
 
 \subsubsection{Infinite Impulse Response filtre}
-Et IIR filter er defineret som et digitalt filter med uendelig mange impulsresponser. Derfor har dette filter en impulsrespons med uendeligt mange nulværdier\fxnote{zeros}, hvilket gør at filterets impulsresponsen falder eksponentielt i amplitude og resulterer i en uendelig respons. Filteret kan derfor kun tilnærmelsesvis designes med en lineær fase, hvorfor det kan risikere at være ustabilt. Idet IIR filtre benytter tidligere outputs, er det et feedback filter, hvilket gør det udregningseffektivt.\fxnote{nemmere at udregne} \citep{Blandford2013} Af den generelle formel for IIR filtre i \eqref{eq:iir} fremgår det, at filteret benytter tidligere og nutidige inputs men også tidligere outputs, hvormed det får uendeligt mange impulsresponser. 
+Et IIR filter er, modsat FIR filtre, defineret som et digitalt filter med uendelig mange impulsresponser. Derfor har dette filter en impulsrespons med uendeligt mange nulværdier\fxnote{zeros}, hvilket gør at filterets impulsresponsen falder eksponentielt i amplitude og resulterer i en uendelig respons. Filteret kan derfor kun tilnærmelsesvis designes med en lineær fase, hvorfor det kan risikere at være ustabilt. Idet IIR filtre benytter tidligere outputs, er det et feedback filter, hvilket gør det udregningseffektivt.\fxnote{nemmere at udregne} \citep{Blandford2013} Af den generelle formel for IIR filtre i \eqref{eq:iir} fremgår det, at filteret benytter tidligere og nutidige inputs men også tidligere outputs, hvormed det får uendeligt mange impulsresponser. 
 \space
 \begin{flalign}
 	Y[n] = \sum_{k=1}^{k} a_k Y[n-k] + \sum_{m=0}^{m} b_m X[n-m]
