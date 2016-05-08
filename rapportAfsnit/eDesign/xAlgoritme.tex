@@ -24,7 +24,7 @@ Resultatet af ovenstående signalbehandling medfører at der findes et udtryk fo
 \end{figure}
 
 Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført løb og max peak registreres og gemmes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført gang og max peak registeres og gemmes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra. \\
-Fælles for både detektering af gang og løb er at første målte peak og eller efterfulgt at inaktivitet kasseres. Dette er tilfældet da dette sikre at en periode med inaktivitet ikke summeres som faktisk gang eller løb. 
+Fælles for både detektering af gang og løb er at første målte peak og, eller efterfulgt at inaktivitet kasseres. Dette er tilfældet da dette sikre at en periode med inaktivitet ikke summeres som faktisk gang eller løb. 
 
 \subsection{Cykling}
 Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvorefter andet trin indledes. Dette trin finder den maksimale magnitude med tilhørende frekvens. Tredje trin består af to summeringer, første summering summerer FFT'en fra den frekvens hvor den største magnitude befandt sig $\pm$1 Hz. Anden summering summerer FFT'en fra 1 til 20 Hz. Resultaterne af disse, benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering udgør af den anden summering. \\
@@ -43,7 +43,7 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 
 \subsection{Implementering}
 \subsubsection{Gang og løb}
-Implementeringen af algoritmen for detektering af gang og løb består grundlæggende af to delelementer. Først signalbehandling, hvorefter selve algoritmen implementeres. Signal behandlingen er blevet implementeret som enestående funktioner, hvoraf signalet bliver behandlet med fire funktioner førend data bliver kørt igennem algoritmen.
+Implementeringen af algoritmen for detektering af gang og løb består grundlæggende af to delelementer. Først signalbehandling, hvorefter selve algoritmen implementeres. Signalbehandlingen er blevet implementeret som enestående funktioner igennem C, hvoraf signalet bliver behandlet med fire funktioner førend data bliver kørt igennem algoritmen.
 
 \begin{figure}[H]
 	\centering
@@ -52,7 +52,7 @@ Implementeringen af algoritmen for detektering af gang og løb består grundlæg
 	\label{fig:algoritme_cykling}
 \end{figure}
 
-Det behandlede output antages som værende repræsentativt for hvordan PSoC vil behandle data når det endelige system er færdigt. Dette er tilfældet, da det er data fra pilotforsøget, som er blevet behandlet igennem PSoC, og derefter plottet. Data fra pilotforsøget er for alle forsøgspersoner blevet behandlet med ovenstående signalbehandling med henblik på fastsættelse af tærskelværdier. 
+Funktionaliteten af ovenstående signalbehandling sikre at hælnedslag bliver omdannet til en størrelse hvoraf tærskelværdier til detektering er muligt. Det behandlede output antages som værende repræsentativt for hvordan PSoC vil behandle realtids data når det endelige system er færdigt. Dette antages, da det er data fra pilotforsøget, som er blevet behandlet igennem PSoC, og derefter visualiseret. Data fra pilotforsøget er for alle forsøgspersoner blevet behandlet med ovenstående signalbehandling med henblik på fastsættelse af tærskelværdier. 
 
 \begin{table}[H]
 	\centering
@@ -87,70 +87,59 @@ De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf a
 	\label{tab:faelles_taerskel}
 \end{table}
 
-
+Fastsættelsen af den fælles tærskelværdi bør sikre at gang og løb blandt forsøgspersonerne er mulige at detektere, samt adskille. Igennem behandling af data fra pilotforsøget forekom tærskelværdierne i \tabref{tab:faelles_taerskel} dækkende for alle forsøgspersonerne, hvoraf disse blev valgt.
 
 
 \subsection{Test}
-For at teste hvorvidt algoritmen 
+Algoritmens funktioner testes individuelt samt samlet, ved at indsende et simuleret signal, hvis funktion er at skulle agerer som gang, løb eller inaktivitet. Det simulerede signal er et absolut sinus signal, med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet bør agerer som gang, løb eller inaktivitet.  
 
-
-Gang:
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_gang.png}
-	\caption{Tiddetektering }
-	\label{fig:algoritme_cykling}
-\end{figure}
+For at teste algoritmens funktionalitet vedrørende detektering af gang, blev et absolut sinussignal samplet med 512 Hz, en frekvens på 0,5 Hz og en amplitude på 125, indsendt. Dette resulterede i tre halvbølger med en amplitude på 125, på 1536 samples. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_peak_gang.png}
-	\caption{peak}
-	\label{fig:algoritme_cykling}
+	\includegraphics[scale=0.3]{figures/cDesign/test_timecount_gang.png}
+	\caption{På figuren ses algoritmens time counter, som resultat af detektering af et gang signal. Den sorte kurve er det simulerede gang signal, og den røde kurve er algoritmens time counter, af samples som overholder algoritmens krav.}
+	\label{fig:testgraf_timecounter}
 \end{figure}
-
+Algoritmens time counter starter når signalet bliver indsendt, og nulstilles efter en sample, hvis værdi er under tærskelværdien. Heraf kan det ses at varigheden fra at en sample er gået under en tærskelværdi til at en sample igen er gået under en tærskelværdi er 512 samples. En af algoritmens funktioner er at frasortere det første detekterede peak, dermed nulstille time counter værdien, samt peak værdien. Den egentlige test vedrørende algoritmens time counter består dermed i at undersøge hvilke data der videresendes efter et input er kørt igennem algoritmen.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
-		Gang & 512 - 512 & 125 - 125 \\ \hline
+		Værdi videresendt & Forventet værdi [samples] & Modtaget værdi [samples] \\ \hline
+		Time counter & $\emptyset$ - 512 - 512 & $\emptyset$ - 512 - 512 \\ \hline
 	\end{tabular}
-	\caption{praktisk}
-	\label{my-label}
-\end{table}
+	\caption{I tabellen ses testresultaterne vedrørende test af time counter. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
+	\label{tab:test_res_timecount}
+\end{table} 
+Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede resultat at varigheden af første peak ikke blev medregnet og videresendt som et resultat. Algoritmens time counter fungerede dermed som forventet, og videresendte det forventede resultat. \\
 
-Løb
+Algoritmens andet resultat som skal videresendes, og dermed en af dets funktioner, er peak detektering. Denne peak detektering er designet således at det ikke skal registrer det første peak i et signal.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_loeb.png}
-	\caption{Tiddetektering }
-	\label{fig:algoritme_cykling}
+	\includegraphics[scale=0.3]{figures/cDesign/test_peak_gang.png}
+	\caption{På figuren ses algoritmens funktion til at finde peakværdier, som resultat af detektering af et gang signal. Den sorte kurve er det simulerede gang signal, og den røde kurve er algoritmens funktion til detektering af peakværdier.}
+	\label{fig:test_peak_gang}
 \end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_peak_loeb.png}
-	\caption{peak}
-	\label{fig:algoritme_cykling}
-\end{figure}
-
-
+Algoritmens detektering af peak starter når en sample overskrider en tærskelværdi, og finder peaket, når en sample er under tærskelværdien. Hvis det er første peak der detekteres sættes værdien til nul. Heraf kan det ses at når samplen går under tærskelværdien anden gang så bliver peaket registreret. Den egentlige test vedrørende algoritmens detektering af peaks, består dermed i at undersøge hvilke data der videresendes efter et input er kørt igennem algoritmen.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
-		Løb & 512 - 512 & 1150 - 1150 \\ \hline
+		Værdi videresendt & Forventet værdi [samples] & Modtaget værdi [samples] \\ \hline
+		Peak detektering & $\emptyset$ - 125 - 125 & $\emptyset$ - 125 - 125 \\ \hline
 	\end{tabular}
-	\caption{praktisk}
-	\label{my-label}
+	\caption{I tabellen ses testresultaterne vedrørende test af detektering af peaks. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
+	\label{tab:test_res_timecount}
 \end{table}
+Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede resultat at peakværdien af det første peak ikke blev medregnet og videresendt som et resultat. Algoritmens peak detektering
+fungerede dermed forventet, og videresendte amplituden som halvbølgerne var designet med. \\
+Algoritmen for løb blev ligeledes testet med henhold til time counter og peak detektering. Ved denne test blev der indsendt et ligende absolut sinussignal, med en anden amplitude som ville overskride tærskelværdien vedrørende detektering af løb. Resultaterne af disse test medførte resultater af samme nøjagtighed som ved detektering af gang. Algoritmen bør dermed fungerer optimalt, både til detektering af gang og løb. 
 
-Inaktivitet
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_inaktiv.png}
@@ -171,7 +160,7 @@ Inaktivitet
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Aktivitet & Modtaget time counter & Modtaget peak værdi \\ \hline
+		Aktivitet & Modtaget time counter & Modtaget peakværdi \\ \hline
 		Gang & 512 - 512 - 512 - 512 & 400 - 400 - 1300 - 1300 \\ \hline
 	\end{tabular}
 	\caption{praktisk}
