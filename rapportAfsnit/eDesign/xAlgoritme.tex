@@ -23,7 +23,7 @@ Resultatet af ovenstående signalbehandling medfører at der findes et udtryk fo
 	\label{fig:algoritme}
 \end{figure}
 
-Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført løb og max peak registreres og gemmes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført gang og max peak registeres og gemmes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra. \\
+Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Herefter signalbehandles dataene fra accelerometeret, hvorefter der tjekkes hvorvidt der har været inaktivitet tilstede. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført løb og max peak registreres og gemmes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper gemmes varigheden for timeren i et array tilhørende udført gang og max peak registeres og gemmes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra. \\
 Fælles for både detektering af gang og løb er at første målte peak og, eller efterfulgt at inaktivitet kasseres. Dette er tilfældet da dette sikre at en periode med inaktivitet ikke summeres som faktisk gang eller løb. 
 
 \subsection{Cykling}
@@ -133,42 +133,39 @@ Algoritmens detektering af peak starter når en sample overskrider en tærskelv�
 		Peak detektering & $\emptyset$ - 125 - 125 & $\emptyset$ - 125 - 125 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses testresultaterne vedrørende test af detektering af peaks. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
-	\label{tab:test_res_timecount}
+	\label{tab:test_res_peak}
 \end{table}
 Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede resultat at peakværdien af det første peak ikke blev medregnet og videresendt som et resultat. Algoritmens peak detektering
 fungerede dermed forventet, og videresendte amplituden som halvbølgerne var designet med. \\
 Algoritmen for løb blev ligeledes testet med henhold til time counter og peak detektering. Ved denne test blev der indsendt et ligende absolut sinussignal, med en anden amplitude som ville overskride tærskelværdien vedrørende detektering af løb. Resultaterne af disse test medførte resultater af samme nøjagtighed som ved detektering af gang. Algoritmen bør dermed fungerer optimalt, både til detektering af gang og løb. 
 
-
+Algoritmen undersøger hvorvidt data som modtages fra accelerometeret bør klarificeres som værende inaktivitet. Dette gøres ved at indsende et simuleret signal, som først overskrider tærskelværdierne vedrørende gang, efterfulgt af en periode på tre sekunders hvor hverken gang eller løbs tærskelværdi overskrides, efterfulgt af værdier som overskrider tærskelværdierne vedrørende løb. Dette blev testet for både time count og detektering af peak. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_timecount_inaktiv.png}
-	\caption{Tiddetektering }
-	\label{fig:algoritme_cykling}
+	\includegraphics[scale=0.3]{figures/cDesign/test_timecount_inaktiv.png}
+	\caption{\textbf{DENNE TEST SKAL LAVES IGEN, MCU HAR IKKE VÆRET NULSTILLET INDEN DEN BLEV KØRT} }
+	\label{fig:test_inaktiv_time}
 \end{figure}
-
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/test_peak_inaktiv.png}
+	\includegraphics[scale=0.3]{figures/cDesign/test_peak_inaktiv.png}
 	\caption{peak}
-	\label{fig:algoritme_cykling}
+	\label{fig:test_inaktiv_peak}
 \end{figure}
-
+Resultaterne vedrørende time count viser at i perioden med inaktivitet nulstilles time count ikke før en sample har været over og under en tærskelværdi. Resultaterne vedrørende detektering af peak viser at første værdi tilhørende det første peak, samt det første peak efterfulgt af inaktivitet frasorteres. For at klassificere hvorvidt algoritmen omhandlende detektering af inaktivitet fungerer efter hensigten, så undersøges det data som bliver videresendt. Ved et tilfælde med et indsendt input som ovenstående, så bør der registreres to time count værdier med tilhørende peakværdier, efterfulgt af en periode med inaktivitet, hvoraf første peak frasorteres og dermed to time count værdier med tilhørende peak værdier.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Aktivitet & Modtaget time counter & Modtaget peakværdi \\ \hline
-		Gang & 512 - 512 - 512 - 512 & 400 - 400 - 1300 - 1300 \\ \hline
+		Værdi videresendt & Forventet værdi & Modtaget værdi \\ \hline
+		Time counter & $\emptyset$ - 512 - 512 - $\emptyset$ - 512 - 512 & $\emptyset$ - 512 - 512 - $\emptyset$ - 512 - 512 \\ \hline
+		\multicolumn{1}{l}{Peak detektering} & \multicolumn{1}{l}{$\emptyset$ - 400 - 400 - $\emptyset$ - 1300 - 1300} & \multicolumn{1}{l}{$\emptyset$ - 400 - 400 - $\emptyset$ - 1300 - 1300} \\ \hline
 	\end{tabular}
-	\caption{praktisk}
-	\label{my-label}
+	\caption{I tabellen ses testresultaterne vedrørende test af time count og detektering af peaks ved et simuleret signal som illustrerer en periode med inaktivitet. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
+	\label{tab:test_inaktiv}
 \end{table}
-
-
-
-
+Algoritmen er blevet testet på et simuleret signal, som skulle illustrer en periode med inaktivitet omringet af to perioder med henholdsvis gang og læb. Det forventede resultat for både time count værdien og peakværdien er at første peak frasorteres, og første peak efter inaktivitet frasorteres. Dermed forventes det at det videresendte data er time count på 512, og amplituder som afspejler dets design på 400 og 1300. Resultatet af det data som blev modtaget var som forventet, og dermed kan det antages at algoritmens funktion vedrørende detektering af inaktivitet fungerer efter hensigten. 
 
 
