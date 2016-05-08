@@ -71,8 +71,7 @@ Funktionaliteten af ovenstående signalbehandling sikre at hælnedslag bliver om
 	\end{tabular}
 	\caption{I tabellen ses tærskelværdierne for forsøgspersonerne vedrørende aktiviteterne gang og løb.}
 	\label{tab:individuel_taerskel}
-\end{table}
-  
+\end{table}\vspace{-0.5cm}
 De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf antages det at tærskelværdierne bør være dækkende for hele målingen, da forsøgspersonerne udførte aktiviteterne ved konstant hastighed.   
 
 \begin{table}[H]
@@ -85,8 +84,7 @@ De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf a
 	\end{tabular}
 	\caption{I tabellen ses de tærskelværdier som for alle forsøgspersoner vil kunne adskille gang og løb fra hinanden.}
 	\label{tab:faelles_taerskel}
-\end{table}
-
+\end{table}\vspace{-0.5cm}
 Fastsættelsen af den fælles tærskelværdi bør sikre at gang og løb blandt forsøgspersonerne er mulige at detektere, samt adskille. Igennem behandling af data fra pilotforsøget forekom tærskelværdierne i \tabref{tab:faelles_taerskel} dækkende for alle forsøgspersonerne, hvoraf disse blev valgt.
 
 
@@ -113,7 +111,7 @@ Algoritmens time counter starter når signalet bliver indsendt, og nulstilles ef
 	\end{tabular}
 	\caption{I tabellen ses testresultaterne vedrørende test af time counter. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
 	\label{tab:test_res_timecount}
-\end{table} 
+\end{table} \vspace{-0.5cm}
 Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede resultat at varigheden af første peak ikke blev medregnet og videresendt som et resultat. Algoritmens time counter fungerede dermed som forventet, og videresendte det forventede resultat. \\
 
 Algoritmens andet resultat som skal videresendes, og dermed en af dets funktioner, er peak detektering. Denne peak detektering er designet således at det ikke skal registrer det første peak i et signal.
@@ -134,7 +132,7 @@ Algoritmens detektering af peak starter når en sample overskrider en tærskelv�
 	\end{tabular}
 	\caption{I tabellen ses testresultaterne vedrørende test af detektering af peaks. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
 	\label{tab:test_res_peak}
-\end{table}
+\end{table}\vspace{-0.5cm}
 Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede resultat at peakværdien af det første peak ikke blev medregnet og videresendt som et resultat. Algoritmens peak detektering
 fungerede dermed forventet, og videresendte amplituden som halvbølgerne var designet med. \\
 Algoritmen for løb blev ligeledes testet med henhold til time counter og peak detektering. Ved denne test blev der indsendt et ligende absolut sinussignal, med en anden amplitude som ville overskride tærskelværdien vedrørende detektering af løb. Resultaterne af disse test medførte resultater af samme nøjagtighed som ved detektering af gang. Algoritmen bør dermed fungerer optimalt, både til detektering af gang og løb. 
@@ -165,7 +163,7 @@ Resultaterne vedrørende time count viser at i perioden med inaktivitet nulstill
 	\end{tabular}
 	\caption{I tabellen ses testresultaterne vedrørende test af time count og detektering af peaks ved et simuleret signal som illustrerer en periode med inaktivitet. $\emptyset$ antyder at det ikke blev modtaget noget ved første peak.}
 	\label{tab:test_inaktiv}
-\end{table}
+\end{table}\vspace{-0.5cm}
 Algoritmen er blevet testet på et simuleret signal, som skulle illustrer en periode med inaktivitet omringet af to perioder med henholdsvis gang og læb. Det forventede resultat for både time count værdien og peakværdien er at første peak frasorteres, og første peak efter inaktivitet frasorteres. Dermed forventes det at det videresendte data er time count på 512, og amplituder som afspejler dets design på 400 og 1300. Resultatet af det data som blev modtaget var som forventet, og dermed kan det antages at algoritmens funktion vedrørende detektering af inaktivitet fungerer efter hensigten. 
 
 
