@@ -27,7 +27,7 @@ Resultatet af ovenstående signalbehandling medfører at der findes et udtryk fo
 Ovenstående figur repræsenterer algoritmen for detektering og adskilles af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges hvorvidt cykling registreres. Herefter signalbehandles dataene fra accelerometeret. Hvis dette ikke er tilfældet og løb detekteres, skal en timer stoppe når løb ikke længere detekteres. Når timeren stopper sendes varigheden for timeren som en tidsværdi for udført løb og max peak registreres og videresendes ligeledes. Herefter startes timeren igen. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper sendes varigheden som en tidsværdi for udført gang og max peak registeres og sendes ligeledes. Herefter startes timeren igen. Hvis algoritmen for detektering af løb og gang ikke registrer aktiviteterne, så bliver der ikke udført nogen bevægelse, og algoritmen starter forfra. \\
 Fælles for både detektering af gang og løb er at første målte peak og, eller efterfulgt at inaktivitet kasseres. Dette er tilfældet da dette sikre at en periode med inaktivitet ikke summeres som faktisk gang eller løb. 
 
-\subsection{Cykling}
+\subsubsection{Cykling}
 Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører at signalets magnitude og dets tilhørende frekvenser kommer til udtryk, hvorefter andet trin indledes. Dette trin finder den maksimale magnitude med tilhørende frekvens. Tredje trin består af to summeringer, første summering summerer FFT'en fra den frekvens hvor den største magnitude befandt sig, $\pm$1 Hz. Anden summering summerer FFT'en fra 1 til 20 Hz. Resultaterne af disse, benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering udgør af anden summering. \\
 Resultatet af ovenstående signalbehandling medfører at der opstilles et udtryk for signalets spredning af energi. Det gør sig gældende at cykling har en spredning af energi fordelt nært frekvensen med den største amplitude. Data fra gyroskopets z-akse vedrørende cykling blev for alle forsøgspersoner, behandlet med ovenstående metode. Dette resulterede i at 84,5\% til 91,9\% af energien lå $\pm$1 Hz omkring den fundne frekvens med den største amplitude. Følgende blev ligeledes behandlet for gang og løb, for at sikre disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling, kan fastsættes. Resultatet heraf medførte at ved gang befandt energien omkring den fundne frekvens sig mellem 35,9\% til 48,5\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. \\
 Resultatet af at energien omkring den fundne frekvens med den største amplitude er $\approx$30\% større ved cykling end ved gang og løb, fastsættes tærskelværdien til 70\%. For at detektere cykling skal outputtet fra databehandlingen være større end 70\%.
@@ -88,8 +88,11 @@ De individuelle tærskelværdier er fundet over et fem sekunders vindue. Heraf a
 \end{table}\vspace{-0.5cm}
 Fastsættelsen af den fælles tærskelværdi bør sikre at gang og løb blandt forsøgspersonerne er mulige at detektere, samt adskille. Igennem behandling af data fra pilotforsøget forekom tærskelværdierne i \tabref{tab:faelles_taerskel} dækkende for alle forsøgspersonerne, hvoraf disse blev valgt.
 
+\subsubsection{Cykling}
+\textit{Mangler}
 
 \subsection{Test}
+\subsubsection{Gang og løb}
 Algoritmens funktioner testes individuelt samt samlet. Dette gøres ved at indsende et simuleret signal, hvis funktion er at skulle agerer som gang, løb eller inaktivitet. Det simulerede signal er et absolut sinussignal, med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet bør agerer som gang, løb eller inaktivitet.  
 
 For at teste algoritmens funktionalitet vedrørende detektering af gang, blev der indsendt et absolut sinussignal samplet med 512 Hz, en frekvens på 0,5 Hz og en amplitude på 125. Dette resulterede i tre halvbølger med en amplitude på 125, på 1536 samples. 
@@ -166,4 +169,6 @@ Resultaterne vedrørende time count viser at i perioden med inaktivitet nulstill
 \end{table}\vspace{-0.5cm}
 Algoritmen er blevet testet på et simuleret signal, som skulle illustrer en periode med inaktivitet omringet af to perioder med henholdsvis gang og læb. Det forventede resultat for både time count værdien og peakværdien er at første peak frasorteres, og første peak efter inaktivitet frasorteres. Dermed forventes det at det videresendte data er time count på 512, og amplituder som afspejler signalets design på 400 og 1300. Resultatet af det data som blev modtaget var som forventet, med præcis nøjagtighed, og dermed kan det antages at algoritmens funktion vedrørende detektering af inaktivitet fungerer efter hensigten. 
 
+\subsubsection{Cykling}
+\textit{Mangler}
 
