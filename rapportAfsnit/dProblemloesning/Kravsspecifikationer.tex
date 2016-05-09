@@ -88,7 +88,7 @@ ADC'en skal:
 %\subsection{Krav til software}
 %Aktivitetsmålerens software består af algoritmedesign til MCU'ens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
-\subsection{Algoritmedesign}
+\subsection{Algoritmedesign} \label{krav_algoritme}
 Designet af de fire algoritmer ligger til grund for hele funktionaliteten af systemet. \\
 Algoritmen til PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCU'en til en GAP peripheral. Den skal indeholde elementer, som henvendes til IC'en, da gyroskopet skal deaktiveres hvis det ikke er i brug. Hvert tiende sekund aktiveres gyroskopet, som skal tracke aktiviteten cykling. Hvis der ikke udføres aktiviteten cykling, slukkes gyroskopet, hvorefter det ti sekunder senere vågner igen. Algoritmen skal gøre mikroprocessoren i stand til at detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter vækkes EZ-BLE PRoC fra stop power mode og den gemte data overføres hertil via UART kommunikation.\\
 Algoritmen til EZ-BLE PRoC på GAP peripheral sørger for, at enheden er i stop power mode med mindre, der modtages et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAP central via BLE. \\
