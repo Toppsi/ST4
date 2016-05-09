@@ -1,5 +1,6 @@
 \section{Algoritme til detektering af gang, løb og cykling}
-\textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang, løb og cykling. Først designes algoritmerne til det specifikke formål, hvorefter de kan implementeres. Afslutningsvist bliver algoritmerne testet i forhold til opstillede krav i \secref{krav_algoritme}. %bliver design af algoritmerne behandlet, hvilket er ensbetydende med at implementering og kodning kan foregå. Når algoritmerne er designet og implementeret bliver de efterfølgende testet for at af- eller bekræfte deres virkning.}
+\textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang, løb og cykling. Først designes algoritmerne til det specifikke formål, hvorefter de kan implementeres. Afslutningsvist bliver algoritmerne testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
+%bliver design af algoritmerne behandlet, hvilket er ensbetydende med at implementering og kodning kan foregå. Når algoritmerne er designet og implementeret bliver de efterfølgende testet for at af- eller bekræfte deres virkning.}
 
 \subsection{Design}
 For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyroskop som er beskrevet i \secref{sec_design_LSM9DS1}. Gyroskopet skal benyttes til at detektere cykling, mens løb og gang detekteres ved brug af accelerometeret. For at kunne detektere og adskille disse aktiviteter behandles inputtet fra sensorerne gennem forskellig signalbehandlingsprocessor. Algoritmerne gør det muligt at afgøre, om de pågældende signaler repræsenterer gang, løb, cykling eller ingen aktivitet. 
@@ -115,7 +116,7 @@ Algoritmens andens anden test er peak detektering. Denne peak detektering er des
 	\caption{På figuren ses algoritmens funktion til at detektere peakværdier som resultat af detektering af et gangsignal. Den sorte kurve er det simulerede gang signal, og den røde kurve er algoritmens funktion til detektering af peakværdier.}
 	\label{fig:test_peak_gang}
 \end{figure}
-Algoritmens detektering af peak starter, når en sample overskrider en tærskelværdi og finder peaket, når en sample er under tærskelværdien. Hvis det er første peak, som detekteres, sættes værdien til nul. Heraf kan det ses, at når samplen går under tærskelværdien anden gang, bliver peaket registreret. Den egentlige test vedrørende algoritmens detektering af peaks består dermed i at undersøge hvilke data, der videresendes som resultat, efter et input er kørt igennem algoritmen. Resultatet heraf ses i \tableref{tab:test_res_peak}.
+Algoritmens detektering af peak starter, når en sample overskrider en tærskelværdi og finder peaket, når en sample er under tærskelværdien. Hvis det er første peak, som detekteres, sættes værdien til nul. Heraf kan det ses, at når samplen går under tærskelværdien anden gang, bliver peaket registreret. Den egentlige test vedrørende algoritmens detektering af peaks består dermed i at undersøge hvilke data, der videresendes som resultat, efter et input er kørt igennem algoritmen. Resultatet heraf ses i \tabref{tab:test_res_peak}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
