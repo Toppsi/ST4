@@ -58,7 +58,7 @@ Der indsendes 1451 samples og der benyttes en samplingsfrekvens på 188~Hz, hvor
 Det fremgår der er 9,26 peaks samt at arrayet har en varighed af 7,7 sekunder, hvormed der er er 0,83 sekunder mellem hver overskridelse af tærskelværdien. Derfor vil det indsendte signal medføre en værdi af 72 BPM. Det er derfor forventeligt, at algoritmen vil beregne og printe en puls som har en værdi af 72 BPM. 
 
 Algoritmen er bestemt til at nulstille sin counter hver gang der er registreret tre overskridelser af tærskelværdien. Derfor vil algoritmen gøre brug af det antal samples som counteren har talt, til at bestemme pulsen for den pågældende periode. \\
-Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan counteren nulstilles når der er registreret tre overskridelser af tærskelværdien. 
+Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan counteren nulstilles når der er registreret tre overskridelser af tærskelværdien. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Real Term har printer de forventede værdi for BPM.
 
 \begin{figure}[H]
 	\centering
@@ -67,13 +67,24 @@ Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_pu
 \label{fig:timecounter_puls_realterm}
 \end{figure}
 
-Det fremgår af figuren, at algoritmen tæller counteren op, indtil der er registreret tre overskridelser af tærskelværdien. Herefter beregnes algoritmen pulsen, ud fra det antal samples som counteren har talt. Herefter printes pulsen i Real Term, hvilket ses på den højre side af \figref{fig:timecounter_puls_realterm}. Det fremgår ydermere, at der printes en puls på 72 BPM i Real Term, hvilket stemmer overens med det forventede. \\
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
+		72 - 72 - 72          & 72 - 72 - 72         & 0\% - 0\% - 0\% \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er fra Real Term.}
+	\label{tab:test_puls_realterm}
+\end{table} \vspace{-0.5cm}
+
+Det fremgår af figuren, at algoritmen tæller counteren op, indtil der er registreret tre overskridelser af tærskelværdien. Herefter beregnes algoritmen pulsen, ud fra det antal samples som counteren har talt. Herefter printes pulsen i Real Term, hvor værdierne er illustreret i tabellen. Det fremgår ydermere, at de modtagede værdier har 0\% afvigelse fra de forventede værdier. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
-Der foretages yderligere to tests, md henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}.
-Der foretages yderligere en test ved brug af sensoren i et pratisk øjemed. Dette udføres ved at påføre sensoren på en forsøgsperson, hvorefter denne person løber med en konstant hastighed på et løbebånd. Yderligere vil der blive benyttet en pulsmåler i form af ......., som benyttes som reference for den beregne puls af algoritmen. 
+Der foretages yderligere to tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. Først testes systemet mens en person er stillesiddende, hvorefter systemet testes ved at løbe på et løbebånd. \\
+Først testes pulssensoren og den tilhørende algoritme ved en stillesiddende aktivitet. Dette udføres ved at påføre sensoren på en forsøgsperson, hvorefter denne person løber med en konstant hastighed på et løbebånd. Yderligere vil der blive benyttet en pulsmåler i form af ......., som benyttes som reference for den beregne puls af algoritmen. 
 
-HERNEDE KOMMER DEN PRAKTISKE DEL AF TESTEN
 
 
 
