@@ -4,9 +4,7 @@ Pilotforsøget udføres med henblik på at kunne lave algoritmer ud fra målinge
 
 Til opsamling af data, anvendes en Shimmer 3. Dette er en enhed, som indeholder en række sensorer\fxnote{accelerometer, gyroskop, tryksensor, magnometer, højdemåler}, hvor der til forsøget udelukkende benyttes et accelerometer og et gyroskop. 
 
-
 %Resultaterne fra pilotforsøget bruges til at designe det endelige system, hvor softwaren for CY8CKIT-043 PSoC 4 M-Series Prototyping Kit skal konfigureres og tilpasses.
-
 Formålet med pilotforsøget er dermed:\vspace{-3mm}
 \begin{itemize}
 	\item At undersøge hvordan signalerne for gang, løb og cykling adskilles fra hinanden. 
@@ -68,12 +66,7 @@ Før forsøgene kan udføres skal Shimmer forbindes korrekt med computeren, og i
 	\item De maksimale arbejdsområder på $\pm$16 g og $\pm$2000 dps vælges, da signalets amplitude endnu er ukendt.
 	\item Samplingsfrekvensen indstilles på 512 Hz, da signalets frekvens er ukendt, og denne samplingsfrekvens er den maksimale der kan vælges, når både gyroskopet og accelerometeret er i brug.  
 	\item Det er nu muligt at starte stream, og derefter realtime.
-	
-	
 \end{itemize}
-
-
-
 %Shimmer3 undersøges nu for at kunne konkludere hvorvidt værdierne fra sensorerne er korrekte. Til denne undersøgelse skal akserne for accelerometeret og gyoskopet findes ved opslag i datablad for enheden. Når disse akser er bestemt, benyttes Labview til at optage målinger i. Der startes en ’Stream’ for at undersøge realtime målingerne.
 %Først undersøges accelerometerets værdier ved at placere Shimmer3 på en flad, fast overflade. Shimmer3 vendes i 6 forskellige positioner afhængigt af om det er den positive eller negative akse for x, y eller z som undersøges. Værdien for den positive akse for henholdsvis x, y og z skal vise cirka 9,8 m/s, og med negativt fortegn ved den negative akse for x, y og x. I tilfælde af at værdierne er cirka 9,8 m/s, da kan accelerometerets nøjagtighed godtages. Ydermere undersøges gyroskopet ved at spinne Shimmer3 rundt i en række forskellige retninger for at undersøge hvorvidt sensoren reagerer på dette. Hvis gyroskopet registrerer ændringerne, da godtages dennes nøjagtighed. 
 %Shimmer3 er forbundet, konfigureret og undersøgt således forsøget efterfølgende kan gennemføres.
@@ -83,7 +76,7 @@ Forsøget udføres på fire forsøgspersoner, som alle skal udføre aktivitetern
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/qBilag/Sensor_placering2.png}
+	\includegraphics[scale=0.55]{figures/qBilag/Sensor_placering2.png}
 	\caption{På figuren ses, hvor sensoren skal placeres under pilotforsøget. Placering A: proximalt for den laterale malleolus. Placering B: medialt på den laterale side af tibia. Placering C: distalt for patella på den laterale side. (Modificeret fra \cite{Perna2016,Shimmer2016})}
 	\label{fig:sensor_placering}
 \end{figure}
@@ -254,16 +247,13 @@ Slutvis blev accelerometerets y-akse undersøgt ved forsøget hvor forsøgsperso
 	\label{fig:Ap_maxghastighed}
 \end{table}
 Det ses dermed at den maksimale værdi målt i påsitiv etning på accelerometerets y-akse under hastighedsstigningen var 11,65 Hz $\pm$5,3 ved placering A, 11,55 Hz $\pm$4,77 for placering B og 10,44 Hz $\pm$4,91 for placerinng C. \newline
-Den maksimale påvirkning i negativ retning for accelerometerets y-akse under hastighedsstigningen var -5,00 Hz $\pm$1,96 for placering A, -5,29 Hz $\pm$0,8 for placering B og -6,72 Hz $\pm$2,09 for placering C.\newline
-
+Den maksimale påvirkning i negativ retning for accelerometerets y-akse under hastighedsstigningen var -5,00 Hz $\pm$1,96 for placering A, -5,29 Hz $\pm$0,8 for placering B og -6,72 Hz $\pm$2,09 for placering C.
 
 \subsection{Maksimal omdrejninger per sekund under cykling}
 Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af den maksimale amplitude fra gyroskopet. Dette blev bestemt ved at beregne den maksimale peak-to-peak, under udførelsen af cykling. Dataene blev kun behandlet med henblik på gyroskopets z-akse, som resultat af \secref{bevaegelse}. Inden dataopsamling for cykling, blev der målt en baseline. Den maksimale afvigelse fra nul var -0,9979\%, hvormed det vurderes at alle målinger havde en neutral baseline. Dataene fra forsøget kan ses i nedstående tabel.
 
-
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{cccc}
 			\hline
 			\rowcolor[HTML]{C0C0C0} 
@@ -273,7 +263,6 @@ Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af 
 			F3 & -208,29 ; 136,28  	& -196,95 ; 140,18	 & -195,43 ; 151,10 \\ \hline
 			F4 & -182,56 ; 152,13  	& -159,82 ; 138,35	 & -152,62 ; 136,83 \\ \hline
 		\end{tabular}%
-	}
 	\caption{I tabellen ses de maksimale positive og negative værdier fra gyroskopets z-akse som resultat af cykling med en hastighed på 20,9 km/t. Værdierne er fundet for både placering A, B og C.}
 	\label{fig:Ap_maxghastighed}
 \end{table}
@@ -314,11 +303,11 @@ Dataene fra aktiviteten, cykling blev behandlet for at bestemme signalernes frek
 
 \subsection{Accelerometer karakteristika vedrørende gang og løb}
 Dataene fra aktiviteten gang og løb blev behandlet med henblik på bestemmelse af signalets karakteristika, således en sammenligning og senere algoritmedesign blev muliggjort. Dataene fra accelerometerets y-akse blev for alle forsøgspersoner lavpas filtreret ved 45 Hz, grundet frekvensspektret på \figref{fig:Ap_FFt}. Derudover vlev signalet differentieret hvormed områderne med størst hældningskoefficient kommer til udtryk. Dermed fremhæves hælnedslag og tåafsæt da disse events har en stor hældning.
-
+\newpage
 \textit{Gang:}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.68]{figures/qBilag/gang_diff}
+	\includegraphics[scale=0.6]{figures/qBilag/gang_diff}
 	\caption{På figuren ses det filtrerede og differentierede data fra aktiviteten gang for alle forsøgspersoner.}
 	\label{fig:Ap_gangdiff}
 \end{figure}
@@ -327,7 +316,7 @@ Det ses at hælnedslagg og tåafsæt fremgår tydligere end på \figref{raa_data
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.68]{figures/qBilag/loeb_diff}
+	\includegraphics[scale=0.6]{figures/qBilag/loeb_diff}
 	\caption{På figuren ses det filtrerede differentierede data fra aktiviteten løb for alle forsøgspersoner.}
 	\label{fig:Ap_loebdiff}
 \end{figure}
