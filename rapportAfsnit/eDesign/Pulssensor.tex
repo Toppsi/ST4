@@ -73,7 +73,7 @@ Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_pu
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
-		72 - 72 - 72          & 72 - 72 - 72         & 0\% - 0\% - 0\% \\ \hline
+		72 - 72 - 72          & 72 - 72 - 72         & 0 - 0 - 0 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er fra Real Term.}
 	\label{tab:test_puls_realterm}
@@ -83,10 +83,22 @@ Det fremgår af figuren, at algoritmen tæller counteren op, indtil der er regis
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
 Der foretages yderligere to tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. Først testes systemet mens en person er stillesiddende, hvorefter systemet testes ved at løbe på et løbebånd. \\
-Først testes pulssensoren og den tilhørende algoritme ved en stillesiddende aktivitet. Dette udføres ved at påføre sensoren på en forsøgsperson, hvorefter denne person løber med en konstant hastighed på et løbebånd. Yderligere vil der blive benyttet en pulsmåler i form af ......., som benyttes som reference for den beregne puls af algoritmen. 
+Først testes pulssensoren og den tilhørende algoritme ved en stillesiddende aktivitet. Personens puls vil dermed være en konstant puls, hvilepulsen. Yderligere vil der blive benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregne puls af algoritmen. Denne pulssensors data vil blive printet i programmet, Logger Pro. \\
+Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Gennemsnitligt puls \\ Logger Pro [BPM] & Gennemsnitligt puls \\ Real Term [BPM] & Afvigelse [\%]\\ \hline
+		60,4         & 64,5         & 6,4 \\ \hline
+	\end{tabular}
+	\caption{I tabellen fremgår den gennemsnitlige puls beregnet med data printet i henholdsvis Logger Pro og Real Term. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 6,4\%.}
+	\label{tab:test_pulssystem}
+\end{table} \vspace{-0.5cm}
 
-
+Testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 6,4\%. Dermed overholder pulssensoren de opstillede krav i \secref{puls_krav}.
 
 
 
