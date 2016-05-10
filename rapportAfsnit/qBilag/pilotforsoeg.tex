@@ -257,7 +257,7 @@ Dataene fra aktiviteten, cykling, blev behandlet med henblik på bestemmelse af 
 		\begin{tabular}{cccc}
 			\hline
 			\rowcolor[HTML]{C0C0C0} 
-			Forsøgsperson & \begin{tabular}[c]{@{}c@{}} Placering A {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Placering B {[}g{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Placering C {[}g{]}\end{tabular} \\ \hline
+			Forsøgsperson & \begin{tabular}[c]{@{}c@{}} Placering A {[}dps{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Placering B {[}dps{]}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Placering C {[}dps{]}\end{tabular} \\ \hline
 			F1 & -148,23 ; 108,29   & -209,82 ; 118,60   & -188,66 ; 98,29  \\ \hline
 			F2 & -108,42 ; 108,11   & -133,11 ; 114,94	 & -150,43 ; 120,61 \\ \hline
 			F3 & -208,29 ; 136,28  	& -196,95 ; 140,18	 & -195,43 ; 151,10 \\ \hline
@@ -273,14 +273,12 @@ Den maksimale påvirkning i negativ retning er -161,88 dps $\pm$53,46 for placer
 Databehandling vil ud fra de maksimale værdier tage udgangspunkt i placering A. Dette gøres på baggrund af at denne er den mest optimale placering i forhold til komfort for brugeren, da tre ud af fire forsøgspersoner foretrak denne placering. Den maksimale værdi for placering A overskrider den maksimale accelerationskraftpåvirkning med 0,95 g. Det vurderes dog at placering A vil være optimal at bruge da de 16,95 g repræsenteres i form af hælnedslag. Det vil stadig være muligt at adskille hælnedslag fra tåafsæt selvom det vil klippes ved 16 g. \newline
 Gyroskopets data viser ligeledes at det er muligt at benytte placering A, da denne viser at cykling ikke resulterer i en høj dps. 
 På baggrund af dette vil der i det resterende databehandling tages udgangspunkt i placering A, som kan ses i to sekunders interval for hver af de fire forsøgspersoner på \figref{raa_data}.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.38]{figures/qBilag/raa_data}
-	\caption{På figuren ses det ubehandlede data fra de tre aktivitetstyper gang, løb og cykling optaget på henoldsvis et accelerometer og et gyroskop ved placering A.}
+	\caption{På figuren ses det ubehandlede data fra de tre aktivitetstyper gang, løb og cykling, hvoraf data for gang og løb er fra accelerometret mens data for cykling er fra gyroskopet ved placering A.}
 	\label{raa_data}
 \end{figure}
-
 
 \subsection{Frekvensindhold af gang, løb og cykling}
 Dataene fra aktiviteterne, gang og løb blev behandlet for at bestemme signalernes frekvensindhold. Resultatet af dette muliggør bestemmelsen af samplingsfrekvensen vedrørende accelerometeret og gyroskopet. Der blev foretaget en frekvensdomæne analyse, hvilket muliggør visualisering af signalets magnitude ved forskellige frekvenser, hvoraf energien af signalet kommer til udtryk.
@@ -302,7 +300,7 @@ Dataene fra aktiviteten, cykling blev behandlet for at bestemme signalernes frek
 \end{figure}
 
 \subsection{Accelerometer karakteristika vedrørende gang og løb}
-Dataene fra aktiviteten gang og løb blev behandlet med henblik på bestemmelse af signalets karakteristika, således en sammenligning og senere algoritmedesign blev muliggjort. Dataene fra accelerometerets y-akse blev for alle forsøgspersoner lavpas filtreret ved 45 Hz, grundet frekvensspektret på \figref{fig:Ap_FFt}. Derudover vlev signalet differentieret hvormed områderne med størst hældningskoefficient kommer til udtryk. Dermed fremhæves hælnedslag og tåafsæt da disse events har en stor hældning.
+Dataene fra aktiviteten gang og løb blev behandlet med henblik på bestemmelse af signalets karakteristika, således en sammenligning og senere algoritmedesign blev muliggjort. Dataene fra accelerometerets y-akse blev for alle forsøgspersoner lavpas filtreret ved 45 Hz, grundet frekvensspektret på \figref{fig:Ap_FFt}. Derudover blev signalet differentieret, hvorved områderne med størst hældningskoefficient kommer til udtryk. Herigennem fremhæves hælnedslag og tåafsæt, da disse events har en stor hældning.
 \newpage
 \textit{Gang:}
 \begin{figure}[H]
