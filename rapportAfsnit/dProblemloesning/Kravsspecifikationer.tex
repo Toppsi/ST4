@@ -40,15 +40,15 @@ Accelerometeret skal:
 \item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
 \end{itemize}
 
-\subsection{Gyroskop} 
+\subsection{Gyroskop} \label{krav:gyro}
 %Et gyroskop kræver en given spænding for at kunne optage data. Gyroskopet i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav.
-Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte $\pm$160 dps som maksimalværdierne. Dette blev bestemt for en given frekvens ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere frekvens. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
+Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte et arbejdsområde på maks 334,69 dps for placering A. Dette blev bestemt for en given frekvens ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere frekvens. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
 
 \textbf{Krav til gyroskop} \newline
 Gyroskopet skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
-\item Have et arbejdsområde på mindst 320~dps.
+\item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
 \end{itemize}
 
 \subsection{Pulssensor} \label{puls_krav}

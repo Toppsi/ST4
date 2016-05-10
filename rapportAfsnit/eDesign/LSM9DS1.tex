@@ -51,20 +51,18 @@ Gyroskopet har tre forskellige power modes; slukket, low power og normal power. 
 %Ved kontinuert-til-FIFO tilstand skifter tilstanden alt efter de bit der modtages i interruptet for accelerometeret og gyroskopet. Hvis der modtages et bit på 1 vil den være i FIFO tilstand, og modtages der et bit på 0, vil den være i kontinuert tilstand. 
 %I bypass-til-kontinuert tilstand skiftes der ligeledes mellem bypass og kontinuert tilstand alt efter det modtagne interrups for accelerometeret og gyroskopet. Hvis der modtages et bit på 1, er den i kontinuert tilstand, og modtages der en bit på 0, nulstilles den ved at gå i bypass tilstand. 
 \subsection{Implementering}
-MCuen skal kunne modtage data fra sensoren, hvilket udførs ved at implementere en algoritme i MCUen. Algoritmen i MCUen skal blandt andet skrive til hex adressen '6B', som er registeradressen for gyroskopet og accelerometer. Således kan MCUen som master skrive til selve accelerometret eller gyroskopet. Det fremgår yderligere at databladet for ICen, at algoritmen skal skrive til hexkoden 'A8' for at indstille accelerometeret til et arbejdsområde på $\pm$16~g og en samplingsfrekvens på 476~Hz. Yderligere benyttes hexkoden '79' til at indstille gyroskopet til et arbejdsområde på 2000 grader per sekund og en samlingsfrekvens på 119~Hz. \citep{STMicroelectronics2016}
+MCuen skal kunne modtage data fra sensoren, hvilket udførs ved at implementere en algoritme i MCUen. Algoritmen i MCUen skal blandt andet skrive hexadressen '6B' til ICen, som er registeradressen for gyroskopet og accelerometer. Således kan MCUen som master af de to skrive til selve accelerometret eller gyroskopet. Det fremgår yderligere at databladet for ICen, at algoritmen skal skrive hexkoden 'A8' for at indstille accelerometeret til et arbejdsområde på $\pm$16~g og en samplingsfrekvens på 476~Hz. Yderligere skrives hexkoden '79' for at indstille gyroskopet til et arbejdsområde på 2000 grader per sekund og en samlingsfrekvens på 119~Hz. \citep{STMicroelectronics2016}
 
-I PSoC Programmer indhentes det analoge komponent I2CM. Denne skaber en I$^2$C forbindelse imellem MCUen og ICen samtidig med, at den indstiller MCUen til at være master. %Når PSoC Programmer benyttes til test af sensoren er der ikke behov for flere komponenter, men hvis dataen skal sendes ind i eksempelvis matlab, kræver det en UART. 
+I PSoC Programmer indhentes det analoge komponent I2CM. Denne skaber en I$^2$C forbindelse imellem MCUen og ICen samtidig med, at den indstiller MCUen til at være master. Når PSoC Programmer benyttes til test af sensoren, er der ikke behov for flere komponenter, men hvis dataen skal sendes ind i eksempelvis matlab, kræver det et UART komponent. 
 I2CM modulet skal indstilles til korrekte pins i topdesignet af algoritmen, således sensorens SDA og SCL pins kobles korrekt til MCUen.
-% SKRIV NOGET OM GROUND OG VDD FORBINDELSEN, FOR PT FÅR DET JO IKKE STRØM FRA MCUEN
 
 \subsection{Test}
-Accelerometeret er indstillet til $\pm$16~g igennem algoritmedesignet, hvorfor det antages, at den kan opsamle op til $\pm$16 g. Ifølge accelerometerets andet krav i \secref{sec:krav} skal det angive korrekt g påvirkning med en maks afvigelse på 5\%. Dette testes ved at påvirke sensorens y akse med $\pm$1~g, da denne akse på accelerometret benyttes til detektering af gang og løb, se \secref{bevaegelse}.\\
-Ydermere antages det, at gyroskopet fungerer som producenten foregiver, idet projektgruppen ikke er i besiddelse af korrekt måleudstyr, der har konstant cirkulær acceleration til test af gyroskopet.
+Accelerometeret er indstillet til $\pm$16~g igennem algoritmedesignet, hvorfor det antages, at den kan opsamle op til $\pm$16 g. Der vil dog testes for i den samlede systemtest, om signalet klippes grundet accelerometret ikke er indstillet korrekt til 16 g. Ifølge accelerometerets andet krav i \secref{sec:krav} skal det angive korrekt g påvirkning med en maks afvigelse på 5\%. Dette testes ved at påvirke sensorens y akse med $\pm$1~g, da denne akse på accelerometret benyttes til detektering af gang og løb, se \secref{bevaegelse}.\\
 
-ICens accelerometer har en sensitivitet på 0,000732~g per LSB \citep{STMicroelectronics2016}. Outputtet fra sensoren igennem MCUen er LSB, da den optager low og high byte. Dette input fra sensoren, low byte og high byte, bliver bitskiftet og derefter adderet i MCUen, hvormed sensorens output gennem MCUen bliver LSB. 
+ICens accelerometer har en sensitivitet på 0,000732~g per LSB \citep{STMicroelectronics2016}. Outputtet fra sensoren igennem MCUen er LSB, da den optager low og high byte. Dette input fra sensoren, low byte og high byte, bliver bitskiftet og derefter adderet i MCUen, hvormed sensorens output gennem MCUen bliver LSB. For at omregne output til g påvirkning skal outputtet ganges med sensitiviteten, hvilket sker i tredje spalte i \tabref{tab:test_sensor}
 
-For at sikre, at kun den ønskede akse påvirkedes i vertikal retning, da tjekkes bordet med vaterpas. Det fremgår her, at bordet, som sensoren er placeret på, er i vater. \\
-Det testes hvilket output y-aksen har, når sensoren er placeret således y-aksen er i horisontal retning. Ved denne placering bør sensoren teoretisk have et output svarende til 0~g. Efterfølgende placeres sensoren med y-aksen i vertikal retning, hvilket, teoretisk, vil have en påvirkning på $\pm$1~g. I \tabref{tab:test_sensor} ses resultatet fra testen.
+For at sikre, at kun den ønskede akse påvirkedes i vertikal retning, da tjekkes bordet med vaterpas. \\
+Det testes hvilket output y-aksen har, når sensoren er placeret således y-aksen er i horisontal retning. Ved denne placering bør sensoren teoretisk have et output svarende til 0~g. Efterfølgende placeres sensoren med y-aksen i vertikal retning, hvilket teoretisk burde have en påvirkning på $\pm$1~g. I \tabref{tab:test_sensor} ses resultatet fra testen.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{cccc} \hline
@@ -74,15 +72,19 @@ Det testes hvilket output y-aksen har, når sensoren er placeret således y-akse
 		+1 & 1368 & 1,003 g & 0,3\\ \hline
 		-1  & -1356 & -0,993 g & -0,7\\ \hline
 	\end{tabular}%
-	\caption{I tabellen ses resultatet fra testen af accelerometrets y-akse.}
+	\caption{I tabellen ses resultatet fra testen af accelerometrets y-akse. For at omregne MCUens output fra LSB til g påvirkning multipliceres outputtet med accelerometrets sensitivitet.}
 	\label{tab:test_sensor}
 \end{table}\vspace{-0.2cm}
+Det ses i \tabref{tab:test_sensor}, at sensorens accelerometer har en afvigelse på 0,3~\% til 1,4~\%, hvilket overholder en accepteret afvigelse på 5\%, jævnfør \secref{krav:acc}. Det er ydermere antaget, at acceleromeret overholder arbejdsområdet på den indstillede værdi $\pm$16~g, indtil det samlede system giver mulighed for at teste dette. Sensorens accelerometer overholder dermed de opstillede krav og er klar til videre implementering. 
 
-Det ses i \tabref{tab:test_sensor}, at sensorens accelerometer har en afvigelse på 0,3~\% til 1,4~\%, hvilket overholder en accepteret afvigelse på 5\%, jævnfør \secref{krav:acc}. Det er ydermere antaget, at acceleromeret overholder arbejdsområdet på den indstillede værdi, $\pm$16~g. Sensorens accelerometer overholder dermed de opstillede krav. 
+Gyroskopet i ICen har en sensitivitet på 0,070 dps per LSB, når den måler med 2000 dps. Ifølge krav til gyroskopet i \secref{krav:gyro} skal enheden have et arbejdsområde på mindst 334,69 dps, hvilket overholdes ved valg af 2000 dps. Outputtet fra gyroskopet gives ligeledes i LSB, hvorfor eksempelvis 360 dps, der svarer til én rotation i sekundet, giver et output på 5.142. Hvorledes den digitale sensor overholder denne sensitivitet og dermed giver korrekt output, er ikke muligt for projektgruppen at teste, da det korrekte udstyr hertil ikke er i besiddelse. Test af et gyroskop kræver en kontrolleret acceleration om egen specifik akse, hvilket kræver det rette udstyr.\\
+Hvis sådanne udstyr fandtes, havde det været fordelagtigt med en cirkulær plade, hvis omdrejninger skulle være kontrollerbare. Derved kunne den indstilles til for eksempel en omdrejning i sekundet, og i så fald burde gyroskopet måle 360 dps.
+%
+%
 %Accelerometrets sensitivitet ved 16 g målinger: 0,732 mg/LSB
 %Hvor LSB er 2*16/2^16 = 0.0078125
 %(Man får et output på ca. 1350 fra acc, hvilket giver næsten 1 ganget med 0,732 mg/LSB)
 %
-%Gyroskopets sensitivitet med 2000 dps målinger: 70 mdps/LSB
+%Gyroskopets sensitivitet med 2000 dps målinger: 70 mdps/LSB (17,5 hvis 500)
 %Hvor LSB er 2*2000/2^16 = 0.97656
 %()
