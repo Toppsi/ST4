@@ -1,12 +1,11 @@
-\textit{I dette kapitel designes, implementeres og testes hver blok af det samlede system og afslutningsvist testes det samlede system.}
+\textit{I dette kapitel designes, implementeres og testes hver blok i systemet og afslutningsvist testes det samlede system.}
 
-Systemet er opbygget af forskellige blokke, hvilke designes og testes separat, hvor de efterfølgende bliver samlet og testet som et samlet system. De enkelte blokke af systemt designes med henblik på at sikre systemets funktionalitet, hvorfor de designes  med henhold til de opstillede krav i \secref{Sec:krav}. Systemet vil dermed have en opbygning, som illustreres på \figref{fig:design_blokdiagram}.
-
+Systemet er opbygget af forskellige blokke, der designes, implementeres og testes separat. Afslutningsvis koples hver blok sammen, som til sidst testes som det samplede system. %samlet og testet som et samlet system. 
+De enkelte blokke af systemt designes med henblik på at sikre systemets funktionalitet, hvorfor de designes med henhold til de opstillede krav i \secref{Sec:krav}. Systemet vil dermed overordnet have en opbygning, som illustreres på \figref{fig:design_blokdiagram}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.45]{figures/bProblemloesning/blokdiagram.png}
 	\caption{På figuren ses blokdiagram for det samlede system, hvor et input modtages fra brugeren gennem sensorer, hvilket behandles i en GAP peripheral MCU. Herefter sendes dataet via BLE til en computer gennem en GAP central MCU, hvor det visualiseres på en brugerflade.}
 	\label{fig:design_blokdiagram}
 \end{figure}
-
-Blokkene implementeres forskellige stedet i det samlede system, som vist på \figref{fig:design_blokdiagram}, hvoraf spændingsforsyningen tilkobles GAP peripheral MCUen, hvor sensorer også tilkobles. På denne MCU vil signalerne blive digitaliseret og algoritmer vil efterfølgende behandle og adskille aktiviteterne gang, løb og cykling, samt udregne en tilhørende puls. Disse data sendes via BLE til en GAP central som er koblet til en computer. På computeren vil dataet blive visualiseret igennem en MATLAB GUI, hvor brugeren kan følge sin progression.\fxnote{Vil vi have denne tekst før eller efter billedet?}  
+Blokkene implementeres forskellige steder i det samlede system, som vist på \figref{fig:design_blokdiagram}. Spændingsforsyningen tilkobles GAP peripheral MCUen, hvor sensorer også tilkobles. På denne MCU vil signalerne blive digitaliseret og algoritmer vil efterfølgende behandle og adskille aktiviteterne gang, løb og cykling samt udregne en tilhørende puls. Disse data sendes via BLE til en GAP central, som er koblet til en computer. På computeren vil dataet blive visualiseret igennem en MATLAB GUI, hvor brugeren kan følge sin progression.
