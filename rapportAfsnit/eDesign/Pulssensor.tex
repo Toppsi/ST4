@@ -1,55 +1,45 @@
 \section{Pulsdetektering}\label{sec_de_im_te_puls}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor.}
+\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor. Først designes opsætningen af pulssendoreren og dets algoritmen til det specifikke formål, hvorefter dette implementeres. Afslutningsvist bliver algoritmen vedrørende pulsdetektering testet i forhold til opstillede krav i \secref{puls_krav_}.
 
 \subsection{Design} \label{sec_design_puls}
-Pulssensoren skal benyttes til at beskrive intensiteten af aktiviteten, som beskrevet i \secref{subsub:ak_int}. Herudfra kan effekten af aktiviteten bestemmes, hvilket vil blive afspejlet som en motiverende faktor i forbindelse med visualisering i GUI. \newline
-Pulssensoren SEN-11574 er valgt til dette projekt, da det er en optisk pulssensor og er derfor mere sikker for brugeren, som beskrevet i \secref{sec:pulssensor}. Ydermere er en optisk sensor alsidig i forhold til placering, idet denne type sensor blot kræver en placering over en arterie for at kunne måle pulsen. \newline
-Den valgte pulssensor, SEN-11574, kræver en spændingstilkobling på 3~V til 5~V for at være funktionel og forbruger 4~mA ved en forsyning på 5~V. På sensorens board findes et aktivt filter\fxnote{Et aktivt filter er en type af analog elektronisk filter, der anvender aktive bestanddele, såsom en forstærker.} samt en forstærker, som tilsammen øger amplituden for pulsbølgen og normaliserer signalet omkring et referencepunkt, hvilket fjerner DC spænding i signalet. \citep{Murphy2016,Murphy2016_sensor}
-
+Pulssensoren skal benyttes til at beskrive intensiteten af aktiviteten, som beskrevet i \secref{subsub:ak_int}. Heraf kan effekten af aktiviteten bestemmes, hvilket vil blive afspejlet som en motiverende faktor i forbindelse med visualisering i GUI. \newline
+Pulssensoren SEN-11574 er valgt til dette projekt, hvilket er en optisk pulssensor og er derfor mere sikker for brugeren, som beskrevet i \secref{sec:pulssensor}. Ydermere er en optisk sensor alsidig i forhold til placering, idet denne type sensor blot kræver en placering over en arterie for at kunne måle pulsen. Den valgte pulssensor, SEN-11574, kræver en spændingstilkobling på 3~V til 5~V for at være funktionel og forbruger 4~mA ved en forsyning på 5~V. På sensorens printplade findes et aktivt filter\fxnote{Et aktivt filter er en type af analog elektronisk filter, der anvender aktive bestanddele, såsom en forstærker.} samt en forstærker, som tilsammen øger amplituden for pulsbølgen og normaliserer signalet omkring et referencepunkt, hvilket fjerner DC spænding i signalet. \citep{Murphy2016,Murphy2016_sensor}\\
 Pulssensoren designes således pulsen (BPM) beregnes for brugeren i GAP peripheral og sendes til GAP central, hvilket fremgår af \figref{fig:puls_pseudo}.
-
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/puls_pseudo.png}
-	\caption{Illustration af pulssensorens funktioner på GAP peripheral. Pulssensorens algoritme skal registrere tre pulsslag førend pulsen kan bestemmes ud fra disse værdier. Ved tre pulsslag som overskrider tærskelværdien, da vil algoritmen bestemme den gennemsnitlige puls ved brug af disse tre værdier og herefter sende pulsen til GAP central.}
+	\caption{På figuren ses et flowchart over algoritmen vedrørende detektering af BPM under alle aktiviteterne. Pulssensorens algoritme skal registrere tre pulsslag førend pulsen kan beregnes ud fra disse værdier.}
 	\label{fig:puls_pseudo}
 \end{figure}
 
-Pulssensor opfanger pulssignalet fra brugeren, hvorefter dette signal sendes ind i PSoC 4200M på GAP peripheral. I denne MCU vil algoritmen til beregning af pulsen finde sted, hvilket ses på \figref{fig:puls_pseudo}. \\
-Det ønskes at detektere pulsen, ved at beregne varigheden mellem tre pulsslag med udgangspunkt i den systoliske peak, hvilken fremgår af \secref{sec:pulssensor}. Denne peak har større amplitude end peaken for diastole, hvormed det er muligt at foretage signalbehandling således forholdet mellem den systoliske og diastolske peak ændres. Dette vil kunne lade sig gøre, ved at gøre amplituden for den systoliske peak større end peaken for diastole. \\
-Denne type signalbehandling vil derfor indebære henholdsvis en division og kvadrering af det oprindelige signal. Dette vil medføre at den største peak i signalet, vil blive forøget i amplitude og de mindre peaks vil opnå en lavere amplitude. Dermed kan en tærskelværdi benyttes til at bestemme antallet af systoliske peaks. \\
-Algoritmen designes således, at den kun registrerer et pulsslag når en tidligere sample er over tærskelværdien og den efterfølgende sample er under tærkselværi. Algoritmen benytter yderligere tre pulssalg som overskrider en given tærskelværdi, for derved at kunne bestemme den gennemsnitlige puls med henhold til disse pulsslag. Når algoritmen har registreret tre overskridelser, da vil counteren, som tæller antallet af samples, blive nulstillet. \\
-Ved brug af algoritmens counter, vil det gennemsnitlige antal samples som befinder sig mellem tre pulsslag, hvorefter varigheden mellem pulsslagene kan bestemmes med henhold til samplingsfrekvensen i ADCen. Denne samplingsfrekvens konfigureres til 188~Hz, hvilket beskrives i \secref{krav_adc}. Herefter kan algoritmen bestemme pulsen, som de tre pulsslag repræsenterer. Denne puls sendes til GAP central ved brug af bluetooth. 
+Ovenstående figur repræsenterer algoritmen for detektering og adskillelsen af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges det hvorvidt cykling registreres. Hvis dette ikke er tilfældet, signalbehandles dataene fra accelerometeret. En timer skal aktiveres, når algoritmen registrerer enten gang eller løb og stoppe når cykling registreres i stedet. Når timeren stopper, sendes varigheden for den pågælende aktivitet som en tidsværdi, hvoraf max peak registreres og videresendes ligeledes.
+
+Ovenstående figur repræsenterer algoritmen vedrørende detektering af BPM. Pulssensoren opfanger pulssignalet fra brugeren, hvorefter dette signal bliver signalbehandlet førend detektering pulsslag startes. Det ønskes at detektere pulsen, ved at beregne varigheden mellem tre pulsslag med udgangspunkt i det systoliske peak, hvilket fremgår af \secref{sec:pulssensor}. Dette peak har større amplitude end peaket for diastole, hvormed signalbehandlingen forstærker det systoliske peak, og dæmper det diastoliske peak.  \\
+Signalbehandling dataet fra pulssensoreren behandles med, indebærer henholdsvis en division og kvadrering. Dette vil medføre at det største peak i signalet, vil blive forøget i amplitude og de mindre peaks vil opnå en lavere amplitude. Resultatet heraf medfører at en tærskelværdi kan fastsættes til at bestemme antallet af systoliske peaks, og dermed muliggøre en beregning af BPM. \\
+Algoritmen designes således, at den kun registrerer et pulsslag når en tidligere sample er over tærskelværdien og den efterfølgende sample er under tærkselværi. Algoritmen skal registrerer yderligere tre pulssalg som overskrider en given tærskelværdi, for derved at kunne bestemme den gennemsnitlige puls. Når algoritmen har registreret tre overskridelser, da vil time count, som tæller antallet af samples, blive nulstillet. \\
+Ved brug af algoritmens time count, vil det gennemsnitlige antal samples som befinder sig mellem tre pulsslag, hvorefter varigheden mellem pulsslagene kan bestemmes med henhold til samplingsfrekvensen i ADCen. Denne samplingsfrekvens konfigureres til 188~Hz, hvilket beskrives i \secref{krav_adc}. Herefter kan algoritmen bestemme pulsen, som de tre pulsslag repræsenterer. Denne BPM videresendes til GAP central igennem BLE. 
 
 
 \subsection{Implementering}
-Sensoren har 3 pins til henholdsvis spændingsforsyning, ground og outputsignal. Disse pins kobles til hver sin pin på GAP peripheral. Outputsignalets pin skal designes i programmet PSoC Creator, således MCU'en modtager pulssensorens signale fra den pågældende pin. Dette gøres ved at indsætte henholdsvis en UART serie kommunikationsblok (SCB) og SAR ADC i topdesignet. UART'en bruges for at sensoren og MCU'en kan kommunikere. Standardindstillingerne for denne blok benyttes til konfigurationen af MCUen. \newline
-Outputsignalet fra sensoren er et analogt signal, hvormed dette signal skal gennem en ADC, for at skabe en konvertering til et digitalt signal. ADCens design skal derfor konfigurers således denne bearbejder én single ended kanal, inputtet fra pulssensoren. Yderligere indstilles sampleraten for ADcen for den pågældende inputkanal til 35~Hz, jævnfør \secref{krav_adc}. \\
-Efter konfigurering af UART og ADC i Topdesignet, skal de korrekte pins indstilles i pinopsætning. UART tildeles interne pins, hvorimod ADC'ens inputpin skal indstilles til den plads, som outputtet fra sensoren er, hvilket i dette tilfælde er pin 2.0. 
+Pulssensoren har 3 pins til henholdsvis spændingsforsyning, ground og outputsignal. Disse pins kobles til hver sin pin på GAP peripheral. Outputsignalets pin skal designes i PSoC Creator, således MCU'en modtager pulssensorens signaler fra den pågældende pin. Dette gøres ved at indsætte henholdsvis en UART serie kommunikationsblok (SCB) og SAR ADC i topdesignet. UART'en bruges for at sensoren og MCU'en kan kommunikere. Standardindstillingerne for denne blok benyttes til konfigurationen af MCUen. \newline
+Outputsignalet fra sensoren er et analogt signal, hvormed dette signal behandles af en ADC, for at skabe en konvertering til et digitalt signal. ADCens design skal derfor konfigurers således denne bearbejder én single ended kanal, inputtet fra pulssensoren. Yderligere indstilles samplingsfrekvensen for ADcen for den pågældende inputkanal til 188~Hz, da dette er det MCU'en kan sættes til. \\
+Efter konfigurering af UART og ADC i topdesignet, skal de korrekte pins indstilles i pinopsætning. UART tildeles interne RX-, og TX-pins, hvorimod ADC'ens inputpin skal indstilles til den plads, som outputtet fra sensoren er placeret i, hvilket er valgt til pin 2.0. 
 
-Det rå pulssignal vil blive henholdsvis divideret og kvadreret, med henblik på at kunne detektere de systoliske peaks i signalet. Denne signalbehandling fremgår desuden af \figref{fig:behandlet_puls}.
-
+Det rå pulssignal vil blive henholdsvis divideret og kvadreret, med henblik på at kunne fastsætte en tærskelværdi til detektering af de systoliske peaks i signalet. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.46]{figures/cDesign/puls_ore_behandlet.png}
-	\caption{Illustrering af algoritmens signalbehandling (rød kurve), som indebærer en division og kvadrering, af det rå pulssignal (sort kurve).}
+	\caption{På figuren ses algoritmens signalbehandling af et råt pulssignal. Den sorte kurve er det rå pulssignal, og den røde kurve er det signalbehandlede signal.}
 	\label{fig:behandlet_puls}
 \end{figure}
-
-Det behandlede signals amplitude ses tydeligt forøget, hvorimod de mindre peaks er formindsket. Den store peak i signalet repræsenterer dermed den systoliske periode i hjertecyklussen, hvormed denne peak kan benyttes til at bestemmes BPM for signalet. \\
-For at kunne bestemme BPM for signalet, bliver der ydermere implementeret en tærskelværdi. Denne værdi skal signalet overskride for at kunne blive detekteret som et systolisk peak. \\
-Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen. Denne signaloptagelse fremgår af \figref{fig:taerskel_puls}.
-
+Som resultat af ovenstående signalbehandling ses det tydeligt at amplituden på det behandlede signal er forøget hvorimod de mindre peaks er formindsket. De største peaks i signalet repræsenterer den systoliske periode i hjertecyklussen, hvilket er peaket der benyttes til at bestemmes BPM for signalet. For at kunne bestemme BPM for signalet, bliver der implementeret en tærskelværdi. Denne værdi skal signalet overskride for at kunne blive detekteret som et systolisk peak. Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.46]{figures/cDesign/puls_taerskel.png}
-	\caption{Illustrering af en pulsmåling på en øreflippen (rød kurve), hvortil algoritmens tærskelværdi (sorte, stiplede linje) på 400 er påført.}
+	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er pulsmålingen fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi på 400}
 	\label{fig:taerskel_puls}
 \end{figure}
-
-Den behandlede signal fremgår af figuren, hvortil det er indtegnet en tærskelværdi som alle de systoliske peaks vil kunne overskride.\\
-Denne tærskelværdi vil dermed medføre, at det systoliske tryk overstiger tærkselværdien hvortil det diastoliste tryk vil befinde sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i tre peaks. 
-
+Det behandlede signal fremgår af figuren, hvortil det er indtegnet en tærskelværdi som alle de systoliske peaks vil kunne overskride. Denne tærskelværdi vil medføre, at det systoliske tryk overstiger tærskelværdien, hvortil det diastoliste tryk vil befinde sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i tre detekterede peaks. 
 
 \subsection{Test}
 Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af en ensrettet sinusbølge. Dette signal sendes ind i MCUen, hvorefter det undersøges hvorvidt timecounteren detekterer varigheden mellem overskridelser af tærskelværdien. Når pulsen er bestemt, benyttes programmet Real Term til at printe BPM i. \\
