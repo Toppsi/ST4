@@ -1,5 +1,5 @@
 \section{Pulsdetektering}\label{sec_de_im_te_puls}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor. Først designes opsætningen af pulssendoreren og dets algoritmen til det specifikke formål, hvorefter dette implementeres. Afslutningsvist bliver algoritmen vedrørende pulsdetektering testet i forhold til opstillede krav i \secref{puls_krav_}.
+\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor. Først designes opsætningen af pulssendoreren og dets algoritmen til det specifikke formål, hvorefter dette implementeres. Afslutningsvist bliver algoritmen vedrørende pulsdetektering testet i forhold til opstillede krav i \secref{puls_krav_}}.
 
 \subsection{Design} \label{sec_design_puls}
 Pulssensoren skal benyttes til at beskrive intensiteten af aktiviteten, som beskrevet i \secref{subsub:ak_int}. Heraf kan effekten af aktiviteten bestemmes, hvilket vil blive afspejlet som en motiverende faktor i forbindelse med visualisering i GUI. \newline
@@ -32,28 +32,33 @@ Det rå pulssignal vil blive henholdsvis divideret og kvadreret, med henblik på
 	\caption{På figuren ses algoritmens signalbehandling af et råt pulssignal. Den sorte kurve er det rå pulssignal, og den røde kurve er det signalbehandlede signal.}
 	\label{fig:behandlet_puls}
 \end{figure}
-Som resultat af ovenstående signalbehandling ses det tydeligt at amplituden på det behandlede signal er forøget hvorimod de mindre peaks er formindsket. De største peaks i signalet repræsenterer den systoliske periode i hjertecyklussen, hvilket er peaket der benyttes til at bestemmes BPM for signalet. For at kunne bestemme BPM for signalet, bliver der implementeret en tærskelværdi. Denne værdi skal signalet overskride for at kunne blive detekteret som et systolisk peak. Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen.
+Som resultat af ovenstående signalbehandling ses det tydeligt at amplituden på det behandlede signal er forøget hvorimod de mindre peaks er formindsket. De største peaks i signalet repræsenterer den systoliske periode i hjertecyklussen, hvilket er det peak der benyttes til at bestemmes BPM for signalet. For at kunne bestemme BPM for signalet, bliver der implementeret en tærskelværdi. Denne værdi skal signalet overskride for at kunne blive detekteret som et systolisk peak. Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.46]{figures/cDesign/puls_taerskel.png}
-	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er pulsmålingen fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi på 400}
+	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er en signalbehandlet pulsmåling fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi på 400}
 	\label{fig:taerskel_puls}
-\end{figure}
-Det behandlede signal fremgår af figuren, hvortil det er indtegnet en tærskelværdi som alle de systoliske peaks vil kunne overskride. Denne tærskelværdi vil medføre, at det systoliske tryk overstiger tærskelværdien, hvortil det diastoliste tryk vil befinde sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i tre detekterede peaks. 
+\end{figure} \vspace{-0.5cm}
+Det behandlede signal fremgår af figuren, hvortil der er indtegnet en tærskelværdi som alle de systoliske peaks vil overskride. Denne tærskelværdi vil medføre, at det systoliske tryk overstiger tærskelværdien, hvortil det diastoliste tryk vil befinder sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i tre detekterede peaks. 
 
 \subsection{Test}
-Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af en ensrettet sinusbølge. Dette signal sendes ind i MCUen, hvorefter det undersøges hvorvidt timecounteren detekterer varigheden mellem overskridelser af tærskelværdien. Når pulsen er bestemt, benyttes programmet Real Term til at printe BPM i. \\
-Det indsendte signal er en ensrettet sinusbølge som har en frekvens på 0,6~Hz og en samplingsfrekvens på 188~Hz. Ydermere er det array, som indsendes til MCUen, på 1451 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
-Der indsendes 1451 samples og der benyttes en samplingsfrekvens på 188~Hz, hvormed arrayet har en længde på 7,7 sekunder. Idet der er tale om en ensrettet sinusbølge på 0,6~Hz, vil der derfor være 9,26 peaks i det indsendte signal. Ydermere vil dette betyde, at algoritmen skal udregne og printe tre værdier for pulsen idet der er cirka 9 peaks. \\
-Det fremgår der er 9,26 peaks samt at arrayet har en varighed af 7,7 sekunder, hvormed der er er 0,83 sekunder mellem hver overskridelse af tærskelværdien. Derfor vil det indsendte signal medføre en værdi af 72 BPM. Det er derfor forventeligt, at algoritmen vil beregne og printe en puls som har en værdi af 72 BPM. 
+Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af et absolut sinussignal. Dette signal sendes ind i MCUen, hvorefter det undersøges hvorvidt time counteren detekterer varigheden mellem overskridelser af algoritmens opsætning. Når pulsen er bestemt, benyttes programmet Real Term til at printe algoritmens slutresultat, BPM. \\
+Det indsendte signal er et absolut sinussignal som har en frekvens på 0,6~Hz og en samplingsfrekvens på 188~Hz. Ydermere er det array, som indsendes til MCUen, på 1451 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
+Der indsendes 1451 samples og der benyttes en samplingsfrekvens på 188~Hz, hvormed arrayet har en længde på 7,7 sekunder. Idet der er tale om et absolut sinussignal på 0,6~Hz, vil der opstå 9,26 peaks i det indsendte signal. Ydermere vil dette betyde, at algoritmen skal udregne og printe tre værdier for pulsen idet der er ni fuldstændige peaks. \\
+Det fremgår der er 9,26 peaks samt at arrayet har en varighed af 7,7 sekunder, hvormed der er er 0,83 sekunder mellem hver overskridelse af tærskelværdien. Pulsen bestemmes som det fremgår af \eqref{eq:puls_teori}.
+\begin{equation}
+\frac{60~sekunder}{Varighed~mellem~samples} = \frac{60~sekunder}{0,83~sekunder} = 72~BPM
+\label{eq:puls_teori}
+\end{equation} 
+Derfor vil det indsendte signal medføre en værdi af 72 BPM. Det er derfor forventeligt, at algoritmen vil beregne og printe en puls som har en værdi af 72 BPM.
 
-Algoritmen er bestemt til at nulstille sin counter hver gang der er registreret tre overskridelser af tærskelværdien. Derfor vil algoritmen gøre brug af det antal samples som counteren har talt, til at bestemme pulsen for den pågældende periode. \\
-Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan counteren nulstilles når der er registreret tre overskridelser af tærskelværdien. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Real Term har printer de forventede værdi for BPM.
+Algoritmen er bestemt til at nulstille sin time counter hver gang der er registreret tre tilfælde hvor en sample er gået under tærskelværdien. Derfor vil algoritmen gøre brug af det antal samples som time counteren har talt, til at bestemme pulsen for den pågældende periode. \\
+Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan counteren nulstilles når der er registreret tre tilfælde hvor en sample er gået under tærskelværdien. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Real Term har printer de forventede værdi for BPM.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.46]{figures/cDesign/timecounter_puls_pic.png}
-	\caption{Algoritmens timecounter som tæller op, indtil tre pulsslag har overskredet tærskelværdien, hvorefter timecounter nulstilles og starter samme procedure.}
+	\caption{På figuren ses algoritmens timecounter som tæller op, indtil en sample på det tredje pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og starter samme procedure.}
 \label{fig:timecounter_puls_realterm}
 \end{figure}
 
@@ -65,31 +70,30 @@ Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_pu
 		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
 		72 - 72 - 72          & 72 - 72 - 72         & 0 - 0 - 0 \\ \hline
 	\end{tabular}
-	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er fra Real Term.}
+	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er resultatet fra Real Term.}
 	\label{tab:test_puls_realterm}
 \end{table} \vspace{-0.5cm}
 
-Det fremgår af figuren, at algoritmen tæller counteren op, indtil der er registreret tre overskridelser af tærskelværdien. Herefter beregnes algoritmen pulsen, ud fra det antal samples som counteren har talt. Herefter printes pulsen i Real Term, hvor værdierne er illustreret i tabellen. Det fremgår ydermere, at de modtagede værdier har 0\% afvigelse fra de forventede værdier. \\
+Det fremgår af figuren, at algoritmen tæller time counteren op, indtil der er registreret et tilfælde hvor en sample er gået under tærskelværdien. Herefter beregner algoritmen pulsen, ud fra det antal samples som counteren har talt. Herefter printes pulsen i Real Term, hvor værdierne er illustreret i tabellen. Det fremgår ydermere, at de modtagede værdier har 0\% afvigelse fra de forventede værdier. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
-Der foretages yderligere to tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. Først testes systemet mens en person er stillesiddende, hvorefter systemet testes ved at løbe på et løbebånd. \\
-Først testes pulssensoren og den tilhørende algoritme ved en stillesiddende aktivitet. Personens puls vil dermed være en konstant puls, hvilepulsen. Yderligere vil der blive benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregne puls af algoritmen. Denne pulssensors data vil blive printet i programmet, Logger Pro. \\
+Der foretages yderligere en test, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. \\
+Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens BPM forventes dermed at være stabil. Yderligere vil der blive benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregnede BPM af algoritmen. Denne pulssensors data vil blive printet i programmet, Logger Pro, og systemets BPM vil blive printet i RealTerm. \\
 Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc}
-		\hline
-		\rowcolor[HTML]{C0C0C0} 
-		Gennemsnitligt puls \\ Logger Pro [BPM] & Gennemsnitligt puls \\ Real Term [BPM] & Afvigelse [\%]\\ \hline
-		60,4         & 64,5         & 6,4 \\ \hline
-	\end{tabular}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccc}
+			\hline
+			\rowcolor[HTML]{C0C0C0} 
+			Gennemsnitlig puls LoggerPro {[}BPM{]} & Gennemsnitlig puls Algortime {[}BPM{]} & Afvigelse {[}\%{]} \\ \hline
+			60,4 & 64,5 & 6,4 \\ \hline
+		\end{tabular}%
+	}
 	\caption{I tabellen fremgår den gennemsnitlige puls beregnet med data printet i henholdsvis Logger Pro og Real Term. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 6,4\%.}
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
 
 Testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 6,4\%. Dermed overholder pulssensoren de opstillede krav i \secref{puls_krav}.
-
-
-
 
