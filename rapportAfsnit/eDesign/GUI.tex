@@ -20,6 +20,14 @@ GUI implementeres ved at anvende MATLABS funktion Graphical User Interface Desig
 Resultaterne fra algoritmerne hentes ind til MATLAB, hvor de gemmes i en variabel med [samples,peak,BPM].
 
 \subsubsection{Test}
-GUIs funktionalitet tests ud fra kravene heraf, se \secref{krav_GUI}
-Den trådløse kommunikation testes ud fra kravene hertil, se \secref{krav_BLE}. Der undersøges kvaliteten af forbindelsen mellem GAP peripheral og GAP central i forhold til afstand. GAP peripheral bliver sat til at videresende datapakker, som GAP central skal modtage alle af. Hvis dataoverførslen er nøjagtig, vil der ikke mangle nogle pakker. Dette vil blive illustreret igennem MATLAB, hvori en nøjagtig overførsel vil medføre en fuldstændig lineær kurve. Hvis datapakker er gået tabt, vil illustrationen af antal modtagne pakker varierer fra antal sendte pakker med stor hældning, og den kurven vil ikke være lineær. Denne test udføres med forskellig afstand mellem GAP peripheral og GAP central, hvoraf den maksimale afstand for succesfuld dataoverførsel vil komme til udtryk. \\
-Datapakkerne i denne test sendes fire gange i sekundet, og resultaterne bliver opsamlet igennem 30 sekunder. Der skabes forbindelse mellem GAP peripheral og GAP central, hvor antallet af modtagne datapakker optages igennem RealTerm. Derfra konverteres det fra hex til decimaltal, hvormed data kan plottes i matlab.\fxnote{capture, optaget i hex, konverteret til decimaltal, som er plottet i matlab}
+GUIs funktionalitet tests ud fra kravene heraf, se \secref{krav_GUI}. Dets funktionalitet testes ved at indsende et kendte værdier, hvoraf hver aktivitet kan testes individuelt. Igennem en test med kendte værdier kan funktionen med multiplikation af point, varighed og aktivitetstype testes igennem samme test. Igennem testen indsendes følgende data sæt som skulle trigge de forskellige aktiviteter: 
+
+\begin{equation}
+gang_tid = [1 1 1 1 1 1] \\
+gang_peak = [110 110 110 110 110 110] \\
+løb_tid = [1 1 1 1 1 1] \\
+løb_peak = [1110 1110 1110 1110 1110 1110] \\
+cykling_tid = [1 1 1 1 1 1] \\
+\end{equation} 
+
+
