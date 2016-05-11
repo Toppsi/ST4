@@ -1,4 +1,17 @@
 \section{Analog til digital konvertering}
+\textit{INDLEDENDE KURSIV TEKST}
+
 \subsection{Design}
-I mikrokontrolleren findes en 12 bits 1 mega sample per sekund (Msps) SAR ADC. Mikrokontrollerens 12 bits ADC kan inddele det analoge signal i $2^{12} = 4096$ spændingsniveauer. Den maksimale clockfrekvens er på 18.000.000 Hz, hvortil der skal bruges 18 clocks, før en 12 bits konvertering er mulig. Det er ikke muligt at benytte SAR'en når mikrokontrolleren er i deep-sleep, da en klolfrekvens på 18MHz kræves.\newline
-ADC'en understøtter både single ended og differential inputs og kan skanne alle 16 kanaler automatisk.  Derudover har ADC'en et arbejdsområde på 1,71 og 5,5 V. Enhver pin på mikrokontrolleren kan monitoreres af ADC'en. Det er muligt at have flere kanaler på ADC'en, hvorved der kan samples ved forskellige frekvenser alt efter signalernes udformning. \citep{Semiconductor20164200M}
+Systemets IC har en ADC tilkoblet i sit kredsløb, hvormed ADCen tilhørende denne blok er designet, implementeret og testet i \secref{sec_design_LSM9DS1}.\\
+Pulssensoren kræver en AD konvertering for at kunne blive behandlet som digitalt data. Derfor benyttes MCUen 12 bits SAR ADC, til at konvertere det analoge pulssignal til et digitalt signal. 
+
+%I mikrokontrolleren findes en 12 bits 1 mega sample per sekund (Msps) SAR ADC. Mikrokontrollerens 12 bits ADC kan inddele det analoge signal i $2^{12} = 4096$ spændingsniveauer. Den maksimale clockfrekvens er på 18.000.000 Hz, hvortil der skal bruges 18 clocks, før en 12 bits konvertering er mulig. Det er ikke muligt at benytte SAR'en når mikrokontrolleren er i deep-sleep, da en klolfrekvens på 18MHz kræves.\newline
+%ADC'en understøtter både single ended og differential inputs og kan skanne alle 16 kanaler automatisk.  Derudover har ADC'en et arbejdsområde på 1,71 og 5,5 V. Enhver pin på mikrokontrolleren kan monitoreres af ADC'en. Det er muligt at have flere kanaler på ADC'en, hvorved der kan samples ved forskellige frekvenser alt efter signalernes udformning. \citep{Semiconductor20164200M}
+
+\subsection{Implementering}
+Pulssensorens analoge signal, skal gennemgå en AD konvertering i MCUen. Denne proces udføres, ved at koble pulssensorens output til ADCens input. Topdesignet for ADCen i PSOC 4200M bliver derfor forbundet med en analog inputpin, som konfigureres til at være tilhørende outputsignalet fra pulssensoren. \\
+Det fremgår af \secref{krav_adc}, at ADCen skal have en samplingsfrekvens på mindst 35~Hz, for at kunne gengive et repræsentativt digitalt signal for pulssensoren. Topdesignet for ADCen konfigureres til den ønskede samplingsfrekvens på 35~Hz. Det er dog ikke muligt at benytte denne samlingsfrekvens, idet clockfrekvensen for PSOC 4200M dermed vil være 185~kHz. Denne clockfrekvens accepterer PSoC Creator dog ikke, idet clockfrekvensen skal være i intervallet 1000-9000~kHz. Derfor benytte den laveste clockfrekvens på 1000~kHz, hvilket medfører en samplingsfrekvens på 188~Hz. Denne samplingsfrekvens for pulssensoren er desuden acceptabel med henhold til kravene opstillet i \secref{krav_adc}. 
+
+
+\subsection{Test}
+
