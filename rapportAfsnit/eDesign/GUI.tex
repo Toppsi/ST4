@@ -17,17 +17,45 @@ Hver aktivitet belønnes forskelligt, da det er væsentligt at få børnene til 
 
 \subsection{Implementering}
 GUI implementeres ved at anvende MATLABS funktion Graphical User Interface Design Environment (GUIDE) som er en funktion der gør det muligt at lave en specifik brugerflade. I GUIen benyttes en toggle button for at starte og slutte indsamling af resultater fra algoritmerne vedrørende aktiviteterne gang, løb og cykling. Derudover benyttes axes, som benyttes til at repræsentere de samlede point der er samlet i løbet af dagen. Sidst benyttes static text til de resterende funktioner i GUI. \newline
-Resultaterne fra algoritmerne hentes ind til MATLAB, hvor de gemmes i en variabel med [samples,peak,BPM].
+Resultaterne fra algoritmen vedrørende gang og løb sendes til MATLAB, hvor de gemmes i en variabel med [samples, peak]. Resultaterne fra algoritmen vedrørende cykling sendes til MATLAB, og gemmes i en variable med [samples, C]. Begge algoritmers resultater sammenholdes med resultaterne fra algoritmen vedrørende pulsdetektering med henblik på multiplikation afhængig af intensitetsniveau. Resultatet fra pulsdetektering sendes til MATLAB og gemmes i en variable med [BPM].
 
 \subsubsection{Test}
-GUIs funktionalitet tests ud fra kravene heraf, se \secref{krav_GUI}. Dets funktionalitet testes ved at indsende et kendte værdier, hvoraf hver aktivitet kan testes individuelt. Igennem en test med kendte værdier kan funktionen med multiplikation af point, varighed og aktivitetstype testes igennem samme test. Igennem testen indsendes følgende data sæt som skulle trigge de forskellige aktiviteter: 
+GUIs funktionalitet testes ud fra kravene heraf, se \secref{krav_GUI}. Dets funktionalitet testes ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt. Igennem en test med kendte værdier kan funktionen med multiplikation af point afhængig af aktivitetstype, varighed, multiplikation af point samt aktivitetstype genkendelse, testes igennem samme test.
+Igennem testen benyttes følgende datasæt som skulle trigge de forskellige aktiviteter. Dataene skal fungere som simulerede input fra algoritmerne. 
 
-\begin{equation}
-gang_tid = [1 1 1 1 1 1] \\
-gang_peak = [110 110 110 110 110 110] \\
-løb_tid = [1 1 1 1 1 1] \\
-løb_peak = [1110 1110 1110 1110 1110 1110] \\
-cykling_tid = [1 1 1 1 1 1] \\
-\end{equation} 
+\begin{eqnarray*}
+	Gang &=& [512~110,~512~110,~512~110,~512~110,~512~110,~512~110] \\ 
+	L\text{ø}b &=& [512~1110,~512~1110,~512~1110,~512~1110,~512~1110] \\ 
+	Cykling &=& [512~C,~512~C,~512~C,~512~C,~512~C,~512~C] \\
+	Intensitet &=& [90~90~90~90~90~90] 
+\end{eqnarray*}
+Resultatet af GUIs design så skal forskellige aktivitetsformer bidrage til en forskellig mængde point. I takt med at varigheden og intensiteten af aktiviteter som indsendes til GUI er identiske, så skal mængden af point varierer. \\
+Måden hvorpå pointene udregnes, og dermed kunne varierer, afhænger af aktiviteten samt intensiteten. 
+\begin{equation*}
+Antal point = Varighed \cdot Aktivitetsfaktor \\ \cdot Intensitetsfaktor
+\end{equation*}
+Varigheden i ovenstående ligning udregnes som nævnt i design ved at dividere modtagne antal samples med samplingsfrekvensen.
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Aktivitet & Indsendt data & Forventet antal point & Optalt antal point \\ \hline
+		Gang & Gang - Intensitet & 6$\cdot$ 1$\cdot$ 2 = 12 & 12 \\ \hline
+		Løb & Løb - Intensitet & 6$\cdot$ 3$\cdot$ 2 = 36 & 36 \\ \hline
+		Cykling & Cykling - Intensitet & 6$\cdot$ 2$\cdot$ 2 = 24 & 24 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
+	\label{test:GUI}
+\end{table}
+Resultatet af at aktiviteterne gang og cykling har større mængde point er et resultat af multiplikationen af dets aktivitetstype og intensitetsniveau. Disse point visualiseres i søjle som beskrevet i design som ser således ud \figref{fig:test_GUI_matlab}.
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.4]{figures/cDesign/test_gui_matlab.png}
+%	\caption{På figuren ses et udklip af GUI hvor udførslen af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
+%	\label{fig:GUI}
+%\end{figure}
+Efterfulgt af design, implementering og test af GUI, kan det konkluderes at denne opfylder kravene heraf. GUI er i stand til at visualisere tidsforbruget samt antal point opnået, for alle aktiviteterne. GUI opdaterede i testen i reelle tid, hvoraf kravet vedrørende opdatering af GUI mindst hvert femtende minut, ligeledes er opfyldt.
 
+ 
