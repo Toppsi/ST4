@@ -46,10 +46,9 @@ Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cy
 \subsection{Implementering}
 \subsubsection{Algoritme til detektion af gang og løb}
 Implementeringen af algoritmen for detektering af gang og løb tager udgangspunkt i data fra pilotforsøg og består grundlæggende af to delelementer. Først signalbehandling hvorefter selve algoritmen implementeres. Signalbehandlingen er blevet implementeret som egenfunktioner i C, hvoraf signalet bliver behandlet med fire funktioner, førend data bliver kørt igennem algoritmen. De fire funktioner er som sagt et elliptisk filter, dividering med 2, kvadrering og mooving average filter. \\
-For at finde filterkoefficienterne til det elliptiske filter anvendes Matlab. Herinde skrives knækfrekvenserne samt dæmpningsgraden for et elliptisk filter, hvorefter programmet giver a og b koefficienterne. Disse skrives ind i PSoC programmer som et IIR filter som double float type. Denne funktion kan initialisere større tal og er mere præcis i forhold til kommatal. Efter filtret Herefter 
+For at finde filterkoefficienterne til det elliptiske filter anvendes Matlab. Herinde skrives knækfrekvenserne samt dæmpningsgraden for et elliptisk filter, hvorefter programmet giver a og b koefficienterne. Disse skrives ind i PSoC programmer som et IIR filter som double float type. Denne funktion kan initialisere større tal og er mere præcis i forhold til kommatal. Efter filtreringen divideres og kvadreres dataet, som til sidst behandles af et mooving average filter i PSoC creater, hvorfor behandlingen vil ske på MCUen.
 
-
-Betydningen af disse for signalet kan ses på \figref{fig:algoritme_cykling2}
+Betydningen af databehandlingen for signalet kan ses på \figref{fig:algoritme_cykling2}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.37]{figures/cDesign/signalbehandling_psoc.png}
@@ -89,7 +88,8 @@ De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet ov
 \end{table}\vspace{-0.5cm}
 Fastsættelsen af den fælles tærskelværdi bør sikre, at gang og løb er mulige at detektere samt adskille for forsøgspersonernes data. Igennem behandling af data fra pilotforsøget forekom tærskelværdierne i \tabref{tab:faelles_taerskel} dækkende for alle forsøgspersonerne, hvorfor disse blev valgt.
 
-
+Tærskelværdierne implementeres i PSoC creater i if lykker. Her hentes data fra databehandlingen ind, hvorefter if lykkerne skal afgøre, om dataet er under laveste, mellem eller over højeste tærskelværdi. Hvis data er under laveste tærskelværdi, bliver timeren ikke udløst til at nulstille sig men fortsætter med at tælle i tre sekunder, hvorefter den nulstilles og tæller igen til tre. Det første detekterede maks peak efter ingen aktivitet registreres ikke, da timeren skal tælle fra forrige tilfælde af, at signalet går under tærskelværdien og til den næste. Det første maks peak efter en periode uden aktivitet vil derfor have en ukorrekt time counter værdi, da det kan være fra nul til tre sekunder lang. \\% har ikke noget forrige maks peak at sammenholde med, hvorved time counteren vil give ukorrekt output.
+Ved hjælp af if lykkerne behandles det databehandlede signal som henholdsvis ingen aktivitet, gang og løb, hvorigennem specifikt data sendes videre. Data sendes videre ved brug af UART forbindelsen, som kaldes i PSoC Creater.
 
 \subsubsection{Algoritme til detektion af cykling}
 \textit{Er ikke lavet endnu.}
@@ -105,7 +105,7 @@ Først testes algoritmens time counter, der giver et udtryk for, om algoritmen d
 	\caption{På figuren ses algoritmens time counter som den røde kurve, der reagerer på detekteringen af et simuleret gangsignal. Denne nulstilles hver gang signalet går under tærskelværdien, således maks peak værdien og tidsværdien sendes videre. Den sorte kurve er det simulerede gangsignal.}
 	\label{fig:testgraf_timecounter}
 \end{figure}
-Algoritmens time counter starter, når signalet bliver indsendt, og nulstilles efter en sample går under tærskelværdien. Heraf kan det ses, at varigheden fra en sample er gået under en tærskelværdi til, at en sample igen er gået under en tærskelværdi er 512 samples. En af algoritmens funktioner er at frasortere det første detekterede peak, dermed nulstille time counter værdien samt peak værdien. Det første peak registreres ikke, da timeren skal tælle fra forrige tilfælde af, at signalet går under tærskelværdien og til den næste. Det første maks peak har ikke noget forrige maks peak at sammenholde med, hvorved time counteren vil give ukorrekt output.\\
+Algoritmens time counter starter, når signalet bliver indsendt, og nulstilles efter en sample går under tærskelværdien. Heraf kan det ses, at varigheden fra en sample er gået under en tærskelværdi til, at en sample igen er gået under en tærskelværdi er 512 samples. En af algoritmens funktioner er at frasortere det første detekterede peak, dermed nulstille time counter værdien samt peak værdien.\\
 Den egentlige test vedrørende algoritmens time counter består dermed i at undersøge, om den første peak tælles med eller ej i videresendt data. I \tabref{tab:test_res_timecount} ses der, at selvom den første peak visualiseres i \figref{fig:testgraf_timecounter}, så medregnet den ikke i de endelige værdier. Disse værdier fås ved hjælp af programmet Realterm, som viser sendt data fra MCUen ved brug af UART.
 \begin{table}[H]
 	\centering
