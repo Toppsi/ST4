@@ -15,7 +15,8 @@ Det fremgår af \secref{krav_adc}, at ADCen skal have en samplingsfrekvens på m
 Det fremgår af \eqref{eq:adc_puls}, at der er 0,0286~sekunder mellem hver sample ved en frekvens på 35~Hz. 
 
 \subsection{Implementering}
-Pulssensorens analoge signal, skal gennemgå en AD konvertering i MCUen. Denne proces udføres, ved at koble pulssensorens output til ADCens input. Topdesignet for ADCen i PSOC 4200M bliver derfor forbundet med en analog inputpin, som konfigureres til at være tilhørende outputsignalet fra pulssensoren. \\
+Pulssensorens analoge signal, skal gennemgå en AD konvertering i MCUen. Topdesignet for ADCen indebærer derfor en analog komponent i form af en SAR ADC, som yderligere er placeret i PSoC 4200M \citep{Murphy2016}. 
+AD konverteringen udføres, ved at koble pulssensorens output til ADCens input. Topdesignet for ADCen i PSOC 4200M bliver derfor forbundet med en analog inputpin, som konfigureres til at være tilhørende outputsignalet fra pulssensoren. ADCen konverterer derfor hver sample fra den optagede kanal, og når ADCen har konverteret data klar, kan dette blive benyttet af pågældende algoritmer. \\
 Yderligere konfigureres samplingsfrekensen for ADCen, med hensyn til den tid mellem hver sample som er bestemt i \eqref{eq:adc_puls}.
 Derfor skal konverteringstiden i Topdesign for ADC konfigureres til 0,0286~sekunder. Dette vil dermed konfigurere ADCen til at have en samplingsfrekvens på 35~Hz.
 
@@ -23,5 +24,15 @@ Derfor skal konverteringstiden i Topdesign for ADC konfigureres til 0,0286~sekun
 ADCen testes, for at undersøge samplingsfrekvensen på den kanal som sampler pulssensoren. \\
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_adc}.
 
-ADCen er konfigureret således, at denne sender samples afsted så snart disse er klar, hvilket fremgår af \secref{puls_impl}. 
-Derfor vil det 
+ADCen er konfigureret således, at denne sender samples afsted så snart disse er klar. Det vil derfor være muligt at oprette en variabel som står og tæller op, hver gang der er data klar fra ADCen. Ved at printe denne variabel vil det være muligt at se, hvor mange gange der har været data klar fra ADCen over et givent tidsinterval. Herved vil den respektive frekvens kunne bestemmes, med henhold til den konfigurerede frekvens på 35~Hz. 
+
+Der oprettes en variabel af størrelsen int16, som skal tælle op hver gang ADCen har data klar. Idet variablen har den valgte størrelse, da vil denne kunne tælle op til $2^16 = 65.536$. Samtidig er ADCen konfigureret til en samplingsfrekvens på 35~Hz, hvormed der er 35 samples per sekund. Hvis testen har en varighed af 1 minut, vil ADCen antageligt have konverteret følgende antal samples: $35~samples \cdot 60~sekunder = 2100~samples$. Dette antal samples vil ydermere ikke overskride variablens størrelse, idet denne er 16 bit. \\
+Testen viser, at ved en varighed på 60 sekunder, da har ADCen konverteret 1935 samples. Dette betyder, at den egentlige samplingsfrekvens har en værdi af:
+\begin{equation}
+\frac{1935~samples}{60~sekunder} = 32,3~Hz 
+\end{equation}
+Testen påviser, at ADCen har en egentlig samplingsfrekvens på 32,3~Hz. Den procentvise afvigelse mellem den konfigurerede samplingsfrekvens og den egentlige samplingsfrekvens er dermed:
+\begin{equation}
+\frac{35~Hz-32,3~Hz}{35~Hz} = -7,7~% 
+\end{equation}
+Den procentvise afvigelse er dermed bestemt som værende -7,7\%. 
