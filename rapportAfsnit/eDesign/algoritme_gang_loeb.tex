@@ -1,3 +1,4 @@
+% !TeX spellcheck = de_DE
 \section{Algoritmer til detektering af gang, løb og cykling}
 \textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang, løb og cykling. Først designes algoritmerne til det specifikke formål, hvorefter de kan implementeres. Afslutningsvist bliver algoritmerne testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
 %bliver design af algoritmerne behandlet, hvilket er ensbetydende med at implementering og kodning kan foregå. Når algoritmerne er designet og implementeret bliver de efterfølgende testet for at af- eller bekræfte deres virkning.}
@@ -9,15 +10,14 @@ For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyro
 Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere samt adskille gang og løb. Første trin i denne signalbehandling er at fjerne støj ved brug af et elliptisk filter. Dette skal være et fjerde ordens elliptisk båndpasfilter med et pasbånd fra 20 til 50 Hz, og med en dæmpningsgrad på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples - frekvenserne for gang og løb lå mellem 25 og 45}. Båndpasfilterets knækfrekvenser er bestemt gennem pilotforsøget i \appref{pilot}, hvorudfra det vurderes at hælnedslag findes ved cirka 25 Hz og signalet herfra stopper omkring 45 Hz. Alt inden for disse frekvenser burde derfor indeholde det vigtigste i signalet.\fxnote{Der er også meget lavfrekvent støj med meget høj amplitude, men det er vi ikke interesseret i, fordi det er f.eks. svingfasen.} Dermed frafiltreres eventuel 50 Hz støj fra signalet samt lavfrekvent DC signal. %. Knækfrekvensen omkring 20 Hz er bestemt for at bibeholde signalets hælnedslag, hvoraf frekvensen befandt sig omkring 20 Hz. 
 Andet trin i signalbehandlingen består af, at det filtrede signal divideres to. Dette gøres ved hjælp af en funktion i PSoC programmer, hvorved signalets amplituder bliver formindsket, og de mindste amplituder nærmer sig nul i større grad end amplituden for hælnedslag. Derved gøres peaket for dette tydligere. I det tredje trin i signalbehandlingen bliver signalet kvadreret ved hjælp af en funktion i PSoC programmer. Dette medfører, at de dele af signalet med lav amplitude under 1 formindskes, mens andre dele af signalet med amplituder over værdien 1 forstærkes. Dermed minimeres de events kraftigt, som ikke relateres til hælnedslaget, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.} Fjerde og sidste trin i signalbehandlingen bliver signalet filtreret med et moving average filter, som udglatter signalet, hvorved små udslag ikke opfattes, og signalets hælnedslag vil fremstå som et enkelt event.
 
-Ovenstående signalbehandling giver et endeligt signal med peaks, som skal adskilles med tærskelværdier for henholdsvis gang og løb. Førend en værdi for denne tærskelværdi kan fastsættes, skal dataet fra pilotforsøgets omregnes til ICens arbejdsområde: 
+Ovenstående signalbehandling giver et endeligt signal med peaks, som skal adskilles med tærskelværdier for henholdsvis gang og løb. Førend en værdi for denne tærskelværdi kan fastsættes, skal dataet fra pilotforsøgets omregnes til ICens arbejdsområde. ICens arbejdsområde er opgivet i bytes af dets 16 bits ADC arbejdsområde. Konverteringen til denne enhed skal gøres ved Shimmer, da enheden er $m/s^{2}$. Først skal dataet omregnes fra denne enhed til g, hvilket gøres ved at dividere med tyngdekræften. Efterfulgt af dette skal enheden omregnes til Shimmers arbejdsområde vedrørende dets 12 bit ADC arbejdsområde. For at gøre dette benyttes accelerometerets sensitivitet, som er 0,012 g/LSB. Data fra shimmer som er omregnet til g, skal divideres med accelerometerets sensitivitet. Outputet fra Shimmer og ICen er nu samme enhed, men ikke samme størrelse. Dette er et resultat af at de ikke besidder samme ADC.
+ 
 \begin{equation}
 \frac{32 g \times 2^{16}}{32 g \times 2^{12}} = 16
 \label{eq:bitsammenhaeng}
 \end{equation}
-Data fra Shimmer samples med en 12 bit ADC, og ICen besidder en 16 bit ADC. Resultatet heraf er, at data fra pilotforsøgets skal ganges med 16 for at repræsenterer ICens output i samme situation.
 
-%Resultatet af ovenstående signalbehandling medfører, at der findes et udtryk for gang og løbs amplitude forhold.
-Ud fra \eqref{eq:bitsammenhaeng} samt data fra pilotforsøget i \appref{pilot} vurderes det, at amplituden for hælnedslag ved løb overstiger en outputværdi på 1100 og ved gang overstiger en outputværdi på 100 for alle forsøgspersoner. Derfor vil events med amplituder under 100 vurderes som værende inaktivitet.
+Data fra Shimmer skal ganges med 16 for at være sammen størrelsesorden, hvilket er et resultat af at Shimmer benytter 12 bit ADC, og ICen besidder en 16 bit ADC. Ud fra konvertering af data samt algoritmens signalbehandling, vurderes det, at amplituden for hælnedslag ved løb overstiger en outputværdi på 400 og ved gang overstiger en outputværdi på 50 for alle forsøgspersoner. Derfor vil events med amplituder under 50 vurderes som værende inaktivitet.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/algoritme_gl.png}
@@ -63,13 +63,13 @@ Funktionaliteten af ovenstående signalbehandling sikre, at signalet for hælned
 		\rowcolor[HTML]{C0C0C0} 
 		Forsøgsperson & Tærskelværdi for gang & Tærskelværdi for løb \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F1 & 100 & 3000 \\ \hline
+		F1 & 50 & 1050 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F2 & 120 & 1100 \\ \hline
+		F2 & 55 & 500 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F3 & 100 & 1100 \\ \hline
+		F3 & 50 & 400 \\ \hline
 		\rowcolor[HTML]{FFFFFF} 
-		F4 & 500 & 2400 \\ \hline
+		F4 & 150 & 100 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses tærskelværdierne for forsøgspersonerne vedrørende aktiviteterne gang og løb.}
 	\label{tab:individuel_taerskel}
@@ -81,7 +81,7 @@ De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet ov
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Tærskelværdi for ingen aktivitet & Tærskelværdi for gang & Tærskelværdi for løb \\ \hline
-		x \textless 100 & x \textgreater 100 \& x \textless 1100 & x \textgreater 1100 \\ \hline
+		x \textless 50 & x \textgreater 50 \& x \textless 400 & x =\textgreater 400 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses de tærskelværdier, som for alle forsøgspersoner vil kunne detektere og adskille gang og løb fra hinanden.}
 	\label{tab:faelles_taerskel}
