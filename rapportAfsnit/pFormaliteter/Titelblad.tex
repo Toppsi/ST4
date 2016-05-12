@@ -1,93 +1,75 @@
-% Dette er LaTeX-versionen af titelbladet for tek-nat-basis-rapporter 2004 efterår
+% Dette er LaTeX-versionen af titelbladet for TNB studenterrapporter
 % Filen kræver:
-% Universitetets logo:  aau-logo.png (for LaTeX) eller aau-logo.ps (for LaTeX)
+% Universitetets logo:  AAU-logo-stud-UK eller AAU-logo-stud-DK
 % Synopsis: En fil ved navn synopsis.tex
 
-% Udarbejdet af: Hans Håttel (hans@cs.auc.dk) 21. maj 2003
-% Rettet af Morten Christophersen (mortench@tnb.aau.dk) 30. nov 2004(ændret til nyt design 2004 efterår)
+% Udarbejdet af: Jesper Nørgaard (jesper@noergaard.eu) 10. april 2012
 
-%\documentclass[11pt]{article}
-%\ifx\pdfoutput\undefined 
-%\usepackage[dvips]{graphicx}
-%\else
-%\usepackage[pdftex]{graphicx} 
-%\usepackage{type1cm} \fi
-%    \usepackage[ansinew]{inputenc}
-%    \usepackage{a4}
-
-%\begin{document} 
+\phantomsection
+\pdfbookmark[0]{Titelblad}{titelblad}
 \thispagestyle{empty}
-%\begin{titlepage}
-\begin{nopagebreak}
-{\samepage 	
-	
-\begin{flushright}
-\begin{tabular}{r}
-\parbox{\textwidth}{  \raisebox{11mm}{\includegraphics[height=1.cm]{figures/aaulogo-da.png}}
-\hfill \hspace{2cm} \parbox{8cm}{\begin{tabular}{l} %4.90
-{\small \textbf{\textcolor{MidnightBlue}{Sundhedsteknologi}}}\\ 
-{\small \textcolor{NavyBlue}{Fredrik Bajers Vej 7}} \\
-{\small \textcolor{NavyBlue}{9220 Aalborg}} \\
-{\small \textcolor{NavyBlue}{\emph{http://smh.aau.dk}}}
-\end{tabular}}}
-\end{tabular}
-\end{flushright}
+
+\begin{minipage}[t]{0.48\textwidth}
+\vspace*{-25pt}			%\vspace*{-9pt}
+\includegraphics[height=4cm]{figures/AAU-logo-stud-DK-RGB}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+{\small 
+\textbf{School of Medicine and Health}\\
+Sundhedsteknologi \\
+Niels Jernes Vej 12 \\
+9220 Aalborg Øst \\
+http://www.smh.aau.dk}
+\end{minipage}
+
+\vspace*{1cm}
+
+\begin{minipage}[t]{0.48\textwidth}
+\textbf{Titel} \\[5pt]\hspace*{2ex} 
+Udvikling af aktivitetsmåler\\\hspace*{2ex}
+til forebyggelse af inaktivitet\\
 
 
-\begin{tabular}{cc}
-\parbox{7cm}{
-\begin{description}
-{\setlength{\parindent}{0cm}
-\item \textbf{Titel}: \\
-\item \textbf{Tema}: \\
-\item \textbf{Projekt periode}: D. 01/02/2016 - 27/05/2016\\
-   P4, forår 2016\\
-  \hspace{4cm}
-\item \textbf{Projektgruppe}: 403 \\
-  \hspace{4cm}
-\item \textbf{Medvirkende}:\\
-\underline{\hspace{4cm}}\\
-Cecilie Sophie Rosenkrantz Topp  \\
-\underline{\hspace{4cm}}\\
-Frederik Skou Nielsen \\
-\underline{\hspace{4cm}}\\
-Josefine Dam Gade \\
-\underline{\hspace{4cm}}\\
-Line Sofie Hald \\
-\underline{\hspace{4cm}}\\
-Morten Skaarup Larsen \\
-\underline{\hspace{4cm}}\\
-Rana Haddang \\
-\hspace{1cm}
-\item \textbf{Vejleder}:\\
-Sabata Gervasio  \\
-}
-  
-\end{description}
+\textbf{Projekt} \\[5pt]\hspace*{2ex} 
+P4 - Behandling af fysiologiske signaler\\\hspace*{2ex}
 
-\begin{description}
-\item {\textbf{Oplagstal}: ??}
-\item \textbf{Sider}: ?? 
-\item \textbf{Bilag}: ??
-\item {Afsluttet d. 16/12/2015} 
-\end{description}
 
-} &
-\parbox{7cm}{
-  \vspace{.15cm}
-  \hfill 
-  \begin{tabular}{l}
-  \textbf{Synopsis}\bigskip \\
-  \fbox{
-    \parbox{6.5cm}{\bigskip
-     {\vfill{\small \input{rapportAfsnit/pFormaliteter/synopsis.tex}
-     \bigskip}}
-     }}
-   \end{tabular}}
-\end{tabular}} \vspace{0.5cm}
-\centering
-\textit{\tiny Offentliggørelse af rapportens indhold (med kildeangivelse) må kun ske efter aftale med forfatterne.}
-\\
-\end{nopagebreak}
-%\end{titlepage}
-%\end{document}
+\textbf{Projektperiode} \\[5pt]\bigskip\hspace{2ex}
+Februar 2016 - Juni 2016
+
+\textbf{Projektgruppe} \\[5pt]\bigskip\hspace{2ex}
+4403
+
+\textbf{Deltagere} \\[5pt]\hspace*{2ex}
+Cecilie Sophie Rosenkrantz Topp \\\hspace*{2ex}
+Frederik Skou Nielsen \\\hspace*{2ex}
+Josefine Dam Gade \\\hspace*{2ex}
+Line Sofie Hald \\\hspace*{2ex}
+Morten Skaarup Larsen \\\bigskip\hspace{2ex}
+
+
+\textbf{Vejleder} \\[5pt]\hspace*{2ex}
+Sabata Gervasio \\\bigskip\hspace{2ex}
+
+
+\vspace*{1cm}
+
+\textbf{Oplagstal: Online} \\
+\textbf{Sidetal: x (PDF sidetal: x)} \\
+\textbf{Appendiks: x (x - Dx)} \\ 
+\textbf{Afleveret: 27-05-2016}
+
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.483\textwidth}
+\textbf{Synopsis:} \\[5pt]
+\fbox{\parbox{8cm}{\bigskip\input{rapportAfsnit/pFormaliteter/synopsis}\bigskip}}
+\end{minipage}
+
+\vfill
+
+{\footnotesize\itshape Rapportens indhold er frit tilgængeligt, men offentliggørelse (med kildeangivelse) må kun ske efter aftale med forfatterne.}
+
+% Rapportens indhold er frit tilgængeligt, men offentliggørelse (med kildeangivelse) må kun ske efter aftale med forfatterne.
+% The content of the report is freely available, but publication (with source reference) may only take place in agreement with the authors.
