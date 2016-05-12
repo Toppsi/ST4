@@ -4,7 +4,7 @@
 \subsection{Design}
 Der benyttes et integrated circuit (IC) af typen LSM9DS1, der kræver 3,3~V for at være optimal funktionel. Denne indeholder magnometer, gyroskop og accelerometer, hvoraf magnometeret ikke vil blive benyttet.\fxnote{Magnometeret benyttes til måling af givne paramtere på et magnetfelt} \\ 
 Arbejdsområderne for accelerometeret og gyroskopet valgbart, hvoraf det er muligt at indstille accelerometeret til $\pm$1, $\pm$4, $\pm$8 eller $\pm$16~g, og gyroskopet kan indstilles til $\pm$245, $\pm$500 eller $\pm$2000~dps. \citep{Jimb02016,STMicroelectronics2016} \\
-På baggrund af kravene opstillet i \secref{Sec:krav}, vælges accelerometerets arbejdsområde til $\pm$16 g og gyroskopets arbejdsområde til $\pm$2000 dps. 
+På baggrund af kravene opstillet i \secref{Sec:krav}, vælges accelerometerets arbejdsområde til $\pm$16~g og gyroskopets arbejdsområde til $\pm$2000~dps. 
 
 LSM9DS1 har seks frihedsgrader, når magnometeret fravælges, hvilket betyder, at den måler i x-, y- og z-aksen for accelerometeret og gyroskopet, som kan ses på \figref{vores_IC}. %Akserne for gyroskopet og accelerometeret internt følger højrehåndsreglen.
 \citep{STMicroelectronics2016}\newline 
@@ -15,16 +15,16 @@ LSM9DS1 har seks frihedsgrader, når magnometeret fravælges, hvilket betyder, a
 	\label{vores_IC}
 \end{figure}
 
-Sensorens opbygning fremgår af \figref{fig:IC_pins}, hvor der er henholdsvis fire pins på venstre side og 9 pins på højre side. De fire pins på venstre side af ICen vil blive benyttet til spændingstilkobling samt til at læse sensorens outputdata fra. GND og VDD er jord og strømforsyningspins, mens SDA er I$^2$C datapin, hvor data bliver sendt og modtaget igennem, og SCL er en seriel clock, der blandt andet sørger for synkron datasampling.
+Sensorens opbygning fremgår af \figref{fig:IC_pins}, hvor der er henholdsvis fire pins på venstre side og 9 pins på højre side. De fire pins på venstre side af ICen vil blive benyttet til spændingstilkobling samt til at læse sensorens outputdata fra. GND og VDD er pins til henholdsvis jord og spændingsforsyning, mens SDA er I$^2$C datapin, hvor data bliver sendt og modtaget, og SCL er en seriel clock, der blandt andet sørger for synkron dataopsamling.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.2]{figures/cDesign/accelerometeret.png}
+	\includegraphics[scale=0.3]{figures/cDesign/accelerometeret.png}
 	\caption{Figuren viser pinkonfigurationen af LSM9DS1. \citep{Jimb02016} (Modificeret)}
 	\label{fig:IC_pins}
 \end{figure}
 
-LSM9DS1 er en digital sensor, hvormed de analoge signaler konverteres til digitale i ICen ved hjælp af en indbygget 16 bit ADC. Derfor bliver sensoren konfigureret til en given samplingsfrekvens for ADCen, hvilket vil blive gjort via C kode i implementeringen. Ifølge \secref{krav_adc} skal accelerometret sample med mindst 450~Hz.\\
-Det fremgår af databladet for ICen, at accelerometret kan konfigureres til seks forskellige samplefrekvenser, hvoraf to steps er 238~Hz eller 476~Hz. Derfor vælges samplingen for accelerometret til 476~Hz. Gyroskopet skal samples med mindst 60~Hz, men ifølge gyroskopets datablad kan den indstilles til 59,5~Hz eller 119~Hz, hvorfor den indstilles til 119~Hz.
+LSM9DS1 er en digital sensor, hvormed de analoge signaler konverteres til digitale i ICen ved hjælp af en indbygget 16 bits ADC. Derfor bliver sensoren konfigureret til en given samplingsfrekvens for ADCen. Ifølge \secref{krav_adc} skal accelerometret sample med mindst 450~Hz. Det fremgår af databladet for ICen, at accelerometret kan konfigureres til seks forskellige samplefrekvenser, hvoraf en samplingsfrekvens på 476~Hz har mindst afvigelse til den ønskede samplingsfrekvens. \\
+Gyroskopet skal samples med mindst 60~Hz, men ifølge gyroskopets datablad kan den indstilles til 59,5~Hz eller 119~Hz, hvorfor denne vælges til en samplingsfrekvens 119~Hz.
 
 Det AD konverterede outputsignal fra ICen kan benyttes med en SPI og en I$^{2}$C styrefunktion. Den benyttede mikrokontroller, CY8CKIT-043 PSoC 4-M, besidder begge styrefunktioner. I$^{2}$C styrefunktionen blive benyttet, idet der skal være modtagelse og afsendelse af data mellem ICen og MCUen.\fxnote{Modtage om gyroskopet skal tændes eller slukkes.} For at kunne benytte den pågældende styringsfunktion, da skal ICen kodes, således der skrives og læses fra et givent register i ICen. På \figref{Fig:master_slave} ses kommunikationen mellem en master og slave, hvoraf slaven i dette tilfælde er ICen og masteren er MCUen.\fxnote{Og dette kan ikke vendes om, ICen vil ALTID være slaven} 
 
@@ -52,6 +52,9 @@ Gyroskopet har tre forskellige power modes; slukket, low power og normal power. 
 %Ved kontinuert-til-FIFO tilstand skifter tilstanden alt efter de bit der modtages i interruptet for accelerometeret og gyroskopet. Hvis der modtages et bit på 1 vil den være i FIFO tilstand, og modtages der et bit på 0, vil den være i kontinuert tilstand. 
 %I bypass-til-kontinuert tilstand skiftes der ligeledes mellem bypass og kontinuert tilstand alt efter det modtagne interrups for accelerometeret og gyroskopet. Hvis der modtages et bit på 1, er den i kontinuert tilstand, og modtages der en bit på 0, nulstilles den ved at gå i bypass tilstand. 
 \subsection{Implementering}
+- BENYTTER REGISTER HVORAF HEXKODEN FREMGÅR --> DENNE HEXKODE SENDES TIL IC FOR AT INDSTILLE TIL ØNSKEDE SAMPLINGSFREKVENS OG ARBEJDSOMRÅDE
+- MODSTANDE SOM SØRGER FOR AT KUNNE HENTE DATA FRA IC (SE DATABLAD)
+
 MCuen skal kunne modtage data fra sensoren, hvilket udførs ved at implementere en algoritme i MCUen. Algoritmen i MCUen skal blandt andet skrive hexadressen '6B' til ICen, som er registeradressen for gyroskopet og accelerometer. Således kan MCUen som master af de to skrive til selve accelerometret eller gyroskopet. Det fremgår yderligere at databladet for ICen, at algoritmen skal skrive hexkoden 'A8' for at indstille accelerometeret til et arbejdsområde på $\pm$16~g og en samplingsfrekvens på 476~Hz. Yderligere skrives hexkoden '79' for at indstille gyroskopet til et arbejdsområde på 2000 dps og en samlingsfrekvens på 119~Hz. \citep{STMicroelectronics2016}
 
 I PSoC Programmer indhentes det analoge komponent I2CM. Denne skaber en I$^2$C forbindelse imellem MCUen og ICen samtidig med, at den indstiller MCUen til at være master. Når PSoC Programmer benyttes til test af sensoren, er der ikke behov for flere komponenter, men hvis dataen skal sendes ind i eksempelvis matlab, kræver det et UART komponent. 
