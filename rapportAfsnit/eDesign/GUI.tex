@@ -20,8 +20,8 @@ GUI implementeres ved at anvende MATLABS funktion Graphical User Interface Desig
 Resultaterne fra algoritmen vedrørende gang og løb sendes til MATLAB, hvor de gemmes i en variabel med [samples, peak]. Resultaterne fra algoritmen vedrørende cykling sendes til MATLAB, og gemmes i en variable med [samples, C]. Begge algoritmers resultater sammenholdes med resultaterne fra algoritmen vedrørende pulsdetektering med henblik på multiplikation afhængig af intensitetsniveau. Resultatet fra pulsdetektering sendes til MATLAB og gemmes i en variable med [BPM].
 
 \subsubsection{Test}
-GUIs funktionalitet testes ud fra kravene heraf, se \secref{krav_GUI}. Dets funktionalitet testes ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt. Igennem en test med kendte værdier kan funktionen med multiplikation af point afhængig af aktivitetstype, varighed, multiplikation af point vedrørende intensitet samt aktivitetstype genkendelse, testes igennem samme test.
-Igennem testen benyttes følgende datasæt som skulle trigge de forskellige aktiviteter. Dataene skal fungere som simulerede input fra algoritmerne. 
+GUIs funktionalitet testes ud fra kravene heraf, se \secref{krav_GUI}. Dets funktionalitet testes ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt. Igennem en test med kendte værdier kan funktionen med multiplikation af point afhængig af aktivitetstype, varighed, multiplikation af point vedrørende intensitet og aktivitetstype genkendelse, testes igennem samme test.
+Igennem testen indsendes følgende datasæt som skulle trigge de forskellige aktiviteter. Dataene skal fungere som simulerede input fra algoritmerne. 
 \begin{eqnarray*}
 	Gang &=& [512~110,~512~110,~512~110,~512~110,~512~110,~512~110] \\ 
 	L\text{ø}b &=& [512~1110,~512~1110,~512~1110,~512~1110,~512~1110] \\ 
@@ -54,7 +54,7 @@ Varigheden udregnes som nævnt i design ved at dividere modtagne antal samples m
 	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
 	\label{test:GUI}
 \end{table}\vspace{-.5cm}
-På baggrund af testen af GUI, kunne det konkluderes at denne fungerer som hensigten. De forventede antal point og optalt antal point var nøjagtig det samme. Disse optjente point visualiseres i et søjlediagram som beskrevet i design. Varigheden af hvert aktivitet visualiseres som en boks, som summeres op hver gang et aktivitetsresultat bliver behandlet. Resultatet af at indsende det simulerede data afspejles i GUI i nedenstående figur.
+På baggrund af testen af GUI, kunne det konkluderes at denne fungerer efter hensigten. De forventede antal point og optalt antal point var nøjagtig det samme. Disse optjente point visualiseres i et søjlediagram som beskrevet i design. Varigheden af hvert aktivitet visualiseres som en boks, som summeres op hver gang et aktivitetsresultat bliver behandlet. Resultatet af at indsende det simulerede data afspejles i GUI i nedenstående figur.
 
 \textit{\textbf{Figur indsættes her, include er udkommenteret.} }
 %\begin{figure}[H]
@@ -63,6 +63,5 @@ På baggrund af testen af GUI, kunne det konkluderes at denne fungerer som hensi
 %	\caption{På figuren ses et udklip af GUI hvor udførslen af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
 %	\label{fig:GUI}
 %\end{figure}
-
 
 Efterfulgt af design, implementering og test af GUI, kan det konkluderes at denne opfylder kravene heraf. GUI er i stand til at visualisere tidsforbruget samt antal point opnået, for alle aktiviteterne. GUI opdaterede i testen i reelle tid, hvoraf kravet vedrørende opdatering af GUI mindst hvert femtende minut, ligeledes er opfyldt.
