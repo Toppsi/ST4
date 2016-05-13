@@ -26,7 +26,7 @@ Som resultat af signalbehandlingen på \figref{fig:behandlet_puls} ses det, at a
 	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er en signalbehandlet pulsmåling fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi, som har en værdi 400.}
 	\label{fig:taerskel_puls}
 \end{figure} \vspace{-0.5cm}
-Det behandlede signal fremgår af figuren, hvortil der er indtegnet en tærskelværdi, som alle de systoliske peaks vil overskride. Denne tærskelværdi vil medføre, at det systoliske tryk overstiger tærskelværdien, hvortil det diastoliste tryk vil befinder sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i tre detekterede peaks. 
+Det behandlede signal fremgår af figuren, hvortil der er indtegnet en tærskelværdi, som alle de systoliske peaks vil overskride. Denne tærskelværdi vil medføre, at det systoliske tryk overstiger tærskelværdien, hvortil det diastoliste tryk vil befinder sig under. Algoritmen vil benytte varigheden mellem de forekomne systoliske tryk til at kunne beregne BPM med udgangspunkt i fem detekterede peaks. 
 
 \subsection{Implementering} \label{puls_impl}
 Pulssensoren har 3 pins til henholdsvis spændingsforsyning, ground og outputsignal. Disse pins kobles til hver sin pin på GAP peripheral. Outputsignalets pin skal designes i PSoC Creator, således MCUen modtager pulssensorens signaler fra den pågældende pin. Dette gøres ved at indsætte henholdsvis en UART serie kommunikationsblok (SCB) og SAR ADC i topdesignet. UARTen bruges til, at sensoren og MCUen kan kommunikere med hinanden. Standardindstillingerne for denne blok benyttes til konfigurationen af MCUen. \newline
@@ -39,7 +39,7 @@ Efter konfigurering af UART og ADC i topdesignet, skal de korrekte pins indstill
 	\label{fig:puls_pseudo_c}
 \end{figure} \vspace{-0.5cm}
 Første trin, efter dataopsamlingen fra pulssensoren, er en konvertering af det analoge signal til et digitalt. Derefter undersøges det, hvorvidt det konverterede data er klar, hvilket der benyttes en indbygget kodegenerering til. Hvis data er klar, da starter algoritmens time counter som starter optælling af samples. Når en sample er klar, bliver den kvadreret og divideret, som det beskrives i \secref{sec_design_puls}. Den behandlede sample gemmes i en variabel, 'Value[0]'. Når der kommer en ny sample, vil den forrige sample blive gemt i en ny variabel, 'Value[1]', og den nye sample gemmes i den anden variabel. \\
-Yderligere tæller algoritmen antallet af pulsslag, ved at vurdere om 'Value[0]' er under tærkselværdien og 'Value[1]' er over. Hvis dette er tilfældet, vil der blive lagt én til antal pulsslag, dog maksimalt til antal pulsslag er <4. Algoritmen erydermere designet således, at at den registrerer et pulsslag, når en tidligere sample er over tærskelværdien og den efterfølgende sample er under. Derfor vil algoritmen kunne beregne BPM for brugeren, med det forbehold, at antallet af pulsslag skal være 3. Time counteren benyttes i denne forbindelse, til at optælle antallet af samples mellem 3 pulsslag. Beregningen foretages ved at bestemme den gennemsnitlige varighed mellem 3 pulsslag, for derefter at dividere 60 sekunder med den gennemsnitlige varighed. Når beregningen er foretaget, vil BPM for brugeren blive sendt til GAP central gennem bluetooth, hvorefter algoritmens værdier nulstilles.
+Yderligere tæller algoritmen antallet af pulsslag, ved at vurdere om 'Value[0]' er under tærkselværdien og 'Value[1]' er over. Hvis dette er tilfældet, vil der blive lagt én til antal pulsslag, dog maksimalt til antal pulsslag er <6. Algoritmen erydermere designet således, at at den registrerer et pulsslag, når en tidligere sample er over tærskelværdien og den efterfølgende sample er under. Derfor vil algoritmen kunne beregne BPM for brugeren, med det forbehold, at antallet af pulsslag skal være fem. Time counteren benyttes i denne forbindelse, til at optælle antallet af samples mellem fem pulsslag. Beregningen foretages ved at bestemme den gennemsnitlige varighed mellem fem pulsslag, for derefter at dividere 60 sekunder med den gennemsnitlige varighed. Når beregningen er foretaget, vil BPM for brugeren blive sendt til GAP central gennem bluetooth, hvorefter algoritmens værdier nulstilles.
 
 
 \subsection{Test}
@@ -48,21 +48,21 @@ Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvig
 
 Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af et absolut sinussignal. Peaks på dette simulerede signal skal repræsentere de systoliske peaks i en pulssignal optages med en pulssensor.\\
 Det simulerede signal sendes ind i MCUen, hvorefter det undersøges hvorvidt time counteren detekterer varigheden mellem overskridelser af algoritmens opsætning. Når pulsen er bestemt, benyttes programmet Real Term til at printe algoritmens slutresultat, som er BPM. \\
-Det indsendte signal er et absolut sinussignal, som har en frekvens på 0,6~Hz og en samplingsfrekvens på 188~Hz. Ydermere er det array, som indsendes til MCUen, på 1451 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
-Der indsendes 1451 samples og benyttes en samplingsfrekvens på 188~Hz, hvormed arrayet har en længde på 7,7 sekunder. Idet der er tale om et absolut sinussignal på 0,6~Hz, vil der opstå 9,26 peaks i det indsendte signal. Dette vil betyde, at algoritmen skal udregne og printe tre værdier for pulsen, idet der er 9 fuldstændige peaks. \\
-Når der er 9,26 peaks og arrayet har en varighed af 7,7 sekunder, vil der være 0,83 sekunder mellem hver overskridelse af tærskelværdien. Pulsen bestemmes, som det fremgår af \eqref{eq:puls_teori}.
+Det indsendte signal er et absolut sinussignal, som har en frekvens på 0,6~Hz og en signalfrekvens på 35~Hz. Ydermere er det array, som indsendes til MCUen, på 992 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
+Der indsendes 992 samples og benyttes en singalfrekvens 35~Hz, hvormed arrayet har en længde på 28,3 sekunder. Idet der er tale om et absolut sinussignal på 0,6~Hz, vil der opstå 34 peaks i det indsendte signal. Dette vil betyde, at algoritmen skal udregne og printe seks værdier for pulsen, idet der er 34 fuldstændige peaks. \\
+Når der er 34 peaks og arrayet har en varighed af 28,3 sekunder, vil der være 0,83 sekunder mellem hver overskridelse af tærskelværdien. Pulsen bestemmes, som det fremgår af \eqref{eq:puls_teori}.
 \begin{equation}
 \frac{60~sekunder}{Varighed~mellem~samples} = \frac{60~sekunder}{0,83~sekunder} = 72~BPM
 \label{eq:puls_teori}
 \end{equation} 
 Derfor vil det indsendte signal medføre en værdi af 72 BPM. Det er forventeligt, at algoritmen vil beregne og printe en puls, som har en værdi af 72 BPM.
 
-Algoritmen er bestemt til at nulstille sin time counter hver gang der registreres tre tilfælde, hvor en sample er gået under tærskelværdien. Derfor vil algoritmen gøre brug af time counterens optalte antal samples til at bestemme pulsen for den pågældende periode. \\
-Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret tre tilfælde. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Real Term har printer de forventede værdi for BPM.
+Algoritmen er bestemt til at nulstille sin time counter hver gang der registreres fem tilfælde, hvor en sample er gået under tærskelværdien. Derfor vil algoritmen gøre brug af time counterens optalte antal samples til at bestemme pulsen for den pågældende periode. \\
+Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret fem tilfælde. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Real Term har printer de forventede værdi for BPM.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/timecounter_puls_pic.png}
-	\caption{På figuren ses algoritmens timecounter, som tæller op, indtil en sample på det tredje pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og starter samme procedure.}
+	\caption{På figuren ses algoritmens timecounter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og starter samme procedure.}
 \label{fig:timecounter_puls_realterm}
 \end{figure}
 \begin{table}[H]
@@ -71,13 +71,13 @@ Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_pu
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
-		72 - 72 - 72          & 72 - 72 - 72         & 0 - 0 - 0 \\ \hline
+		72 - 72 - 72 - 72 - 72 - 72         & 72 - 72 - 72 - 72 - 72 - 72         & 0 - 0 - 0 - 0 - 0 - 0 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er resultatet fra Real Term.}
 	\label{tab:test_puls_realterm}
 \end{table} \vspace{-0.5cm}
 
-Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller indtil tre peaks er detekteret. Herefter beregner algoritmen pulsen ud fra det antal samples, som findes inden for disse tre peaksdetekteringer. Herefter printes pulsen i Realterm, hvor værdierne er illustreret i tabellen. Det fremgår ydermere, at de modtagede værdier har 0\% afvigelse fra de forventede værdier. \\
+Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller indtil fem peaks er detekteret. Herefter beregner algoritmen pulsen ud fra det antal samples, som findes inden for disse fem peaksdetekteringer. Herefter printes pulsen i Realterm, hvor værdierne er illustreret i tabellen. Det fremgår ydermere, at de modtagede værdier har 0\% afvigelse fra de forventede værdier. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
 Der foretages yderligere en test, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. \\
@@ -88,9 +88,9 @@ Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
 	\begin{tabular}{ccc} \hline
 		\rowcolor[HTML]{C0C0C0} 
 			Gennemsnitlig puls LoggerPro {[}BPM{]} & Gennemsnitlig puls Algortime {[}BPM{]} & Afvigelse {[}\%{]} \\ \hline
-			60,4 & 64,5 & 6,4 \\ \hline
+			66,1 & 76 & 13 \\ \hline
 		\end{tabular}%
-	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 6,4\%.}
+	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 13\%.}
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
-Det fremgår i \tabref{tab:test_pulssystem}, at testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 6,4\%. Dermed overholder pulssensoren de opstillede krav i \secref{puls_krav}.
+Det fremgår i \tabref{tab:test_pulssystem}, at testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 13\%. Dermed overholder pulssensoren de opstillede krav i \secref{puls_krav}.
