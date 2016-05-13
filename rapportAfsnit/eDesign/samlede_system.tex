@@ -6,15 +6,15 @@ Det samlede system består en række blokke, som samlet udgør hele systemet. De
 \subsection{Test}
 Det samlede systems funktionalitet testes ved at påføre sensorerne og GAP peripheral til en forsøgsperson, samt tilkoble GAP central til en computer som modtager resultaterne fra GAP peripheral, hvoraf systemet kommunikerer trådløst. GAP central videresender dette til computeren hvorefter det illustreres i GUI. Denne forsøgsopstilling fremgår af \figref{fig:samlede_system_opstilling}.
 
-\textbf{FIGUR: BILLEDE AF SYSTEM PLACERET PÅ BENET.}
+\textbf{FIGUR: BILLEDE AF SYSTEM PLACERET PÅ BENET.} \\
+
 %\begin{figure}[H]
 %	\centering
 %	\includegraphics[scale=0.5]{figures/cDesign/samlede_system_opstilling.png}
 %	\caption{På figuren ses opsætningen af det endelige system på en forsøgsperson.}
 %	\label{fig:samlede_system_opstilling}
 %\end{figure}
-
-En forsøgsperson skal, med denne forsøgsopstilling, udførere aktiviteterne gang, løb og cykling i et forudbestemt tidsinterval. Formålet med testen er at testes hermed hvorvidt det samlede systems resultater stemmer overens med udført aktivitet. Dette visualiseres i brugerfladen, hvoraf den samlede tid for en udført aktivitet gengives. Systemtesten indebærer også en test af dets spændingsforbrug igennem en time, hvoraf det forbrug illustreres og en batterilevetid kan fastsættes.\\
+En forsøgsperson skal, med denne forsøgsopstilling, udførere aktiviteterne gang, løb og cykling i et forudbestemt tidsinterval. Formålet med testen er at testes hermed hvorvidt det samlede systems resultater stemmer overens med udført aktivitet. Dette visualiseres i brugerfladen, hvoraf den samlede tid for en udført aktivitet gengives. Systemtesten indebærer også en test af dets spændingsforbrug igennem en time, hvoraf dets forbrug illustreres og en batterilevetid kan fastsættes.\\
 Forud for at forsøgspersonen skal udføre aktiviteterne med henblik på det samlede systems præcision vedrørende varigheden af udført aktivitet, skal sensorerne kontrolleres. Det samledes system afhænger af at tærskelværdierne udledt af Shimmer data fra pilotforsøget, er overensstemmende med hvad de burde være ved LSM9DS1. Pulssensoreren testes ligeledes for at udlede at bibeholder dens stabilitet under udførelsen af aktivitet. Denne variabelkontrol af tærskelværdierne og pulssensoreren sikres ved at udføre en biastest af det samledes system. Det samlede system påsættes en forsøgsperson som løber ved 11,3 km/t, samt går ved 4,8 km/t. 
 \begin{table}[H]
 	\centering
@@ -49,10 +49,11 @@ En forsøgsperson skal udføre aktiviteterne gang, løb og cykling i en periode 
 	}
 	\caption{I tabellen ses testresultaterne fra testen af den samlede system.}
 	\label{tab:test_samlet}
-\end{table}
+\end{table}\vspace{-.5cm}
 Resultatet af testen vedrørende det samlede system, bevirker at al aktivitet ikke blev detekteret. Systemet afviger henholdsvis \textbf{x} sekunder i alle aktiviteter, hvoraf pointoptællingen ikke stemmer overens med den forventede mængde. 
 \begin{table}[H]
 	\centering
+	\resizebox{\textwidth}{!}{%
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
@@ -61,21 +62,30 @@ Resultatet af testen vedrørende det samlede system, bevirker at al aktivitet ik
 		Løb ved 11,3 km/t & x & x \\ \hline
 		Cykling ved 20,9 km/t & x & x \\ \hline
 	\end{tabular}
+}
 	\caption{I tabellen ses den procentvise afvigelse for aktiviteterne gang, løb og cykling. Resultaterne afspejler den procentvise afvigelse fra den detekterede varighed til den faktiske varighed, og den procentvise afvigelse fra den optalte pointværdi til den faktiske pointværdi.}
 	\label{tab:test_afvig_samlet}
-\end{table}
-Resultatet af testen af det samlede system medfører at dets krav heraf kan af-, eller bekræftes. Kravet vedrørende detektering og adskillelse af aktiviteterne gang, løb og cykling med en afvigelse på 10\% fra den faktiske varighed kan for alle aktiviteter bekræftes. Kravet vedrørende registrering af intensiteten blev som resultat af biastesten afkræftet, med baggrund i sensorerens stabilitet under aktivitet. Registrering af intensiteten, bør kunne implementeres med en sensor som ikke giver udslag under aktiviteter som løb. Som resultat at af en fast BPM til forsøget blev fastsat, kan kravet vedrørende behandling og repræsentation af aktiviteternes intensitet visualiseres i GUI, med baggrund i pointmultiplikationen.  \\
+\end{table} \vspace{-.5cm}
+Resultatet af testen af det samlede system medfører at dets krav heraf kan af-, eller bekræftes. Kravet vedrørende detektering og adskillelse af aktiviteterne gang, løb og cykling med en afvigelse på 10\% fra den faktiske varighed kan for alle aktiviteter bekræftes. Kravet vedrørende registrering af intensiteten blev som resultat af biastesten afkræftet, med baggrund i sensorerens stabilitet under aktivitet. Registrering af intensiteten, bør kunne implementeres med en sensor som ikke giver udslag under aktiviteter som løb. Som resultat at af en fast BPM til forsøget blev fastsat, kan kravet vedrørende behandling og repræsentation af aktiviteternes intensitet visualiseres i GUI, med baggrund i pointmultiplikationen. 
 
-Systemet testes ligeledes for at afgøre batteriets levetid, med henblik på at af,- eller bekræfte kravet vedrørende at kunne være batteridrevet igennem en hel dag. Systemets initialeres til at starte samtidig med et stopur. Det samlede systems spændingsforsyning tilkobles et multimeter for at kunne fastsættes dets spænding inden forsøget, hvilket gøres efter forsøget. Systemet skal køre uafbrudt i en time, hvorefter spændingsforsyningens spændingsniveau måles igen. 
-ww 
+Systemet testes ligeledes for at afgøre batteriets levetid, med henblik på at af,- eller bekræfte kravet vedrørende at kunne være batteridrevet igennem en hel dag. Systemets initialeres til at starte samtidig med et stopur. Det samlede systems spændingsforsyning tilkobles et multimeter for at kunne fastsættes dets spænding inden forsøget. Systemet skal køre uafbrudt i en time, hvorefter spændingsforsyningens spændingsniveau igen måles. 
 
-Proto derfor ingen confort eller motivationsfaktor.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Spændingsniveau før forsøg {[}V{]} & Spændingsniveau efter forsøg {[}V{]} \\ \hline
+		3,14 & 2,78 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses testresultaterne vedrørende det samlede systems spændingsforbrug.}
+	\label{tab:test_spaending}
+\end{table} \vspace{-.5cm}
+Ovenstående testresultater medfører at det samledes system forbruger 0,36 V per time. Med baggrund i design af sensoreren LSM9DS1 kendes spændingsniveauet hvoraf sensoreren ikke længere forventes at opererer lineært, hvilket er på 2,40 V. Dette resulterer systemet kan forbruge 0,74 V, hvorefter systemet ikke forventes at fungere mere. 
 
-	\item Være komfortabelt for brugeren.
-og være batteridrevet en hel dag.
-	\item Være elektrisk sikkert for brugeren.
-	\item Behandle og repræsentere signalerne visuelt som intensiteten af en aktivitet i forhold til tid.
-	\item Motivere børn i aldersgruppen 9-12 år. 
+\begin{equation}
+Varighed~vedr\text{ø}rende~line\text{æ}r~operation = \frac{0,74~V}{0,36~V~per~time} = 2,05~timer
+\end{equation}   
+Det samlede system vil efter 2,05 timer have opbrugt det spændingsarbejdsområde, hvoraf sensoreren opererer lineært. Test af systemets levetid per batteri afkræfter dermed kravet heraf.
 
-
-
+Det samlede systems krav vedrørende et komfortabelt produkt for brugeren, samt bestå af et motiverende element for børn i aldersgruppen 9-12 år, blev ikke implementeret. Dette blev ikke implementeret, da systemet er en prototype, hvoraf fokus er på dets funktionalitet. 
