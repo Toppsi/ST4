@@ -131,6 +131,19 @@ GUI'en skal:
 	\item Være i stand til at opdatere interfacet senest hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
 \end{itemize}
 
+\subsection{Det samlede system} \label{krav_samlet_sys}
+Når hver af de overstående dele fungerer, skulle det gerne være muligt at sammensætte systemet til en samlet enhed. Kravene hertil vil derfor tage udgangspunkt i \secref{funktionellekrav} med accepterede afvigelser. Men eftersom systemet anses som en prototype vurderes det, at nogle krav fra \secref{funktionellekrav} ikke kan testes og dermed muligvis ikke opfyldes. Eksempelvis er det inden for projektperioden ikke muligt at teste for, om systemet er motiverende for børn i aldersgruppen 9-12 år. Derudover er det ikke muligt at teste, hvorledes systemet kan være batteridrevet over én dag samtidig med, at det er funktionelt, da modtagerenheden og det visuelle interface er en PC.
+
+\textbf{Krav til det samlede system} \newline
+Det samlede system skal:
+\begin{itemize}
+	\item Kunne detektere aktiviteterne gang, løb og cykling gennem bestemte ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
+	\item Kunne adskille gang, løb og cykling ved hjælp af algoritmer i softwaren. Der accepteres en afvigelse på 5\% ift. fejlvurdering af aktivitet.
+	\item Kunne registrere puls igennem pulssensor og derefter omregne dette til intensitet af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
+	\item Videresende signaler til en ekstern enhed ved hjælp af BLE. Der accepteres ikke andre trådløse kommunikationsformer.
+	\item Repræsentere varigheden og intensiteten af en given aktivitet i en GUI, hvor der gives point herudfra. Der accepteres ikke en anden form for visualisering. 
+\end{itemize}
+
 %Afspejling af en eventuel motiverende faktor, 
 %	- Vise data fra en hel dag. 
 %Notes: 
