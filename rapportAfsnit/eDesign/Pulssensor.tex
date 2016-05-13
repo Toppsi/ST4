@@ -1,5 +1,5 @@
 \section{Pulsdetektering}\label{sec_de_im_te_puls}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor. Først designes opsætningen af pulssensoren og dets algoritme til det specifikke formål, hvorefter dette implementeres. Afslutningsvist bliver algoritmen vedrørende pulsdetektering testet i forhold til opstillede krav i \secref{puls_krav_}}.
+\textit{I dette afsnit beskrives designet, implementeringen og testen af den valgte pulssensor. Først designes opsætningen af pulssensoren og dets algoritme til det specifikke formål, hvorefter dette implementeres. Afslutningsvist bliver algoritmen vedrørende pulsdetektering testet i forhold til opstillede krav i \secref{puls_krav}.}
 
 \subsection{Design} \label{sec_design_puls}
 Pulssensoren skal benyttes til at beskrive intensiteten af aktiviteten, som er beskrevet i \secref{subsub:ak_int}. Heraf kan effekten af aktiviteten bestemmes, hvilket vil blive afspejlet som en motiverende faktor i forbindelse med visualisering i GUI. \newline
@@ -7,7 +7,7 @@ Pulssensoren SEN-11574 er valgt til dette projekt, da den er en optisk pulssenso
 Pulssensoren designes således, at pulsen (BPM) beregnes for brugeren i GAP peripheral og sendes til GAP central, hvilket fremgår af \figref{fig:puls_pseudo}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/cDesign/puls_pseudo.png}
+	\includegraphics[scale=0.6]{figures/cDesign/puls_pseudo.png}
 	\caption{På figuren ses et flowchart over algoritmen vedrørende detektering af BPM under alle aktiviteterne. Pulssensorens algoritme skal registrere tre pulsslag førend pulsen kan beregnes ud fra disse værdier.}
 	\label{fig:puls_pseudo}
 \end{figure}
@@ -34,7 +34,7 @@ Outputsignalet fra sensoren er et analogt signal, hvormed dette signal opsamles 
 Efter konfigurering af UART og ADC i topdesignet, skal de korrekte pins indstilles i pinopsætning. UART tildeles interne RX-, og TX-pins, hvorimod ADCens inputpin skal indstilles til den pin, som outputtet fra sensoren er placeret i, hvilket er valgt til pin 2.0. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/Puls_ckode.png}
+	\includegraphics[scale=0.5]{figures/cDesign/Puls_ckode.png}
 	\caption{På figuren ses pulssensorens algoritme i C kode beskrevet med pseudokode.}
 	\label{fig:puls_pseudo_c}
 \end{figure} \vspace{-0.5cm}
@@ -87,7 +87,7 @@ Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
 	\centering
 	\begin{tabular}{ccc} \hline
 		\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls LoggerPro {[}BPM{]} & Gennemsnitlig puls Algortime {[}BPM{]} & Afvigelse {[}\%{]} \\ \hline
+			Gennemsnitlig puls LoggerPro {[}BPM{]} & \begin{tabular}[c]{@{}c@{}} Gennemsnitlig puls \\ Algortime {[}BPM{]} \end{tabular} & Afvigelse {[}\%{]} \\ \hline
 			66,1 & 76 & 13 \\ \hline
 		\end{tabular}%
 	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 13\%.}
