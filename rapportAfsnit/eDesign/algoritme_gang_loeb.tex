@@ -29,12 +29,33 @@ En timer skal aktiveres, når algoritmen registrerer ingen aktivitet, gang eller
 Hvis algoritmen til detektering af gang og løb ikke registrer aktiviteterne, bliver der ikke udført nogen bevægelse eller cykling finder sted, hvorfor algoritmen starter forfra indtil detektering af gang eller løb. \\
 Fælles for både detektering af gang og løb er, at første målte peak samt det første peak efter tre sekunder uden aktivitet kasseres. Dette gøres for at sikre en periode uden aktivitet ikke summeres som faktisk gang eller løb.
 
-\subsubsection{Algoritme til detektion af cykling}
-Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere og adskille aktiviteterne. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører, at signalets frekvenser og deres tilhørende magnituder kommer til udtryk. I andet trin findes frekvensværdien for den maksimale peak. Amplituden herfra bliver summeret i det tredje trin sammen med amplituderne for $\pm$1 Hz af den pågældende frekvens med maks peak. Derved fås en amplitudeværdi for maks peak værdien summeret med de to omkringliggende amplitudeværdier. Derudover %Tredje trin består af to summeringer, hvoraf første summering lægger FFTen fra den største frekvens hvor den største magnitude befandt sig, $\pm$1 Hz. Anden summering 
-summeres amplitudeværdierne for FFTen fra 1 til 20 Hz i det tredje trin, som herefter vil blive betegnet som hele FFTen.
-Herved fremkommer to resultater: en amplitudeværdi for makspeak med omkringliggende værdier samt en amplitudeværdi for hele FFTen. Resultaterne af disse to summeringer benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering med det højeste peak udgør i forhold til den samlede FFT. Maks peak værdien med omkringliggende værdier vil typisk udgøre en stor procentdel af den samlede summering, hvorfor det er muligt at definere, om gyroskopet sampler cykling eller ej.\\
-Resultatet af ovenstående signalbehandling medfører, at der opstilles et udtryk for signalets spredning af energi. Cykling har en spredning af energi fordelt nært frekvensen med maks peak i amplitude. Data fra gyroskopets z-akse vedrørende cykling blev for alle forsøgspersoner behandlet med ovenstående metode. Dette resulterede i, at 84,5\% til 91,9\% af energien lå $\pm$1 Hz omkring den fundne frekvens med den største amplitude. Hvorledes acceleration eller andre hastigheder har påvirkning på denne procentfordeling diskuteres i \secref{sec:diskussion}. Procentfordelingen blev ligeledes behandlet for gang og løb for at sikre, at disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling kan fastsættes. Resultatet heraf medførte at ved gang befandt energien omkring den fundne frekvens sig mellem 35,9\% til 48,5\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. \\
-Resultatet af at energien omkring den fundne frekvens med den største amplitude er $\approx$30\% større ved cykling end ved gang og løb, hvorfor tærskelværdien for gyroskopets detektering af cykling sættes til 70\%. For at detektere cykling skal outputtet fra databehandlingen af gyroskopets z akse altså være større end 70\%.
+\subsubsection{Algoritme til detektion af cykling}\label{design_cykling}
+Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere cykling og adskille denne fra gang og løb. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører, at signalets frekvenser og deres tilhørende magnituder kommer til udtryk. I andet trin findes frekvensværdien for den maksimale peak. Amplituden herfra bliver summeret i det tredje trin sammen med amplituderne for $\pm$1 Hz af den pågældende frekvens med maks peak. Derved fås en amplitudeværdi for maks peak værdien summeret med de to omkringliggende amplitudeværdier. Derudover summeres amplitudeværdierne for FFTen fra 1 til 20 Hz i det tredje trin, som herefter vil blive betegnet som hele FFTen. Resultatet heraf består i en amplitudeværdi for den maksimale peak med omkringliggende værdier, samt en amplitude værdi for hele FFTen. Resultaterne af disse to summeringer benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering med det højeste peak udgør i forhold til den samlede FFT. Summeringen over den maksimale peak med omkringliggende værdier vil typisk udgøre en stor procentdel af den samlede summering. Resultatet af at summeringen udgør en stor procentdel af den samlede energi, er at cykling afspejles som et sinussignal, hvoraf energien befinder sig omkring få frekvenser. Aktiviteterne gang og løb har ikke samme karakteristiske påvirkning af gyroskopet.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{figures/cDesign/gyro_behandling.png}
+	\caption{Figuren viser rå data for gang, løb og cykling for et 5 sekunders interval opsamlet på gyroskopets z-akse på øverste graf, samt signalbehandling af dataet fra 0 til 20~Hz på nederste graf.}
+	\label{fig:gyro_behandling}
+\end{figure}\vspace{-0.5cm}
+Data fra pilotforsøget er behandlet med ovenstående signalbehandling. Dette er gjort med henblik på fastsættelse af en tærskelværdi som adskiller cykling fra gang og løb. På den øverste graf på \figref{fig:gyro_behandling} ses de rå signaler fra gyroskopet fra gang, løb og cykling. Som det tydelig ses afspejles cykling tilnærmelsesvis som en sinus, hvorfor dennes energi er centreret omkring få frekvenser. Resultatet af den omtalte signalbehandling ses på den nederste graf, hvoraf gang, løb og cykling er blevet behandlet med en FFT. Hertil ses det også at energien for gang og løb ikke centrerer sig omkring en enkelt frekvens, men om forskellige frekvenser, hvoraf denne spredning af energi kan benyttes til signalgenkendelse og adskillelse af aktiviteterne. 
+
+Efter ovenstående signalbehandlingen implementeres signalgenkendelsen som består af, først at finde den maksimale magnitude og den tilhørende frekvens, resultatet heraf er aktivitetens dominerende frekvens. Herefter summeres værdierne for den maksimale magnitude, ved at summere intervallet $\pm$1~Hz omkring frekvens heraf. Hertil summeres også værdierne for FFTen fra 1 til 20~Hz. Afslutningsvist bestemmes hvor stor en procentdel summeringen for den maksimale magnitude udgør af summeringen for 1 til 20~Hz.\\ 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & Procent for gang & Procent for løb & Procent for cykling \\ \hline
+		F1 & 41,0\% & 38,6\% & 85,5\% \\ \hline	
+		F2 & 48,5\% & 51,5\% & 91,9\% \\ \hline	
+		F3 & 35,9\% & 42,8\% & 85,0\% \\ \hline
+		F4 & 38,7\% & 60,6\% & 91,6\% \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses hvor stor en procentdel summeringen vedrørende den maksimale magnitude udgør af hele FFTen. Dette er gjort for både gang, løb og cykling, med henblik på bestemmelse af en tærskelværdi.}
+	\label{tab:individuel_procent}
+\end{table}\vspace{-0.5cm}
+Mængden af energi ved den maksimale magnitude er markant større for cykling i forhold til gang og løb, hvilket er illustreret i \tabref{tab:individuel_procent}. Dette resulterede i, at 84,5\% til 91,9\% af energien lå $\pm$1 Hz omkring den fundne frekvens med den største amplitude. Hvorledes acceleration eller andre hastigheder ved cykling har påvirkning på denne procentfordeling diskuteres i \secref{sec:diskussion}. Procentfordelingen blev ligeledes behandlet for gang og løb for at sikre, at disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling kan fastsættes. Resultatet heraf medførte at ved gang befandt energien omkring den fundne frekvens sig mellem 35,9\% til 48,5\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. Denne forskel benyttes til at adskille cykling fra gang og løb, ved at implementere et tærskelværdi på 70\%. Summeringen af magnituden omrking den største magnitude skal dermed udgøre 70\% for at blive klassificeret som cykling. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/algoritme_cykling.png}
@@ -93,38 +114,40 @@ Ved hjælp af if lykkerne behandles det databehandlede signal som henholdsvis in
 
 \subsubsection{Algoritme til detektion af cykling}
 %% Implementering i MATLAB
+Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_cykling}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_cykling}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_cykling_basic.png}
+	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere en kommende figur.}
+	\label{fig:basic_cykling}
+\end{figure} \vspace{-0.5cm}
+
+Algoritmen henter low og high byte fra ICens gyroskop outputdata, hvorefter de enkelte samples gennemgår en signalbehandling, således det rigtige output videresendes. 
+
+HERTIL
+
+Efter samples er blevet behandlet, bliver time\_counteren startet således, at denne tæller antallet af samples mellem bestemte if lykker i algoritmen. De behandlede samples gemmes i variabel Value[0], hvortil den foregående behandlede sample bliver gemt i variabel Value[1]. På denne måde, hvorpå en gammel og ny sample gemmes i hver sin variabel, muliggøres blandt andet, at algoritmen kan undersøge disse variabler i forhold til hinanden og deres størrelse i forhold til en tærskelværdi. \\
+
 Implementeringen af algoritme til detektering af cykling opdeles i to deleelementer: signalbehandling og signalgenkendelse. Dette implementeres i MATLAB, ligeledes med brugerfladen.\\
 Signalbehandlingens første trin består som tidligere nævnt, af en FFT over fire sekunders sampling. Måden hvorpå dette er gjort i MATLAB er ved at inputsignalet gemmes i et array mens samples tælles for et fire sekunders interval, når datalængden er fire sekunder, signalbehandles arrayet. 
 Behandlingen af arrayet er en FFT, som i MATLAB implementeres ved først at centrere signalet omkring 0 ved hjælp af en detrend funktion, hvorefter MATLABs FFT funktion benyttes på det detrendede signal, afslutningsvist kvadreres den absolutte værdi af det FFT behandlede data.\fxnote{MATLAB kommando: $fft_z = abs(fft(detrend(input_data))).^2$} 
 %Denne signalbehandling af et signal fra pilotforsøget er illustreret på \figref{fig:gyro_behandling}.  
+
+
+ \\
+Idet kun cykling detekteres, bliver en id kode for cykling sammen med en tidsværdi på fire sekunder, sendt til koden for brugerfladen\fxnote{vi "sender" det jo reelt set ikke, det bliver brugt i koden for GUIen med det samme...}. 
+
+
+
+Implementeringen af algoritmen for detektering af gang og løb tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_algo_g_l}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_algo_g_l}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.8]{figures/cDesign/gyro_behandling.png}
-	\caption{Figuren viser rå data for gang, løb og cykling for et 5 sekunders interval opsamlet på gyroskopets z-akse på øverste graf, samt signalbehandling af dataet fra 0 til 20~Hz på nederste graf.}
-	\label{fig:gyro_behandling}
-\end{figure}\vspace{-0.5cm}
-Data fra pilotforsøget for forsøgsperson 2 er behandlet med ovenstående signalbehandling. Dette er gjort med henblik på fastsættelse af en tærskelværdi som adskiller cykling fra gang og løb.\\ 
-På den øverste graf på \figref{fig:gyro_behandling} ses de rå gyroskopsignaler for gang, løb og cykling, hvoraf cykling tilnærmelsesvis ligner en sinus, hvorfor dennes energi er centreret omkring en frekvens efter signalbehandlingen, som det er illustreret på den nederste graf på \figref{fig:gyro_behandling}. Hertil ses det også at energien for gang og løb ikke centrerer sig omkring en enkelt frekvens, men om forskellige frekvenser, hvorfor spredningen af energi kan benyttes til signalgenkendelse. 
+	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_g_l_basic.png}
+	\caption{På figuren ses den overordnede C kode for algoritmen til detektering af gang og løb beskrevet med pesudokode. De markerede kasser vil blive forklaret yderligere i kommende figurer.}
+	\label{fig:basic_algo_g_l}
+\end{figure} \vspace{-0.5cm}
+Algoritmen henter low og high byte fra ICens outputdata, hvorefter de enkelte samples gennemgår en signalbehandling. Denne signalbehandling og den tilhørende C kode vil blive yderligere forklaret i \figref{fig:signalbehandling_g_l}. Efter samples er blevet behandlet, bliver time\_counteren startet således, at denne tæller antallet af samples mellem bestemte if lykker i algoritmen. De behandlede samples gemmes i variabel Value[0
 
-Efter signalbehandlingen implementeres signalgenkendelsen som består af, først at finde den maksimale magnitude og den tilhørende frekvens, resultatet heraf er aktivitetens dominerende frekvens. Herefter summeres værdierne for den maksimale magnitude, ved at summere intervallet $\pm$1~Hz omkring frekvens heraf. Hertil summeres også værdierne for FFTen fra 1 til 20~Hz. Afslutningsvist bestemmes hvor stor en procentdel summeringen for den maksimale magnitude udgør af summeringen for 1 til 20~Hz. Dette gøres ved at dividere disse summeringer og efterfølgende multiplicere med 100.\\ 
-
-\begin{table}[H]
-	\centering
-	\begin{tabular}{cccc}
-		\hline
-		\rowcolor[HTML]{C0C0C0} 
-		Forsøgsperson & Procent for gang & Procent for løb & Procent for cykling \\ \hline
-		F1 & 41,0\% & 38,6\% & 85,5\% \\ \hline	
-		F2 & 48,5\% & 51,5\% & 91,9\% \\ \hline	
-		F3 & 35,9\% & 42,8\% & 85,0\% \\ \hline
-		F4 & 38,7\% & 60,6\% & 91,6\% \\ \hline
-	\end{tabular}
-	\caption{I tabellen ses hvor mange procent den maksimale frekvensmagnitude udgør for forsøgspersonerne ved aktiviteterne gang, løb og cykling.}
-	\label{tab:individuel_procent}
-\end{table}\vspace{-0.5cm}
-
-Da mængden af energi ved den maksimale magnitude er markant større for cykling i forhold til gang og løb, hvilket er illustreret i \tabref{tab:individuel_procent}, benyttes denne information til at adskille cykling fra gang og løb, ved at implementere et tærskelværdi på 70. Herved vil cykling, igennem if løkker, blive detekteret hvis den maksimale magnitude udgør 70\% eller derover, hvorimod gang og løb ikke vil blive detekteret, da disse maksimalt er henholdsvis 48,5 og 60,6\% under pilotforsøget. \\
-Idet kun cykling detekteres, bliver en id kode for cykling sammen med en tidsværdi på fire sekunder, sendt til koden for brugerfladen\fxnote{vi "sender" det jo reelt set ikke, det bliver brugt i koden for GUIen med det samme...}. 
 
 \subsection{Test}
 \subsubsection{Algoritme til detektion af gang og løb}
