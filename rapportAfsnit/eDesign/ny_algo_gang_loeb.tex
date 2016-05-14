@@ -103,7 +103,7 @@ Mængden af energi ved den maksimale magnitude er markant større for cykling i 
 	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling.}
 	\label{fig:algoritme_cykling}
 \end{figure}
-Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, starter en time count, som stopper når cykling ikke længere detekteres. Når timeren stopper, videresendes timerens værdi som repræsenterer tiden hvormed cykling har været detekteret. Hvis cykling ikke detekteres, signalbehandles ny data fra gyroskopet, for at tjekke hvorvidt cykling detekteres.  
+Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, gemmes fire sekunders cykling. Hvis cykling ikke detekteres, signalbehandles ny data fra gyroskopet, for at tjekke hvorvidt cykling detekteres.  
 
 
 \subsection{Implementering}
@@ -164,14 +164,14 @@ For at bestemme varigheden mellem hælnedslag  skal antal hælnedslag for løb o
 Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_cykling}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_cykling}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/Algoritme_cykling_basic.png}
+	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_cykling_basic.png}
 	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere en kommende figur.}
 	\label{fig:basic_cykling}
 \end{figure}
 Algoritmen henter low-, og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB, som gemmer 4 sekunders data i et arrary og påbegynder signalbehandlingen. Resultatet af signalbehandlingen medfører en procentvis værdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/algoritme_matlab_cykling.png}
+	\includegraphics[scale=0.6]{figures/cDesign/algoritme_matlab_cykling.png}
 	\caption{På figuren ses den kode for algoritmens signalbehandling i MATLAB.}
 	\label{fig:matlab_cykling}
 \end{figure} 
