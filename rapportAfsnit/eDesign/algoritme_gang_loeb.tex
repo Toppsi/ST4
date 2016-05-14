@@ -43,15 +43,17 @@ Efter ovenstående signalbehandlingen implementeres signalgenkendelsen som best�
 
 \begin{table}[H]
 	\centering
+	\resizebox{\textwidth}{!}{%
 	\begin{tabular}{cccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Forsøgsperson & Procent for gang & Procent for løb & Procent for cykling \\ \hline
+		Forsøgsperson & Procentdel af totalen for gang & Procentdel af totalen for løb & Procentdel af totalen for cykling \\ \hline
 		F1 & 41,0\% & 38,6\% & 85,5\% \\ \hline	
 		F2 & 48,5\% & 51,5\% & 91,9\% \\ \hline	
 		F3 & 35,9\% & 42,8\% & 85,0\% \\ \hline
 		F4 & 38,7\% & 60,6\% & 91,6\% \\ \hline
 	\end{tabular}
+}
 	\caption{I tabellen ses hvor stor en procentdel summeringen vedrørende den maksimale magnitude udgør af hele FFTen. Dette er gjort for både gang, løb og cykling, med henblik på bestemmelse af en tærskelværdi.}
 	\label{tab:individuel_procent}
 \end{table}\vspace{-0.5cm}
@@ -62,7 +64,7 @@ Mængden af energi ved den maksimale magnitude er markant større for cykling i 
 	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling.}
 	\label{fig:algoritme_cykling}
 \end{figure}
-Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, starter en timer, som stopper når cykling ikke længere detekteres. Når timeren stopper, videresendes timerens værdi som repræsenterer tiden brug på cykling. Hvis cykling ikke detekteres, skal gyroskopet gå i LPM i 30 sekunder før algoritmen køres igen. 
+Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, starter en time count, som stopper når cykling ikke længere detekteres. Når timeren stopper, videresendes timerens værdi som repræsenterer tiden hvormed cykling har været detekteret. Hvis cykling ikke detekteres, signalbehandles ny data fra gyroskopet, for at tjekke hvorvidt cykling detekteres.  
 
 \subsection{Implementering}
 \subsubsection{Algoritme til detektion af gang og løb}
@@ -113,40 +115,22 @@ Tærskelværdierne implementeres i PSoC creater i if lykker. Her hentes data fra
 Ved hjælp af if lykkerne behandles det databehandlede signal som henholdsvis ingen aktivitet, gang og løb, hvorigennem specifikt data sendes videre. Data sendes videre ved brug af UART forbindelsen, som kaldes i PSoC Creater.
 
 \subsubsection{Algoritme til detektion af cykling}
-%% Implementering i MATLAB
 Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_cykling}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_cykling}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_cykling_basic.png}
+	\includegraphics[scale=0.4]{figures/cDesign/Algoritme_cykling_basic.png}
 	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere en kommende figur.}
 	\label{fig:basic_cykling}
-\end{figure} \vspace{-0.5cm}
-
-Algoritmen henter low og high byte fra ICens gyroskop outputdata, hvorefter de enkelte samples gennemgår en signalbehandling, således det rigtige output videresendes. 
-
-HERTIL
-
-Efter samples er blevet behandlet, bliver time\_counteren startet således, at denne tæller antallet af samples mellem bestemte if lykker i algoritmen. De behandlede samples gemmes i variabel Value[0], hvortil den foregående behandlede sample bliver gemt i variabel Value[1]. På denne måde, hvorpå en gammel og ny sample gemmes i hver sin variabel, muliggøres blandt andet, at algoritmen kan undersøge disse variabler i forhold til hinanden og deres størrelse i forhold til en tærskelværdi. \\
-
-Implementeringen af algoritme til detektering af cykling opdeles i to deleelementer: signalbehandling og signalgenkendelse. Dette implementeres i MATLAB, ligeledes med brugerfladen.\\
-Signalbehandlingens første trin består som tidligere nævnt, af en FFT over fire sekunders sampling. Måden hvorpå dette er gjort i MATLAB er ved at inputsignalet gemmes i et array mens samples tælles for et fire sekunders interval, når datalængden er fire sekunder, signalbehandles arrayet. 
-Behandlingen af arrayet er en FFT, som i MATLAB implementeres ved først at centrere signalet omkring 0 ved hjælp af en detrend funktion, hvorefter MATLABs FFT funktion benyttes på det detrendede signal, afslutningsvist kvadreres den absolutte værdi af det FFT behandlede data.\fxnote{MATLAB kommando: $fft_z = abs(fft(detrend(input_data))).^2$} 
-%Denne signalbehandling af et signal fra pilotforsøget er illustreret på \figref{fig:gyro_behandling}.  
-
-
- \\
-Idet kun cykling detekteres, bliver en id kode for cykling sammen med en tidsværdi på fire sekunder, sendt til koden for brugerfladen\fxnote{vi "sender" det jo reelt set ikke, det bliver brugt i koden for GUIen med det samme...}. 
-
-
-
-Implementeringen af algoritmen for detektering af gang og løb tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_algo_g_l}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_algo_g_l}.
+\end{figure}
+Algoritmen henter low-, og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB, som gemmer 4 sekunders data i et arrary og påbegynder signalbehandlingen. Resultatet af signalbehandlingen medfører en procentvis værdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_g_l_basic.png}
-	\caption{På figuren ses den overordnede C kode for algoritmen til detektering af gang og løb beskrevet med pesudokode. De markerede kasser vil blive forklaret yderligere i kommende figurer.}
-	\label{fig:basic_algo_g_l}
-\end{figure} \vspace{-0.5cm}
-Algoritmen henter low og high byte fra ICens outputdata, hvorefter de enkelte samples gennemgår en signalbehandling. Denne signalbehandling og den tilhørende C kode vil blive yderligere forklaret i \figref{fig:signalbehandling_g_l}. Efter samples er blevet behandlet, bliver time\_counteren startet således, at denne tæller antallet af samples mellem bestemte if lykker i algoritmen. De behandlede samples gemmes i variabel Value[0
+	\includegraphics[scale=0.4]{figures/cDesign/algoritme_matlab_cykling.png}
+	\caption{På figuren ses den kode for algoritmens signalbehandling i MATLAB.}
+	\label{fig:matlab_cykling}
+\end{figure} 
+Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen af dataet ved brug at formlerne i \figref{fig:matlab_cykling}. Hvis cykling bliver detekteret bliver en varighed på fire sekunder videresendt til udført cykling i GUI. 
+
 
 
 \subsection{Test}
