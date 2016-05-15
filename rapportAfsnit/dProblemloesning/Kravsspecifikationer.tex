@@ -7,19 +7,19 @@ Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsfo
 %Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling og -konvertering, hvoraf det digitale signal efterfølgende bliver behandlet af aktivitetsmålerens software.
 
 \subsection{Spændingsforsyning} \label{krav_spaendingsf}
-MCU'en kræver en spændingsforsyning for at kunne fungere, hvilket enten kan ske igennem USB porten eller tilføres fra en mobil enhed. Spændingsforsyningen skal kunne forsyne MCU'en i en hel dag samt være sikkert for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
+MCUen kræver en spændingsforsyning for at kunne fungere, hvilket enten kan ske igennem USB porten eller tilføres fra en mobil enhed. Spændingsforsyningen skal kunne forsyne MCUen i en hel dag samt være sikkert for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
 
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71~V og maks 5,5~V til MCU'en\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Levere mindst 1,71~V og maks 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
 	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
 	%\item Muliggøre spændingsopsætning af systemet udenom elnettet og	være elektrisk sikkert.
 	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
 \end{itemize}
 
 \subsection{Mikrokontroller} \label{krav_mikro_spaending}
-Vi har fået udleveret en specifik MCU, som skal benyttes til projektet. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til IC samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+En specifik, udleveret MCU skal benyttes til projektet. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til ICen samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
 
 \textbf{Krav til mikrokontrolleren} \newline 
 Mikrokontrolleren skal:
@@ -35,7 +35,7 @@ Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksi
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
-%\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
+%\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
 \item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
 \end{itemize}
@@ -47,37 +47,36 @@ Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, de
 \textbf{Krav til gyroskop} \newline
 Gyroskopet skal:
 \begin{itemize}
-%\item Være operativ ved 3,3 V fra MCU'ens VDD output spænding.\fxnote{Outputspændingen fra MCU'en er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
+%\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
 \end{itemize}
 
 \subsection{Pulssensor} \label{puls_krav}
-En pulssensor kræver en given spænding for at kunne optage data, som tilføres fra MCU'en. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
-Yderligere skal pulssensoren kunne opfange brugerens puls, med henblik på at bestemme intensiteten af den pågældende aktivitet.
+En pulssensor kræver en given spænding for at kunne optage data, som tilføres fra MCUen. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
+Yderligere skal pulssensoren kunne opfange brugerens puls med henblik på at bestemme intensiteten af den pågældende aktivitet.
 
 \textbf{Krav til pulssensor} \newline
 Pulsmåleren skal:
 \begin{itemize}
-%\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCU'en leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
-\item Kunne opfange brugerens puls, uden ukorrekt optagelse og udsving. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
+%\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCUen leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
+\item Kunne opfange brugerens puls uden ukorrekt optagelse og udsving. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
 \end{itemize}
 
 \subsection{Analog til Digital konverter} \label{krav_adc}
 %Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
 Accelerometret i LSM9DS1 skal benyttes til at opfange gang og løb, mens gyroskopet i LSM9DS1 skal benyttes til at opfange cykling. For at begge sensorer skal være i stand til dette, er det essentielt at vide det analoge signals frekvensområde. %Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet heraf. 
-Pilotforsøget viste, at frekvensområdet for signalet ved gang og løb er 45 Hz, når det optages af et accelerometer. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde, altså 90 Hz. I praksis benyttes ofte en samplingshastighed som er 10 gange større end det maksimale frekvensområde. Derfor skal ADCen have en samplingshastighed på mindst 450 Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \newline
-Frekvensområdet for signalet under cykling ved benyttelse af gyroskop blev under pilotforsøget undersøgt. Det fremgik heraf, at det maksimale frekvensområde var 6 Hz. Derfor skal ADC'en sample gyroskopets data med mindst 60 Hz.
+Pilotforsøget viste, at frekvensområdet for signalet ved gang og løb er 45 Hz, når det optages af et accelerometer. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde, altså 90 Hz \citep{Webster2011}. I praksis benyttes en samplingshastighed ofte, som er ti gange større end det maksimale frekvensområde. Derfor skal ADCen have en samplingshastighed på mindst 450 Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \newline
+Frekvensområdet for gyroskopet viste sig at have et maksimalt frekvensområde på 6 Hz. Derfor skal ADCen sample gyroskopets data med mindst 60 Hz.
 
-For at sikre, at der registreres en valid puls for brugeren af systemet, da skal den beregnede puls være <208 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
+For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være <208 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
 \begin{equation}
 220~[BPM] - alder~[$År$] = $Maksimale puls$~[BPM]
 \end{equation}
 
-Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <208, hvilket svarer til cirka 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35 Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \fxnote{HAR VI KILDE PÅ DET HER?!?!!?!?!?}
-
+Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <208, hvilket svarer til cirka 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35 Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
 
 \textbf{Krav til ADC} \newline
-ADC'en skal:
+ADCen skal:
 \begin{itemize}
 \item Sample accelerometerets output med mindst 450 Hz. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \item Sample gyroskopets output med mindst 60 Hz. Der accepteres ikke en samplingsfrekvens under 60~Hz.
@@ -86,16 +85,16 @@ ADC'en skal:
 \end{itemize}
 %
 %\subsection{Krav til software}
-%Aktivitetsmålerens software består af algoritmedesign til MCU'ens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
+%Aktivitetsmålerens software består af algoritmedesign til MCUens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
 \subsection{Algoritmedesign til detektion af fysisk aktivitet} \label{krav_algoritme}
 To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til deres BLE forbindelse. Dette opnås via et standart kodeeksempel fra Cypress, som skal debugges på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en PC skal være GAP central. \\
 Selve algoritmedesignet består altså af at lave en algoritme, som kan detektere henholdsvis gang, løb og cykling ved hjælp af data fra et accelerometer og et gyroskop. Der ses på data fra pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere forskellen imellem aktiviteterne. Derudover ses der, at peaket for hælnedslag har større amplitude under løb end ved gang, hvorfor en mulighed for detektion og adskillelse herimellem kunne være at indsætte en tærskelværdi.
 %Designet af de fire algoritmer ligger til grund for hele funktionaliteten af systemet. \\
-%Algoritmen til PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCU'en til en GAP peripheral. Den skal indeholde elementer, som henvendes til IC'en, da gyroskopet skal deaktiveres hvis det ikke er i brug. Hvert tiende sekund aktiveres gyroskopet, som skal tracke aktiviteten cykling. Hvis der ikke udføres aktiviteten cykling, slukkes gyroskopet, hvorefter det ti sekunder senere vågner igen. Algoritmen skal gøre mikroprocessoren i stand til at detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter vækkes EZ-BLE PRoC fra stop power mode og den gemte data overføres hertil via UART kommunikation.\\
+%Algoritmen til PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCUen til en GAP peripheral. Den skal indeholde elementer, som henvendes til ICen, da gyroskopet skal deaktiveres hvis det ikke er i brug. Hvert tiende sekund aktiveres gyroskopet, som skal tracke aktiviteten cykling. Hvis der ikke udføres aktiviteten cykling, slukkes gyroskopet, hvorefter det ti sekunder senere vågner igen. Algoritmen skal gøre mikroprocessoren i stand til at detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter vækkes EZ-BLE PRoC fra stop power mode og den gemte data overføres hertil via UART kommunikation.\\
 %Algoritmen til EZ-BLE PRoC på GAP peripheral sørger for, at enheden er i stop power mode med mindre, der modtages et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAP central via BLE. \\
 %Algoritmen på EZ-BLE PRoC på GAP central skal få enheden til at modtage data fra EZ-BLE PRoC på GAP peripheral. Denne data skal sendes til PSoC 4200M på GAP central via UART kommunikation. \\
-%Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCU'en til en GAP central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAP central og videreføre dette til en GUI på en PC via USB porten.
+%Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCUen til en GAP central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAP central og videreføre dette til en GUI på en PC via USB porten.
 
 \textbf{Krav til algoritmedesign} \newline 
 Algoritmedesignet skal:
@@ -112,7 +111,7 @@ Algoritmedesignet skal:
 \end{itemize}
 
 \subsection{Trådløs kommunikation}\label{krav_BLE}
-Den trådløse kommunikation imellem GAP Central og GAP Peripheral skal foregå over BLE. Dette kan give problematikker, da BLE's effektivitet afhænger af distancen imellem enhederne\fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
+Den trådløse kommunikation imellem GAP Central og GAP Peripheral skal foregå over BLE. Dette kan give problematikker, da BLEs effektivitet afhænger af distancen imellem enhederne\fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
 
 \textbf{Krav til den trådløse kommunikation} \newline 
 Den trådløse kommunikation skal:
@@ -122,13 +121,13 @@ Den trådløse kommunikation skal:
 \end{itemize}
 
 \subsection{Grafisk Bruger Interface}\label{krav_GUI}
-GUI'en skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til øget fysisk aktivitet. Den skal visualisere tidsforbruget på og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. Hvert 15. minutter kan interfacet opdateres, da GAP peripheral afsender data til GAP central i dette tidsinterval.
+GUIen skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til øget fysisk aktivitet. Den skal visualisere tidsforbruget på og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. %Hvert 15. minutter kan interfacet opdateres, da GAP peripheral afsender data til GAP central i dette tidsinterval.
 
 \textbf{Krav til GUI} \newline 
-GUI'en skal:
+GUIen skal:
 \begin{itemize}
 	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 
-	\item Være i stand til at opdatere interfacet senest hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
+%	\item Være i stand til at opdatere interfacet senest hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
 \end{itemize}
 
 \subsection{Det samlede system} \label{krav_samlet_sys}
