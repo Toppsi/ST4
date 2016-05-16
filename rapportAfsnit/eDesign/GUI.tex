@@ -33,8 +33,14 @@ Tidsvariablen og pointvariablen for de enkelte aktiviteter lægges over i forske
 Derudover er der implementeret axis, hvor det er muligt at plotte data. I denne samles point fra cykling, gang og løb, som plottes oven på hinanden, hvormed det er muligt at se hvilke aktiviteter der er udført og hvor mange point de samlet set giver for en dag. 
 I programet er der aktiveret en timer, hvormed det er muligt at skifte mellem de forskellige dage efter 24 timer. Ved begyndelse på en ny dag nulstilles alle variabler, og der plottes i den næste dag. Slutteligt er der en reset toggle button, som gør det muligt at nulstille alt data. Denne er kun mulig at trykke på når programmet ikke kører. 
 
-\subsubsection{Test}
-GUIs funktionalitet testes ud fra kravene heraf, se \secref{krav_GUI}. Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype og intensitet.
+\subsection{Test}
+Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_GUI}. Kravene beskriver, at GUI skal:
+\begin{enumerate}
+	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 
+\end{enumerate}
+
+
+Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype og intensitet.
 Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal trigge de forskellige aktiviteter. For gang indsendes [512 1100], for løb indsendes [512 1110] og for cykling indsendes [512 0]. De forskellige aktiviteter simuleres 60*6 gange, hvormed et simulerest signal på 6 minutter opnås, hvorefter der skiftes til en ny dag. På den første dag simuleres alle aktiviteterne med lav intensitet [146], på anden dag simuleres aktiviteterne med moderat intensitet [147] og fo den sidste dag simuleres det med høj intensitet [168]
 
 Resultatet af GUIs design gør at forskellige aktivitetsformer bidrager til en forskellig mængde point. Ligeledes er varigheden og intensiteten  af aktiviteten afgørende for mængden af opnåede point, på baggrund af deres multiplikationsfaktor. Måden hvorpå pointene udregnes, og dermed varierer, afhænger af aktiviteten samt intensiteten, hvilket kan ses i \eqref{eq:pointvariabel}
