@@ -22,6 +22,14 @@ For at kunne forsyne targetboardet på GAP peripheral med spænding skal pins fr
 
 \subsection{Test} 
 %Testen udføres med henblik på at overholde de opstillede krav med henhold til de opstillede afvigelser. 
+Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_spaendingsf}. Kravene beskriver, at spændingsforsyningen skal:
+\begin{enumerate}
+	\item Levere mindst 1,71~V og maks 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
+	%\item Muliggøre spændingsopsætning af systemet udenom elnettet og	være elektrisk sikkert.
+	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
+\end{enumerate}
+
 Det undersøges hvilket spændingsoutput den udleverede komponent har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at komponenten har et spændingsoutput på 3,14~V ved disse betingelser.\newline
 Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V.\fxnote{Vi skal have lavet en test hvor komponenterne er sat til, og man derefter noterer hvor meget spænding batterierne taber undervejs. Testen skal fx vare 10 minutter. }
 
