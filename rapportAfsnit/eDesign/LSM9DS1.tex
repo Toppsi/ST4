@@ -63,6 +63,17 @@ Yderligere fremgår det, at hexkoden '79' konfiguerer gyroskopet til de ønskede
 
 
 \subsection{Test}
+ICen testes med henblik på at undersøge ICens senorer og deres funktionalitet samt tilhørende tilladte afvigelser opstillet i henholdsvis \secref{krav:acc} og \secref{krav:gyro}. Kravene til accelerometeret er som følger;
+Accelerometeret skal:
+\begin{enumerate}
+	\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
+	\item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
+\end{enumerate}
+Gyroskopet skal:
+\begin{enumerate}
+	\item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
+\end{enumerate}
+
 Accelerometeret er indstillet til $\pm$16~g, hvorfor det antages, at den kan opsamle op til $\pm$16 g. Ifølge accelerometerets andet krav i \secref{sec:krav} skal det angive korrekt g-påvirkning med en maks afvigelse på 5\%. Dette testes ved at påvirke sensorens y akse med $\pm$1~g, da denne akse på accelerometret benyttes til detektering af gang og løb, som beskrevet i \secref{bevaegelse}. Det vil i den samlede systemtest, blive testet om accelerometerets signaler klippes. 
 
 ICens accelerometer har en sensitivitet på 0,000732~g per LSB \citep{STMicroelectronics2016}. Outputtet fra sensoren er low byte og high byte, hvilket bliver bitskiftet og derefter adderet i MCUen, hvormed output fra MCUen er i LSB. For at omregne dette output til g skal outputtet ganges med sensitiviteten, hvilket sker i tredje kolonne i \tabref{tab:test_sensor}
