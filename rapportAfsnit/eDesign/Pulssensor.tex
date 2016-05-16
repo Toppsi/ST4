@@ -93,9 +93,9 @@ Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller in
 Det fremgår, at den forventede puls var 72 BPM samt Real Term modtager og printer en værdi tilsvarende. Det kan derfor konkluders, at algoritmen har 0\% afvigelse på et simuleret inputsignal. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
-Der foretages yderligere en test, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav i \secref{puls_krav}. \\
-Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens BPM er forholdsvis stabil og uden markante udsving. Yderligere vil der blive benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregnede BPM af algoritmen. Denne pulssensors data vil blive printet i programmet Logger Pro, og systemets BPM vil blive printet i Realterm. \\
-Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
+Der foretages yderligere to tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav. Den ene test er ved en stillesiddende position, og den anden test er ved fysisk aktivitet i form af gang. Det er gældende for begge test, at der bliver benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregnede BPM af algoritmen. Denne pulssensors data vil blive printet i programmet Logger Pro, og systemets BPM vil blive printet i Realterm. \\
+Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens BPM er forholdsvis stabil og uden markante udsving. Testen udføres ved at have pulssensor påført øreflippen, hvoraf MCUen bestemmer BPM og sender denne værdi ved brug af bluetooth til GAP central. \\
+Resultaterne af den første udførte test, ved en stillesiddende position, fremgår af \tabref{tab:test_pulssystem}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc} \hline
@@ -107,3 +107,15 @@ Resultaterne af den udførte test fremgår af \tabref{tab:test_pulssystem}.
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
 Det fremgår i \tabref{tab:test_pulssystem}, at testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 13\%. Pulssensoren og den tilhørende algoritme overholder dermed første krav til pulsdetekteringen.
+
+Der foretages yderligere en test, for at undersøge hvorvidt det er muligt at detektere BPM under fysisk aktivitet. Denne test indebærer en pulsmåling under fysisk aktivitet i form af gang på et løbebånd.\\
+Testen viste, at det ikke var muligt at detektere BPM under denne fysisk aktivitet. Dette skyldtes signalets udformning fra testen, hvilken fremgår af \figref{fig:test_puls_aktivitet}.
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[scale=0.25]{figures/cDesign/BILLEDE_NAVN!.png}
+%	\caption{På figuren ses signalets udformning fra pulssensoren under gang.}
+%\label{fig:test_puls_aktivitet}
+%\end{figure}
+Signalets udformning på figuren illusterer, at pulssensorens dataopsamling ikke har karakteriska som en pulssignal. Det kan derfor konkluderes, at signalet indeholder støj som umuliggør en pulsdetektering ved denne signal. \\
+Testen blev udført ved gang, hvoraf denne fysiske aktivitet har mindre rystelser af ledningen og udstyr i modsætning til løb. Det kan derfor antages, at ved løb vil signalets udformning være lignende \figref{fig:test_puls_aktivitet}. \\
+Det kan derfor konkluderes, at pulsdetektering ikke er mulig ved fysisk aktivtet med tilgængeligt udstyr samt med henhold til opstillede krav. De følgende elementer i prorotypen vil derfor ikke medtænke en eventuel funktionel pulsdetektering.
