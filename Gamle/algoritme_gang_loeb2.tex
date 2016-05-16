@@ -1,12 +1,11 @@
-% !TeX spellcheck = de_DE
-\section{Algoritmer til detektering af gang, løb og cykling}
-\textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang, løb og cykling. Først designes algoritmerne til det specifikke formål, hvorefter de kan implementeres. Afslutningsvist bliver algoritmerne testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
+% !TeX spellcheck = da_DK
+\section{Algoritme til detektering af gang og løb}
+\textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang og løb. Først designes algoritmen til det specifikke formål, hvorefter den kan implementeres. Afslutningsvist bliver algoritmen testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
 %bliver design af algoritmerne behandlet, hvilket er ensbetydende med at implementering og kodning kan foregå. Når algoritmerne er designet og implementeret bliver de efterfølgende testet for at af- eller bekræfte deres virkning.}
 
-\subsection{Design}
-For at kunne adskille gang, løb og cykling benyttes et accelerometer og et gyroskop, som er beskrevet i \secref{sec_design_LSM9DS1}. Gyroskopet skal benyttes til at detektere cykling, mens løb og gang detekteres ved brug af accelerometeret. For at kunne detektere og adskille disse aktiviteter behandles inputtet fra sensorerne gennem forskellig signalbehandlingsprocessor. Algoritmerne gør det muligt at afgøre, om de pågældende signaler repræsenterer gang, løb, cykling eller ingen fysisk aktivitet. 
+For at kunne adskille gang og løb benyttes et accelerometer, som er beskrevet i \secref{sec_design_LSM9DS1}. For at kunne detektere og adskille disse aktiviteter behandles inputtet fra sensoren gennem forskellig signalbehandlingsprocessor. Algoritmerne gør det muligt at afgøre, om de pågældende signaler repræsenterer gang, løb ingen fysisk aktivitet. 
 
-\subsubsection{Algoritme til detektion af gang og løb} \label{design_algo_g_l}
+\subsection{Design} \label{design_algo_g_l}
 Data fra accelerometerets y-akse skal signalbehandles, førend en algoritme kan detektere samt adskille gang og løb. Første trin i denne signalbehandling er at fjerne støj ved brug af et elliptisk filter. Dette skal være et fjerde ordens elliptisk båndpasfilter med et pasbånd fra 20 til 50 Hz, og med en dæmpning på 60 dB\fxnote{og 0.5 dB peak-to-peak ripples - frekvenserne for gang og løb lå mellem 25 og 45}. Båndpasfilterets knækfrekvenser er bestemt gennem pilotforsøget i \appref{pilot}, hvorudfra det vurderes at hælnedslag findes ved cirka 25 Hz og signalet herfra stopper omkring 45 Hz. Alt inden for disse frekvenser burde derfor indeholde det vigtigste i signalet.\fxnote{Der er også meget lavfrekvent støj med meget høj amplitude, men det er vi ikke interesseret i, fordi det er f.eks. svingfasen.} Dermed frafiltreres eventuel 50 Hz støj fra signalet samt lavfrekvent DC signal. %. Knækfrekvensen omkring 20 Hz er bestemt for at bibeholde signalets hælnedslag, hvoraf frekvensen befandt sig omkring 20 Hz. 
 Andet trin i signalbehandlingen består af, at det filtrede signal divideres med 36. Dette gøres ved hjælp af en implementeret funktion i PSoC. Signalets amplituder bliver heraf formindsket, og de mindste amplituder nærmer sig nul i større grad end amplituden for hælnedslag. Derved gøres peaket for dette tydligere. I det tredje trin i signalbehandlingen bliver signalet kvadreret ved hjælp af en funktion i PSoC programmer. Dette medfører, at de dele af signalet med lav amplitude under 1 formindskes, mens andre dele af signalet med amplituder over værdien 1 forstærkes. Dermed minimeres de events kraftigt, som ikke relateres til hælnedslaget, og selve hælnedslaget forstærkes.\fxnote{ved gang er det swing og heel strike, ved løb er det primært kun heel strike, men også lidt toe offset.} Fjerde og sidste trin i signalbehandlingen bliver signalet filtreret med et moving average filter, som udglatter signalet, hvorved små udslag ikke opfattes, og signalets hælnedslag vil fremstå som et enkelt event.
 
@@ -27,47 +26,9 @@ Data fra Shimmer skal ganges med 16 for at være sammen størrelsesorden, hvilke
 Ovenstående \figref{fig:algoritme} repræsenterer algoritmen for detektering og adskillelsen af gang og løb. Førend algoritmen tilhørende gang og løb starter, undersøges det hvorvidt cykling registreres. Hvis dette er tilfældet, påbegyndes algoritmen for cykling, som ses på \textbf{HENVIS TIL PSEUDO FIGUREN FOR CYKLING!}. Hvis cykling ikke registreres, vil data fra accelerometret blive signalbehandlet. \\
 En timer skal aktiveres, når algoritmen registrerer ingen aktivitet, gang eller løb, der adskilles ved hjælp af to tærskelværdier. Timeren nulstilles hver gang et maks peak går under en defineret tærskelværdi. Hvis dette maks peak ligger inden for samme tærskelværdi som forrige maks peak, skal timerens tid summeres med den forrige, således der kommer en samlet tid for den pågældende aktivitet. Dette kommer dog til at finde sted i algoritmen for GUIen. Når timeren nulstiller, sendes tidsenheden herfra altså videre samt værdien for den registrerede maks peak. Værdien herfra definerer netop, om der er tale om ingen aktivitet, gang eller løb. Timeren skal stoppe helt, hvis cykling registreres i stedet, da der findes en separat timer i algoritmen til detektion af cykling. %Herefter startes timeren igen opg. Hvis løb ikke detekteres, undersøges der hvorvidt gang registreres. Hvis gang registreres skal en timer ligeledes først stoppe når gang ikke længere detekteres. Når timeren stopper sendes varigheden som en tidsværdi for udført gang og max peak registeres og sendes ligeledes. Herefter startes timeren igen. 
 Hvis algoritmen til detektering af gang og løb ikke registrer aktiviteterne, bliver der ikke udført nogen bevægelse eller cykling finder sted, hvorfor algoritmen starter forfra indtil detektering af gang eller løb. \\
-Fælles for både detektering af gang og løb er, at første målte peak samt det første peak efter tre sekunder uden aktivitet kasseres. Dette gøres for at sikre en periode uden aktivitet ikke summeres som faktisk gang eller løb.
-
-\subsubsection{Algoritme til detektion af cykling}\label{design_cykling}
-Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detektere cykling og adskille denne fra gang og løb. Første trin i denne signalbehandling er at udføre en Fast Fourier Transform (FFT) over fire sekunders sampling. Dette medfører, at signalets frekvenser og deres tilhørende magnituder kommer til udtryk. I andet trin findes frekvensværdien for den maksimale peak. Amplituden herfra bliver summeret i det tredje trin sammen med amplituderne for $\pm$1 Hz af den pågældende frekvens med maks peak. Derved fås en amplitudeværdi for maks peak værdien summeret med de to omkringliggende amplitudeværdier. Derudover summeres amplitudeværdierne for FFTen fra 1 til 20 Hz i det tredje trin, som herefter vil blive betegnet som hele FFTen. Resultatet heraf består i en amplitudeværdi for den maksimale peak med omkringliggende værdier, samt en amplitude værdi for hele FFTen. Resultaterne af disse to summeringer benyttes til fjerde og sidste trin, som omregner hvor stor en procentdel den første summering med det højeste peak udgør i forhold til den samlede FFT. Summeringen over den maksimale peak med omkringliggende værdier vil typisk udgøre en stor procentdel af den samlede summering. Resultatet af at summeringen udgør en stor procentdel af den samlede energi, er at cykling afspejles som et sinussignal, hvoraf energien befinder sig omkring få frekvenser. Aktiviteterne gang og løb har ikke samme karakteristiske påvirkning af gyroskopet.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.8]{figures/cDesign/gyro_behandling.png}
-	\caption{Figuren viser rå data for gang, løb og cykling for et 5 sekunders interval opsamlet på gyroskopets z-akse på øverste graf, samt signalbehandling af dataet fra 0 til 20~Hz på nederste graf.}
-	\label{fig:gyro_behandling}
-\end{figure}\vspace{-0.5cm}
-Data fra pilotforsøget er behandlet med ovenstående signalbehandling. Dette er gjort med henblik på fastsættelse af en tærskelværdi som adskiller cykling fra gang og løb. På den øverste graf på \figref{fig:gyro_behandling} ses de rå signaler fra gyroskopet fra gang, løb og cykling. Som det tydelig ses afspejles cykling tilnærmelsesvis som en sinus, hvorfor dennes energi er centreret omkring få frekvenser. Resultatet af den omtalte signalbehandling ses på den nederste graf, hvoraf gang, løb og cykling er blevet behandlet med en FFT. Hertil ses det også at energien for gang og løb ikke centrerer sig omkring en enkelt frekvens, men om forskellige frekvenser, hvoraf denne spredning af energi kan benyttes til signalgenkendelse og adskillelse af aktiviteterne. 
-
-Efter ovenstående signalbehandlingen implementeres signalgenkendelsen som består af, først at finde den maksimale magnitude og den tilhørende frekvens, resultatet heraf er aktivitetens dominerende frekvens. Herefter summeres værdierne for den maksimale magnitude, ved at summere intervallet $\pm$1~Hz omkring frekvens heraf. Hertil summeres også værdierne for FFTen fra 1 til 20~Hz. Afslutningsvist bestemmes hvor stor en procentdel summeringen for den maksimale magnitude udgør af summeringen for 1 til 20~Hz.\\ 
-
-\begin{table}[H]
-	\centering
-	\resizebox{\textwidth}{!}{%
-	\begin{tabular}{cccc}
-		\hline
-		\rowcolor[HTML]{C0C0C0} 
-		Forsøgsperson & Procentdel af totalen for gang & Procentdel af totalen for løb & Procentdel af totalen for cykling \\ \hline
-		F1 & 41,0\% & 38,6\% & 85,5\% \\ \hline	
-		F2 & 48,5\% & 51,5\% & 91,9\% \\ \hline	
-		F3 & 35,9\% & 42,8\% & 85,0\% \\ \hline
-		F4 & 38,7\% & 60,6\% & 91,6\% \\ \hline
-	\end{tabular}
-}
-	\caption{I tabellen ses hvor stor en procentdel summeringen vedrørende den maksimale magnitude udgør af hele FFTen. Dette er gjort for både gang, løb og cykling, med henblik på bestemmelse af en tærskelværdi.}
-	\label{tab:individuel_procent}
-\end{table}\vspace{-0.5cm}
-Mængden af energi ved den maksimale magnitude er markant større for cykling i forhold til gang og løb, hvilket er illustreret i \tabref{tab:individuel_procent}. Dette resulterede i, at 84,5\% til 91,9\% af energien lå $\pm$1 Hz omkring den fundne frekvens med den største amplitude. Hvorledes acceleration eller andre hastigheder ved cykling har påvirkning på denne procentfordeling diskuteres i \secref{sec:diskussion}. Procentfordelingen blev ligeledes behandlet for gang og løb for at sikre, at disse ikke havde samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling kan fastsættes. Resultatet heraf medførte at ved gang befandt energien omkring den fundne frekvens sig mellem 35,9\% til 48,5\% og ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. Denne forskel benyttes til at adskille cykling fra gang og løb, ved at implementere et tærskelværdi på 70\%. Summeringen af magnituden omrking den største magnitude skal dermed udgøre 70\% for at blive klassificeret som cykling. 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{figures/cDesign/algoritme_cykling.png}
-	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling.}
-	\label{fig:algoritme_cykling}
-\end{figure}
-Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, starter en time count, som stopper når cykling ikke længere detekteres. Når timeren stopper, videresendes timerens værdi som repræsenterer tiden hvormed cykling har været detekteret. Hvis cykling ikke detekteres, signalbehandles ny data fra gyroskopet, for at tjekke hvorvidt cykling detekteres.  
+Fælles for både detektering af gang og løb er, at første målte peak samt det første peak efter tre sekunder uden aktivitet kasseres. Dette gøres for at sikre en periode uden aktivitet ikke summeres som faktisk gang eller løb. 
 
 \subsection{Implementering}
-\subsubsection{Algoritme til detektion af gang og løb}
 Implementeringen af algoritmen for detektering af gang og løb tager udgangspunkt i data fra pilotforsøg og består grundlæggende af to delelementer. Først signalbehandling hvorefter selve algoritmen implementeres. Signalbehandlingen er blevet implementeret som egenfunktioner i C, hvoraf signalet bliver behandlet med fire funktioner, førend data bliver kørt igennem algoritmen. De fire funktioner er som sagt et elliptisk filter, division med 32, kvadrering og mooving average filter. \\
 For at finde filterkoefficienterne til det elliptiske filter anvendes MATLAB. Herinde skrives knækfrekvenserne samt dæmpningsgraden for et elliptisk filter, hvorefter programmet giver a og b koefficienterne. Disse skrives ind i PSoC programmer som et IIR filter som double float type. Denne funktion kan initialisere større tal og er mere præcis i forhold til kommatal. Efter filtreringen divideres og kvadreres dataet, som til sidst behandles af et mooving average filter i PSoC creater, hvorfor behandlingen vil ske på MCUen.
 
@@ -114,27 +75,7 @@ Fastsættelsen af den fælles tærskelværdi bør sikre, at gang og løb er muli
 Tærskelværdierne implementeres i PSoC creater i if lykker. Her hentes data fra databehandlingen ind, hvorefter if lykkerne skal afgøre, om dataet er under laveste, mellem eller over højeste tærskelværdi. Hvis data er under laveste tærskelværdi, bliver timeren ikke udløst til at nulstille sig men fortsætter med at tælle i tre sekunder, hvorefter den nulstilles og tæller igen til tre. Det første detekterede maks peak efter ingen aktivitet registreres ikke, da timeren skal tælle fra forrige tilfælde af, at signalet går under tærskelværdien og til den næste. Det første maks peak efter en periode uden aktivitet vil derfor have en ukorrekt time counter værdi, da det kan være fra nul til tre sekunder lang. \\% har ikke noget forrige maks peak at sammenholde med, hvorved time counteren vil give ukorrekt output.
 Ved hjælp af if lykkerne behandles det databehandlede signal som henholdsvis ingen aktivitet, gang og løb, hvorigennem specifikt data sendes videre. Data sendes videre ved brug af UART forbindelsen, som kaldes i PSoC Creater.
 
-\subsubsection{Algoritme til detektion af cykling}
-Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_cykling}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_cykling}.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/Algoritme_cykling_basic.png}
-	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere en kommende figur.}
-	\label{fig:basic_cykling}
-\end{figure}
-Algoritmen henter low-, og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB, som gemmer 4 sekunders data i et arrary og påbegynder signalbehandlingen. Resultatet af signalbehandlingen medfører en procentvis værdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/algoritme_matlab_cykling.png}
-	\caption{På figuren ses den kode for algoritmens signalbehandling i MATLAB.}
-	\label{fig:matlab_cykling}
-\end{figure} 
-Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen af dataet ved brug at formlerne i \figref{fig:matlab_cykling}. Hvis cykling bliver detekteret bliver en varighed på fire sekunder videresendt til udført cykling i GUI. 
-
-
-
 \subsection{Test}
-\subsubsection{Algoritme til detektion af gang og løb}
 Algoritmens funktioner testes individuelt og samlet. Dette gøres ved at indsende et simuleret signal, hvis funktion er at agerer som gang, løb eller ingen aktivitet. Det simulerede signal er et absolut sinussignal med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet bør agerer som gang, løb eller ingen aktivitet. Et sinussignal er valgt, da dette har grundlæggende samme karateristik som et eventuelt gang- eller løbesignal. Der ønskes et ideelt signal, som går over og under tærskelværdierne og derved kan aktivere timeren i algoritmen.
 
 Først testes algoritmens time counter, der giver et udtryk for, om algoritmen detekterer gang korrekt. Der indsendes et absolut sinussignal samplet med 512 Hz, en frekvens på 0,5 Hz og en amplitude på 100. Dette resulterede i tre halvbølger med en amplitude på 100 på 1536 samples. Dette kan ses som den sorte kurve på \figref{fig:testgraf_timecounter}.

@@ -99,8 +99,9 @@ Selve algoritmedesignet består altså af at lave en algoritme, som kan detekter
 \textbf{Krav til algoritmedesign} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
-	\item Indlede med databehandling således, hælnedslaget fra accelerometrets optagede data fremstår som en tydelig peak, og gyroskopets data for cykling fremstår som en tydelig sinus. Der accepteres ikke, hvis signalet ikke kommer til at fremstå som en tydelig peak eller sinus.
-	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af eksempelvis tærskelværdier for peakværdien. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
+	\item Behandle data fra accelerometret således, at hælnedslaget fremstår som et tydelig peak.
+	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
+	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af tærskelværdier for peakværdien eller procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
 %	\item Gøre PSoC 4200M på GAP peripheral i stand til at sample signalet fra sensoren og pulssensoren samt filtrere og behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
 %	\item Aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
 %	\item Gøre PSoC 4200M på GAP peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
