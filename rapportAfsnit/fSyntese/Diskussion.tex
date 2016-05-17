@@ -1,14 +1,26 @@
 \section{Diskussion}\label{sec:diskussion}
-%\textit{}
+\textit{Afsnittet diskuterer og vurderer validiteten af rapportens opnåede resultater, for derefter at opstille eventuelle forbedringer med henblik på en systemoptimering. Afslutningsvis diskuteres prototypens egnethed i et samfundsfagligt perspektiv.}
 
-Indhold til diskussion i kort punktform:
-\begin{itemize}
-	\item Diskuter problemstillingen fra problemanalysen. Er det sundt og fornuftigt at gøre så unge mennesker bevidste om deres aktivitetsniveau og egen krop? Man kunne evt. kople lidt moderne livsstil ind over, hvor det er populært i vores moderne samfund at være fit og med på alle sociale medier (lidt langt ude...)
-	\item Diskutter pilotforsøgets betydning for hele projektet. Hvorfor er der så stor forskel på de forskellige forsøgspersoners data? Har deres sko haft betydning? Hvilken betydning har denne spredning for hele designet af systemet? Var sensoren den mest optimale til forsøget? Hvis vi kunne lave noget om, hvad skulle det så være?
-	\item Når der ikke tages højde for batterilevetid alligevel, havde det så ikke været en fordel at bruge gyroskop til detektering af alle aktiviteter, når dette signal var mere markant? 
-	\item Havde almindelig bluetooth været bedre at benytte istedet for BLE? Hvilke andre muligheder havde det givet, både positiv (længere range) og negativ (kræver mere strøm)
-	\item Diskutter at vores algoritme for cykling muligvis ikke tager højde for acceleration. Det er ikke noget vi kan sige med sikkerhed, da vi netop har tjekke for en fast hastighed. Vi mener, at under acceleration vil frekvenserne netop være fordelt mere end ved konstant hastighed - uanset hastighed - hvorved der muligvis kan forekomme fejl under acceleration.
-	\item Tærskelværdien er ikke kalibreret. Dette Bliver over beskrevet i perspektiveringsafsnittet, hvordan dette kunne gøres - her kan man altså fokusere på, hvilken betydning har det for det samlede system?
-	\item Hvis en person træder meget hårdt eller hopper meget under gang eller whatever og vedkommende får en værdi på eksempelvis 1500 under gang, så vil dette detekteres som løb. Hvad kan vi gøre for at løse dette?
-	\item Diskussion om det samlede systemforsøg (der kommer sikkert til at være nogle diskussionselementer)
-\end{itemize}
+Problemanalysen undersøger kvaliteten af en række aktivitetsmålere, men hensyn til udvalgte kriterier. Det fremgår her af, at ingen aktivitetsmålere opfylder alle opstillede kriterier, hvorfor et alternativt system vil være fordelagtigt at undersøge og udvikle. \\
+Rapporten beskriver udarbejdelsen af en prototype, som potentielt kan opfylde de opstillede kriterier. 
+
+\subsubsection{Pilotforsøget}
+Pilotforsøget undersøgte blandt andet signalers udformning ved gang, løb og cykling. Der viste sig dog at være stor forskel på forsøgspersonernes amplituder ved de pågældende aktiviteter. Dette kan skyldtes, at forsøgspersonerne ikke benyttede samme type fodtøj. Derfor vil personer med en større stødabsorbering opnå lavere amplituder ved gang og løb, end personer i fodtøj med lav stødabsorbering. Det kan derfor antages, at en forsøgspopulation med sammenligneligt fodtøj vil medføre en mere valid dataopsamling.
+Ydermere vil en større forsøgspopulation give et mere repræsentativt datasæt, hvilket ligeledes vil øge validiteten af dataopsamlingen. \\
+Pilotforsøgets forsøgspersoner har en højere vægt end rapportens målgruppe. Det er derfor antageligt, at g påvirkningerne fra forsøgspersonerne under pilotforsøget var højere end målgruppens. Derfor vil det være essentielt, at udføre et pilotforsøg på en forsøgspopulation i aldersgruppen tilsvarende målgruppen. Datasættet vil dermed være mere repræsentativt for rapportens målgruppe.
+
+Pilotforsøget undersøgte ikke gyroskopets output ved forsøgspersonernes maksimale antal omdrejninger ved cykling. Kravene til prototypens gyroskop er dermed opstillet på baggrund af en tilnærmelsesvis konstant omdrejningshastighed. Det er bestemt, at prototypens gyroskop blot skal overholde et minimum antal omdrejninger per sekund. Det vil derfor være fordelagtigt, at undersøge forsøgspopulationens maksimale hastighed og dermed maksimale antal omdrejninger ved cykling. Denne værdi kan benyttes til at opstille krav til arbejdsområdet for prototypens gyroskop. \\
+Ydermere undersøgte pilotforsøget ikke hvilken betydning en acceleration under cykling har for signalets udformning. Det vil være særligt fordelagtigt, at undersøge betydningen af en acceleration for signalets frekvensdomæne. Dette er med henhold til detektering af cykling, hvoraf en frekvensdomæneanalyse benyttes til dette formål.
+
+\subsubsection{Design, implementering og test af prototypens blokke}
+Prototypens separate blokke er design, implementeret og testet enkeltvis for at opretholde variabelkontrol under processen. Prototypen er dog ikke et færdigudviklet produkt som tager højde for alle relevante system- og brugermæssige aspekter. \\
+Prototypens spændingsforbrug er testet over en varighed på X timer. Det fremgik af testen, at GAP peripheral vil være funktionel i Y timer ved en spændingstilkobling svarende 3,17~V.  
+
+
+\subsubsection{Samlet systemtest}
+
+
+
+\subsubsection{Samfundsmæssige perspektiver}
+Rapporten sætter særligt fokus på fysisk inaktivitet hos børn i aldersgruppen 9-12 år, og hvilke konsekvenser dette kan have for barnet i nutiden og fremtiden. Det er med udgangspunkt i disse fysiologiske og psykiske konsekvenser, at der er vurderet behov for en ny og forbedret aktivitetsmåler. \\
+Væsentligt er især valget af målgruppe, hvor det er beskrevet, at implementeringen af nye vaner kan være hensigtsmæssigt i hos målgruppen. Det er dog vigtigt, at de sundhedsmæssige vaner som en aktivitetsmåler ligger op til, ikke bliver overdrevet hos børnene……
