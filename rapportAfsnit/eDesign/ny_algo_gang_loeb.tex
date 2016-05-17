@@ -124,7 +124,7 @@ For at bestemme varigheden mellem hælnedslag  skal antal hælnedslag for løb o
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_algoritme}. Kravene beskriver, at algoritmen skal:
 \begin{enumerate}
 	\item Behandle data fra accelerometret således, at hælnedslaget fremstår som et tydelig peak.
-	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af tærskelværdier for peakværdien eller procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
+	\item Være i stand til at detektere gang og løb ved hjælp af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
 \end{enumerate}
 Algoritmens funktioner testes individuelt og samlet. Dette gøres ved at indsende et simuleret signal, hvis funktion er at agerer som gang, løb eller ingen aktivitet. Det simulerede signal er et absolut sinussignal med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet bør agerer som gang, løb eller ingen aktivitet. Et sinussignal er valgt, da dette har grundlæggende samme karateristik som et eventuelt gang- eller løbesignal. Der ønskes et ideelt signal, som går over og under tærskelværdierne og derved kan aktivere timeren i algoritmen.
 

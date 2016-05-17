@@ -67,11 +67,13 @@ ICen testes med henblik på at undersøge ICens senorer og deres funktionalitet 
 Accelerometeret skal:
 \begin{enumerate}
 	\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
-	\item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
+	\item Angive korrekt g påvirkning i under kontrollerede forhold. Der accepteres en afvigelse på 5\%.
+	\item Samples med mindst 450 Hz af den ICens indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \end{enumerate}
 Gyroskopet skal:
 \begin{enumerate}
 	\item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
+	\item Samples med mindst 60 Hz af ICens indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 60~Hz.
 \end{enumerate}
 
 Accelerometeret er indstillet til $\pm$16~g, hvorfor det antages, at den kan opsamle op til $\pm$16 g. Ifølge accelerometerets andet krav i \secref{sec:krav} skal det angive korrekt g-påvirkning med en maks afvigelse på 5\%. Dette testes ved at påvirke sensorens y akse med $\pm$1~g, da denne akse på accelerometret benyttes til detektering af gang og løb, som beskrevet i \secref{bevaegelse}. Det vil i den samlede systemtest, blive testet om accelerometerets signaler klippes. 

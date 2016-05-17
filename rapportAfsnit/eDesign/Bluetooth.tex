@@ -26,8 +26,8 @@ GAP central skal konfigureres således, at denne kan modtage data og herefter ov
 Den trådløse kommunikation, bluetooth, testes for at undersøge rækkevidden af denne kommunikation. \\
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_BLE}. Kravene til den trådløse kommunikation er, at den trådløse kommunikation skal:
 \begin{enumerate}
-	\item Foregå via BLE imellem de to MCU enheder. Der accepteres ikke andre former for trådløs kommunikation.
-	\item Være i stand til at sende korrekt data i 3 meters afstand. Der accepteres ikke tab af data eller anden komplikation med dataoverførslen ved under 3 meters afstand imellem enhederne.
+	\item Foregå via BLE imellem de to GAP peripheral og GAP central. Der accepteres ikke andre former for trådløs kommunikation.
+	\item Være i stand til at opretholde forbindelse og sende data indenfor 3 meters afstand. Der accepteres ikke tab af data eller anden komplikation med dataoverførslen indenfor 3 meters afstand imellem enhederne.
 \end{enumerate}
 
 Testen undersøge rækkevidden for den trådløse kommunikation, ved at GAP peripheral bliver sat til at videresende datapakker, som GAP central skal modtage alle af. Hvis dataoverførslen er nøjagtig, vil der ikke mangle nogle pakker. Dette vil blive illustreret igennem MATLAB, hvori en nøjagtig overførsel vil medføre en fuldstændig lineær kurve. Hvis datapakker er gået tabt, vil illustrationen af antal modtagne pakker varierer fra antal sendte pakker med stor hældning, og den kurven vil ikke være lineær. Denne test udføres med forskellig afstand mellem GAP peripheral og GAP central, hvoraf den maksimale afstand for succesfuld dataoverførsel vil komme til udtryk. \\

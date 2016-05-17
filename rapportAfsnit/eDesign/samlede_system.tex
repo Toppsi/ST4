@@ -6,12 +6,12 @@ Det samlede system består en række blokke, som tidligere er blevet designet, i
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_samlet_sys}. Kravene beskriver, at det samlede system skal:
 \begin{itemize}
-	\item Kunne detektere aktiviteterne gang, løb og cykling gennem bestemte ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
-	\item Kunne adskille gang, løb og cykling ved hjælp af algoritmer i softwaren. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet.
+	\item Kunne detektere aktiviteterne gang, løb og cykling ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
+	\item Kunne adskille gang, løb og cykling ved hjælp af algoritmer i software. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet og varighed.
 	\item Kunne registrere puls igennem pulssensor og derefter omregne dette til intensitet af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
 	\item Videresende signaler til en ekstern enhed ved hjælp af BLE. Der accepteres ikke andre trådløse kommunikationsformer.
-	\item Besidde batteriledetid for en hel dag svarende til 14 timer. Der accepteres en batterilevetid på mindst 10 timer.
-	\item Repræsentere varigheden og intensiteten af en given aktivitet i en GUI, hvor der gives point herudfra. Der accepteres ikke en anden form for visualisering. 
+	\item Besidde batterilevetid for en hel dag svarende til 15 timer. Der accepteres ikke en batterilevetid på mindre end 15 timer.
+	\item Repræsentere varigheden, intensiteten og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering. 
 \end{itemize}
 Kravet om registrering af puls vil ikke blive opfyldt, da pulssensoren ikke indgår i det samlede system, se \secref{sec_de_im_te_puls}. \\
 Formålet med test af det samlede system er altså at undersøge, hvorledes disse krav samt tolerancer overholdes. Det samlede systems funktionalitet testes ved først at opsætte softwaren på ICen og GAP peripheral ved hjælp af PSoC programmer. Derefter skal ICen sammensættes med MCUen samt en spændingsforsyning til begge enheder og påsættes på en forsøgsperson. GAP central tilkobles en computer, hvorved denne MCU modtager signaler fra GAP peripheral og sender dette ind i computeren. GAP peripheral kommunikerer trådløst ved hjælp af BLE med GAP central, hvorved data fra GAP central illustreres i en GUI. Denne forsøgsopstilling fremgår af \figref{fig:samlede_system_opstilling}.

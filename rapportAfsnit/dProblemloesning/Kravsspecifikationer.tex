@@ -1,5 +1,5 @@
 \section{Kravspecifikationer}\label{Sec:krav}
-\textit{I det følgende afsnit opstilles krav samt tolerancer hertil for hver del i det samlede system. Det sikres herved, at hver enhed kan fungere efter hensigten.}
+\textit{I det følgende afsnit vil kravene til systemets blokke blive beskrevet. Kravene tager udgangspunkt i pilotforsøget samt den underbyggende teori. Det opstilles ligeledes tolerancer til de krav hvoraf dette er nødvendigt. Disse tolerancer skal sikre, at hver enhed kan fungerer efter hensigten. Kravene er ydermere nødvendige for senere at kunne designe, implementere og teste systemets blokke, samt det samlede system.}
 
 Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, som er beskrevet i \appref{pilot} og kort opsummeret i \secref{opsamling_pilot}.
 %
@@ -12,10 +12,9 @@ MCUen kræver en spændingsforsyning for at kunne fungere, hvilket enten kan ske
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71~V og maks 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen. %en tilstrækkelig spænding til alle systemets aktive komponenter, og må varierer med $\pm$5\%.
+	\item Levere mindst 1,71~V og maks 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 	\item Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
-	%\item Muliggøre spændingsopsætning af systemet udenom elnettet og	være elektrisk sikkert.
-	\item Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
+	\item Være mobil og dermed besidde en opsætning udenom elnettet. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
 \end{itemize}
 
 \subsection{Mikrokontroller} \label{krav_mikro_spaending}
@@ -24,7 +23,7 @@ En specifik, udleveret MCU skal benyttes til projektet. Der kan derfor ikke stil
 \textbf{Krav til mikrokontrolleren} \newline 
 Mikrokontrolleren skal:
 \begin{itemize}
-	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at ICen modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 \end{itemize}
 
@@ -53,8 +52,8 @@ Accelerometeret skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
-\item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
-\item Samples med mindst 450 Hz af den indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 450~Hz.
+\item Angive korrekt g påvirkning i under kontrollerede forhold. Der accepteres en afvigelse på 5\%.
+\item Samples med mindst 450 Hz af den ICens indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \end{itemize}
 
 \subsection{Gyroskop} \label{krav:gyro}
@@ -67,7 +66,7 @@ Gyroskopet skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
-\item Samples med mindst 60 Hz af den indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 60~Hz.
+\item Samples med mindst 60 Hz af ICens indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 60~Hz.
 \end{itemize}
 
 \subsection{Pulssensor} \label{puls_krav}
@@ -78,44 +77,37 @@ Yderligere skal pulssensoren kunne opfange brugerens puls med henblik på at bes
 Pulsmåleren skal:
 \begin{itemize}
 %\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCUen leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
-\item Kunne opfange brugerens puls uden ukorrekt optagelse og udsving. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
+\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
 \end{itemize}
 %
 %\subsection{Krav til software}
 %Aktivitetsmålerens software består af algoritmedesign til MCUens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
 \subsection{Algoritmedesign til detektion af fysisk aktivitet} \label{krav_algoritme}
-To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til deres BLE forbindelse. Dette opnås via et standart kodeeksempel fra Cypress, som skal debugges på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en PC skal være GAP central. \\
-Selve algoritmedesignet består altså af at lave en algoritme, som kan detektere henholdsvis gang, løb og cykling ved hjælp af data fra et accelerometer og et gyroskop. Der ses på data fra pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere forskellen imellem aktiviteterne. Derudover ses der, at peaket for hælnedslag har større amplitude under løb end ved gang, hvorfor en mulighed for detektion og adskillelse herimellem kunne være at indsætte en tærskelværdi.
-%Designet af de fire algoritmer ligger til grund for hele funktionaliteten af systemet. \\
-%Algoritmen til PSoC 4200M på den mobile MCU skal overordnet designes til at gøre hele MCUen til en GAP peripheral. Den skal indeholde elementer, som henvendes til ICen, da gyroskopet skal deaktiveres hvis det ikke er i brug. Hvert tiende sekund aktiveres gyroskopet, som skal tracke aktiviteten cykling. Hvis der ikke udføres aktiviteten cykling, slukkes gyroskopet, hvorefter det ti sekunder senere vågner igen. Algoritmen skal gøre mikroprocessoren i stand til at detektere, om den pågældende aktivitet er gang, løb eller cykling. Tiden, som brugeren bruger på den pågældende aktivitet, samt pulsmålingen skal gemmes. Hvert kvarter vækkes EZ-BLE PRoC fra stop power mode og den gemte data overføres hertil via UART kommunikation.\\
-%Algoritmen til EZ-BLE PRoC på GAP peripheral sørger for, at enheden er i stop power mode med mindre, der modtages et interrupt fra PSoC 4200M på samme enhed. Når dette interrupt modtages, skal EZ-BLE PRoC modtage al data og overføre til en anden EZ-BLE PRoC på GAP central via BLE. \\
-%Algoritmen på EZ-BLE PRoC på GAP central skal få enheden til at modtage data fra EZ-BLE PRoC på GAP peripheral. Denne data skal sendes til PSoC 4200M på GAP central via UART kommunikation. \\
-%Algoritmen til PSoC 4200M på enheden tilkoblet en PC skal overordnet designes til at gøre hele MCUen til en GAP central. Desuden skal algoritmen gøre, at mikroprocessoren kan modtage data fra EZ-BLE PRoC på GAP central og videreføre dette til en GUI på en PC via USB porten.
+To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til deres BLE forbindelse. Dette opnås via et standard kodeeksempel fra Cypress, som skal debugges på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en PC skal være GAP central. \\
+Selve algoritmedesignet består altså af at lave to algoritmer, som kan detektere henholdsvis gang, løb og cykling ved hjælp af data fra et accelerometer og et gyroskop. Heraf skal den ene algoritme benyttes til detektering af gang og løb ved hjælp af data fra accelerometeret, mens den anden algoritme benyttes til detektering af cykling ved hjælp af data fra gyroskopet. Det vurderes på baggrund af data fra pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere forskellen imellem aktiviteterne. Derudover ses det, at peaket for hælnedslag har større amplitude under løb end ved gang, hvorfor en mulighed for detektion og adskillelse herimellem kunne være at indsætte en tærskelværdi. Ligeledes ses det, at procentfordelingen af frekvensindhold centreres omkring én frekvens ved cykling, mens det ved gang og løb centreres omkring flere frekvenser, hvorfor denne information kan benyttes til adskillelse af cykling fra gang og løb. 
 
-\textbf{Krav til algoritmedesign} \newline 
+\textbf{Krav til algoritmedesign til detektering af gang og løb} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
 	\item Behandle data fra accelerometret således, at hælnedslaget fremstår som et tydelig peak.
-	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
-	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af tærskelværdier for peakværdien eller procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
-%	\item Gøre PSoC 4200M på GAP peripheral i stand til at sample signalet fra sensoren og pulssensoren samt filtrere og behandle dette. Der accepteres ikke, at mikroprocessoren ikke er i stand til dette grundet algoritmedesignet.
-%	\item Aktivere gyroskopet hvert 10. sekund, som skal tracke om aktiviteten er cykling. Hvis dette er tilfældet, skal data fra gyroskopet samples istedet, og hvert 10. sekund skal algoritmen stadig tjekke for, om aktiviteten fortsat er cykling. Hvis aktiviteten ikke er cykling, skal algoritmen deaktivere gyroskopet igen for strømbesparelse.
-%	\item Gøre PSoC 4200M på GAP peripheral i stand til at skelne imellem aktiviteterne gang, løb og cykling samt kunne tracke tiden for den pågældende aktivitet. Der accepteres, at enheden fejlbedømmer aktiviteten 5\% af tiden grundet tærskelværdien for skellet imellem.
-%	\item Gøre, at PSoC 4200M på GAP peripheral kan gemme tidsenheden for hver aktivitet i et kvarter, hvorefter dette sendes til EZ-BLE PRoC på GAP peripheral. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-%	\item Få EZ-BLE PRoC på GAP peripheral til at vågne ved et interrupt fra PSoC 4200M og derved kunne modtage data, som skal sendes videre via BLE. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-%	\item Gøre, at EZ-BLE PRoC på GAP central kan modtage data fra EZ-BLE PRoC på GAP peripheral via BLE, hvorefter dette skal sendes til PSoC 4200M på GAP central. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
-%	\item PSoC 4200M på GAP central i stand til at modtage data fra EZ-BLE PRoC på GAP central og overføre dette til en PC via USB port. Der accepteres ikke, at algoritmen er skyld i, at dette ikke kan lade sig gøre.
+	\item Være i stand til at detektere gang og løb ved hjælp af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
 \end{itemize}
 
+\textbf{Krav til algoritmedesign til detektering af cykling} \newline 
+Algoritmedesignet skal:
+\begin{itemize}
+	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
+	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
+\end{itemize}
 \subsection{Trådløs kommunikation}\label{krav_BLE}
 Den trådløse kommunikation imellem GAP Central og GAP Peripheral skal foregå over BLE. Dette kan give problematikker, da BLEs effektivitet afhænger af distancen imellem enhederne\fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
 
 \textbf{Krav til den trådløse kommunikation} \newline 
 Den trådløse kommunikation skal:
 \begin{itemize}
-	\item Foregå via BLE imellem de to MCU enheder. Der accepteres ikke andre former for trådløs kommunikation.
-	\item Være i stand til at sende korrekt data i 3 meters afstand. Der accepteres ikke tab af data eller anden komplikation med dataoverførslen ved under 3 meters afstand imellem enhederne.
+	\item Foregå via BLE imellem de to GAP peripheral og GAP central. Der accepteres ikke andre former for trådløs kommunikation.
+	\item Være i stand til at opretholde forbindelse og sende data indenfor 3 meters afstand. Der accepteres ikke tab af data eller anden komplikation med dataoverførslen indenfor 3 meters afstand imellem enhederne.
 \end{itemize}
 
 \subsection{Grafisk Bruger Interface}\label{krav_GUI}
@@ -134,12 +126,12 @@ Når hver af de overstående dele fungerer, skulle det gerne være muligt at sam
 \textbf{Krav til det samlede system} \newline
 Det samlede system skal:
 \begin{itemize}
-	\item Kunne detektere aktiviteterne gang, løb og cykling gennem bestemte ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
-	\item Kunne adskille gang, løb og cykling ved hjælp af algoritmer i softwaren. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet.
+	\item Kunne detektere aktiviteterne gang, løb og cykling ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
+	\item Kunne adskille gang, løb og cykling ved hjælp af algoritmer i software. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet og varighed.
 	\item Kunne registrere puls igennem pulssensor og derefter omregne dette til intensitet af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
 	\item Videresende signaler til en ekstern enhed ved hjælp af BLE. Der accepteres ikke andre trådløse kommunikationsformer.
-	\item Besidde batteriledetid for en hel dag svarende til 14 timer. Der accepteres en batterilevetid på mindst 10 timer.
-	\item Repræsentere varigheden og intensiteten af en given aktivitet i en GUI, hvor der gives point herudfra. Der accepteres ikke en anden form for visualisering. 
+	\item Besidde batterilevetid for en hel dag svarende til 15 timer. Der accepteres ikke en batterilevetid på mindre end 15 timer.
+	\item Repræsentere varigheden, intensiteten og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering. 
 \end{itemize}
 
 %Afspejling af en eventuel motiverende faktor, 
