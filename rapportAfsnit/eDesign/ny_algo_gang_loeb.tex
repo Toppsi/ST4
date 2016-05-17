@@ -2,7 +2,7 @@
 \textit{Dette afsnit omhandler design, implementering og test af algoritmerne til detektering af gang og løb. Først designes algoritmen til det specifikke formål, hvorefter den kan implementeres. Afslutningsvist bliver algoritmen testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
 %bliver design af algoritmerne behandlet, hvilket er ensbetydende med at implementering og kodning kan foregå. Når algoritmerne er designet og implementeret bliver de efterfølgende testet for at af- eller bekræfte deres virkning.}
 
-For at kunne adskille gang og løb benyttes et accelerometer, som er beskrevet i \secref{sec_design_LSM9DS1}. For at kunne detektere og adskille disse aktiviteter behandles inputtet fra sensoren gennem forskellig signalbehandlingsprocessor. Algoritmerne gør det muligt at afgøre, om de pågældende signaler repræsenterer gang, løb ingen fysisk aktivitet. 
+For at kunne adskille gang og løb benyttes et accelerometer, som er beskrevet i \secref{sec_design_LSM9DS1}. For at kunne detektere og adskille disse aktiviteter behandles inputtet fra sensoren gennem forskellig signalbehandlingsprocessor. Algoritmerne gør det muligt at afgøre, om de pågældende signaler repræsenterer gang, løb eller ingen fysisk aktivitet. 
 
 \subsubsection{Design} \label{design_algo_g_l}
 Algoritmen som skal detektere gang eller løb designes til at benytte accelerometerets data, med henhold til \appref{pilot}. Dette design fremgår som flowchart på \figref{fig:design_algoritme_gang_loeb}.
