@@ -1,5 +1,5 @@
 \section{Spændingsforsyning}\label{spaendingsforsyning}
-\textit{I dette afsnit beskrives designet, implementeringen og testen af spændingsforsyningen til MCUen, der agerer som GAP peripheral. Dette gøres med henblik på at opfylde kravene til den eksterne spændingsforsyning.}
+\textit{Dette afsnit beskriver design, implementering og test af spændingsforsyningen til MCUen, der agerer som GAP peripheral. Dette gøres med henblik på at opfylde kravene til den eksterne spændingsforsyning, som ses i \secref{krav_spaendingsf}.}
 
 Design, implementering og test af spændingsforsyningen udføres med hensyn til de krav, der er opstillet i \secref{krav_spaendingsf}. \newline
 Denne komponent skal derfor kunne levere et spændingsoutput, som overholder MCUens inputspænding for aktivering samtidig med, at komponenten overholder krav til mobilitet og brugersikkerhed. Ydermere skal spændingsforsyningen kunne levere den påkrævede spænding i mindst 15 timer. \newline
@@ -30,7 +30,7 @@ Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvig
 \end{enumerate}
 
 Det undersøges hvilket spændingsoutput den udleverede komponent har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at komponenten har et spændingsoutput på 3,14~V ved disse betingelser.\newline
-Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V.\fxnote{Vi skal have lavet en test hvor komponenterne er sat til, og man derefter noterer hvor meget spænding batterierne taber undervejs. Testen skal fx vare 10 minutter. }
+Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V.
 
 
 

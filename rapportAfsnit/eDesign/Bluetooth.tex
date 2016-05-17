@@ -1,5 +1,5 @@
 \section{Trådløs kommunikation gennem Bluetooth Low Energy}
-\textit{Dette afsnit gennemgår design, implementering og test af systemets trådløse kommunikation mellem de to benyttede MCUer.}
+\textit{Dette afsnit gennemgår design, implementering og test af systemets trådløse kommunikation mellem de to benyttede MCUer. Disse designes for at kunne lave et trådløst system, hvorefter det implementeres til algoritmerne. Afslutningsvis testes de opstillede krav, som ses i \secref{krav_BLE}}
 
 \subsection{Design}
 Systemet vil involvere to MCUer, henholdsvis en GAP central og en GAP peripheral. Begge enheder er påført et BLE modul, således dataoverførslen mellem enhederne foregår ved brug af dette. Denne dataoverførsel mellem MCUerne er illustreret som pseudokode på \figref{fig:blue_pseudo}. 
