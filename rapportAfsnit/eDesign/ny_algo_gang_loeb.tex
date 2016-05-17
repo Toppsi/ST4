@@ -13,12 +13,12 @@ Algoritmen som skal detektere gang eller løb designes til at benytte accelerome
 	\label{fig:design_algoritme_gang_loeb}
 \end{figure}
 Algoritmen skal benyttes accelerometerets data til at detektere hvorvidt brugeren ikke udfører fysisk aktivitet, går eller løber. \\
-Førend denne detektering, skal accelerometeres data signalbehandles for afslutningsvis at kunne benytte tærkselværdier til at detektere hvilken aktivitet der udføres. Signalbehandlingen indebærer filtrering, dividering, kvadrering og moving average filtrering. Denne type signalbehandling af illustreret på \figref{fig:algoritme_cykling2}.
+Førend denne detektering, skal accelerometeres data signalbehandles for afslutningsvis at kunne benytte tærkselværdier til at detektere hvilken aktivitet der udføres. Signalbehandlingen indebærer filtrering, dividering, kvadrering og moving average filtrering. Denne type signalbehandling af illustreret på \figref{fig:algoritme_behandling}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{figures/cDesign/signalbehandling_psoc.png}
 	\caption{På figuren ses de fire signalbehandlingsfunktioners effekt på rå data fra accelerometeret under løb. Den sorte kurve på de fire figurer er det rå signal, og den røde er det behandlede output. Der gøres opmærksom på, at y-aksen ikke er ens for henholdsvis de to øvre og de to nedre figurer, hvorfor det sorte, rå signal bliver en næsten lige linje på de to nedre figurer.}
-	\label{fig:algoritme_cykling2}
+	\label{fig:algoritme_behandling}
 \end{figure}
 Signalbehandlingen har til formål at tydeliggøre hælnedslag, for derefter at kunne implementere tærskelværdier til adskillelse af de fysisk aktiviteter. \\
 Første del af signalbehandlingen er en filtrering med et elliptisk båndpassfilter, som benyttes til at dæmpe støj. Dette skal være et fjerde ordens elliptisk båndpasfilter med et pasbånd fra 20~Hz til 50~Hz, og med en dæmpning på 60~dB\fxnote{og 0.5 dB peak-to-peak ripples - frekvenserne for gang og løb lå mellem 25 og 45}. Båndpasfilterets knækfrekvenser er valgt med hensyn til pilotforsøget i \appref{pilot}, hvorfra det vurderes at hælnedslag har en frekvens på 25~Hz til 45-~Hz. Ved at benytte et båndpass filter bliver det ønskede signal i frekvensområdet 25-45~Hz bevaret, og andre frekvensen dæmpes.\\
@@ -87,7 +87,7 @@ Algoritmens signalbehandling involverer fire elementer; elliptisk filtrering, di
 	\label{fig:signalbehandling_g_l}
 \end{figure} \vspace{-0.5cm}
 Efter datamodtagelse fra ICen bliver samples IIR filtreret ved hjælp af a og b koefficienter for et elliptisk filter. Efterfølgende retureneres de behandlede samples, hvormed disse er klar til næste del af signalbehandlingen. De pågældende a og b koefficienter bestemmes i MATLAB, hvor filterets knækfrekvenser og dæmpning benyttes til at bestemme det elliptiske filters koefficienter. Disse koefficienter skriver i C koden for algoritmen, således filtreringen er med henhold til det ønskede filter designet i MATLAB.\\
-De enkelte samples bliver herefter bitskiftet med 5, hvilket svarer til at dividere med 32\fxnote{2 opløftet i 5}. Derudover bliver samples kvadreret ved at gange hver sample med sig selv. Afslutningsvis filtreres samples med et moving average filter, hvilket medfører en blødere kurve, som ses på \figref{fig:algoritme_cykling2}.
+De enkelte samples bliver herefter bitskiftet med 5, hvilket svarer til at dividere med 32\fxnote{2 opløftet i 5}. Derudover bliver samples kvadreret ved at gange hver sample med sig selv. Afslutningsvis filtreres samples med et moving average filter, hvilket medfører en blødere kurve, som ses på \figref{fig:algoritme_behandling}.
 
 Algoritmen er designet og implementeret således, at denne kan detektere, hvis brugeren ikke er fysisk aktiv. Denne del af algoritmen fremgår af \figref{fig:ingen_ak_pseudo}.
 \begin{figure}[H]
