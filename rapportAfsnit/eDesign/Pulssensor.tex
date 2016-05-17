@@ -97,39 +97,54 @@ Der foretages yderligere tre tests, med henblik på at vurdere hvorvidt pulssens
 Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens BPM er forholdsvis stabil og uden markante udsving. Testen udføres ved at have pulssensor påført øreflippen, hvoraf MCUen bestemmer BPM og printer denne værdi i Real Term. \\
 Resultaterne af den første udførte test, ved en stillesiddende position, fremgår af \tabref{tab:test_pulssystem}.
 \begin{table}[H]
-	\centering
-	\begin{tabular}{ccc} \hline
-		\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls \\ LoggerPro {[}BPM{]} & \begin{tabular}[c]{@{}c@{}} Gennemsnitlig puls \\ Algortime {[}BPM{]} \end{tabular} & Afvigelse {[}\%{]} \\ \hline
-			60,0 & 64,9 & 8,15 \\ \hline
-		\end{tabular}%
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ccc}
+	\hline
+	\rowcolor[HTML]{C0C0C0} 
+	Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
+	60 & 64,9 & 8,15 \\ \hline
+\end{tabular}
+}
 	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term målt på stillesiddende person. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 8,15\%.}
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
+
+
+
 Det fremgår i \tabref{tab:test_pulssystem}, at testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 8,15\%. Pulssensoren og den tilhørende algoritme overholder dermed første krav til pulsdetekteringen, ved stillesiddende position.
 
 Anden test undersøger hvorvidt det er muligt at detektere BPM under fysisk aktivitet. Denne test indebærer en pulsmåling under fysisk aktivitet i form af gang ved 4,8~km/t på et løbebånd.\\
 Resultaterne af den anden udførte test med gang, fremgår af \tabref{tab:test_puls_aktivitet}.
+
+
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc} \hline
-		\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls \\ LoggerPro {[}BPM{]} & \begin{tabular}[c]{@{}c@{}} Gennemsnitlig puls \\ Algortime {[}BPM{]} \end{tabular} & Afvigelse {[}\%{]} \\ \hline
-			116,5 & 95,70 & -17,85 \\ \hline
-		\end{tabular}%
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccc}
+			\hline
+			\rowcolor[HTML]{C0C0C0} 
+			Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
+			116,5 & 95,70 & 17,85 \\ \hline
+		\end{tabular}
+	}
 	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -17,85\%.}
 	\label{tab:test_puls_aktivitet}
 \end{table} \vspace{-0.5cm}
 Det fremgår i \tabref{tab:test_puls_aktivitet}, at testen af pulssensoren og den tilhørende algoritme ved 4,8~km/t viser en gennemsnitlig afvigelse fra referenceværdien på -17,85\%. Pulsdetekteringen ved gang overholder derfor ikke det opstillede krav for pulsdetektering.\\
 Yderligere testes pulsdetektering ved løb med 11,3~km/t på samme vis som foregående tests. 
 Resultaterne af den sidste udførte test, fremgår af \tabref{tab:test_puls_aktivitet_run}.
+
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc} \hline
-		\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls \\ LoggerPro {[}BPM{]} & \begin{tabular}[c]{@{}c@{}} Gennemsnitlig puls \\ Algortime {[}BPM{]} \end{tabular} & Afvigelse {[}\%{]} \\ \hline
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccc}
+			\hline
+			\rowcolor[HTML]{C0C0C0} 
+			Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
 			154 & 82,6 & -46,4 \\ \hline
-		\end{tabular}%
+		\end{tabular}
+	}
 	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -46,4\%.}
 	\label{tab:test_puls_aktivitet_run}
 \end{table} \vspace{-0.5cm}

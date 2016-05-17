@@ -36,14 +36,16 @@ Testen viser, at ved en varighed på 60 sekunder, da har ADCen konverteret 2134 
 Testen påviser, at ADCen har en egentlig samplingsfrekvens på 35,6~Hz. Jævnfør kravene for samplingsfrekvensen for ADcen, da accepteres en samplingsfrekvens højere end 35~Hz. Derfor påviser testen, at den konfigurerede samplingsfrekvens for ADCen kan accepteres. 
 
 Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample 1 single ended kanal men en frekvens på 200~Hz med inputkanalen i P2[0]. Funktionsgeneratoren kobles til dette indput samt ground på MCUen og indstilles til at indsende et sinussignal med 10 Hz og 4 Vpp. Herefter påbegyndes dataopsamling ved hjælp af Matlab, som visualiserer inputsignalet. Udover denne datavisualisering, koples et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte indput anses for værende det korrekte output fra funktionsgeneratoren. Resultatet fra denne test ses i \tabref{tab:ADC_test}.
+
 \begin{table}[H]
 	\centering
-	\begin{tabular}{cccc} \hline
+	\begin{tabular}{cccc}
+		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Indstillet amplitude {[}Vpp{]}  & \begin{tabular}[c]{@{}c@{}} Målte amplitude\\fra oscilloskop {[}Vpp{]} \end{tabular} & Målte amplitude\\fra MCU ADC {[}Vpp{]} & \begin{tabular}[c]{@{}c@{}} Afvigelse \\ {[}\%{]} \end{tabular} \\ \hline
-		4 & 4,001 & 3,993 & 0,20 \%\\ \hline
-	\end{tabular}%
+		Indstillet amplitude [Vpp] & \begin{tabular}[c]{@{}c@{}}Målt amplitude fra \\ oscilloskop [Vpp]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Målt amplitude fra \\ MCU ADC [Vpp]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Afvigelse [\%]\end{tabular} \\ \hline
+		4 & 4,001 & 3,993 & 0,20 \\ \hline
+	\end{tabular}
 	\caption{I tabellen ses resultatet fra testen af MCUens AD konvertering.}
 	\label{tab:ADC_test}
-\end{table}\vspace{-0.2cm}
+\end{table} \vspace{-.2cm}
 Der ses i \tabref{tab:ADC_test}, at MCUens ADC repræsenterer den analoge inputsignal med 0,20\% afvigelse. Dette overholder kravet på maks 5\%, hvorfor ADCen i MCUen accepteres til videre implementering.
