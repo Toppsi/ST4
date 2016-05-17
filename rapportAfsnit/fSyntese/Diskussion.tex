@@ -13,12 +13,18 @@ Pilotforsøget undersøgte ikke gyroskopets output ved forsøgspersonernes maksi
 Ydermere undersøgte pilotforsøget ikke hvilken betydning en acceleration under cykling har for signalets udformning. Det vil være særligt fordelagtigt, at undersøge betydningen af en acceleration for signalets frekvensdomæne. Dette er med henhold til detektering af cykling, hvoraf en frekvensdomæneanalyse benyttes til dette formål.
 
 \subsubsection{Design, implementering og test af prototypens blokke}
-Prototypens separate blokke er design, implementeret og testet enkeltvis for at opretholde variabelkontrol under processen. Prototypen er dog ikke et færdigudviklet produkt som tager højde for alle relevante system- og brugermæssige aspekter. \\
-Prototypens spændingsforbrug er testet over en varighed på X timer. Det fremgik af testen, at GAP peripheral vil være funktionel i Y timer ved en spændingstilkobling svarende 3,17~V.  
+Prototypens separate blokke er designet, implementeret og testet enkeltvis for at opretholde variabelkontrol under processen. Prototypen er dog ikke et færdigudviklet produkt som tager højde for alle relevante system- og brugermæssige aspekter. \\
+Prototypens spændingsforbrug er testet over en varighed på X timer. Det fremgik af testen, at GAP peripheral vil være funktionel i Y timer ved en spændingstilkobling på 3,17~V fra ubrugte batterier. Denne test beskriver prototypens funktionelle varighed når alle sensorer og algoritmer hele tiden er igang. Det vil derfor være relevant at sænke dette forbrug, for at kunne øge batteriernes levetid.
+
+Prototypens pulsdetektering viste sig, at have en afvigelse på 0\% ved et simuleret inputsignal. Ydermere blev pulsdetekteringen testet ved en forsøgsperson som ikke udførte fysisk aktivtet. Det fremgik heraf, at pulsdetekteringen havde en afvigelse på XX\% fra den benyttede reference. Dette kan blandt andet være som følge af en dårlig kontakt mellem pulssensor og øreflip. Hvis dette var tilfældet, ville signalets amplitude ikke være tilstrækkeligt stort til at overskride tærskelværdien. \\
+Yderligere blev pulsdetektering testet ved gang på et løbebånd, for at undersøge funktionaliteten ved fysisk aktivtet. Testen påviste, at det ikke var muligt at detektere en puls. Dette skyldtes signalets udformning der indeholdte støj, hvilken kan være opstået som følge af bevægelser af ledningerne. Ydermere kan kontakten mellem hud og sensor være blevet forringet, hvilket ligeledes kan have bidraget til et støjfuldt signal. \\
+Det kan derfor være fordelagtigt, at udforme en anordning der sænker risikoen for bevægelse af sensorens ledninger ved selve sensoren. Yderligere vil det være fordelagtigt, at udforme en anordning som sikrer en stabil og konstant kontakt mellem sensor og hud.
+
+Prototypens rækkevidde for den trådløse kommunikation er testet, hvor det fremgår at ved en afstand på 4~meter mellem to MCUer, da mistes forbindelsen. Denne afstand blev testet hvor begge PRoCs på MCUerne var placeret således de pegede mod hinanden. Det vil derfor være fordelagtigt yderligere at teste hvilken betydning det har, når afstanden mellem enhederne er afskærmet af genstande eller personer. Dette kun eksempelvis testes ved en person har påmonteret MCUen på benet under et par bukser, for dermed at simulere en påmontering af prototypen. Rækkevidden for den trådløse kommunikation kan derfor antages kortere ved disse forhold, end testen påviste.
 
 
 \subsubsection{Samlet systemtest}
-
+Vi gennemgår resultaterne fra testen og beskriver hvorfor de er som de er, og hvad der kan være galt/godt med resultaterne.
 
 
 \subsubsection{Samfundsmæssige perspektiver}
