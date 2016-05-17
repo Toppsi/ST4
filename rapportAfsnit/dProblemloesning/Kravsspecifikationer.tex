@@ -1,4 +1,4 @@
-	\section{Kravspecifikationer}\label{Sec:krav}
+\section{Kravspecifikationer}\label{Sec:krav}
 \textit{I det følgende afsnit opstilles krav samt tolerancer hertil for hver del i det samlede system. Det sikres herved, at hver enhed kan fungere efter hensigten.}
 
 Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, som er beskrevet i \appref{pilot} og kort opsummeret i \secref{opsamling_pilot}.
@@ -28,8 +28,24 @@ Mikrokontrolleren skal:
 	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 \end{itemize}
 
+\subsection{Analog til Digital konverter} \label{krav_adc}
+%Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
+For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være <208 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
+\begin{equation}
+220~[BPM] - alder~[$År$] = $Maksimale puls$~[BPM]
+\end{equation}
+Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <208, hvilket svarer til cirka 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35 Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
+
+\textbf{Krav til ADC} \newline
+ADCen skal:
+\begin{itemize}
+	\item Sample pulssensorens output med mindst 35~Hz. Der accepteres ikke en samplingsfrekvens under 35~Hz. 
+	\item Repræsentere det analoge signal med maksimalt 5\% afvigelse. 
+\end{itemize}
+
 \subsection{Accelerometer}\label{krav:acc}
 % Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
+Den digitale sensor LSM9DS1 vælges til dette projekt, hvilket er nødvendig viden for at stille krav hertil. Sensoren beskrives yderligere i \secref{sec_design_LSM9DS1}. Accelerometret i LSM9DS1 skal benyttes til at opfange gang og løb, hvis frekvensområde er omkring 45 Hz, se \secref{pilot}. Ifølge Nyquist skal aktivitetsmålerens ADC til accelerometer data derfor have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde, altså 90 Hz \citep{Webster2011}. I praksis benyttes en samplingshastighed ofte, der er ti gange større end det maksimale frekvensområde. Derfor skal ADCen have en samplingsfrekvens på mindst 450 Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \newline
 Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation (n=4) med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med over 16 g. %Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt. Placeringen af sensorer skal derfor være ud for den laterale malleolus.
 
 \textbf{Krav til accelerometer} \newline 
@@ -38,10 +54,12 @@ Accelerometeret skal:
 %\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den får tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke, at accelerometret har et arbejdsområde på under $\pm$16 g.
 \item Angive korrekt påvirkning i forhold til g påvirkning. Der accepteres en afvigelse på 5\%.
+\item Samples med mindst 450 Hz af den indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \end{itemize}
 
 \subsection{Gyroskop} \label{krav:gyro}
 %Et gyroskop kræver en given spænding for at kunne optage data. Gyroskopet i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav.
+Gyroskopet i LSM9DS1 skal benyttes til at opfange cykling, hvis frekvensområde er maksimalt 6 Hz. Derfor skal den indbyggede ADC i ICen sample gyroskopets data med mindst 60 Hz. \\
 Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte et arbejdsområde på maks 334,69 dps for placering A. Dette blev bestemt for en given frekvens ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere frekvens. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
 
 \textbf{Krav til gyroskop} \newline
@@ -49,6 +67,7 @@ Gyroskopet skal:
 \begin{itemize}
 %\item Være operativ ved 3,3 V fra MCUens VDD output spænding.\fxnote{Outputspændingen fra MCUen er omkring 4.8V, men det afhænger måske er, hvilken spænding den fårr tilført? Ellers skal det reguleres med potentiometer} Der accepteres en afvigelse på +5\%.
 \item Have et arbejdsområde på mindst 334,69 dps. Der accepteres ikke et arbejdsområde herunder.
+\item Samples med mindst 60 Hz af den indbyggede ADC. Der accepteres ikke en samplingsfrekvens under 60~Hz.
 \end{itemize}
 
 \subsection{Pulssensor} \label{puls_krav}
@@ -60,28 +79,6 @@ Pulsmåleren skal:
 \begin{itemize}
 %\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCUen leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
 \item Kunne opfange brugerens puls uden ukorrekt optagelse og udsving. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
-\end{itemize}
-
-\subsection{Analog til Digital konverter} \label{krav_adc}
-%Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
-Accelerometret i LSM9DS1 skal benyttes til at opfange gang og løb, mens gyroskopet i LSM9DS1 skal benyttes til at opfange cykling. For at begge sensorer skal være i stand til dette, er det essentielt at vide det analoge signals frekvensområde. %Accelerometeret skal benyttes til at detektere gang og løb, hvorfor pilotforsøg blev undersøgt med henhold til frekvensområdet heraf. 
-Pilotforsøget viste, at frekvensområdet for signalet ved gang og løb er 45 Hz, når det optages af et accelerometer. Ifølge Nyquist skal aktivitetsmålerens ADC derfor have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde, altså 90 Hz \citep{Webster2011}. I praksis benyttes en samplingshastighed ofte, som er ti gange større end det maksimale frekvensområde. Derfor skal ADCen have en samplingshastighed på mindst 450 Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \newline
-Frekvensområdet for gyroskopet viste sig at have et maksimalt frekvensområde på 6 Hz. Derfor skal ADCen sample gyroskopets data med mindst 60 Hz.
-
-For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være <208 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
-\begin{equation}
-220~[BPM] - alder~[$År$] = $Maksimale puls$~[BPM]
-\end{equation}
-
-Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <208, hvilket svarer til cirka 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35 Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
-
-\textbf{Krav til ADC} \newline
-ADCen skal:
-\begin{itemize}
-\item Sample accelerometerets output med mindst 450 Hz. Der accepteres ikke en samplingsfrekvens under 450~Hz.
-\item Sample gyroskopets output med mindst 60 Hz. Der accepteres ikke en samplingsfrekvens under 60~Hz.
-\item Sample pulssensorens output med mindst 35~Hz. Der accepteres ikke en samplingsfrekvens under 35~Hz. 
-\item Repræsentere det analoge signal med maksimalt 5\% afvigelse. 
 \end{itemize}
 %
 %\subsection{Krav til software}
