@@ -39,7 +39,7 @@ For at sikre at der registreres en valid puls for brugeren af systemet, skal den
 \end{equation}
 Samplingsfrekvensen bestemmes med antagelse om, at målgruppens maksimale puls er <211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, i henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
 
-\textbf{Krav til ADC} \newline
+\textbf{Krav til analog til digital konverter} \newline
 ADCen skal:
 \begin{itemize}
 	\item Sample pulssensorens output med mindst 35~Hz. Der accepteres ikke en samplingsfrekvens under 35~Hz. 
@@ -78,7 +78,7 @@ Gyroskopet skal:
 En pulssensor kræver en given spænding for at kunne optage data, som tilføres fra MCUen. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
 Yderligere skal pulssensoren kunne opfange brugerens pulssignaler med henblik på bestemmelse puls og intensiteten af den pågældende aktivitet.
 
-\textbf{Krav til pulssensor} \newline
+\textbf{Krav til pulssensor og tilhørende algoritme} \newline
 Pulsmåleren skal:
 \begin{itemize}
 %\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCUen leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
@@ -88,29 +88,29 @@ Pulsmåleren skal:
 %\subsection{Krav til software}
 %Aktivitetsmålerens software består af algoritmedesign til MCUens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
-\subsection{Algoritmedesign til detektion af fysisk aktivitet} \label{krav_algoritme}
+\subsection{Algoritme til detektion af fysisk aktivitet} \label{krav_algoritme}
 To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til deres BLE forbindelse. Dette opnås via et standard kodeeksempel fra Cypress, som skal debugges på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en PC skal være GAP central. \\
 Algoritmedesignet består af to algoritmer, som kan detektere henholdsvis gang og løb og cykling. Heraf skal den ene algoritme benyttes til detektering af gang og løb ved hjælp af data fra accelerometeret, mens den anden algoritme benyttes til detektering af cykling ved hjælp af data fra gyroskopet. Det vurderes på baggrund af data fra pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere forskellen mellem aktiviteterne. Derudover fremgår det, at peaket for hælnedslag har større amplitude under løb end ved gang, hvorfor en mulighed for detektion og adskillelse herimellem kunne være at indsætte en tærskelværdi. Ligeledes ses det, at procentfordelingen af frekvensindhold centreres omkring én frekvens ved cykling, mens det ved gang og løb centreres omkring flere frekvenser, hvorfor denne information kan benyttes til adskillelse af cykling fra gang og løb. 
 
-\textbf{Krav til algoritmedesign til detektering af gang og løb} \newline 
+\textbf{Krav til algoritme til detektering af gang og løb} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
 	\item Behandle data fra accelerometret, således hælnedslag fremstår som et markant peak.
 	\item Være i stand til at detektere gang og løb ved brug af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
 \end{itemize}
 
-\textbf{Krav til algoritmedesign til detektering af cykling} \newline 
+\textbf{Krav til algoritme til detektering af cykling} \newline 
 Algoritmedesignet skal:
 \begin{itemize}
 	\item Behandle data fra gyroskopet, således frekvensindholdet fra signalet fremstår.
 	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Det accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
 \end{itemize}
 
-\subsection{Trådløs kommunikation}\label{krav_BLE}
+\subsection{Trådløs kommunikation via Bluetooth Low Energy}\label{krav_BLE}
 Den trådløse kommunikation mellem GAP Central og GAP Peripheral skal foregå ved brug af BLE. Denne type trådløse kommunikation er den implementerede på den udleverede MCU, hvorfor denne ikke er mulig at ændre.\\
 De to enheder skal ydermere kunne sende data til hinanden indenfor en afstand på 3 meter. \fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
 
-\textbf{Krav til den trådløse kommunikation} \newline 
+\textbf{Krav til den trådløse kommunikation via Bluetooth Low Energy} \newline 
 Den trådløse kommunikation skal:
 \begin{itemize}
 %	\item Foregå via BLE imellem de to GAP peripheral og GAP central. Der accepteres ikke andre former for trådløs kommunikation.
@@ -120,7 +120,7 @@ Den trådløse kommunikation skal:
 \subsection{Grafisk Bruger Interface}\label{krav_GUI}
 GUIen skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til et øget fysisk aktivitetsniveau. Den skal visualisere tiden og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. %Hvert 15. minutter kan interfacet opdateres, da GAP peripheral afsender data til GAP central i dette tidsinterval.
 
-\textbf{Krav til GUI} \newline 
+\textbf{Krav til Grafisk Bruger Interface} \newline 
 GUIen skal:
 \begin{itemize}
 	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 

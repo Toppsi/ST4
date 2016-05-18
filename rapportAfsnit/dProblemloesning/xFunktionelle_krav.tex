@@ -21,8 +21,8 @@ På baggrund af ovenstående udformes de funktionelle krav således, at systemet
 	\item Motivere børn i aldersgruppen 9-12 år. 
 \end{itemize}
 
-\subsection{Blokdiagram}
-Ud fra kravene til systemet udformes et blokdiagram, som illustreres på \figref{fig:blokdiagram}. På denne fremgår rækkefølgen af blokkene, samt om de er analoge eller digitale. 
+\subsection{Overordnede system}
+Ud fra kravene til det overordnede system udformes et blokdiagram, som illustreres på \figref{fig:blokdiagram}. På denne fremgår rækkefølgen af blokkene, samt om de er analoge eller digitale. 
 
 Den analoge del, som er omringet af en rød firkant på \figref{fig:blokdiagram}, består af inputs fra de tre analoge sensorer\fxnote{sensorerne er analoge, men der findes en ADC i IC'en, hvilket gør at det kaldes en digital sensor}; accelerometer, gyroskop og pulssensor. Disse analoge inputs konverteres fra analoge til digitale signaler gennem en analog-til-digital konverter (ADC). Herefter behandles signalerne i den digitale del i slaven, således der kan adskilles mellem de specifikke aktiviteter, gang løb og cykling. Gennem trådløs kommunikation mellem de to digitale dele overføres data til master, som viderefører data til PC'en. Sidst visualiseres dataet på en GUI, så børnene kan se perioden og intensiteten af en given aktivitet.  
 
