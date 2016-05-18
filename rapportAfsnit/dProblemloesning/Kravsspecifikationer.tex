@@ -1,8 +1,8 @@
 \section{Kravspecifikationer}\label{Sec:krav}
 \textit{I det følgende afsnit vil kravene til systemets blokke blive beskrevet. Kravene tager udgangspunkt i pilotforsøget samt den underbyggende teori. Det opstilles ligeledes afvigelser til opstillede krav, som sikrer systemet opfylder de tiltænkte formål. Kravene er benyttes senere til at designe, implementere og teste systemets blokke, samt det samlede system.}
 
-Formålet med aktivitetsmåleren er at kunne registrere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling herpå. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. \\
-Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i de opnåede resultater fra de udførte pilotforsøg, hvilke er opsummeret i \secref{opsamling_pilot}.
+Formålet med aktivitetsmåleren er at kunne detektere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. \\
+Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i resultaterne fra de udførte pilotforsøg, hvilke er opsummeret i \secref{opsamling_pilot}.
 %
 %\subsection{Krav til hardware}
 %Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling og -konvertering, hvoraf det digitale signal efterfølgende bliver behandlet af aktivitetsmålerens software.
@@ -20,12 +20,14 @@ Spændingsforsyningen skal:
 \end{itemize}
 
 \subsection{Mikrokontroller} \label{krav_mikro_spaending}
-En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til ICen samt pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til %ICen samt 
+pulssensoren, hvorfor der skal stilles krav hertil. I %\secref{sec_design_LSM9DS1} og 
+\secref{sec_design_puls} beskrives den specifikke sensor for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
 
 \textbf{Krav til mikrokontrolleren} \newline 
 Mikrokontrolleren skal:
 \begin{itemize}
-	\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	%\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 \end{itemize}
 
@@ -35,7 +37,7 @@ For at sikre at der registreres en valid puls for brugeren af systemet, skal den
 \begin{equation}
 220~[BPM] - Alder~[$År$] = $Maksimale puls$~[BPM]
 \end{equation}
-Sampleraten bestemmes med antagelse om, at målgruppens maksimale puls er <211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, med henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
+Samplingsfrekvensen bestemmes med antagelse om, at målgruppens maksimale puls er <211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, i henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
 
 \textbf{Krav til ADC} \newline
 ADCen skal:
@@ -47,22 +49,22 @@ ADCen skal:
 \subsection{Accelerometer}\label{krav:acc}
 % Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
 ICen, LSM9DS1, vælges til dette projekt, idet specifikationerne for denne overholder de ønskede formål. Sensoren beskrives yderligere i \secref{sec_design_LSM9DS1}. \\
-Accelerometret i LSM9DS1 benyttes til at detektere gang og løb, hvis frekvensområde er cirka 45~Hz, som det ses i \appref{pilot}. Med henhold til Nyquist skal accelerometeret på ICen have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde. %ICen skal derfor sample accelerometeret med 90~Hz \citep{Webster2011}.
-I praksis benyttes dog en samplingshastighed, der er ti gange større end det maksimale frekvensområde. Derfor skal ICens ADC have en samplingsfrekvens på mindst 450~Hz for accelerometret. Det kan dog være fordelagtig at oversample. Dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \\
-Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation (n=4) med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med mere end 16~g. 
+Accelerometret i LSM9DS1 benyttes til at detektere gang og løb, hvis frekvensområde er cirka 45~Hz, som det ses i \appref{pilot}. Ifølge Nyquist skal accelerometeret på ICen have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde. %ICen skal derfor sample accelerometeret med 90~Hz \citep{Webster2011}.
+I praksis benyttes dog en samplingshastighed, der er ti gange større end det maksimale frekvensområde. Derfor skal ICens ADC have en samplingsfrekvens på mindst 450~Hz for accelerometret. Det kan dog være fordelagtig at oversample, da dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \\
+Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation, n=4, med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med mere end 16~g. 
 
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
 \item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke et arbejdsområde på under $\pm$16~g.
 \item Angive korrekt g påvirkning under kontrollerede forhold. Der accepteres en afvigelse på 5\%.
-\item Samples med mindst 450~Hz af ICens ADC. Der accepteres ikke en samplingsfrekvens under 450~Hz.
+\item ICens ADC skal have en samplingsfrekvens på mindst 450~Hz. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \end{itemize}
 
 \subsection{Gyroskop} \label{krav:gyro}
 %Et gyroskop kræver en given spænding for at kunne optage data. Gyroskopet i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav.
 Gyroskopet i LSM9DS1 skal benyttes til at detektere cykling. Frekvensområdet for cykling blev i pilotforsøget bestemt til at være maksimalt 6~Hz. Derfor skal den indbyggede ADC i ICen sample gyroskopets data med mindst 60~Hz. \\
-Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte et arbejdsområde på maks 334,69 dps for placering A. Dette blev bestemt for en given kadence ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere kadence. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
+Det maksimale arbejdsområde for gyroskopet blev undersøgt i pilotforsøget, der udledte et arbejdsområde på maksimalt 334,69 dps for placering A. Dette blev bestemt for en given kadence ved cykling, hvorfor gyroskopet bør have et større arbejdsområde for at tage forbehold for en højere kadence. % af omdrejninger på cyklen . Jævnfør pilotforsøget blev den optimale placering af sensorer med henblik på målgruppen bestemt.
 
 \textbf{Krav til gyroskop} \newline
 Gyroskopet skal:
@@ -72,9 +74,9 @@ Gyroskopet skal:
 \item Samples med mindst 60~Hz af ICens ADC. Der accepteres ikke en samplingsfrekvens under 60~Hz.
 \end{itemize}
 
-\subsection{Pulssensor} \label{puls_krav}
+\subsection{Pulssensor og tilhørende algoritme} \label{puls_krav}   
 En pulssensor kræver en given spænding for at kunne optage data, som tilføres fra MCUen. Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding. % med baggrund i spændingsforsyningens krav. 
-Yderligere skal pulssensoren kunne opfange brugerens puls med henblik på at bestemme intensiteten af den pågældende aktivitet.
+Yderligere skal pulssensoren kunne opfange brugerens pulssignaler med henblik på bestemmelse puls og intensiteten af den pågældende aktivitet.
 
 \textbf{Krav til pulssensor} \newline
 Pulsmåleren skal:
@@ -135,7 +137,7 @@ Det samlede system skal:
 \begin{itemize}
 	\item Kunne detektere aktiviteterne gang, løb og cykling ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
 	\item Kunne lave automatisk adskillelse af gang, løb og cykling ved hjælp af algoritmer. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet og varighed.
-	\item Kunne detektere puls ved brug af pulssensor og derefter kategorisere intensiteten af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
+	\item Kunne detektere puls ved brug af pulssensor og tilhørende algoritme samt derefter kategorisere intensiteten af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
 	\item Videresende signaler til en ekstern enhed ved hjælp af BLE. Der accepteres ikke andre trådløse kommunikationsformer.
 	\item Besidde batterilevetid for en hel dag svarende til 15 timer. Der accepteres ikke en batterilevetid på mindre end 15 timer.
 	\item Repræsentere varigheden og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering. 
