@@ -60,8 +60,8 @@ Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen 
 \subsection{Test}
 Algoritmens funktioner testes individuelt og samlet. Dette gøres for at be- eller afkræfte om algoritmen lever op til de opstillede krav i \secref{krav_algoritme}, som lyder at algoritmen skal:
 \begin{itemize}
-	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
-	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
+	\item Behandle data fra gyroskopet, således frekvensindholdet fra signalet fremstår.
+	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Det accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
 \end{itemize}
 
 Det første som testes, er algoritmes fire sekunders time counter. Måden hvorpå denne testes er ved at plotte resultatet af MATLABs time counter. Det undersøges hvorvidt time counteren tæller op til fire sekunder, når der er modtaget fire sekunders data. Hvis dette er tilfældet skal time counteren nulstilles. Dette testes ved at indsende 2048 samples, hvilket svarer til en fire sekunder med en samplingsfrekvens på 512.  

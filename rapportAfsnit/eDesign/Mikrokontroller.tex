@@ -16,10 +16,9 @@ Spændingsforsyningen til pulssensoren og ICen vil blive forbundet ved brug af r
 
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_mikro_spaending}. Kravene beskriver, at MCUen skal:
-\begin{enumerate}
-	\item Levere 1,9~V til 3,6~V til ICen. Der accepteres ikke, at ICen modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-	\item Levere mellem 3~V og 5~V til pulssensoren. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-\end{enumerate}
+\begin{itemize}
+	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+\end{itemize}
 
 Spændingsoutputtet fra MCUen testes ved tilkobling af en ekstern spændingsforsyning til targetboardet, og herefter måles outputspændingen fra henholdsvis pin VDDA og VDDD.  \newline
 Testen viser, at spændingen på pin VDDA er 3,12~V og på pin VDDD er 3,11~V. Dermed overholder MCUen spændingsintervallerne for de benyttede komponenter. Det kan yderligere antages, at spændingsoutput vil være konstant og overholde kravene, så længe spændingsforsyningen til MCUen overholder de opstillede krav i \secref{krav_spaendingsf}.
