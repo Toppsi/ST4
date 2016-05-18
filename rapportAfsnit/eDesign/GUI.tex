@@ -2,51 +2,49 @@
 \textit{Dette afsnit omhandler design, implementering og test af Graphical User Interface (GUI) til visualisering af de udførte aktiviteter. Først designes GUI til det specifikke formål ud fra dets kravspecifikationer, hvorefter denne kan implementeres. Afslutningsvist bliver GUI testet i forhold til opstillede krav, som beskrevet i \secref{krav_GUI}.}
 
 \subsection{Design}
-GUI benyttes til at motivere børn til en mere aktiv hverdag. Dette gøres ud fra \secref{motivation_boern}, hvor det beskrives at børn motiveres gennem succesoplevelser. GUI designes med henblik på at give børnene et overblik over hvor lang tid de har udført en given aktivitet, og hvor mange point de har optjent som følge af dette. Pointene vægtes ud fra aktivitetstypen og varigheden heraf. 
+GUI benyttes i dette projekt til at motivere børn til en mere aktiv hverdag. Dette gøres ud fra \secref{motivation_boern}, hvor det beskrives, at børn motiveres gennem succesoplevelser. GUI designes med henblik på at give børnene et overblik over, hvor lang tid de har udført en given aktivitet, og hvor mange point de har optjent som følge af dette. Pointene vægtes ud fra aktivitetstypen og varigheden heraf. 
 
-Data fra algoritmerne vedrørende aktiviteterne gang og løb, samt data fra gyroskopet sendes til MATLAB i form af et array med tre variable. Den første variabel består af en identifikation (ID), hvormed det kan identificeres hvorvidt data kommer fra accelerometeret eller gyroskopet, som det ses på \figref{fig:GUI}. ID for accelerometeret er to, mens ID for gyroskopet er tre.\\
-Registreres ID for accelerometeret er der på anden plads i arrayet en peakværdi, som informerer om hvilken aktivitet varigheden bør tillægges. På tredje plads er der et resultat af varighed siden sidst detekterede peak. Er peakværdien mellem 100 og 1100 skal varigheden lægges i tidsvariablen for gang, og er den over 1100 skal den lægges over i tidsvariablen for løb.\\
-Registreres ID for gyroskopet, tillægges anden værdi i arrayet fra mikrokontrolleren i et array for gyroskopet, som er i MATLAB, hvorefter signalbehandlingen, som er beskrevet i \secref{sec:algocykel}. Giver denne værdi over 70\% overføres fire sekunder til tidsvariablen for cykling, eftersom signalbehandlingen er foretaget over samplings af denne varighed. På den tredje plads i arrayet er tallet fire repræsenteret, som ikke bruges i nogen beregninger, denne er til for at mikrokontrollerens array for alle tre aktiviteter er lige lange. 
+Data fra algoritmerne vedrørende aktiviteterne gang og løb samt data fra gyroskopet sendes til MATLAB i form af et array med tre variable. Den første variabel i arrayet er en identifikation (ID). Derved kan det identificeres, hvorvidt data kommer fra accelerometeret eller gyroskopet, som det ses på \figref{fig:GUI}. ID for accelerometeret er 2, mens ID for gyroskopet er 3.\\
+Hvis MATLAB registrerer ID for accelerometeret, findes peakværdien på anden plads i arrayet. Denne værdi gør, at gang og løb kan adskilles og informerer dermed om, hvilken aktivitet tidsvariablen skal lægges til. På tredje plads findes en tidsenhed, som er resultat af varighed siden sidst detekterede peak. Er peakværdien mellem 100 og 1100 skal varigheden lægges i tidsvariablen for gang, og er den over 1100 skal den lægges over i tidsvariablen for løb.\\
+Registreres ID for gyroskopet, påbegyndes en anden form for databehandling i MATLAB, som er beskrevet i \secref{sec:algocykel}. Giver denne værdi over 70\% overføres fire sekunder til tidsvariablen for cykling til GUIen. På første plads i dette array findes 3 tallet, der er ID for gyroskop data. Anden plads indeholder gyroskopdata. På den tredje plads i arrayet er tallet 4 repræsenteret, som ikke bruges i nogen beregninger. Denne er til for at mikrokontrollerens array for alle tre aktiviteter er lige lange. 
 
-Hver aktivitet belønnes forskelligt, da det er væsentligt at få børnene til at løbe og cykle mere, end at gå. Dermed multipliceres tiden for løb med tre, for cykling med to og for gang med en. Pointene visualiseres ud for den enkelte aktivitet, så barnet kan se hvor mange point de har opnået ved udførslen for den enkelte aktivitet igennem en hel dag. For at aktivere børnene hver dag, samles dagens point for alle aktiviteter udført i løbet af dagen. Pointene vises grafisk som en søjle hvormed barnet kan få et overblik over antallet af point fra de forskellige dage, samt hvor stor en del der er opnået ved henholdsvis gang, løb og cykling.  
-
+Hver aktivitet belønnes forskelligt, da cykling og løb har højere intensitetsniveau end gang, hvormed pulsen stiger for disse aktiviteter. Derfor multipliceres tiden for løb med 3, for cykling med 2 og for gang med 1. Pointene visualiseres i GUI ud for den enkelte aktivitet, hvorved barnet kan se, hvor mange point vedkommende har opnået ved udførsel af hver aktivitet igennem en hel dag. For at give barnet bedre visualisering af udført aktivitet over en periode summeres pointene for hver dag og plottes i en graf. Pointene vises grafisk som en søjle med individuelle farver for hver aktivitet, hvormed barnet yderligere kan se hvor stor en del, hver aktivitet har udgjort af dagens aktivitet.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/pseudo_GUI.png}
-	\caption{På figuren ses et flowchart som gennemgår hvorledes resultaterne fra de forskellige algoritmer behandles af GUI.}
+	\caption{På figuren ses et flowchart, der gennemgår hvorledes resultaterne fra de forskellige algoritmer behandles af GUI.}
 	\label{fig:GUI}
 \end{figure}
 
 \subsection{Implementering}
-GUI implementeres ved at anvende MATLABS funktion Graphical User Interface Design Environment (GUIDE). GUIDE er en funktion der gør det muligt at lave en specifik brugerflade med indbyggede funktioner.
+GUI implementeres ved at anvende MATLABs funktion Graphical User Interface Design Environment (GUIDE). GUIDE er en funktion, der gør det muligt at lave en specifik brugerflade med indbyggede funktioner.
 
-Der indsættes en toggle button med teksten START, og når der trykkes på knappen, startes programmet, og teksten bliver ændret til STOP. Når programmet startes indhentes data fra mikrokontrolleren. \\
-Er den første værdi to, registreres mikrokontrollerens array værende data fra accelerometeret. Den tredje værdi videreføres til løkker hvor det tjekkes hvorvidt det er et peak som følge af gang eller løb. Den anden værdi, som er en repræsentation af hvor mange samples der er mellem hvert peak, omregnes til minutter og lægges over i tidsvariablen for den pågældende aktivitet. Omregning udføres som \eqref{eq:tidsvariabel}. \\
-Er den første værdi tre, registreres mikrokontrollerens array værende data fra gyroskopet. Den anden værdi fra mikrokontrolleren lægges derefter over i et array på 4*Fs, og behandles, som beskrevet i \secref{sec:algocykel}. En tidsvariabel på fire sekunder lægges derfor over i cykling, hvis databehandlingen viser at energien omkring 1~Hz er over 70\%. 
-
+Der indsættes en grøn toggle button med teksten START, og når der trykkes på knappen starter programmet. Herefter bliver knappen rød, og teksten ændres til STOP. Når programmet starter indhentes data fra mikrokontrolleren. \\
+Er den første værdi 2, registreres mikrokontrollerens array som værende data fra accelerometeret. Den anden værdi i arrayet er en repræsentation af, hvor mange samples der er mellem hvert peak. Denne skal omregnes til minutter og lægges over i tidsvariablen for den pågældende aktivitet. Omregning udføres som ses i \eqref{eq:tidsvariabel}. Den tredje værdi videreføres til løkker, hvori der tjekkes for, om peakværdien indikerer aktiviteten gang eller løb. \\
+Er den første værdi 3, registreres mikrokontrollerens array som værende data fra gyroskopet. Den anden værdi i arrayet lægges derefter over i et nyt array på 4*Fs og behandles som beskrevet i \secref{sec:algocykel}. En tidsvariabel på fire sekunder lægges derfor over i cykling, hvis databehandlingen viser at energien omkring maks peak summeret med værdien fra $\pm$1~Hz er over 70\%. 
 \begin{equation}
+Tidsvariabel = \frac{Tid}{Samplingsfrekvens \times 0,016667}
 \label{eq:tidsvariabel}
-	tidsvariabel = tid/samplingsfrekvens*0,016667
 \end{equation}
 
-Derudover skal tidsvariablen omregnes til point, ved at multiplicere med de tidligere nævnte værdier opnået som følge af aktivitetstypen, som det ses på \eqref{eq:pointvariabel}. 
+Derudover skal tidsvariablen omregnes til point. Dette gøres ved at multiplicere med de tidligere nævnte værdier opnået som følge af aktivitetstypen. Dette ses i \eqref{eq:pointvariabel}. 
 \begin{equation}
+Pointvariabel = Tidsvariabel \times Aktivitetspoint
 \label{eq:pointvariabel}
-pointvariabel = tidsvariabel*aktivitetspoint
 \end{equation}
 
-Tidsvariablen og pointvariablen for de enkelte aktiviteter lægges over i forskellige static text felter, som tilhører henholdsvis point og tid for de tre forskellige aktivitetstyper. Ydermere er der to forskellige static text, hvor der i den ene samles tidsvariablerne for hele dagen, og i den anden samles point opnået gennem hele dagen. 
-Derudover er der implementeret axis, hvor det er muligt at plotte data. I denne samles point fra cykling, gang og løb, som plottes oven på hinanden, hvormed det er muligt at se hvilke aktiviteter der er udført og hvor mange point de samlet set giver for en dag. 
-I programmet er der aktiveret en timer, hvormed det er muligt at skifte mellem de forskellige dage efter 24 timer. Ved begyndelse på en ny dag nulstilles alle variabler, og der plottes i den næste dag. Slutteligt er der en reset toggle button, som gør det muligt at nulstille alt data. Denne er kun mulig at trykke på når programmet ikke kører. 
+Tidsvariablen og pointvariablen for de enkelte aktiviteter lægges over i forskellige static text felter. Disse tilhører henholdsvis point og tid for de tre forskellige aktivitetstyper. Ydermere er der to forskellige static text, hvor der i den ene samles tidsvariablerne for hele dagen, og i den anden samles point opnået gennem hele dagen. \\
+Der implementeres axis værdier, hvor det er muligt at plotte data. I denne samles point fra cykling, gang og løb, som plottes oven på hinanden med forskellige farver. Dette gør det muligt at se hvilke aktiviteter, der er udført, og hvor mange point de summeret giver for en dag. \\
+I programmet er der aktiveret en timer, hvilket gør det muligt at skifte mellem de forskellige dage efter 24 timer. Ved begyndelse på en ny dag nulstilles alle variabler, og der plottes i den næste dag. Slutteligt er der en reset toggle button, som gør det muligt at nulstille alt data. Denne er kun mulig at trykke på, når programmet ikke kører. 
 
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_GUI}. Kravene beskriver, at GUI skal:
-\begin{enumerate}
+\begin{itemize}
 	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 
-\end{enumerate}
+\end{itemize}
 
-
-Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype og intensitet.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GAMMELT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype.
 Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal trigge de forskellige aktiviteter. For gang indsendes [2 512 1100], for løb indsendes [2 512 1110] og for cykling indsendes [3 (35*sin(2$\pi$)*0,5*(2t))+60) 0]. De forskellige aktiviteter simuleres 60*6 gange, hvormed et simuleret signal på 6 minutter opnås.
 
 Resultatet af GUIs design gør at forskellige aktivitetsformer bidrager til en forskellig mængde point. Ligeledes er varigheden og intensiteten  af aktiviteten afgørende for mængden af opnåede point, på baggrund af deres multiplikationsfaktor, hvilket kan ses i \eqref{eq:pointvariabel}
@@ -63,13 +61,13 @@ Resultatet af GUIs design gør at forskellige aktivitetsformer bidrager til en f
 	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
 	\label{test:GUI}
 \end{table}\vspace{-.5cm}
-På baggrund af testen af GUI, konkluderes det at denne fungerer efter hensigten. De forventede antal point og optalt antal point var nøjagtig det samme. Disse optjente point visualiseres i et søjlediagram som beskrevet i design. Varigheden af hvert aktivitet visualiseres som en værdi, der summeres op hver gang et aktivitetsresultat bliver behandlet. Resultatet af at indsende det simulerede data afspejlet i GUI kan ses på \figref{fig:GUI}.
+På baggrund af testen af GUI, konkluderes det at denne fungerer efter hensigten. De forventede antal point og optalt antal point var nøjagtig det samme. Disse optjente point visualiseres i et søjlediagram som beskrevet i design. Varigheden af hvert aktivitet visualiseres som en værdi, der summeres op hver gang et aktivitetsresultat bliver behandlet. Resultatet af at indsende det simulerede data afspejlet i GUI kan ses på \figref{fig:GUI2}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{figures/cDesign/test_GUI.png}
 	\caption{På figuren ses et udklip af GUI hvor udførslen af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
-	\label{fig:GUI}
+	\label{fig:GUI2}
 \end{figure}
 
 Efterfulgt af design, implementering og test af GUI, kan det konkluderes at denne opfylder kravene heraf. GUI er i stand til at visualisere tidsforbruget samt antal point opnået, for alle aktiviteterne. GUI opdaterede kontinuert i testen hver gang et nyt input blev indsendt, hvoraf kravet vedrørende opdatering af GUI mindst hvert femtende minut, ligeledes er opfyldt.
