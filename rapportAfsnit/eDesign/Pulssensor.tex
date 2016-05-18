@@ -50,7 +50,7 @@ Pulssensoren testes, for at undersøge hvorvidt den designede og implementerede 
 Testen udføres på baggrund af
 de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{puls_krav}. Kravene til pulsedetektering, beskriver at pulsdetekteringen skal:
 \begin{itemize}
-	\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
+	\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af pulsen på 10\%.
 \end{itemize}
 
 Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af et absolut sinussignal. Peaks på det simulerede signal skal repræsentere de systoliske peaks i et pulssignal optaget med en pulssensor.\\
@@ -93,14 +93,11 @@ Pulssensoren og den tilhørende algoritme testes på en person ved en stillesidd
 Resultaterne af den første udførte test, ved en stillesiddende position, fremgår af \tabref{tab:test_pulssystem}.
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{ccc}
-			\hline
-			\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
-			60 & 64,9 & 8,15 \\ \hline
-		\end{tabular}
-	}
+\begin{tabular}{ccc}
+	\hline
+	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ LoggerPro {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ algoritme {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
+	60 & 64,9 & 8,15 \\ \hline
+\end{tabular}
 	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term målt på stillesiddende person. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 8,15\%.}
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
@@ -110,14 +107,11 @@ Anden test undersøger hvorvidt det er muligt at detektere puls under fysisk akt
 Resultaterne af den anden udførte test med gang, fremgår af \tabref{tab:test_puls_aktivitet}.
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{ccc}
-			\hline
-			\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
-			116,5 & 95,70 & 17,85 \\ \hline
-		\end{tabular}
-	}
+	\begin{tabular}{ccc}
+		\hline
+		\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ LoggerPro {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ algoritme {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
+		116,5 & 95,70 & 17,85 \\ \hline
+	\end{tabular}
 	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -17,85\%.}
 	\label{tab:test_puls_aktivitet}
 \end{table} \vspace{-0.5cm}
@@ -127,14 +121,11 @@ Resultaterne af den sidste udførte test, fremgår af \tabref{tab:test_puls_akti
 
 \begin{table}[H]
 	\centering
-	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{ccc}
-			\hline
-			\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
-			154 & 82,6 & -46,4 \\ \hline
-		\end{tabular}
-	}
+	\begin{tabular}{ccc}
+		\hline
+		\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ LoggerPro {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Gennemsnitspuls \\ algoritme {[}BPM{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
+		154 & 82,6 & -46,4 \\ \hline
+	\end{tabular}
 	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -46,4\%.}
 	\label{tab:test_puls_aktivitet_run}
 \end{table} \vspace{-0.5cm}

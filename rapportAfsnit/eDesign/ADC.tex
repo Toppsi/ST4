@@ -20,10 +20,10 @@ Yderligere konfigureres samplingsfrekensen for ADCen, med hensyn til den tid mel
 \subsection{Test}
 ADCen testes i to omgange for at undersøge, om samplingsfrekvensen på inputkanalen sampler pulssensoren korrekt. Derudover testes ADCen for, om den konverterer signalet repræsentativt i forhold til LSB og afvigelser. \\
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_adc}. Kravene beskriver, at ADCen skal:
-\begin{enumerate}
+\begin{itemize}
 	\item Sample pulssensorens output med mindst 35~Hz. Der accepteres ikke en samplingsfrekvens under 35~Hz. 
 	\item Repræsentere det analoge signal med maksimalt 5\% afvigelse. 
-\end{enumerate}
+\end{itemize}
 
 ADCen er konfigureret således, at denne sender samples afsted, så snart disse er klar. Det vil derfor være muligt at oprette en variabel, som tæller op, hver gang der er data klar fra ADCen. Ved at printe denne variabel vil det være muligt at se, hvor mange gange der har været data klar fra ADCen over et givent tidsinterval. Herved vil den respektive samplingsfrekvens kunne bestemmes, med henhold til den konfigurerede samplingsfrekvens på 35~Hz. \\
 Den første test af ADCen undersøger derfor, hvilken samplingsfrekvens som ADCen har. Denne værdi er svarende til samplingsfrekvensen for ADCen. ADCen er konfigureret til en samplingsfrekvens på 35~Hz, hvormed der samples med 35 samples per sekund. Hvis testen har en varighed af 1 minut, vil ADCen antageligt have konverteret følgende antal samples: $35~samples \cdot 60~sekunder = 2100~samples$. \\
@@ -35,13 +35,12 @@ Testen påviser, at ADCen har en egentlig samplingsfrekvens på 35,6~Hz. Jævnf�
 
 Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample 1 single ended kanal men en frekvens på 200~Hz med inputkanalen i pin 2.0. Funktionsgeneratoren kobles til denne inputkanal samt ground på MCUen og indstilles til at indsende et sinussignal med en frekvens på 10~Hz med en peak-to-peak på 4~V. Herefter påbegyndes dataopsamling ved hjælp af MATLAB, som visualiserer signalet fra funktionsgeneratoren. Udover denne datavisualisering, kobles et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte input fra funktionsgeneratoren antages som værende det korrekte output fra funktionsgeneratoren. Resultatet af testen ses i \tabref{tab:ADC_test}.
 \begin{table}[H]
-	\centering
-	\begin{tabular}{cccc}
-		\hline
-		\rowcolor[HTML]{C0C0C0} 
-		Peak-to-peak for inputsignal [V] & \begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ på oscilloskop [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ i MATLAB [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Afvigelse [\%]\end{tabular} \\ \hline
-		4,000 & 4,001 & 3,993 & 0,2000 \\ \hline
-	\end{tabular}
+\centering
+\begin{tabular}{cccc}
+	\hline
+	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak for \\ inputsignal {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak på \\ oscilloskop {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ i MATLAB {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
+	4,000 & 4,001 & 3,993 & 0,2000 \\ \hline
+\end{tabular}
 	\caption{I tabellen ses resultatet fra testen af MCUens AD konvertering af et inputsignal fra en funktionsgenerator.}
 	\label{tab:ADC_test}
 \end{table} \vspace{-.2cm}

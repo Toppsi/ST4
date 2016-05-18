@@ -29,7 +29,7 @@ Afslutningsvis filtreres signalet med et moving average filter, som udglatter si
 Ovenstående signalbehandling giver et signal med peaks, som skal adskilles med tærskelværdier for henholdsvis gang og løb. Førend en værdi for denne tærskelværdi kan fastsættes, skal dataet fra pilotforsøgets omregnes til ICens enhed for outputdata. ICens arbejdsområde er opgivet i bytes, som følge af ICens 16 bits ADC arbejdsområde. Pilotforsøgets data skal derfor omregnes til bytes, idet data fra pilotforsøget er optaget med Shimmer3 som har enheden, $m/s^{2}$. Derfor bliver pilotforsøgets data først omregnet til g, hvorefter denne være omregnes med henhold til opløsningen for den 12 bits ADC som er placeret i Shimmer3. For at gøre dette benyttes accelerometerets sensitivitet, som er 0,012 g/LSB. Data fra shimmer som er omregnet til g, skal divideres med accelerometerets sensitivitet. Outputet fra Shimmer3 og ICen er nu samme enhed, som det fremgår af \eqref{eq:bitsammenhaeng}.
  
 \begin{equation}
-\frac{32 g \times 2^{16}}{32 g \times 2^{12}} = 16
+\frac{32 g \cdot 2^{16}}{32 g \cdot 2^{12}} = 16
 \label{eq:bitsammenhaeng}
 \end{equation}
 
@@ -60,7 +60,7 @@ De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet ov
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Tærskelværdi for ingen fysisk aktivitet & Tærskelværdi for gang & Tærskelværdi for løb \\ \hline
-		x \textless 50 & 50 \textless x \textless 400 & x =\textgreater 400 \\ \hline
+		x \textless~50 & 50 \textless~x~\textless 400 & x~$\geq$~400 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses de tærskelværdier, som for alle forsøgspersoner vil kunne detektere og adskille gang og løb fra hinanden.}
 	\label{tab:faelles_taerskel}
@@ -122,10 +122,10 @@ For at bestemme varigheden mellem hælnedslag  skal antal hælnedslag for løb o
 
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_algoritme}. Kravene beskriver, at algoritmen skal:
-\begin{enumerate}
-	\item Behandle data fra accelerometret således, at hælnedslaget fremstår som et tydelig peak.
-	\item Være i stand til at detektere gang og løb ved hjælp af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
-\end{enumerate}
+\begin{itemize}
+	\item Behandle data fra accelerometret, således hælnedslag fremstår som et markant peak.
+	\item Være i stand til at detektere gang og løb ved brug af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
+\end{itemize}
 Algoritmens funktioner testes individuelt og samlet. Dette gøres ved at indsende et simuleret signal, hvis funktion er at agerer som gang, løb eller ingen aktivitet. Det simulerede signal er et absolut sinussignal med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet bør agerer som gang, løb eller ingen aktivitet. Et sinussignal er valgt, da dette har grundlæggende samme karateristik som et eventuelt gang- eller løbesignal. Der ønskes et ideelt signal, som går over og under tærskelværdierne og derved kan aktivere timeren i algoritmen.
 
 Først testes algoritmens time counter, der giver et udtryk for, om algoritmen detekterer gang korrekt. Der indsendes et absolut sinussignal samplet med 512 Hz, en frekvens på 0,5 Hz og en amplitude på 100. Dette resulterede i tre halvbølger med en amplitude på 100 på 1536 samples. Dette kan ses som den sorte kurve på \figref{fig:testgraf_timecounter}.

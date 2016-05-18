@@ -23,13 +23,13 @@ Der indsættes en grøn toggle button med teksten START, og når der trykkes på
 Er den første værdi 2, registreres mikrokontrollerens array som værende data fra accelerometeret. Den anden værdi i arrayet er en repræsentation af, hvor mange samples der er mellem hvert peak. Denne skal omregnes til minutter og lægges over i tidsvariablen for den pågældende aktivitet. Omregning udføres som ses i \eqref{eq:tidsvariabel}. Den tredje værdi videreføres til løkker, hvori der tjekkes for, om peakværdien indikerer aktiviteten gang eller løb. \\
 Er den første værdi 3, registreres mikrokontrollerens array som værende data fra gyroskopet. Den anden værdi i arrayet lægges derefter over i et nyt array på 4*Fs og behandles som beskrevet i \secref{sec:algocykel}. En tidsvariabel på fire sekunder lægges derfor over i cykling, hvis databehandlingen viser at energien omkring maks peak summeret med værdien fra $\pm$1~Hz er over 70\%. 
 \begin{equation}
-Tidsvariabel = \frac{Tid}{Samplingsfrekvens \times 0,016667}
+Tidsvariabel = \frac{Tid}{Samplingsfrekvens \cdot 0,016667}
 \label{eq:tidsvariabel}
 \end{equation}
 
 Derudover skal tidsvariablen omregnes til point. Dette gøres ved at multiplicere med de tidligere nævnte værdier opnået som følge af aktivitetstypen. Dette ses i \eqref{eq:pointvariabel}. 
 \begin{equation}
-Pointvariabel = Tidsvariabel \times Aktivitetspoint
+Pointvariabel = Tidsvariabel \cdot Aktivitetspoint
 \label{eq:pointvariabel}
 \end{equation}
 
@@ -40,7 +40,7 @@ I programmet er der aktiveret en timer, hvilket gør det muligt at skifte mellem
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_GUI}. Kravene beskriver, at GUI skal:
 \begin{itemize}
-	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 
+	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling.  
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GAMMELT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,9 +54,9 @@ Resultatet af GUIs design gør at forskellige aktivitetsformer bidrager til en f
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Aktivitet 	& Forventet antal point & Optalt antal point \\ \hline
-		Gang 	  6 & 6	 \\ \hline
-		Løb 	 18 & 18 \\ \hline
-		Cykling  12 & 12 \\ \hline
+		Gang 	&  6 & 6  \\ \hline
+		Løb 	& 18 & 18 \\ \hline
+		Cykling & 12 & 12 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
 	\label{test:GUI}
