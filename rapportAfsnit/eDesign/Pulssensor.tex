@@ -46,31 +46,31 @@ Efter nulstilling af de benyttede variabler, bliver time counteren startet igen,
 
 
 \subsection{Test}
-Pulssensoren testes, for at undersøge hvorvidt den designede og implementerede algoritme kan bestemme den rigtige BPM ved et simuleret signal. Ydermere testes sensoren og algoritmen, ved at benytte Vernier, Excercise Heart Rate Monitor, som reference for den BPM som pulssensoren og den tilhørende algoritme bør sende via BLE. \\
-Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{puls_krav}. Kravene til pulsedetektering, beskriver at pulsdetekteringen skal:
-\begin{enumerate}
-\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
-\end{enumerate}
+Pulssensoren testes, for at undersøge hvorvidt den designede og implementerede algoritme kan bestemme den rigtige puls ved et simuleret signal. Ydermere testes sensoren og algoritmen, ved at benytte Verniers Excercise Heart Rate Monitor, som reference for den puls i BPM som pulssensoren og den tilhørende algoritme bør sende via BLE. \\
+Testen udføres på baggrund af
+de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{puls_krav}. Kravene til pulsedetektering, beskriver at pulsdetekteringen skal:
+\begin{itemize}
+	\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af BPM på 10\% fra en reference måling.
+\end{itemize}
 
-
-Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af et absolut sinussignal. Peaks på dette simulerede signal skal repræsentere de systoliske peaks i en pulssignal optages med en pulssensor.\\
-Det simulerede signal sendes ind i MCUen, hvorefter det undersøges hvorvidt time counteren detekterer varigheden mellem overskridelser af algoritmens tærskelværdi på 400. Når pulsen er bestemt, benyttes programmet Real Term til at printe algoritmens slutresultat, som er BPM. \\
-Det indsendte signal er et absolut sinussignal, som har en frekvens på 0,6~Hz og en signalfrekvens på 35~Hz. Ydermere er det array, som indsendes til MCUen, på 992 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
-Der indsendes 992 samples og benyttes en singalfrekvens 35~Hz, hvormed arrayet har en længde på 28,3 sekunder. Idet der er tale om et absolut sinussignal på 0,6~Hz, vil der opstå 34 peaks i det indsendte signal. Dette vil betyde, at algoritmen skal udregne og printe seks værdier for pulsen, idet der er 34 fuldstændige peaks. \\
-Når der er 34 peaks og arrayet har en varighed af 28,3 sekunder, vil der være 0,83 sekunder mellem hver overskridelse af tærskelværdien. Pulsen bestemmes, som det fremgår af \eqref{eq:puls_teori}.
+Algoritmens funktionalitet testes ved at indsende et simuleret signal, som består af et absolut sinussignal. Peaks på det simulerede signal skal repræsentere de systoliske peaks i et pulssignal optaget med en pulssensor.\\
+Det simulerede signal sendes ind i MCUen, hvorefter det undersøges hvorvidt time counteren detekterer varigheden mellem overskridelser af algoritmens tærskelværdi på 400. Når pulsen er bestemt, benyttes programmet Real Term til at printe algoritmens slutresultat, som er pulsen i BPM. \\
+Det indsendte signal har en frekvens på 0,6~Hz og en signals samplingsfrekvens på 35~Hz, samt en længde på 992 samples. Derfor kan det bestemmes hvilken puls, som algoritmen bør printe i Real Term. \\
+Der indsendes 992 samples og benyttes en samplingsfrekvens på 35~Hz, hvormed arrayet har en længde på 28,3 sekunder. Idet der er tale om et absolut sinussignal på 0,6~Hz, vil der opstå 34 peaks i det indsendte signal. Dette vil betyde, at algoritmen skal udregne og printe seks værdier for pulsen, idet der er 34 fuldstændige peaks. \\
+Når der er 34 peaks og arrayet har en varighed af 28,3 sekunder, vil der være 0,83 sekunder mellem hver overskridelse af tærskelværdien, hvormed pulsen bestemmes, som det fremgår af \eqref{eq:puls_teori}:
 \begin{equation}
 \frac{60~sekunder}{Varighed~mellem~samples} = \frac{60~sekunder}{0,83~sekunder} = 72~BPM
 \label{eq:puls_teori}
 \end{equation} 
-Derfor vil det indsendte signal medføre en værdi af 72 BPM. Det er forventeligt, at algoritmen vil beregne og printe en puls, som har en værdi af 72 BPM.
+Derfor vil det indsendte signal medføre en værdi af 72 BPM, hvorfor det er forventeligt, at algoritmen vil beregne og printe en puls, som har en værdi af 72 BPM.
 
-Algoritmen er bestemt til at nulstille sin time counter hver gang der registreres fem tilfælde, hvor en sample er gået under tærskelværdien. Derfor vil algoritmen gøre brug af time counterens optalte antal samples til at bestemme pulsen for den pågældende periode. \\
-Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret fem tilfælde. Ydermere ses det i \figref{fig:test_puls_realterm}, at Real Term har printet de forventede værdi for BPM.
+Algoritmen er bestemt til at nulstille time counteren hver gang der registreres fem tilfælde, hvor en sample er gået under tærskelværdien. Derfor vil algoritmen gøre brug af time counterens optalte antal samples til at bestemme pulsen for den pågældende periode. \\
+Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret fem tilfælde. Ydermere ses det i \figref{fig:test_puls_realterm}, at Real Term har printet de forventede værdier for BPM.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/timecounter_puls_pic.png}
-	\caption{På figuren ses algoritmens timecounter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og genstarte optælling af samples.}
-\label{fig:timecounter_puls_realterm}
+	\caption{På figuren ses algoritmens time counter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og genstarte optælling af samples.}
+	\label{fig:timecounter_puls_realterm}
 \end{figure}
 %\begin{table}[H]
 %	\centering
@@ -88,30 +88,30 @@ Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller in
 	\centering
 	\includegraphics[scale=0.25]{figures/cDesign/Puls_test_realterm.png}
 	\caption{På figuren ses et skærmbillede af de modtagede værdier for BPM som er sendt til Real Term, efter en beregning af BPM i algoritmen.}
-\label{fig:test_puls_realterm}
+	\label{fig:test_puls_realterm}
 \end{figure}
-Det fremgår, at den forventede puls var 72 BPM samt Real Term modtager og printer en værdi tilsvarende. Det kan derfor konkluders, at algoritmen har 0\% afvigelse på et simuleret inputsignal. \\
+Det fremgår, at den forventede puls var 72 BPM samt at Real Term modtager og printer en tilsvarende værdi. Det kan derfor konkluders, at algoritmen har 0\% afvigelse på et simuleret inputsignal. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
-Der foretages yderligere tre tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav. Den ene test er ved en stillesiddende position, og den anden og tredje test er ved fysisk aktivitet i form af henholdsvis gang og løb. Det er gældende for alle tests, at der bliver benyttet en pulsmåler i form af Vernier, Excercise Heart Rate Monitor, som benyttes som reference for den beregnede BPM af algoritmen. Denne pulssensors data vil blive printet i programmet Logger Pro, og systemets BPM vil blive printet i Realterm. \\
-Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens BPM er forholdsvis stabil og uden markante udsving. Testen udføres ved at have pulssensor påført øreflippen, hvoraf MCUen bestemmer BPM og printer denne værdi i Real Term. \\
+Der foretages yderligere tre tests, med henblik på at vurdere hvorvidt pulssensoren opfylder de opstillede krav. Den ene test er ved en stillesiddende position, mens den anden og tredje test er ved fysisk aktivitet i form af henholdsvis gang og løb. Det er gældende for alle tests, at der bliver benyttet en pulsmåler i form af Vernier Excercise Heart Rate Monitor, der benyttes som reference for den beregnede puls af algoritmen. Denne pulssensors data vil blive printet i programmet LoggerPro, og den algoritmebestemte puls vil blive printet i Realterm. \\
+Pulssensoren og den tilhørende algoritme testes på en person ved en stillesiddende aktivitet, hvoraf personens puls er forholdsvis stabil og uden markante udsving. Testen udføres ved at have pulssensor påført øreflippen, hvoraf MCUen bestemmer puls i BPM og printer denne værdi i Real Term. \\
 Resultaterne af den første udførte test, ved en stillesiddende position, fremgår af \tabref{tab:test_pulssystem}.
 \begin{table}[H]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{ccc}
-	\hline
-	\rowcolor[HTML]{C0C0C0} 
-	Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
-	60 & 64,9 & 8,15 \\ \hline
-\end{tabular}
-}
-	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term målt på stillesiddende person. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 8,15\%.}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccc}
+			\hline
+			\rowcolor[HTML]{C0C0C0} 
+			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
+			60 & 64,9 & 8,15 \\ \hline
+		\end{tabular}
+	}
+	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term målt på stillesiddende person. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på 8,15\%.}
 	\label{tab:test_pulssystem}
 \end{table} \vspace{-0.5cm}
 Det fremgår i \tabref{tab:test_pulssystem}, at testen af pulssensoren og den tilhørende algoritme viser en gennemsnitlig afvigelse fra referenceværdien på 8,15\%. Pulssensoren og den tilhørende algoritme overholder dermed første krav til pulsdetekteringen, ved stillesiddende position.
 
-Anden test undersøger hvorvidt det er muligt at detektere BPM under fysisk aktivitet. Denne test indebærer en pulsmåling under fysisk aktivitet i form af gang ved 4,8~km/t på et løbebånd.\\
+Anden test undersøger hvorvidt det er muligt at detektere puls under fysisk aktivitet. Denne test indebærer en pulsmåling under fysisk aktivitet i form af gang ved 4,8~km/t på et løbebånd.\\
 Resultaterne af den anden udførte test med gang, fremgår af \tabref{tab:test_puls_aktivitet}.
 \begin{table}[H]
 	\centering
@@ -119,11 +119,11 @@ Resultaterne af den anden udførte test med gang, fremgår af \tabref{tab:test_p
 		\begin{tabular}{ccc}
 			\hline
 			\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
+			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
 			116,5 & 95,70 & 17,85 \\ \hline
 		\end{tabular}
 	}
-	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -17,85\%.}
+	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -17,85\%.}
 	\label{tab:test_puls_aktivitet}
 \end{table} \vspace{-0.5cm}
 Det fremgår i \tabref{tab:test_puls_aktivitet}, at testen af pulssensoren og den tilhørende algoritme ved 4,8~km/t viser en gennemsnitlig afvigelse fra referenceværdien på -17,85\%. Pulsdetekteringen ved gang overholder derfor ikke det opstillede krav for pulsdetektering.\\
@@ -136,13 +136,14 @@ Resultaterne af den sidste udførte test, fremgår af \tabref{tab:test_puls_akti
 		\begin{tabular}{ccc}
 			\hline
 			\rowcolor[HTML]{C0C0C0} 
-			Gennemsnitlig puls LoggerPro [BPM] & Gennemsnitlig puls algoritme [BPM] & Afvigelse [\%] \\ \hline
+			Gennemsnitspuls LoggerPro [BPM] & Gennemsnitspuls algoritme [BPM] & Afvigelse [\%] \\ \hline
 			154 & 82,6 & -46,4 \\ \hline
 		\end{tabular}
 	}
-	\caption{I tabellen ses det den gennemsnitlige puls fra Logger Pro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -46,4\%.}
+	\caption{I tabellen ses det den gennemsnitlige puls fra LoggerPro og Real Term ved gang. Det fremgår, at pulssensoren og den tilhørende algoritme har en afvigelse på -46,4\%.}
 	\label{tab:test_puls_aktivitet_run}
 \end{table} \vspace{-0.5cm}
 Det fremgår i \tabref{tab:test_puls_aktivitet_run}, at testen af pulssensoren og den tilhørende algoritme ved 11,3~km/t viser en gennemsnitlig afvigelse fra referenceværdien på -46,4\%. Pulsdetekteringen ved løb overholder derfor ikke det opstillede krav for pulsdetektering.
 
-Pulsdetektering er testet med henhold til opstillede krav. Det fremgår af testen, at pulsdetektering er funktionel ved et simuleret input samt ved stillesiddende positioner. Dog er afvigelsen for pulsdetektering ved henholdsvis gang og løb større end den tilladte afvigelse. Det kan derfor konkluderes, at pulsdetektering ikke er mulig at benytte ved fysisk aktivitet, som resultat af tilgængeligt materiale. Pulsdetekteringen vil derfor ikke indgå yderligere i rapporten, som følge af testens afvigelser.
+%Pulsdetektering er testet med henhold til opstillede krav. 
+Det fremgår af testene, at pulsdetektering er funktionel ved et simuleret input samt ved stillesiddende positioner. Dog er afvigelsen for pulsdetektering ved henholdsvis gang og løb større end den tilladte afvigelse. Det kan derfor konkluderes, at pulsdetektering ikke er mulig at benytte ved fysisk aktivitet, som resultat af tilgængeligt materiale. Pulsdetekteringen vil derfor ikke indgå yderligere i rapporten, som følge af testens afvigelser.
