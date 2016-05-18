@@ -72,24 +72,19 @@ Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_pu
 	\caption{På figuren ses algoritmens time counter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og genstarte optælling af samples.}
 	\label{fig:timecounter_puls_realterm}
 \end{figure}
-%\begin{table}[H]
-%	\centering
-%	\begin{tabular}{ccc}
-%		\hline
-%		\rowcolor[HTML]{C0C0C0} 
-%		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
-%		72 - 72 - 72 - 72 - 72 - 72         & 72 - 72 - 72 - 72 - 72 - 72         & 0 - 0 - 0 - 0 - 0 - 0 \\ \hline
-%	\end{tabular}
-%	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er resultatet fra Real Term.}
-%	\label{fig:test_puls_realterm}
-%\end{table} \vspace{-0.5cm}
-Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller indtil fem peaks er detekteret. Herefter beregner algoritmen pulsen ud fra det antal samples, som findes inden for disse fem peaksdetekteringer. Herefter printes pulsen i Realterm, som det fremgår af \figref{fig:test_puls_realterm}.
-\begin{figure}[H]
+
+Det fremgår af \figref{fig:timecounter_puls_realterm}, at algoritmen tæller indtil fem peaks er detekteret. Herefter beregner algoritmen pulsen ud fra det antal samples, som findes inden for disse fem peaksdetekteringer. Herefter printes pulsen i Realterm, som det fremgår af \tabref{tab:test_puls_realterm}.
+\begin{table}[H]
 	\centering
-	\includegraphics[scale=0.25]{figures/cDesign/Puls_test_realterm.png}
-	\caption{På figuren ses et skærmbillede af de modtagede værdier for BPM som er sendt til Real Term, efter en beregning af BPM i algoritmen.}
-	\label{fig:test_puls_realterm}
-\end{figure}
+	\begin{tabular}{ccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forventet værdi [BPM] & Modtaget værdi [BPM] & Afvigelse [\%]\\ \hline
+		72 - 72 - 72 - 72 - 72 - 72         & 72 - 72 - 72 - 72 - 72 - 72         & 0 - 0 - 0 - 0 - 0 - 0 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses resultaterne fra algoritmens beregning af pulsen på et simuleret inputsignal. Tabellens kolonne; Modtaget værdi, er værdierne printet i Real Term.}
+	\label{tab:test_puls_realterm}
+\end{table} \vspace{-0.5cm}
 Det fremgår, at den forventede puls var 72 BPM samt at Real Term modtager og printer en tilsvarende værdi. Det kan derfor konkluders, at algoritmen har 0\% afvigelse på et simuleret inputsignal. \\
 Det kan derfor konkluderes, at pulssensoren og den tilhørende algoritme fungerer som tiltænkt ved benyttelse af et simuleret inputsignal. 
 
