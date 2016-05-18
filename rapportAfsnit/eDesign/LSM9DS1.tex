@@ -83,14 +83,14 @@ ICens accelerometer har en sensitivitet på 0,000732~g per LSB \citep{STMicroele
 
 Det testes hvilket output y-aksen har, når sensoren er placeret således y-aksen er i horisontal retning. Ved denne placering bør sensoren teoretisk have et output svarende til 0~g. Efterfølgende placeres sensoren med y-aksen i vertikal retning, hvilket teoretisk burde have en påvirkning på $\pm$1~g. Inden målingen testes fladen der måles på med vatterpas, for at sikre, at kun den ønskede akse påvirkedes i vertikal retning. I \tabref{tab:test_sensor} ses resultatet fra testen. 
 \begin{table}[H]
-	\centering
-	\begin{tabular}{cccc} \hline
-		\rowcolor[HTML]{C0C0C0} 
-		Teoretisk påvirkning {[}g{]} & \begin{tabular}[c]{@{}c@{}} Output fra MCU \\ {[}LSB{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Output fra MCU \\ {[}g{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Afvigelse \\ {[}\%{]} \end{tabular} \\ \hline
-		0 & 19 & 0,014 & 1,4\\ \hline
-		+1 & 1368 & 1,003 g & 0,3\\ \hline
-		-1  & -1356 & -0,993 g & -0,7\\ \hline
-	\end{tabular}%
+\centering
+\begin{tabular}{cccc}
+	\hline
+	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Teoretisk påvirkning \\ {[}g{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Output fra MCU \\ {[}LSB{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Output fra MCU \\ {[}g{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
+	0 & 19 & 0,014 & 1,4 \\ \hline
+	+1 & 1368 & 1,003 & 0,3 \\ \hline
+	-1 & -1356 & -0,993 & -0,7 \\ \hline
+\end{tabular}
 	\caption{I tabellen ses resultatet fra testen af accelerometerets y-akse. For at omregne MCUens output fra LSB til g påvirkning multipliceres outputtet med accelerometerets sensitivitet.}
 	\label{tab:test_sensor}
 \end{table}\vspace{-0.2cm}

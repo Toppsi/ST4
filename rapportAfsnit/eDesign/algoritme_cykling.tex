@@ -82,13 +82,12 @@ Resultatet af denne test ses illustreret på \figref{fig:sim_gyro}, hvor de simu
 \end{figure}\vspace{-.5cm}
 Som forventet ses det på \figref{fig:sim_gyro}, at FFTen for vedrørende det simulerede signal af cykling centreres omkring 1~Hz, mens signalerne for gang og løb centreres omkring 0,5~Hz, 1~Hz og 2~Hz. Da det er forskelligt om de tre simulerede signaler centrerer sig omkring én eller flere frekvenser forventes det, at spredningen af signalets energi varierer for de tre aktiviteter, hvilket den tredje test vil undersøge. Heraf forventes det at spredningen af energien ved cykling er markant mindre end spredningen af energi ved gang og løb. Som beskrevet i \secref{design_cykling} forventes minimum 70\% af energien ved cykling, at være indenfor $\pm$1~Hz omkring den maksimale peak af FFTen, hvorimod det ved gang og løb forventes at være markant mindre. 
 \begin{table}[H]
-	\centering
-	\begin{tabular}{ccc}
-		\hline
-		\rowcolor[HTML]{C0C0C0} 
-		Procentdel af totalen for gang {[}\%{]} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for løb {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for cykling {[}\%{]} \end{tabular} \\ \hline
-		56,85\% & 42,46\% & 99,28\% \\ \hline	
-	\end{tabular}
+\centering
+\begin{tabular}{ccc}
+	\hline
+	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Procentdel af totalen \\ for gang [\%]\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Procentdel af totalen \\ for løb [\%]\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Procentdel af totalen \\ for cykling [\%]\end{tabular} \\ \hline
+	56,85 & 42,46 & 99,28 \\ \hline
+\end{tabular}
 	\caption{I tabellen ses hvor mange procent den maksimale frekvensmagnitude udgør af 1-20~Hz ved simuleringerne for gang, løb og cykling.}
 	\label{tab:sim_procent}
 \end{table}\vspace{-0.5cm}
