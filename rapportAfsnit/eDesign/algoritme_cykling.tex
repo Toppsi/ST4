@@ -57,36 +57,30 @@ Algoritmen henter low- og high byte fra ICens gyroskop outputdata, hvorefter hve
 \end{figure} 
 Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen af dataet ved brug at formlerne i \figref{fig:matlab_cykling}. Hvis cykling detekteres, bliver en varighed på fire sekunder videresendt til udført cykling i GUI. 
 
-
 \subsection{Test}
-Algoritmens funktioner testes individuelt og samlet ligeledes som med algoritmen for gang og løb. Dette gøres for at be- eller afkræfte om algoritmen lever op til de opstillede krav i \secref{krav_algoritme}, som lyder at algoritmen skal:
+Algoritmens funktioner testes individuelt og samlet. Dette gøres for at be- eller afkræfte om algoritmen lever op til de opstillede krav i \secref{krav_algoritme}, som lyder at algoritmen skal:
 \begin{itemize}
 	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
 	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
 \end{itemize}
 
-Måden hvorpå dette testes er ved at indsende et simuleret signal, hvis funktion er at agerer som gang, løb eller cykling. De simulerede signaler for gang og løb er genereret som kombinationer af absolutte sinussignaler med varierende amplitude. Signalet for cykling er en sinus forskudt på y-aksen, således at disse tilnærmelsesvis ligner signalerne fra pilotforsøget.
-
-Det første som testes, er algoritmes 4 sekunders counter. Måden hvorpå denne testes er ved at indsende et sinussignal med en frekvens på 1~Hz og samplet med 512~Hz, og se at counteren tæller op til 4 sekunders data, hvorefter den starter forfra. Dette illustreres på \figref{fig:sim_count}, hvor en sinus plottes med rødt, og counteren, som er plottet med sort, tæller fra 0 - 4 sekunder, mens sinuskurven udfører 4 svingninger, hvilket var forventet, da signalet har en frekvens på 1~Hz. Samtidig ses det også at de 4 sekunder svarer til 2048 samples, hvilket stemmer overens, da samplingsfrekvensen er 512~Hz. 
-
+Det første som testes, er algoritmes fire sekunders time counter. Måden hvorpå denne testes er ved at plotte resultatet af MATLABs time counter. Det undersøges hvorvidt time counteren tæller op til fire sekunder, når der er modtaget fire sekunders data. Hvis dette er tilfældet skal time counteren nulstilles. Dette testes ved at indsende 2048 samples, hvilket svarer til en fire sekunder med en samplingsfrekvens på 512.  
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{figures/cDesign/sim_count_sinus.png}
-	\caption{På figuren ses algoritmens counter plottet med sort og sinussignalet plottet i baggrunden med rødt. Det ses at counteren tæller op til 4~sekunder og derefter starter forfra, samtidig ses det at de 4~sekunder som counteren tæller svarer til 4 svingninger af sinussignalet, hvilket stemmer overens, da signalet har en frekvens på 1~Hz.}
+	\includegraphics[width=1.0\textwidth]{figures/cDesign/sim_counter.png}
+	\caption{På figuren ses algoritmens time counter plottet med rød. Det ses at time counteren tæller op til fire sekunder og derefter nulstilles og starter forfra.}
 	\label{fig:sim_count}
 \end{figure}
-
-
-Den anden test som laves, omhandler hvorledes FFTen stemmer overens med forventningerne hertil. Da sinussignalet som repræsenterer cykling har en frekvens på 1~Hz, forventes det at plottet for FFTen illustrerer at dette signal danner en peak omkring 1~Hz. Ved gang og løb, som begge er kombinationer af absolutte sinussignaler med varierende amplituder, forventes det at FFTen for disse centrerer sig omkring flere forskellige frekvenser. Resultatet af denne test ses illustreret på \figref{fig:sim_gryo}, hvor de simulerede rå signaler ses på øverste graf, mens FFTen for signalerne ses på nederste graf.
+Som forventet tæller time counteren til 4 sekunder bestående af 2048 samples, hvorefter denne nulstilles.\\
+Den anden test, omhandler hvorledes FFTen stemmer overens med forventningerne hertil. Der indsendes et sinussignal som skal repræsenterer cykling med en frekvens på 1~Hz. For henholdsvis gang og løb indsendes der et absolut sinussignal med varierende frekvens og amplitude. Forventningen af resultatet bør medføre at energien af det simulerede signal vedrørende cykling er fordelt omkring 1 Hz, og de resterende er spredt over flere. \\
+Resultatet af denne test ses illustreret på \figref{fig:sim_gyro}, hvor de simulerede rå signaler ses på øverste graf, mens FFTen for signalerne ses på nederste graf.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{figures/cDesign/sim_gyro.png}
+	\includegraphics[width=.7\textwidth]{figures/cDesign/sim_gyro.png}
 	\caption{På figurens øverste graf ses de simulerede rå signaler for gang, løb og cykling, hvorefter den nederste graf illustrer signalerne efter de er blevet databehandlet.}
 	\label{fig:sim_gyro}
-\end{figure}
-Som forventet ses det på \figref{fig:sim_gyro}, at FFTen for cyklingssignalet centreres omkring 1~Hz, mens signalerne for gang og løb centreres omkring 0,5~Hz, 1~Hz og 2~Hz.\\ 
-Da det er forskelligt om de tre signaler centrerer sig omkring én eller flere frekvenser forventes det, at spredningen af signalets energi varierer for de tre aktiviteter, hvilket den tredje test vil undersøge. Heraf forventes det at spredningen af energien ved cykling er markant mindre end spredningen af energi ved gang og løb. Som beskrevet i \secref{design_cykling} forventes minimum 70\% af energien ved cykling, at være indenfor $\pm$1~Hz omkring den maksimale peak af FFTen, hvorimod det ved gang og løb forventes at være markant mindre. 
-
+\end{figure}\vspace{-.5cm}
+Som forventet ses det på \figref{fig:sim_gyro}, at FFTen for vedrørende det simulerede signal af cykling centreres omkring 1~Hz, mens signalerne for gang og løb centreres omkring 0,5~Hz, 1~Hz og 2~Hz. Da det er forskelligt om de tre simulerede signaler centrerer sig omkring én eller flere frekvenser forventes det, at spredningen af signalets energi varierer for de tre aktiviteter, hvilket den tredje test vil undersøge. Heraf forventes det at spredningen af energien ved cykling er markant mindre end spredningen af energi ved gang og løb. Som beskrevet i \secref{design_cykling} forventes minimum 70\% af energien ved cykling, at være indenfor $\pm$1~Hz omkring den maksimale peak af FFTen, hvorimod det ved gang og løb forventes at være markant mindre. 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -98,17 +92,14 @@ Da det er forskelligt om de tre signaler centrerer sig omkring én eller flere f
 	\caption{I tabellen ses hvor mange procent den maksimale frekvensmagnitude udgør af 1-20~Hz ved simuleringerne for gang, løb og cykling.}
 	\label{tab:sim_procent}
 \end{table}\vspace{-0.5cm}
-\fxnote{opg: se om vi kan få den første boks (med \% for gang) til at stå på to linjer.}
-
-Som det fremgår af \tabref{tab:sim_procent} udgør energien i den maksimale frekvensamplitude markant mere af den samlede energi ved cykling end ved gang og løb. Det bekræftes derfor at cykling bør kunne registreres ved 70\% af signalet, da det i simuleringen udgør 99,28\%, mens gang og løb maksimalt udgør 56,85\%. 
-
-Afslutningsvist testes det om tærskelværdien på 70\% vil kunne detektere og gemme de 4 sekunders cykling som er samplet, mens den ikke registrerer gang eller løb. Det testes ligeledes om algoritmen kan detektere cykling i mere end 4 sekunder, ved at der returneres antal gange der er registreret 4 sekunders cykling samt en samlet tidsvariabel. Disse værdier er illustreret i \figref{fig:sim_n_cykling}, men der ved gang og løb bliver printet en tekst med "Ikke cykling" i MATLAB.
-
+Som det fremgår af \tabref{tab:sim_procent} udgør procentdelen af totalen vedrørende cykling markant mere af den samlede energi end ved gang og løb. Dette bekræfter dermed kravet, at algoritmen bør kunne detektere og adskille cykling fra gang og løb som resultat af procentfordelingen af frekvensdomænet. Dette er tilfældet hvis data afspejles som det simulerede signal samt data fra pilotforsøget. \\
+Afslutningsvist testes algoritmens funktionalitet omhandlende dets resultat ved behandling af et signal som overskrider tærskelværdien på 70\%. Det undersøges om der gemmes 4 sekunder til varigheden for udført cykling, som resultat af hver detektering.
+%Det testes om algoritmen kan detektere cykling i mere end 4 sekunder, ved at der returneres antal gange der er registreret 4 sekunders cykling samt en samlet tidsvariabel. Disse værdier er illustreret i \figref{fig:sim_n_cykling}, men der ved gang og løb bliver printet en tekst med "Ikke cykling" i MATLAB.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.9\textwidth]{figures/cDesign/sim_n_c.png}
+	\includegraphics[width=.7\textwidth]{figures/cDesign/sim_n_c.png}
 	\caption{På figuren ses en graf for hvor mange sekunder der er registreret cykling, som funktion af antal gange det er registreret.}
 	\label{fig:sim_n_cykling}
 \end{figure}
 
-Disse værdier vil blive brugt i GUIen til at repræsentere brugerens cyklingsaktivitet. Mens de signaler som ikke opfattes som cykling, vil blive kasseret, da gang og løb repræsenteres ved hjælp af accelerometerdata som beskrevet i \secref{sec:algogangloeb}. 
+Disse værdier vil blive brugt i GUI til at repræsentere brugerens cyklingsaktivitet. Mens de signaler som ikke opfattes som cykling, vil blive kasseret, da gang og løb repræsenteres ved hjælp af accelerometerdata som beskrevet i \secref{sec:algogangloeb}. 
