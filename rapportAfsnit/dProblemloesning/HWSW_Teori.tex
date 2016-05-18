@@ -12,7 +12,7 @@ Denne mikroprocessor fungerer som hovedcomputeren og kodes til at bestemme, hvad
 På undersiden, target board delen af MCUen, er en PRoC med Bluetooth Low Energy (BLE) placeret. Denne PRoC har ikke samme antal muligheder for afbenyttelse i forhold til PSoC 4200M, idet BLE kræver meget plads og ydeevne for at være funktionel. \citep{CYPRESS2016PSoC,Semiconductor2016,CYPRESS2016Cortexm0}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.15]{figures/bProblemloesning/PSoC3.png}
+	\includegraphics[scale=0.12]{figures/bProblemloesning/PSoC3.png}
 	\caption{MCUen, CY8CKIT-043 PSoC 4 M-Series Prototyping Kit, er vist på forsiden og undersiden. MCUens PSoC, LP5 og 4200M, samt PRoC BLE er markeret med gul. Mikrokontrolleren kan knækkes over i to: KitProg board og target board, hvilket er markeret med en gul streg på figuren. Kontakten til højre på forsiden af target boardet skal trykkes ned for, at PRoC programmeres på istedet for PSoC 4200M. \citep{CYPRESS2016PSoC,Semiconductor2016}}
 	\label{fig:PSoC}
 \end{figure}\vspace{-0.2cm}
@@ -30,7 +30,7 @@ En digital ramp ADC tæller op fra 0 V for at finde det rette niveau for inputsp
 Et eksempel på en SAR ADCs virkemåde ses på \figref{fig:SAR_ADC}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/bProblemloesning/SAR_ADC.png}
+	\includegraphics[scale=0.52]{figures/bProblemloesning/SAR_ADC.png}
 	\caption{På figuren ses en 4 bits SAR ADCs virkemåde. Vin har i dette tilfælde en fast værdi men kan skifte mange gange i sekundet. Vref indstilles til halvdelen af arbejdsområdet på 1 V, hvor komperatoren vurderer at inputsignalet er større end Vref, hvorfor første betydende tal er 1. Derefter lægges en fjerdedel af arbejdsområdet til Vref og komparatoren vurderer igen. Dette fortsætter til alle fire bits er fundet, hvorefter det analoge signal er konverteret til digitalt.}
 	\label{fig:SAR_ADC}
 \end{figure}\vspace{-0.5cm}
