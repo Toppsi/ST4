@@ -35,13 +35,13 @@ Testen viser, at ved en varighed på 60 sekunder, da har ADCen konverteret 2134 
 \end{equation}
 Testen påviser, at ADCen har en egentlig samplingsfrekvens på 35,6~Hz. Jævnfør kravene for samplingsfrekvensen for ADcen, da accepteres en samplingsfrekvens højere end 35~Hz. Derfor påviser testen, at den konfigurerede samplingsfrekvens for ADCen kan accepteres. 
 
-Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample 1 single ended kanal men en frekvens på 200~Hz med inputkanalen i 2.0. Funktionsgeneratoren kobles til dette indput samt ground på MCUen og indstilles til at indsende et sinussignal med en frekvens på 10~Hz og en amplitude på 4~V. Herefter påbegyndes dataopsamling ved hjælp af MATLAB, som visualiserer signalet fra funktionsgeneratoren. Udover denne datavisualisering, kobles et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte input fra funktionsgeneratoren antages som værende det korrekte output fra funktionsgeneratoren. Resultatet af testen ses i \tabref{tab:ADC_test}.
+Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample 1 single ended kanal men en frekvens på 200~Hz med inputkanalen i 2.0. Funktionsgeneratoren kobles til dette indput samt ground på MCUen og indstilles til at indsende et sinussignal med en frekvens på 10~Hz og en peak-to-peak på 4~V. Herefter påbegyndes dataopsamling ved hjælp af MATLAB, som visualiserer signalet fra funktionsgeneratoren. Udover denne datavisualisering, kobles et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte input fra funktionsgeneratoren antages som værende det korrekte output fra funktionsgeneratoren. Resultatet af testen ses i \tabref{tab:ADC_test}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{cccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Amplitude på inputsignal [V] & \begin{tabular}[c]{@{}c@{}}Amplitude målt \\ på oscilloskop [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Amplitude målt \\ i MATLAB [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Afvigelse [\%]\end{tabular} \\ \hline
+		Peak-to-peak for inputsignal [V] & \begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ på oscilloskop [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ i MATLAB [V]\end{tabular} & \begin{tabular}[c]{@{}c@{}}Afvigelse [\%]\end{tabular} \\ \hline
 		4,000 & 4,001 & 3,993 & 0,2000 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses resultatet fra testen af MCUens AD konvertering af et inputsignal fra en funktionsgenerator.}
