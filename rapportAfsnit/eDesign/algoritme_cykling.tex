@@ -1,5 +1,5 @@
 \section{Algoritme til detektering af cykling}\label{sec:algocykel}
-\textit{Dette afsnit omhandler design, implementering og test af algoritmen til detektering af aktiviteten cykling. Først designes algoritmen til det specifikke formål, hvorefter den kan implementeres. Afslutningsvist bliver algoritmen testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
+\textit{Dette afsnit omhandler design, implementering og test af algoritmen til detektering af cykling. Først designes algoritmen til det specifikke formål, hvorefter den kan implementeres. Afslutningsvist bliver algoritmen testet i forhold til opstillede krav i \secref{krav_algoritme}.} 
 
 For at kunne detektere cykling og adskille dette signal fra gang og løb benyttes et gyroskop, som er beskrevet i \secref{sec_design_LSM9DS1}. Signalet herfra skal databehandles, således det opfattes anderledes af GUIen i det samlede system og derved opfanges som aktiviteten cykling. 
 
@@ -16,15 +16,15 @@ Data fra pilotforsøget er behandlet med ovenstående signalbehandling. Dette er
 Efter ovenstående signalbehandlingen implementeres signalgenkendelsen, som består af først at finde den maksimale magnitude og den tilhørende frekvens. Resultatet heraf er aktivitetens dominerende frekvens. Herefter summeres værdierne for den maksimale magnitude ved at summere intervallet $\pm$1~Hz omkring frekvens heraf. Hertil summeres også værdierne for FFTen fra 1 til 20~Hz. Afslutningsvist bestemmes hvor stor en procentdel summeringen for den maksimale magnitude udgør af summeringen for 1 til 20~Hz.\\ 
 \begin{table}[H]
 	\centering
-		\begin{tabular}{cccc}
-			\hline
-			\rowcolor[HTML]{C0C0C0} 
-			Forsøgsperson & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for gang {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for løb {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for cykling {[}\%{]} \end{tabular} \\ \hline
-			F1 & 41,0 & 38,6 & 85,5 \\ \hline	
-			F2 & 48,5 & 51,5 & 91,9 \\ \hline	
-			F3 & 35,9 & 42,8 & 85,0 \\ \hline
-			F4 & 38,7 & 60,6 & 91,6 \\ \hline
-		\end{tabular}
+	\begin{tabular}{cccc}
+		\hline
+		\rowcolor[HTML]{C0C0C0} 
+		Forsøgsperson & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for gang {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for løb {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for cykling {[}\%{]} \end{tabular} \\ \hline
+		F1 & 41,0 & 38,6 & 85,5 \\ \hline	
+		F2 & 48,5 & 51,5 & 91,9 \\ \hline	
+		F3 & 35,9 & 42,8 & 85,0 \\ \hline
+		F4 & 38,7 & 60,6 & 91,6 \\ \hline
+	\end{tabular}
 	\caption{I tabellen ses hvor stor en procentdel summeringen vedrørende den maksimale magnitude udgør af hele FFTen. Dette er gjort for både gang, løb og cykling med henblik på bestemmelse af en tærskelværdi.}
 	\label{tab:individuel_procent}
 \end{table}\vspace{-0.5cm}
@@ -48,7 +48,7 @@ Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i d
 	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere i en kommende figur.}
 	\label{fig:basic_cykling}
 \end{figure}
-Algoritmen henter low- og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB. Denne gemmer 4 sekunders data i et arrary og påbegynder signalbehandlingen. Resultatet af signalbehandlingen medfører en procentvis værdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
+Algoritmen henter low- og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB. Heri gemmes 4 sekunders data i et array og signalbehandlingen påbegyndes. Resultatet af signalbehandlingen er en procentværdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/algoritme_matlab_cykling.png}
@@ -59,20 +59,23 @@ Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen 
 
 
 \subsection{Test}
-%Algoritmen til detektion af cykling skal testes for følgende krav fra \secref{krav_algoritme}:
-%\begin{itemize}
-%	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
-%	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af tærskelværdier for peakværdien eller procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
-%\end{itemize}
 Algoritmens funktioner testes individuelt og samlet ligeledes som med algoritmen for gang og løb. Dette gøres for at be- eller afkræfte om algoritmen lever op til de opstillede krav i \secref{krav_algoritme}, som lyder at algoritmen skal:
 \begin{itemize}
 	\item Behandle data fra gyroskopet således, at frekvensindholdet fra signalet fremstår.
-	\item Være i stand til at detektere henholdsvis gang, løb og cykling ved hjælp af tærskelværdier for peakværdien eller procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille de tre aktivitetsformer.
+	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Der accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
 \end{itemize}
 
 Måden hvorpå dette testes er ved at indsende et simuleret signal, hvis funktion er at agerer som gang, løb eller cykling. De simulerede signaler for gang og løb er genereret som kombinationer af absolutte sinussignaler med varierende amplitude. Signalet for cykling er en sinus forskudt på y-aksen, således at disse tilnærmelsesvis ligner signalerne fra pilotforsøget.
 
-Det første som testes, er algoritmes 4 sekunders tæller... \fxnote{skrives færdig når testen virker.}
+Det første som testes, er algoritmes 4 sekunders counter. Måden hvorpå denne testes er ved at indsende et sinussignal med en frekvens på 1~Hz og samplet med 512~Hz, og se at counteren tæller op til 4 sekunders data, hvorefter den starter forfra. Dette illustreres på \figref{fig:sim_count}, hvor en sinus plottes med rødt, og counteren, som er plottet med sort, tæller fra 0 - 4 sekunder, mens sinuskurven udfører 4 svingninger, hvilket var forventet, da signalet har en frekvens på 1~Hz. Samtidig ses det også at de 4 sekunder svarer til 2048 samples, hvilket stemmer overens, da samplingsfrekvensen er 512~Hz. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{figures/cDesign/sim_count_sinus.png}
+	\caption{På figuren ses algoritmens counter plottet med sort og sinussignalet plottet i baggrunden med rødt. Det ses at counteren tæller op til 4~sekunder og derefter starter forfra, samtidig ses det at de 4~sekunder som counteren tæller svarer til 4 svingninger af sinussignalet, hvilket stemmer overens, da signalet har en frekvens på 1~Hz.}
+	\label{fig:sim_count}
+\end{figure}
+
 
 Den anden test som laves, omhandler hvorledes FFTen stemmer overens med forventningerne hertil. Da sinussignalet som repræsenterer cykling har en frekvens på 1~Hz, forventes det at plottet for FFTen illustrerer at dette signal danner en peak omkring 1~Hz. Ved gang og løb, som begge er kombinationer af absolutte sinussignaler med varierende amplituder, forventes det at FFTen for disse centrerer sig omkring flere forskellige frekvenser. Resultatet af denne test ses illustreret på \figref{fig:sim_gryo}, hvor de simulerede rå signaler ses på øverste graf, mens FFTen for signalerne ses på nederste graf.
 \begin{figure}[H]
@@ -89,14 +92,23 @@ Da det er forskelligt om de tre signaler centrerer sig omkring én eller flere f
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		\begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for gang {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for løb {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for cykling {[}\%{]} \end{tabular} \\ \hline
+		Procentdel af totalen for gang {[}\%{]} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for løb {[}\%{]} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Procentdel af totalen \\ for cykling {[}\%{]} \end{tabular} \\ \hline
 		56,85\% & 42,46\% & 99,28\% \\ \hline	
 	\end{tabular}
 	\caption{I tabellen ses hvor mange procent den maksimale frekvensmagnitude udgør af 1-20~Hz ved simuleringerne for gang, løb og cykling.}
 	\label{tab:sim_procent}
 \end{table}\vspace{-0.5cm}
+\fxnote{opg: se om vi kan få den første boks (med \% for gang) til at stå på to linjer.}
 
 Som det fremgår af \tabref{tab:sim_procent} udgør energien i den maksimale frekvensamplitude markant mere af den samlede energi ved cykling end ved gang og løb. Det bekræftes derfor at cykling bør kunne registreres ved 70\% af signalet, da det i simuleringen udgør 99,28\%, mens gang og løb maksimalt udgør 56,85\%. 
 
-Afslutningsvist testes det om en tærskelværdi på 70\% vil kunne detektere og gemme de 4 sekunders cykling som er samplet, mens den ikke registrerer gang eller løb. Det testes ligeledes om algoritmen kan detektere cykling i mere end 4 sekunder, ved at der returneres antal gange der er registreret 4 sekunders cykling samt en samlet tidsvariabel.\fxnote{skriv dette færdigt når det virker i matlab} 
+Afslutningsvist testes det om tærskelværdien på 70\% vil kunne detektere og gemme de 4 sekunders cykling som er samplet, mens den ikke registrerer gang eller løb. Det testes ligeledes om algoritmen kan detektere cykling i mere end 4 sekunder, ved at der returneres antal gange der er registreret 4 sekunders cykling samt en samlet tidsvariabel. Disse værdier er illustreret i \figref{fig:sim_n_cykling}, men der ved gang og løb bliver printet en tekst med "Ikke cykling" i MATLAB.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\textwidth]{figures/cDesign/sim_n_c.png}
+	\caption{På figuren ses en graf for hvor mange sekunder der er registreret cykling, som funktion af antal gange det er registreret.}
+	\label{fig:sim_n_cykling}
+\end{figure}
+
+Disse værdier vil blive brugt i GUIen til at repræsentere brugerens cyklingsaktivitet. Mens de signaler som ikke opfattes som cykling, vil blive kasseret, da gang og løb repræsenteres ved hjælp af accelerometerdata som beskrevet i \secref{sec:algogangloeb}. 
