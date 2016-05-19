@@ -137,6 +137,16 @@
   Url                      = {http://politiken.dk/forbrugogliv/livsstil/familieliv/ECE326828/dovne-danskere-koster-samfundet-milliarder/}
 }
 
+@Article{GanZahedi2011,
+  Title                    = {Application of Adaptive Noise Cancellation in Transabdominal Fetal Heart Rate Detection Using Photoplethysmography},
+  Author                   = {Beng Gan, Kok and Zahedi, Edmond and Alauddin Mohd. Ali, Mohd},
+  Journal                  = {INTECH},
+  Year                     = {2011},
+
+  Doi                      = {10.5772/16309},
+  Owner                    = {Frederik}
+}
+
 @Article{Berchtold2010,
   Title                    = {Exercise and cognitive functioning},
   Author                   = {Berchtold, Nicole C.},
@@ -191,7 +201,7 @@
 
 @Book{Bugge2015,
   Title                    = {Forsøg med Læring i Bevægelse},
-  Author                   = {Bugge, Anna and Seelen, Jesper von and Herskind, Mia et. al.},
+  Author                   = {Bugge, Anna and Seelen, Jesper von and Herskind et. al., Mia},
   Editor                   = {Bugge, Anna and Froberg, Karsten},
   Publisher                = {Institut for Idræt og Biomekanik, Syddansk Universitet},
   Year                     = {2015},
@@ -251,7 +261,7 @@
 
 @Article{ClelandKikhia2013,
   Title                    = {Optimal Placement of Accelerometers for the Detection of Everyday Activities},
-  Author                   = {Cleland, Ian and Kikhia, Basel et al.},
+  Author                   = {Cleland, Ian and Kikhia, Basel and Nugnet et. al., Chris},
   Journal                  = {Sensors},
   Year                     = {2013},
 
@@ -382,7 +392,7 @@
 
 @Book{Engelbreth2010,
   Title                    = {Idræt C},
-  Author                   = {Engelbreth, Jette and Estrup, Claus and Pöckel, Rasmus et. al.},
+  Author                   = {Engelbreth, Jette and Estrup, Claus and Pöckel et. al., Rasmus},
   Publisher                = {Systime},
   Year                     = {2010},
 
@@ -401,7 +411,7 @@
 
 @Article{F.SallisG.Simons-MortonJ.Stone1992,
   Title                    = {Determinants of physical activity and interventions in youth},
-  Author                   = {F. Sallis, James and G. Simons-Morton, Bruce and J. Stone, Elaine et al.},
+  Author                   = {F. Sallis, James and G. Simons-Morton, Bruce and J. Stone et. al., Elaine},
   Journal                  = {Medicine and science in sports and exercise},
   Year                     = {1992},
 
@@ -447,16 +457,6 @@
 
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
-}
-
-@Article{GanZahedi2011,
-  Title                    = {Application of Adaptive Noise Cancellation in Transabdominal Fetal Heart Rate Detection Using Photoplethysmography},
-  Author                   = {Gan, Kok Beng and Zahedi, Edmond et al.},
-  Journal                  = {INTECH},
-  Year                     = {2011},
-
-  Doi                      = {10.5772/16309},
-  Owner                    = {Frederik}
 }
 
 @Electronic{GjensidigeForsikring2014,
@@ -556,7 +556,7 @@
 
 @Article{J.Sebire2013,
   Title                    = {Testing a self-determination theory model of children’s physical activity motivation: a cross-sectional study},
-  Author                   = {J. Sebire, Simon and Jago, Russell and R. Fox, Kenneth and J. Edwards, Mark and L. Thompson, Janice},
+  Author                   = {J. Sebire, Simon and Jago, Russell and R. Fox et. al., Kenneth},
   Journal                  = {International Journal of Behavioral Nutrition and Physical Activity},
   Year                     = {2013},
 
@@ -606,7 +606,7 @@
 
 @Article{Kemper2000,
   Title                    = {A fifteen-year longitudinal study in young adults on the relation of physical activity and fitness with the development of the bone mass: The Amsterdam Growth And Health Longitudinal Study.},
-  Author                   = {Kemper, H. C. G. and Twisk, J. W. R. and Van Mechelen, W. et. al.},
+  Author                   = {Kemper, H. C. G. and Twisk, J. W. R. and Van Mechelen et. al., W.},
   Journal                  = {Elsevier},
   Year                     = {2000},
 
@@ -639,7 +639,7 @@
 
 @Article{Kohlhammer2006,
   Title                    = {Influence of physical inactivity on the prevalence of hay fever.},
-  Author                   = {Kohlhammer, Y. and Zutavern, A. and Rzehak, P. et. al.},
+  Author                   = {Kohlhammer, Y. and Zutavern, A. and Rzehak et. al., P.},
   Journal                  = {Allergy},
   Year                     = {2006},
 
@@ -723,7 +723,7 @@
 
 @Article{Marcelino2012,
   Title                    = {Obese and fit adolescents have lower blood pressure levels than obese and unfit counterparts.},
-  Author                   = {Marcelino, G. and Melich-Cerveira, J. and Paccaud, F. et. al.},
+  Author                   = {Marcelino, G. and Melich-Cerveira, J. and Paccaud et. al., F.},
   Journal                  = {The Journal of Sports Medicine and Physical Fitness},
   Year                     = {2012},
 
@@ -734,7 +734,7 @@
 
 @Article{Marin-PerianuMarin-Perianu2013,
   Title                    = {A performance analysis of a wireless body-area network monitoring system for professional cycling},
-  Author                   = {Marin-Perianu, Raluca and Marin-Perianu, Miahi et al.},
+  Author                   = {Marin-Perianu, Raluca and Marin-Perianu, Miahi and Havinga et al., Paul},
   Journal                  = {Springer},
   Year                     = {2013},
 
@@ -1037,7 +1037,7 @@
 
 @Article{Rueterbories2010,
   Title                    = {Methods for gait event detection and analysis in ambulatory systems},
-  Author                   = {Rueterbories, Jan and Spaich, Erika G. and Larsen, Birgit et. al.},
+  Author                   = {Rueterbories, Jan and Spaich, Erika G. and Larsen et. al., Birgit},
   Journal                  = {Elsevier},
   Year                     = {2010},
 
@@ -1472,7 +1472,7 @@
 
 @Article{WeyandKelly2001,
   Title                    = {Ambulatory estimates of maximal aerobic power from foot -ground contact times and heart rates in running humans},
-  Author                   = {Weyand, Peter G. and Kelly, Mauren et al.},
+  Author                   = {Weyand, Peter G. and Kelly, Mauren and Blackadar et al., Thomas},
   Journal                  = {American Physiological Society},
   Year                     = {2001},
 
