@@ -8,7 +8,7 @@ Data fra gyroskopets z-akse skal signalbehandles, førend en algoritme kan detek
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.8]{figures/cDesign/gyro_behandling.png}
-	\caption{På den øverste figur ses rå data for gang, løb og cykling for et 5 sekunders interval opsamlet på gyroskopets z-akse. På den nederste figur ses signalbehandlingens effekt på dataet fra 0 til 20~Hz.}
+	\caption{På figuren ses øverst rå signaler fra gang, løb og cykling optaget med gyroskopets z-akse. Nederst er frekvensdomænet for de nævnte signaler.}
 	\label{fig:gyro_behandling}
 \end{figure}\vspace{-0.5cm}
 Data fra pilotforsøget er behandlet med ovenstående signalbehandling. Dette er gjort med henblik på fastsættelse af en tærskelværdi som adskiller cykling fra gang og løb. På den øverste graf på \figref{fig:gyro_behandling} ses de rå signaler fra gyroskopet fra gang, løb og cykling. Som det tydelig ses afspejles cykling tilnærmelsesvis som en sinus, hvorfor dennes energi er centreret omkring få frekvenser. Resultatet af den omtalte signalbehandling ses på den nederste graf på \figref{fig:gyro_behandling}, hvoraf signal fra gang, løb og cykling er blevet behandlet med en FFT. Hertil ses det også, at energien for gang og løb ikke centrerer sig omkring en enkelt frekvens, men om forskellige frekvenser. Denne spredning af energi kan benyttes til signalgenkendelse og adskillelse af aktiviteterne. 
@@ -25,14 +25,14 @@ Efter ovenstående signalbehandlingen implementeres signalgenkendelsen, som best
 		F3 & 35,9 & 42,8 & 85,0 \\ \hline
 		F4 & 38,7 & 60,6 & 91,6 \\ \hline
 	\end{tabular}
-	\caption{I tabellen ses hvor stor en procentdel summeringen vedrørende den maksimale magnitude udgør af hele FFTen. Dette er gjort for både gang, løb og cykling med henblik på bestemmelse af en tærskelværdi.}
+	\caption{I tabellen ses det, hvor stor en procentdel de største magnituder udgør af hele frekvensdomænet. Den største procentdel er at finde ved cykling.}
 	\label{tab:individuel_procent}
 \end{table}\vspace{-0.5cm}
 Mængden af energi ved den maksimale magnitude er markant større for cykling i forhold til gang og løb, hvilket er illustreret i \tabref{tab:individuel_procent}. Dette resulterede i, at 84,5\% til 91,9\% af energien ligger $\pm$1 Hz omkring den fundne frekvens med den største amplitude. Hvorledes acceleration eller andre hastigheder ved cykling har påvirkning på denne procentfordeling diskuteres i \secref{sec:diskussion}. Procentfordelingen bliver ligeledes behandlet for gang og løb for at sikre, at disse ikke har samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling kan fastsættes. Resultatet heraf viser, at ved gang befandt energien omkring den fundne maks peak sig mellem 35,9\% til 48,5\% i forhold til det samplede frekvensspektrum. Ved løb befandt energien omkring den fundne frekvens sig mellem 42,8\% til 60,5\%. Denne forskel benyttes til at adskille cykling fra gang og løb ved at implementere et tærskelværdi på 70\%. Summeringen af magnituden omkring den største magnitude skal dermed udgøre 70\% for at blive klassificeret som cykling. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/algoritme_cykling.png}
-	\caption{På figuren ses et flowchart som gennemgår algoritmen vedrørende detektering af cykling.}
+	\caption{På figuren ses et flowchart over de overordnede funktioner for algoritmen til detektering af cykling.}
 	\label{fig:algoritme_cykling}
 \end{figure}
 Ovenstående figur repræsenterer algoritmen for detektering af cykling. Hvis cykling detekteres, starter en time count, som stopper når cykling ikke længere detekteres. Når timeren stopper, videresendes timerens værdi som repræsenterer tiden hvormed cykling har været detekteret. Hvis cykling ikke detekteres, signalbehandles ny data fra gyroskopet, for at tjekke hvorvidt cykling detekteres.
@@ -45,14 +45,15 @@ Implementeringen af algoritmen for detektering af cykling tager udgangspunkt i d
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/Algoritme_cykling_basic.png}
-	\caption{På figuren ses den kode for algoritmen til detektering cykling beskrevet med pesudokode. Den røde markerede kasse vil blive forklaret yderligere i en kommende figur.}
+	\caption{På figuren ses et flowchart over den implementerede C kode som muliggør detektering af ingen cykling. \\
+Den markerede kasse, signalbehandling, indeholder yderligere kodning, som forklares uddybende efterfølgende.}
 	\label{fig:basic_cykling}
 \end{figure}
 Algoritmen henter low- og high byte fra ICens gyroskop outputdata, hvorefter hver enkelt sample videresendes til MATLAB. Heri gemmes 4 sekunders data i et array og signalbehandlingen påbegyndes. Resultatet af signalbehandlingen er en procentværdi for det modtagne data. Denne værdi undersøges for at være over eller under tærskelværdien. Hvis resultatet er over 70\% summeres fire sekunder til den totale varighed for cykling, hvis ikke startes algoritmen forfra.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/algoritme_matlab_cykling.png}
-	\caption{På figuren ses koden for algoritmens signalbehandling i MATLAB.}
+	\caption{På figuren ses et flowchart over algoritmens signalbehandling, udført i MATLAB. Koden benytter et antal samples som analyseres for frekvensdomænet. Derefter foretages en vurdering af de maksimale magnituder i forhold til resten af frekvensdomænet.}
 	\label{fig:matlab_cykling}
 \end{figure} 
 Når MATLAB har modtaget fire sekunders sampling påbegyndes signalbehandlingen af dataet ved brug at formlerne i \figref{fig:matlab_cykling}. Hvis cykling detekteres, bliver en varighed på fire sekunder videresendt til udført cykling i GUI. 
@@ -68,7 +69,7 @@ Det første som testes, er algoritmes fire sekunders time counter. Måden hvorp�
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth]{figures/cDesign/sim_counter.png}
-	\caption{På figuren ses algoritmens time counter plottet med rød. Det ses at time counteren tæller op til fire sekunder og derefter nulstilles og starter forfra.}
+	\caption{På figuren ses algoritmens time counter plottet med rød. Det ses, at time counteren tæller op til fire sekunder og derefter nulstilles og starter forfra.}
 	\label{fig:sim_count}
 \end{figure}
 Som forventet tæller time counteren til 4 sekunder bestående af 2048 samples, hvorefter denne nulstilles.\\
@@ -77,7 +78,7 @@ Resultatet af denne test ses illustreret på \figref{fig:sim_gyro}, hvor de simu
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\textwidth]{figures/cDesign/sim_gyro.png}
-	\caption{På figurens øverste graf ses de simulerede rå signaler for gang, løb og cykling, hvorefter den nederste graf illustrer signalerne efter de er blevet databehandlet.}
+	\caption{På figurens øverste graf ses de simulerede inputsignaler for gang, løb og cykling. Den nederste graf iser frekvensdomæneanalysen af de pågældende signaler.}
 	\label{fig:sim_gyro}
 \end{figure}\vspace{-.5cm}
 Som forventet ses det på \figref{fig:sim_gyro}, at FFTen for vedrørende det simulerede signal af cykling centreres omkring 1~Hz, mens signalerne for gang og løb centreres omkring 0,5~Hz, 1~Hz og 2~Hz. Da det er forskelligt om de tre simulerede signaler centrerer sig omkring én eller flere frekvenser forventes det, at spredningen af signalets energi varierer for de tre aktiviteter, hvilket den tredje test vil undersøge. Heraf forventes det at spredningen af energien ved cykling er markant mindre end spredningen af energi ved gang og løb. Som beskrevet i \secref{design_cykling} forventes minimum 70\% af energien ved cykling, at være indenfor $\pm$1~Hz omkring den maksimale peak af FFTen, hvorimod det ved gang og løb forventes at være markant mindre. 
@@ -97,7 +98,7 @@ Afslutningsvist testes algoritmens funktionalitet omhandlende dets resultat ved 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\textwidth]{figures/cDesign/sim_n_c.png}
-	\caption{På figuren ses en graf for hvor mange sekunder der er registreret cykling, som funktion af antal gange det er registreret.}
+	\caption{På figuren ses en lineær graf som viser antallet af sekunder der registreret cykling, som funktion af antal gange at aktiviteten er detekteret. Hver detektering af cykling giver et output på 4 sekunder for aktiviteten.}
 	\label{fig:sim_n_cykling}
 \end{figure}
 

@@ -11,7 +11,7 @@ Alle CY8CKIT-043 PSoC 4-M moduler besidder fem forskellige power modes: active, 
 		Hibernate & 150 nA til 1$\mu$A & 0,7 ms \\ \hline
 		Stop & 20 nA til 80 nA & 2 ms \\ \hline
 	\end{tabular}%
-	\caption{I tabellen ses strømforbruget samt opvågningstiden for PSoC 4200M, som er den valgte MCUs target processor. (Modificeret) \citep{Semiconductor2016PowerMode}}
+	\caption{I tabellen ses strømforbruget samt opvågningstiden ved givne powermodes for PSoC 4200M. \citep{Semiconductor2016PowerMode} (Modificeret)}
 	\label{tab:Powermode}
 \end{table}\vspace{-0.2cm}
 Det kan ses på \tabref{tab:Powermode}, at mikroprocessorens strømforbrug afhænger af, hvor meget af indholdet i mikroprocessoren der gøres utilgængeligt, hvilket illustreres i \tabref{tab:aktiv_inaktiv_CPU}. Det kan derfor være fordelagtigt at køre i en lav strømforbrugende tilstand, hvis der benyttes et batteri til at forsyne MCUen. %Power moden har indflydelse på mikroprocessorens funktioner, hvorfor det ikke altid er fordelagtigt at fokusere for meget på lavt strømforbrug.

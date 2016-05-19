@@ -39,9 +39,9 @@ Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en fu
 \begin{tabular}{cccc}
 	\hline
 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak for \\ inputsignal {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak på \\ oscilloskop {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ i MATLAB {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
-	4,000 & 4,001 & 3,993 & 0,2000 \\ \hline
+	4,000 & 4,001 & 3,993 & 0,200 \\ \hline
 \end{tabular}
-	\caption{I tabellen ses resultatet fra testen af MCUens AD konvertering af et inputsignal fra en funktionsgenerator.}
+	\caption{I tabellen ses størrelsen af det genererede signal som sendes ind i MCUen. Testen viser en afvigelse på 0,2\% fra det genererede signal til det konverterede signal.}
 	\label{tab:ADC_test}
 \end{table} \vspace{-.2cm}
 Der ses i \tabref{tab:ADC_test}, at MCUens ADC repræsenterer den analoge inputsignal med 0,20\% afvigelse. Dette overholder kravet på en maksimal afvigelse på 5\%, hvorfor ADCen i MCUen accepteres til videre implementering.

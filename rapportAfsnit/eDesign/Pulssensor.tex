@@ -9,7 +9,7 @@ Pulssensoren designes således, at pulsen (BPM) beregnes for brugeren i GAP peri
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/puls_pseudo.png}
-	\caption{På figuren ses et flowchart over algoritmen vedrørende detektering af BPM. Pulssensorens algoritme skal registrere fem pulsslag som overskrider en given tærskelværdi, førend BPM kan bestemmes med udgangspunkt i disse værdier.}
+	\caption{På figuren ses et flowchart over algortimen til detektering af puls. Pulssensorens algoritmen skal registrere fem pulsslag som overskrider en fastsat tærskelværdi, førend pulsen kan bestemmes. Pulsen sendes afslutningsvis med BLE.}
 	\label{fig:puls_pseudo}
 \end{figure}
 Ovenstående figur repræsenterer algoritmen vedrørende detektering af BPM. Pulssensoren opfanger pulssignalet fra brugerens øreflip, hvorefter dette signal bliver signalbehandlet førend detektering af pulsslag startes. Der ønskes at detektere pulsen ved at beregne varigheden mellem tre pulsslag med udgangspunkt i det systoliske peak, hvilket fremgår af \secref{sec:pulssensor}. Dette peak har større amplitude end peaket for diastole, hvormed signalbehandlingen skal forstærke det systoliske peak og dæmpe det diastoliske peak.  \\
@@ -37,7 +37,7 @@ Med udgangspunkt i de implementerede elementer, bliver der implementeret en algo
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/Puls_ckode.png}
-	\caption{På figuren ses pulssensorens algoritme i C kode beskrevet med pseudokode. Efter nulstilling af de benyttede variabler, bliver time counteren startet igen, hvorefter løkken fortsætter sin virken.}
+	\caption{På figuren ses et flowchart over pulssensorens algoritme udført i C kode. Data fra pulssensoren AD konverteres, hvorefter en signalbehandling muliggør en detektering af pulsen. Afslutningsvis sendes den beregnede puls med BLE og benyttede variabler nulstilles. Når data er klar, startes proceduren forfra.}
 	\label{fig:puls_pseudo_c}
 \end{figure} \vspace{-0.5cm}
 Første trin, efter dataopsamlingen fra pulssensoren, er en konvertering af det analoge signal til et digitalt. Derefter undersøges det, hvorvidt det konverterede data er klar, hvilket der benyttes en indbygget kodegenerering til og beskrives yderligere i \secref{adc_design_impl}. Hvis data er klar, signalbehandles dataet med division og kvadrering som beskrevet i design. Herefter starter algoritmens time counter som starter optælling af samples. Når en sample er klar, bliver den kvadreret og divideret, som det beskrives i \secref{sec_design_puls}. Den behandlede sample gemmes i en variabel, 'Value[0]'. Når der kommer en ny sample, vil den forrige sample blive gemt i en ny variabel, 'Value[1]', og den nye sample gemmes i den anden variabel. \\

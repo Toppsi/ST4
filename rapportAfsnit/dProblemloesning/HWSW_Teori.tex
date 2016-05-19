@@ -29,7 +29,7 @@ Et eksempel på en SAR ADCs virkemåde ses på \figref{fig:SAR_ADC}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.52]{figures/bProblemloesning/SAR_ADC.png}
-	\caption{På figuren ses en 4 bits SAR ADCs virkemåde. Vin har i dette tilfælde en fast værdi men kan skifte mange gange i sekundet. Vref indstilles til halvdelen af arbejdsområdet på 1 V, hvor komperatoren vurderer at inputsignalet er større end Vref, hvorfor første betydende tal er 1. Derefter lægges en fjerdedel af arbejdsområdet til Vref og komparatoren vurderer igen. Dette fortsætter til alle fire bits er fundet, hvorefter det analoge signal er konverteret til digitalt.}
+	\caption{På figuren ses funktionen for en 4 bits SAR ADC. $V_{in}$ er i dette tilfælde en konstant værdi, men kan skifte værdi flere gange i sekundet. $V_{ref}$ indstilles til halvdelen af arbejdsområdet på 1~V, hvoraf komparatoren vurderer hvorvidt inputsignalet er større end $V_{ref}$. Derefter adderes en fjerdel af arbejdsområdet til $V_{ref}$ og komparatoren foretager samme vurderingen. Denne proces fortsættes til alle bits er fundet, hvorefter det analoge signal er konverteret til et digitalt.}
 	\label{fig:SAR_ADC}
 \end{figure}\vspace{-0.5cm}
 MCUens 12 bits SAR ADC kan inddele det analoge signal i $2^{12} = 4096$ spændingsniveauer. Den skal derudover bruge 18 clocks for at fuldføre en 12 bits konvertering af data med samplingsfrekvens på 18.000.000 Hz, hvilket er dens maksimale samplingsfrekvens. Det er ikke muligt at benytte ADCen, når MCUen er i deep-sleep powermode\fxnote{da en klokfrekvens på 18MHz kræves, og denne hurtige clock er slukket under deep-sleep}. \newline 
@@ -45,7 +45,7 @@ Inden et interrupt er programmet i tread mode, hvilket ses på \figref{fig:inter
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.68]{figures/bProblemloesning/interrupt.png}
-	\caption{På figuren ses et overblik over, hvad der sker når et interrupt afbryder CPUens main. \citep{Tanenbaum2006}}
+	\caption{På figuren ses effekten af et interrupt. Det fremgår, at et interrupt afbryder CPUens main rutine, for dermed at eksekvere den kode som er tilhørende ISR. Når ISR er udført vender CPUen tilbage til eksekveringen af main rutinen. \citep{Tanenbaum2006}}
 	\label{fig:interrupt}
 \end{figure}\vspace{-0.5cm}
 I en Advanced RISC Machines (ARM) Cortex-M0 kan en høj prioritet afbryde en lav prioritet. Hver gang et interrupt finder sted, er der risiko for et stack overflow. Dette hænder, hvis afbrydelserne fortsætter i uendelighed, og det ikke er muligt af finde ud af, hvor i prosessen interruptet skal vende tilbage til. %Hver gang der sker et interrupt skal otte 32-bits word på stacken. 

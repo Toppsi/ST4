@@ -91,7 +91,7 @@ Det testes hvilket output y-aksen har, når sensoren er placeret således y-akse
 	+1 & 1368 & 1,003 & 0,3 \\ \hline
 	-1 & -1356 & -0,993 & -0,7 \\ \hline
 \end{tabular}
-	\caption{I tabellen ses resultatet fra testen af accelerometerets y-akse. For at omregne MCUens output fra LSB til g påvirkning multipliceres outputtet med accelerometerets sensitivitet.}
+	\caption{I tabellen ses resultatet fra testen af accelerometerets y-akse. For at omregne MCUens output fra LSB til g påvirkning multipliceres outputtet med accelerometerets sensitivitet. Testen viser en afvigelse på -0,7\% til 1,4\%.}
 	\label{tab:test_sensor}
 \end{table}\vspace{-0.2cm}
 Det ses i \tabref{tab:test_sensor}, at sensorens accelerometer har en afvigelse på 0,3~\% til 1,4~\%, hvilket overholder en accepteret afvigelse på 5\%, jævnfør \secref{krav:acc}. Det er ydermere antaget, at accelerometeret overholder arbejdsområdet på den indstillede værdi $\pm$16~g, indtil det samlede system giver mulighed for at teste dette. Sensorens accelerometer overholder dermed de opstillede krav og er klar til videre implementering. 

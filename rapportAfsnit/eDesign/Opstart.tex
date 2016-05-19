@@ -4,7 +4,7 @@ Systemet er opbygget af forskellige blokke, der designes, implementeres og teste
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.45]{figures/bProblemloesning/blokdiagram.png}
-	\caption{På figuren ses blokdiagram for det samlede system, hvor et input modtages fra brugeren gennem sensorer, hvilket behandles i en GAP peripheral MCU. Herefter sendes dataet via BLE til en computer gennem en GAP central MCU, hvor det visualiseres på en brugerflade.}
+	\caption{På figuren ses blokdiagrammet for det samlede system, illustreret med de benyttede komponenter. Inputsignalet modtages fra sensorer påført en bruger, hvorefter en databehandling i GAP peripheral detekterer hvilken type aktivitet der udføres. Efterfølgende benyttes BLE til dataoverførsel fra GAP peripheral til GAP central. Afslutningsvis er der en brugerflade visualiseret på en computer.}
 	\label{fig:design_blokdiagram}
 \end{figure}
 Blokkene implementeres forskellige steder i det samlede system, som vist på \figref{fig:design_blokdiagram}. Spændingsforsyningen tilkobles GAP peripheral MCUen, hvor sensorer også tilkobles. På denne MCU vil signalerne blive digitaliseret og algoritmer vil efterfølgende behandle og adskille aktiviteterne gang, løb og cykling samt udregne en tilhørende puls. Algoritmen og krav hertil står i \secref{krav_algoritme} som én samlet enhed, men i det efterfølgende vil der være to algoritme afsnit: en til behandling af data fra henholdsvis accelerometer og gyroskop. Disse data sendes via BLE til en GAP central, som er koblet til en computer. På computeren vil dataet blive visualiseret igennem en MATLAB GUI, hvor brugeren kan følge sin progression.

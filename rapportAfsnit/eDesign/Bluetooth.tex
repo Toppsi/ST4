@@ -6,7 +6,7 @@ Systemet vil involvere to MCUer, henholdsvis en GAP central og en GAP peripheral
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/blue_pseudo.png}
-	\caption{På figuren ses en illustration af den trådløse kommunikation og dataoverførsel mellem GAP central og GAP peripheral. Indledningsvis forsøges der at oprette forbindelse mellem enhederne, hvorefter dataoverførslen finder sted. Ved fuldendt dataoverførsel bliver BLE modulet for de to enheder sat i dvaletilstand.}
+	\caption{På figuren ses flowchartet for den trådløse kommunikation og dataoverførsel mellem GAP central og GAP peripheral. Indledningsvis forsøges der at oprette forbindelse mellem enhederne, hvorefter dataoverførslen finder sted. Ved fuldendt dataoverførsel bliver BLE modulet for de to enheder sat i dvaletilstand.}
 	\label{fig:blue_pseudo}
 \end{figure}
 Ovenstående pseudokode er bestemmende for, hvorvidt en MCU fungerer som GAP central eller peripheral i et kredsløb. Enheden, som initialiseres til GAP central, skal modtage data fra den anden enhed. Ydermere skal GAP central overføre denne data til en computer gennem en USB port, således visualisering i en GUI er muligt. \newline
