@@ -2,11 +2,11 @@
 \textit{Dette afsnit beskriver design, implementering og test af ADCen i MCUen. Denne designes og implementeres ud fra teoretiske aspekter samt de opstillede krav. Afslutningsvis testes ADCens funktionalitet i forhold til kravene opstillet i \secref{krav_adc}.}
 
 \subsection{Design}
-Systemets IC har en ADC indbygget i sit kredsløb, hvorfor ADCen tilhørende denne blok er designet, implementeret og testet i \secref{sec_design_LSM9DS1}.\\
+Systemets IC har en ADC indbygget i sit kredsløb, hvorfor ADCen tilhørende denne blok beskrives i \secref{sec_design_LSM9DS1}.\\
 Pulssensoren kræver en AD konvertering for at kunne blive behandlet som digitalt data. Derfor benyttes MCUens 12 bits SAR ADC til at konvertere det analoge pulssignal til et digitalt signal. \\
-Den benyttede ADC er designet i PSoC Creator således, at denne sender data ud fra ADCen så snart en sample er konverteret. Der benyttes derfor en kode til at undersøge tilstanden for ADCen og dermed om der er tilgængelige digitale samples klar. 
+Den benyttede ADC er designet i PSoC Creator således, at denne sender data ud fra ADCen så snart en sample er konverteret. Der benyttes derfor en kode til at undersøge tilstanden for ADCen, og dermed om der er tilgængelige digitale samples klar. 
 
-Det fremgår af \secref{krav_adc}, at ADCen skal have en samplingsfrekvens på mindst 35~Hz, for at kunne gengive et repræsentativt digitalt signal for pulssensoren. For at kunne konfigurere ADCen til at have den pågældende samplingsfrekvens, da skal varighed mellem hver samples, ved en frekvens på 35~Hz, bestemmes:
+Det fremgår af \secref{krav_adc}, at ADCen skal have en samplingsfrekvens på mindst 35~Hz for at kunne gengive et repræsentativt digitalt signal for pulssensoren. For at kunne konfigurere ADCen til at have den pågældende samplingsfrekvens, da skal varighed mellem hver samples, ved en frekvens på 35~Hz, bestemmes:
 \begin{equation}
 \frac{1~sekund}{35~Hz} = 0,0286~sekunder
 \label{eq:adc_puls}
@@ -14,8 +14,8 @@ Det fremgår af \secref{krav_adc}, at ADCen skal have en samplingsfrekvens på m
 Det fremgår af \eqref{eq:adc_puls}, at der er 0,0286~sekunder mellem hver sample ved en frekvens på 35~Hz. 
 
 \subsection{Implementering}
-Pulssensorens analoge signal, skal gennemgå en AD konvertering i MCUen. Topdesignet for ADCen indebærer derfor en analog komponent i form af en SAR ADC, som yderligere er placeret i PSoC 4200M \citep{Murphy2016}. AD konverteringen udføres ved at koble pulssensorens output til ADCens input. Topdesignet for ADCen i PSOC 4200M bliver derfor forbundet med en analog inputpin, som konfigureres til at være tilhørende outputsignalet fra pulssensoren. ADCen konverterer derfor hver sample fra den optagede kanal, og når ADCen har konverteret data klar, kan dette blive benyttet af pågældende algoritmer. \\
-Yderligere konfigureres samplingsfrekensen for ADCen, med hensyn til den tid mellem hver sample som er bestemt i \eqref{eq:adc_puls}. Derfor skal konverteringstiden i Topdesign for ADC konfigureres til 0,0286~sekunder. Dette vil dermed konfigurere ADCen til at have en samplingsfrekvens på 35~Hz.
+Pulssensorens analoge signal skal gennemgå en AD konvertering i MCUen. Topdesignet for ADCen indebærer derfor en analog komponent i form af en SAR ADC, som yderligere er placeret i PSoC 4200M \citep{Murphy2016}. AD konverteringen udføres ved at koble pulssensorens output til ADCens input. Topdesignet for ADCen i PSOC 4200M bliver derfor forbundet med en analog inputpin, som konfigureres til at være tilhørende outputsignalet fra pulssensoren. ADCen konverterer derfor hver sample fra den optagede kanal, og når ADCen har konverteret data klar, kan dette blive benyttet af pågældende algoritmer. \\
+Yderligere konfigureres samplingsfrekensen for ADCen, med hensyn til den tid mellem hver sample, som er bestemt i \eqref{eq:adc_puls}. Derfor skal konverteringstiden i Topdesign for ADC konfigureres til 0,0286~sekunder. Dette vil dermed konfigurere ADCen til at have en samplingsfrekvens på 35~Hz.
 
 \subsection{Test}
 ADCen testes i to omgange for at undersøge, om samplingsfrekvensen på inputkanalen sampler pulssensoren korrekt. Derudover testes ADCen for, om den konverterer signalet repræsentativt i forhold til LSB og afvigelser. \\
@@ -33,7 +33,7 @@ Testen viser, at ved en varighed på 60 sekunder, da har ADCen konverteret 2134 
 \end{equation}
 Testen påviser, at ADCen har en egentlig samplingsfrekvens på 35,6~Hz. Jævnfør kravene for samplingsfrekvensen for ADcen, da accepteres en samplingsfrekvens højere end 35~Hz. Derfor påviser testen, at den konfigurerede samplingsfrekvens for ADCen kan accepteres. 
 
-Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample 1 single ended kanal men en frekvens på 200~Hz med inputkanalen i pin 2.0. Funktionsgeneratoren kobles til denne inputkanal samt ground på MCUen og indstilles til at indsende et sinussignal med en frekvens på 10~Hz med en peak-to-peak på 4~V. Herefter påbegyndes dataopsamling ved hjælp af MATLAB, som visualiserer signalet fra funktionsgeneratoren. Udover denne datavisualisering, kobles et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte input fra funktionsgeneratoren antages som værende det korrekte output fra funktionsgeneratoren. Resultatet af testen ses i \tabref{tab:ADC_test}.
+Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en funktionsgenerator og et oscilloskop. MCUen indstilles til at sample én single ended kanal men en frekvens på 200~Hz med inputkanalen i pin 2.0. Funktionsgeneratoren kobles til denne inputkanal samt ground på MCUen og indstilles til at indsende et sinussignal med en frekvens på 10~Hz med en peak-to-peak værdi på 4~V. Herefter påbegyndes dataopsamling ved hjælp af MATLAB, som visualiserer signalet fra funktionsgeneratoren. Udover denne datavisualisering kobles et oscilloskop til samme output fra funktionsgeneratoren. Oscilloskopets målte input fra funktionsgeneratoren antages som værende det korrekte output fra funktionsgeneratoren. Resultatet af testen ses i \tabref{tab:ADC_test}.
 \begin{table}[H]
 \centering
 \begin{tabular}{cccc}
@@ -41,7 +41,7 @@ Yderligere testes ADCen for korrekt konvertering. Dette gøres ved brug af en fu
 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak for \\ inputsignal {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak på \\ oscilloskop {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Peak-to-peak målt \\ i MATLAB {[}V{]}\end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}}Afvigelse \\ {[}\%{]}\end{tabular} \\ \hline
 	4,000 & 4,001 & 3,993 & 0,200 \\ \hline
 \end{tabular}
-	\caption{I tabellen ses størrelsen af det genererede signal som sendes ind i MCUen. Testen viser en afvigelse på 0,2\% fra det genererede signal til det konverterede signal.}
+	\caption{I tabellen ses størrelsen af det genererede signal, som sendes ind i MCUen. Testen viser en afvigelse på 0,2\% fra det genererede signal til det konverterede signal.}
 	\label{tab:ADC_test}
 \end{table} \vspace{-.2cm}
 Der ses i \tabref{tab:ADC_test}, at MCUens ADC repræsenterer den analoge inputsignal med 0,20\% afvigelse. Dette overholder kravet på en maksimal afvigelse på 5\%, hvorfor ADCen i MCUen accepteres til videre implementering.
