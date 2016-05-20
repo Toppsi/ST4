@@ -2,7 +2,7 @@
 Alle CY8CKIT-043 PSoC 4-M moduler besidder fem forskellige power modes: active, sleep, deep-sleep, hibernate og stop. Strømforbruget samt tiden det tager at vågne op fra tilstandene ses i \tabref{tab:Powermode} for PSoC 4200M. \citep{Semiconductor2016PowerMode}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc} \hline
+	\begin{tabular}{lcc} \hline
 		\rowcolor[HTML]{C0C0C0} 
 		Power Mode & \begin{tabular}[c]{@{}c@{}}Strømområde\\(Vdd = 3,3V til 5,0V) \end{tabular} &  \begin{tabular}[c]{@{}c@{}}Opvågningstid\\ for PSoC 4200M \end{tabular} \\ \hline
 		Active & 1,3mA til 14 mA & - \\ \hline
@@ -18,7 +18,7 @@ Det kan ses på \tabref{tab:Powermode}, at mikroprocessorens strømforbrug afhæ
 En kort oversigt over aktivt og inaktivt indhold i mikroprocessoren ses i \tabref{tab:aktiv_inaktiv_CPU}. \citep{Semiconductor2016PowerMode}  % For eksempel er mikroprocessorens CPU kun aktiv, når power moden er indstillet til aktiv. Derudover er eksempelvis ADCen kun aktiv under de to power modes aktiv og sleep.\fxnote{Der findes en hel tabel inde på kilden over ting, som er aktive eller slukkede under de forskellige modes. Er det fint bare med disse to eksempler, som står i teksten, eller er der behov for at tabellen skal indsættes?} 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{cccccc} \hline
+	\begin{tabular}{lccccc} \hline
 		\rowcolor[HTML]{C0C0C0} 
 		Subsystem & Active & Sleep & Deep-sleep & Hibernate & Stop \\ \hline
 		CPU & Aktiv & Tilbageholdt & Tilbageholdt & Deaktiv & Deaktiv \\ \hline

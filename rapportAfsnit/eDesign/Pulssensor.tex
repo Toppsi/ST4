@@ -16,14 +16,14 @@ Pulssensoren designes således, at pulsen (BPM) beregnes for brugeren i GAP peri
 Dataet fra pulssensoreren signalbehandles i form af en division og kvadrering. Dette vil medføre, at det største peak i signalet vil blive forøget i amplitude, og de mindre peaks vil opnå en lavere amplitude, hvilket ses på \figref{fig:behandlet_puls}. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/puls_ore_behandlet.png}
+	\includegraphics[scale=0.37]{figures/cDesign/puls_ore_behandlet.png}
 	\caption{På figuren ses algoritmens signalbehandling af et råt pulssignal. Den sorte kurve er det rå pulssignal, og den røde kurve er det dividerede og kvadrerede signal.}
 	\label{fig:behandlet_puls}
 \end{figure}
 Som resultat af signalbehandlingen på \figref{fig:behandlet_puls} ses det, at amplituden på det behandlede signal er forøget, hvorimod de mindre peaks er formindsket. De største peaks i signalet repræsenterer den systoliske periode i hjertecyklussen, hvilket er det peak, der benyttes til at bestemmes BPM for signalet. For at kunne bestemme BPM for signalet bliver der implementeret en tærskelværdi. Denne værdi skal signalet overskride for at kunne blive detekteret som et systolisk peak. Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen. Dette fremgår af \figref{fig:taerskel_puls}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/puls_taerskel.png}
+	\includegraphics[scale=0.37]{figures/cDesign/puls_taerskel.png}
 	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er en signalbehandlet pulsmåling fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi, som har en værdi på 400.}
 	\label{fig:taerskel_puls}
 \end{figure} \vspace{-0.5cm}
@@ -65,7 +65,7 @@ Algoritmen er bestemt til at nulstille time counteren hver gang der registreres 
 Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret fem tilfælde. Ydermere ses det i \figref{fig:test_puls_realterm}, at Real Term har printet de forventede værdier for BPM.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/timecounter_puls_pic.png}
+	\includegraphics[scale=0.34]{figures/cDesign/timecounter_puls_pic.png}
 	\caption{På figuren ses algoritmens time counter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og genstarte optælling af samples.}
 	\label{fig:timecounter_puls_realterm}
 \end{figure}

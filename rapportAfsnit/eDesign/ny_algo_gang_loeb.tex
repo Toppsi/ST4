@@ -88,7 +88,7 @@ Algoritmen er designet og implementeret således, at denne kan detektere, hvis b
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/ingen_aktivitet_gl_pseudo.png}
-	\caption{På figuren ses flowchartet over den algoritme, som er ansvarlig for detekteringen af ingen fysisk aktivitet. Algoritmen registrerer brugeren som værende ikke-aktiv, når time_count er størrelse end 1428 samples, svarende til 3 sekunder.}
+	\caption{På figuren ses flowchartet over den algoritme, som er ansvarlig for detekteringen af ingen fysisk aktivitet. Algoritmen registrerer brugeren som værende ikke-aktiv, når time\_count er størrelse end 1428 samples, svarende til 3 sekunder.}
 	\label{fig:ingen_ak_pseudo}
 \end{figure} \vspace{-0.5cm}
 Algoritmen detekterer, at brugeren ikke er fysisk aktiv, hvis time counteren opnår et antal samples, som er større end tre sekunders sampling. Hvis dette er tilfældet, bliver de pågældende variabler nulstillet og tæller forfra.
@@ -171,7 +171,7 @@ Algoritmen for løb blev ligeledes testet med hensyn til funktionaliteten af tim
 Algoritmen bør altså undersøge, hvorvidt data fra accelerometret klarificeres som ingen aktivitet, gang eller løb ved hjælp af tærskelværdier. I testen heraf indsendes et simuleret signal, som først overskrider tærskelværdierne for gang på 50. Herefter forekommer en periode på tre sekunder, hvor hverken gang eller løbs tærskelværdi overskrides, hvorfor time counteren vil nulstille efter tre sekunder uden overskridelse af nogen tærskelværdier. Afslutningsvis indsendes værdier, som overskrider tærskelværdierne vedrørende løb på 400. Herigennem bliver både time count og detektering af peaks testet, hvilket fremgår i \figref{fig:test_inaktiv_time} og \figref{fig:test_inaktiv_peak}. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{figures/cDesign/test_timecount_inaktiv.png}
+	\includegraphics[scale=0.35]{figures/cDesign/test_timecount_inaktiv.png}
 	\caption{På figuren ses algoritmens time counter, som ved detektering på et simuleret gang-, inaktiv- og løbesignal. Den sorte kurve er det simulerede signal, og den røde kurve viser algoritmens time counter af samples. Der ses i midten af figuren, at time counteren nulstilles efter tre sekunder selvom inden tærskelværdier er overskredet. Det er derfor fordelagtigt at smide værdien ud for første detekterede maks peak herefter.}
 	\label{fig:test_inaktiv_time}
 \end{figure}
