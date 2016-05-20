@@ -1,26 +1,39 @@
 \section{Mikrokontroller}
 \textit{Dette afsnit beskriver design, implementering og test af GAP peripheral MCUen som spændingsforsyning til IC og pulssensor. MCUen designes på baggrund af de opstillede krav i \secref{krav_mikro_spaending} vedrørende spændingsforsyning til ICen og pulssensoren.}
-
 %Design, implementering og test af mikrokontrolleren som spændingsforsyning, udføres med hensyn til de krav som er opstillet i \secref{krav_mikro_spaending}. Mikrokontrolleren skal derfor kunne levere en spænding til ICen og pulssensoren som overholder spændingsintervallerne for de pågældende komponeneter.
 
 \subsection{Design}
-MCUen, der fungerer som GAP peripheral, er tilkoblet en ekstern spændingsforsyning, da denne er mobil. Systemets pulssensor vil være tilkoblet denne MCU, hvorfor denne komponent vil benytte MCUen som spændingsforsyning. Den skal derfor kunne levere tilstrækkelig spænding til, at pulssensoren er funktionsdygtig. \\
+MCUen, der fungerer som GAP peripheral, er tilkoblet en ekstern spændingsforsyning, da denne er mobil. Systemets pulssensor og IC vil være tilkoblet denne MCU, hvorfor disse komponenter vil benytte MCUen som spændingsforsyning. Den skal derfor kunne levere tilstrækkelig spænding til, at pulssensoren og ICen er funktionsdygtig. \\
 MCUens targetboard har fire pins, hvor det er muligt at tilkoble spænding fra en ekstern spændingsforsyning eller udlede spændingsforsyning til komponenter. Yderligere har MCUen fire pins, hvor ground kan tilkobles. \citep{Semiconductor2016} \\
-Systemets pulssensor kræver en spændingsforsyning i intervallet 3~V til 5~V \citep{Murphy2016}.
+Systemets IC indeholder et accelerometer og et gyroskop, hvoraf hele enheden påkræver en spændingsforsyning på 1,9~V til 3,6~V \citep{Jimb02016}. Ydermere kræver pulssensoren, som også er tilkoblet MCUen, en spændingsforsyning i intervallet 3~V til 5~V \citep{Murphy2016}.
 
 \subsection{Implementering}
 Den eksterne spændingsforsyning tilkobles MCUen og leverer, som påvist i \secref{spaendingsforsyning}, et spændingsoutput på 3,14~V. Dermed bør spændingen til MCUen kunne aktivere enheden til funktionelt niveau. %spændingsoutputtet fra MCUen overholde det spændingsinterval som systemets IC og pulssensor påkræver.\\
-Spændingsforsyningen til pulssensoren vil blive forbundet ved brug af række J2 på targetboardet. VDDD og GND fra J2 pinrækken benyttes til at forsyne pulssensoren.
+Spændingsforsyningen til pulssensoren og ICen vil blive forbundet ved brug af række J2 på targetboardet. VDDA og GND benyttes til at forsyne ICen, mens VDDD og GND fra J2 pinrækken benyttes til at forsyne pulssensoren.
 %Ydermere konfigureres det pågældende pins i PSoC Creator, således den pågældende sensor vil blive forbundet med de rigitge pins i forhold til spændingstilkoblingen.
 
 \subsection{Test}
 Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_mikro_spaending}. Kravene beskriver, at MCUen skal:
 \begin{itemize}
+	\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
 \end{itemize}
+Spændingsoutputtet fra MCUen testes ved tilkobling af en ekstern spændingsforsyning til targetboardet, og herefter måles outputspændingen fra henholdsvis pin VDDA og VDDD.
 
-Spændingsoutputtet fra MCUen testes ved tilkobling af en ekstern spændingsforsyning til targetboardet, og herefter måles outputspændingen fra henholdsvis pin VDDA og VDDD.  \newline
-Testen viser, at spændingen på pin VDDD er 3,11~V. Dermed overholder MCUen spændingsintervallet for pulssensoren. Det kan yderligere antages, at spændingsoutput vil være konstant og overholde kravene, så længe spændingsforsyningen til MCUen overholder de opstillede krav i \secref{krav_spaendingsf}.
+Ved testen koples de to outputpins fra henholdsvis VDDA og VDDD til et multimeter, som derved måler outputspæningen. Resultatet heraf ses i \tabref{tab:IC_spaending}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cc}
+		\hline
+		\cellcolor[HTML]{C0C0C0} Output pin & \cellcolor[HTML]{C0C0C0} Output spænding {[}V{]} \\ \hline
+		VDDA & 3,061 \\ \hline
+		VDDD & 3,059  \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses resultatet fra testen af MCUen som spændingsforsyning.}
+	\label{tab:IC_spaending}
+\end{table}\vspace{-0.2cm}
+Testen viser, at spændingen på pin VDDD er 3,059V og VDDA er 3,061~V. Dermed overholder MCUen spændingsintervallet for pulssensoren samt ICen. Det kan yderligere antages, at spændingsoutput vil være konstant og overholde kravene, så længe spændingsforsyningen til MCUen overholder de opstillede krav i \secref{krav_spaendingsf}.\\
+Efter testen blev det observeret, at gyroskopet ikke modtager tilstrækkeligt ampere fra MCUen, når enheden er tilkoblet ekstern spændingsforsyning, forsyner begge sensorer, behandler data og videresender via BLE. Dette vurderes, da ICen og MCUen lukker ned for kommunikation, når gyroskopet aktiveres i ICen. Derudover virker accelerometret ikke optimalt, når denne alene er aktiveret og tilkoplet MCUen. ICen tilkoples derfor den eksterne spændingsforsyning, som leverer 3,14~V til MCUen og nu også ICen. Dette overholder spændingskravet til ICen, og det blev observeret, at ved denne opsætning lukkede MCUen ikke ned for kommunikation. Denne opsætning accepteres derfor til videre implementering i det samlede system.
 
 %Mikrokontrollerens outputspændinger skal testes, således output pins i J1 og J2 rækken henholdsvis leverer 3,3 V og mellem 3 - 5 V. Resultatet fra testen beskrives i \tabref{tab:design_mikrokonsp}:
 %\begin{table}[H]
