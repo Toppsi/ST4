@@ -2,7 +2,7 @@
 Alle CY8CKIT-043 PSoC 4-M moduler besidder fem forskellige power modes: active, sleep, deep-sleep, hibernate og stop. Strømforbruget samt tiden det tager at vågne op fra tilstandene ses i \tabref{tab:Powermode} for PSoC 4200M. \citep{Semiconductor2016PowerMode}
 \begin{table}[H]
 	\centering
-	\begin{tabular}{ccc} \hline
+	\begin{tabular}{lcc} \hline
 		\rowcolor[HTML]{C0C0C0} 
 		Power Mode & \begin{tabular}[c]{@{}c@{}}Strømområde\\(Vdd = 3,3V til 5,0V) \end{tabular} &  \begin{tabular}[c]{@{}c@{}}Opvågningstid\\ for PSoC 4200M \end{tabular} \\ \hline
 		Active & 1,3mA til 14 mA & - \\ \hline
@@ -11,14 +11,14 @@ Alle CY8CKIT-043 PSoC 4-M moduler besidder fem forskellige power modes: active, 
 		Hibernate & 150 nA til 1$\mu$A & 0,7 ms \\ \hline
 		Stop & 20 nA til 80 nA & 2 ms \\ \hline
 	\end{tabular}%
-	\caption{I tabellen ses strømforbruget samt opvågningstiden for PSoC 4200M, som er den valgte MCUs target processor. (Modificeret) \citep{Semiconductor2016PowerMode}}
+	\caption{I tabellen ses strømforbruget samt opvågningstiden ved givne powermodes for PSoC 4200M. \citep{Semiconductor2016PowerMode} (Modificeret)}
 	\label{tab:Powermode}
 \end{table}\vspace{-0.2cm}
 Det kan ses på \tabref{tab:Powermode}, at mikroprocessorens strømforbrug afhænger af, hvor meget af indholdet i mikroprocessoren der gøres utilgængeligt, hvilket illustreres i \tabref{tab:aktiv_inaktiv_CPU}. Det kan derfor være fordelagtigt at køre i en lav strømforbrugende tilstand, hvis der benyttes et batteri til at forsyne MCUen. %Power moden har indflydelse på mikroprocessorens funktioner, hvorfor det ikke altid er fordelagtigt at fokusere for meget på lavt strømforbrug.
 En kort oversigt over aktivt og inaktivt indhold i mikroprocessoren ses i \tabref{tab:aktiv_inaktiv_CPU}. \citep{Semiconductor2016PowerMode}  % For eksempel er mikroprocessorens CPU kun aktiv, når power moden er indstillet til aktiv. Derudover er eksempelvis ADCen kun aktiv under de to power modes aktiv og sleep.\fxnote{Der findes en hel tabel inde på kilden over ting, som er aktive eller slukkede under de forskellige modes. Er det fint bare med disse to eksempler, som står i teksten, eller er der behov for at tabellen skal indsættes?} 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{cccccc} \hline
+	\begin{tabular}{lccccc} \hline
 		\rowcolor[HTML]{C0C0C0} 
 		Subsystem & Active & Sleep & Deep-sleep & Hibernate & Stop \\ \hline
 		CPU & Aktiv & Tilbageholdt & Tilbageholdt & Deaktiv & Deaktiv \\ \hline
@@ -32,7 +32,7 @@ En kort oversigt over aktivt og inaktivt indhold i mikroprocessoren ses i \tabre
 	\caption{I tabellen ses hvilke subsystemer, der er henholdsvis aktive, tilbageholdt, deaktive eller frosset under de fem forskellige power modes. Hvis en funktion tilbageholdes, fungerer dens centrale konfiguration ikke, men alle eksterne funktioner er aktive. Når GPIO er frosset, er alle pins låst og kan derfor ikke modtage input- eller sende outputinformation. (Modificeret) \citep{Semiconductor2016PowerMode}}
 	\label{tab:aktiv_inaktiv_CPU}
 \end{table}\vspace{-0.2cm}
-I sleep mode tilbageholdes CPUen, hvilket betyder at den venter på ethvert interrupt eller manuel genstart for at vågne op. RAMen bevares, men CPUen skriver eller læser ikke fra den, hvorfor den ikke kører sine instruktioner.\fxnote{Den sover ikke helt eller er ikke helt inaktiv - man kan sige, at den sover meget let, for den er til dels inaktiv, men den vækkes meget let.} Denne tilstand er fordelagtig til at reducere strømforbruget mellem hændelser som for eksempel AD-konvertering. \citep{Semiconductor2016PowerMode} \\
+I sleep mode tilbageholdes CPUen, hvilket betyder at den venter på ethvert interrupt eller manuel genstart for at vågne op. RAMen bevares, men CPUen skriver eller læser ikke fra den, hvorfor CPUen ikke kører sine instruktioner.\fxnote{Den sover ikke helt eller er ikke helt inaktiv - man kan sige, at den sover meget let, for den er til dels inaktiv, men den vækkes meget let.} Denne tilstand er fordelagtig til at reducere strømforbruget mellem hændelser som for eksempel AD-konvertering. \citep{Semiconductor2016PowerMode} \\
 Under deep-sleep er højfrekvente clocks deaktive, og da ADCen kræver sådanne clocks, er den ligeledes inaktiv under tilstanden. Deep-sleep mode kan benyttes, hvis høj performance i analoge eller digitale enheder ikke kræves for funktionen. Tilstanden deep-sleep kræver specifikke interrupts for at vågne, som for eksempel et I$^{2}$C eller GPIO interrupt, da disse operationssystemer er aktive og fortsat fungerer som slave. \citep{Semiconductor2016PowerMode} \\
 Når mikroprocessoren er i hibernate mode, er alle clocks og eksterne enheder deaktiveret. RAMen gemmes, men når et specifikt interrupt vækker mikroprocessoren, nulstilles og genstartes hele enheden. Denne tilstand kan vælges, hvis der kun er behov for periodiske opvågninger, og enheden skal bruge under 1$\mu$A strøm. \citep{Semiconductor2016PowerMode} \\
 Stop mode er den laveste strømforbrugende tilstand. Her modtager mikroprocessoren strøm, som bevarer logiske tilstande, men alt andet er deaktiveret. Kun én dedikeret pin kan vække enheden fra denne stop mode, hvorefter den nulstilles og genstarter. Stop mode kan benyttes, når enheden ikke skal slukkes helt men skal være i stand til at tænde igennem for eksempel en trykknap med input i den dedikerede pin. \citep{Semiconductor2016PowerMode}

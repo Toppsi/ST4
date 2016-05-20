@@ -9,7 +9,7 @@ Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i resultaterne
 
 \subsection{Spændingsforsyning} \label{krav_spaendingsf}
 MCUen påkræver en spændingstilkobling for at være funktionel, hvilket kan opnås gennem en USB port eller en ekstern spændingsforsyning.\\
-Den MCU som brugeren benytter skal derfor benytte en ekstern spændingsforsyning. Denne spændingsforsyning skal kunne forsyne MCUen i en hel dag samt være elektrisk sikker for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
+MCUen påsat brugeren skal derfor benytte en ekstern spændingsforsyning. Denne spændingsforsyning skal kunne forsyne MCUen i en hel dag samt være elektrisk sikker for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
 
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
@@ -35,7 +35,7 @@ Mikrokontrolleren skal:
 %Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
 For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være <211 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
 \begin{equation}
-220~[BPM] - Alder~[$År$] = $Maksimale puls$~[BPM]
+220~[BPM] - Alder~[\text{Å}r]~=~Maksimale~puls~[BPM]
 \end{equation}
 Samplingsfrekvensen bestemmes med antagelse om, at målgruppens maksimale puls er <211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, i henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
 

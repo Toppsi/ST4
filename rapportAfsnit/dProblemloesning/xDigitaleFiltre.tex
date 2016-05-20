@@ -2,8 +2,7 @@
 %Digitale filtre kan opnå tusinde gange bedre resultat end analoge filtre.
 
 Digitale filtre benyttes grundlæggende til to formål; adskillelse og genskabelse af signaler. Signaladskillelse %benyttes til at adskille signaler fra hinanden, hvilket ofte 
-benyttes ofte i forbindelse med at filtrere støj fra det ønskede signal.\fxnote{eksempelvis ved ekg eller hjertelyd, hvor vejrtrækning og andre kropssignaler/lyde skal fjernes} 
-Signalgenskabelse benyttes, hvis signalet er blevet beskadiget eller forvrænget. \fxnote{eksempelvis ved rystelser hvis måleudstyret er dårligt eller hvis ikke vi får sat den ordentlig fast på forsøgspersonen.} \citep{Smith1997}
+benyttes ofte i forbindelse med at filtrere støj fra det ønskede signal.\fxnote{eksempelvis ved ekg eller hjertelyd, hvor vejrtrækning og andre kropssignaler/lyde skal fjernes} Signalgenskabelse benyttes, hvis signalet er blevet beskadiget eller forvrænget. \fxnote{eksempelvis ved rystelser hvis måleudstyret er dårligt eller hvis ikke vi får sat den ordentlig fast på forsøgspersonen.} \citep{Smith1997}
 
 Ethvert lineært filter har en impulsrespons, steprespons og en frekvensrespons. Disse responser indeholder information om filteret på forskellig vis og giver tilsammen information om, hvordan filteret vil agerer i givne situationer.\fxnote{hvis en af disse er oplyst eller defineret for filteret, kan de to andre udregnes matematisk.} \citep{Smith1997} Et filter designes ud fra dets responser. Den mest ligetil metode kaldes filterkernen eller Finite Impulse Response (FIR) filtre, hvor signalets inputs summeres med filterets impulsrespons. En anden metode kaldes et rekursivt filter eller Infinite Impulse Response (IIR) filtre, hvor tidligere outputværdier benyttes sammen med inputtet. For at finde impulsresponsen for et rekursivt filter, indsendes en impuls som input i filtret, og impulsresponsen er outputtet. Denne impulsrespons består af en sum af sinuser, som eksponentielt falder i amplitude. Dette resulterer i, at impulsresponsen bliver uendelig lang. \citep{Smith1997,Blandford2013} \newline
 Et filter kan derudover designes ved, at filtrets steprespons eller frekvensrespons sammenholdes med sin impulsrespons. Stepresponsen er integralet af impulsresponsen, som kan findes ved at indsende en stepbølge i filteret. Outputtet heraf vil være stepresponsen. Frekvensresponsen kan findes ved at finde den diskrete Fourier transformationen (DFT) eller Fast Fourier transformationen (FFT) af impulsresponsen. \citep{Smith1997} %Resultatet af filterdesignet er typisk en overføringsfunktion i z-donæmet\fxnote{frekvensdomænet}. Ud fra denne kan filteret analyseres med henblik på at bestemme impulsresponsen, filterets stabilitet, steady-state frekvensrespons, differensformlen og responsen til et arbitrært input. \citep{Blandford2013} %I designfasen for filtre, startes der med at blive set på signalets frekvensspektrum, hvorved det vælges om der er behov for et lavpas-, højpas-, båndstop- eller båndpasfilter, og hertil også knækfrekvenserne for dem. Ud fra signalets frekvens, vælges også samplingshastigheden i henhold til Nyquist\fxnote{2 gange signalets frekvens}. Herefter vælges hvilken filtertype der egner sig bedst til systemet. \citep{Blandford2013}
@@ -24,8 +23,8 @@ en ulige orden og lige længde, men er også asymmetrisk. %Disse kan skrives som
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/bProblemloesning/FIR_type.png}
-	\caption{På figuren ses de fire typer af FIR filtre der findes. \citep{Burrus2016}}
+	\includegraphics[scale=0.5]{figures/bProblemloesning/FIR_type.png}
+	\caption{På figuren ses de fire typer af FIR filtre der finders. Yderligere illustreres ordenen, længden og symmetrien for de fire typer filtre. \citep{Burrus2016}}
 	\label{fig:FIR_typer}
 \end{figure}
 
@@ -59,4 +58,4 @@ Et IIR filter er, modsat FIR filtre, defineret som et digitalt filter med uendel
 	\label{eq:iir}
 \end{flalign}
 \space 
-IIR filtre optræder som forskellige filterkonfigurationer, heriblandt Butterworth, Chebyshev og elliptisk. Disse kan alle benyttes til lavpas-, højpas-, båndpas- eller båndstopfilter, og designes ud fra krav om ripples, linearitet, dæmpningsgrad og faseforskydelse. \citep{Blandford2013}
+IIR filtre optræder som forskellige filterkonfigurationer, heriblandt Butterworth, Chebyshev og elliptisk. Disse kan alle benyttes til lavpas-, højpas-, båndpas- eller båndstopfilter og designes ud fra krav om ripples, linearitet, dæmpningsgrad og faseforskydelse. \citep{Blandford2013}
