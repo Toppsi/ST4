@@ -1,4 +1,4 @@
-\section{Det samlede system}
+\section{Det samlede system}\label{sec:samlet_system}
 \textit{Dette afsnit omhandler test af det samlede system, hvis design og implementering består af indholdet fra de forrige blokke. Designet af det samlede system har til formål at opfylde de specifikke krav i \secref{krav_samlet_sys}.}
 
 Det samlede system består en række blokke, som tidligere er blevet designet, implementeret og testet for, hvorvidt disse blokke opfylder deres krav. Det fremgår af testene, at de separate blokke overholder de opstillede krav. Det samlede system sammensættes af hver enkelt blok og implementeres, som det fremgår af \figref{fig:design_blokdiagram}.% Det følgende afsnit vil derfor indebære en test af funktionaliteten for det samlede system i forhold til kravene opstillet i \secref{krav_samlet_sys}. 
@@ -24,29 +24,28 @@ Formålet med test af det samlede system er altså at undersøge, hvorledes diss
 %	\label{fig:samlede_system_opstilling}
 %\end{figure}
 
-Ved test af det samlede system skal en forsøgsperson udføre tre aktiviteter: gang med 4,8 km/t, løb med 11,3 km/t og cykling med 20,9 km/t. Hver aktivitet skal udføres med 10 sekunders baseline efterfulgt af en accelerationsfase og til slut 45 sekunders måling med konstant hastighed. Fremgangsmåden for test 1 af systemet ses herunder: 
+Ved test af det samlede system skal en forsøgsperson udføre tre aktiviteter: gang med 4,8 km/t, løb med 11,3 km/t og cykling med 20,9 km/t. Hver aktivitet skal udføres i 60 sekunder, og dataopsamlingen skal påbegyndes, når forsøgspersonen vurderer at have en homogen cyklus. Forinden tages en 60 sekunders måling, hvor forsøgspersonen står stille på løbebåndet. Det antages, at GUIen herved ikke vil optage nogen aktivitet. Fremgangsmåden for første test af systemet med gang ses herunder: 
 \begin{itemize}
 	\item GAP central og peripheral skal opdateres med korrekt algoritme på begge 4200M og EZ\_BLE mikroprocessorer.
 	\item GAP peripheral med IC og en spændingsforsyning skal placeres proximalt for den laterale malleolus.
 	\item GAP central kobles til en PC. 
-	\item En test af forbindelsen imellem GAP central og peripheral testes ved brug af Realterm på PCen.
-	\item GUI aktiveres herefter, hvorved datastreaming fra GAP peripheral visualiseres.
-	\item Forsøgspersonen skal stå oprejst med ret ryg, kigge ligeud og fødderne placeret parallelt på løbebåndet under 10 sekunders baseline måling.
-	\item Løbebåndet indstilles til en hastighed på 4,8 km/t. Forsøgspersonen går på løbebåndet indtil en konstant hastighed opnås.
-	\item Når en konstant hastighed er opnået, fortages en 45 sekunders måling.
+	\item Forsøgspersonen skal stå oprejst med ret ryg, kigge ligeud og fødderne placeret parallelt på løbebåndet under 60 sekunders måling uden fysisk aktivitet.
+	\item Herefter indstilles løbebåndet til en hastighed på 4,8 km/t. Forsøgspersonen går på løbebåndet indtil en homogen cyklus er opnået.  
+	\item Et stopur startes samtidig med GUI, hvorved datastreaming fra GAP peripheral visualiseres på PCen.
+	\item Dataopsamlingen skal foregå i 60 sekunder ifølge stopuret, hvorefter der trykkes på Q i MATLAB. Dette fryser figuren, således værdierne ved 60 sekunder kan aflæses.
 	\item Målingen stoppes.
 \end{itemize}
-Denne fremgangsmåde gentages to gange, hvor test 2 er for detektion af løb og test 3 er for detektion af cykling. Forsøgspersonen dog sidder på en motionscykel under detektion af cykling. Resultatet fra denne test fremkommer som en fordeling af aktiviteter på GUIen, der helst ikke skal opfange aktivitet under baseline målingerne. \\
-Resultatet fra testen ses i \tabref{tab:samlet_sys_test1}
+Denne fremgangsmåde gentages to gange, hvor anden test er for detektion af løb og tredje test er for detektion af cykling. Forsøgspersonen dog sidder på en motionscykel under detektion af cykling. Resultatet fra denne test fremkommer som en fordeling af aktiviteter på GUIen, der helst ikke skal opfange aktivitet under målingen med ingen fysisk aktivitet. \\
+Resultatet fra de forskellige tests ses i \tabref{tab:samlet_sys_test1}
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
-		Test nummer & \begin{tabular}[c]{@{}c@{}} Detektion \\ af gang {[}\%{[} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Detektion\\ af løb {[}\%{[}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Detektion \\ af cykling {[}\%{[}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Afvigelse {[}\%{[} \end{tabular} \\ \hline
-		1 & 0 & 100 & 0 & 100 \\ \hline
-		2 & 0 & 100 & 0 & 0 \\ \hline
-		3 & 0 & 0 & 100 & 0 \\ \hline
+		Udført aktivitet & \begin{tabular}[c]{@{}c@{}} Detektion \\ af gang {[}Min{[} \end{tabular} & \begin{tabular}[c]{@{}c@{}} Detektion\\ af løb {[}Min{[}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Detektion \\ af cykling {[}Min{[}\end{tabular} & \begin{tabular}[c]{@{}c@{}} Afvigelse {[}\%{[} \end{tabular} \\ \hline
+		Gang & 0 & 100 & 0 & 100 \\ \hline
+		Løb & 0 & 100 & 0 & 0 \\ \hline
+		Cykling & 0 & 0 & 100 & 0 \\ \hline
 	\end{tabular}%
 	\caption{I tabellen ses resultaterne fra de tre tests af det samlede system.}%mhandlede revurdering af algoritmens tærskelværdier, samt vurdering af pulssensor.}
 	\label{tab:samlet_sys_test1}
@@ -127,3 +126,6 @@ Det samlede system vil efter 2,05 timer have opbrugt tilpas spænding, således 
 Test af systemets levetid per batteri afkræfter dermed kravet heraf.
 
 Det samlede systems krav vedrørende et komfortabelt produkt for brugeren, samt bestå af et motiverende element for børn i aldersgruppen 9-12 år, blev ikke implementeret. Dette blev ikke implementeret, da systemet er en prototype, hvoraf fokus er på dets funktionalitet. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nye diskutterede ting under forsøget
+% Vi tager 1 minuts måling for hver person, hvor de ikke laver nogen aktivitet. Her påvises det, at der ikke detekteres nogen aktivitet. 
