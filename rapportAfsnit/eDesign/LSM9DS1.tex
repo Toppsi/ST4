@@ -54,19 +54,17 @@ MCUen kræver to eksterne pull-up modstande tilkoblet for at opsætte I$^{2}$C b
 
 I PSoC Programmer indhentes det analoge komponent I2CM. Denne skaber en I$^2$C forbindelse imellem MCUen og ICen samtidig med, at den indstiller MCUen til at være master. %Når PSoC Programmer benyttes til test af sensoren, er der ikke behov for flere komponenter, men hvis dataen skal sendes ind i eksempelvis matlab, kræver det et UART komponent. 
 Topdesignet for I2CM modulet konfigureres ydermere til at have sensorens SDA og SCL pins koblet til MCUen på de valgte pins.\\
-MCuen skal kunne modtage data fra sensoren, hvilket udførs ved at implementere en algoritme i MCUen. Algoritmen skriver til den hexadresse, som er registeradressens dataoutout for accelerometeret og gyroskopet. Således kan MCUen som master skrive til selve accelerometret eller gyroskopet. Der ønskes ydermere, at benytte en samplingsfrekvens på 476~Hz og et arbejdsområde på $\pm$16~g for accelerometeret. Det fremgår af registeret, at der skal skrives til hexadressen 'A8' for at konfigurere accelerometeret til disse indstillinger. Der benyttes dog ikke interrupt på MCUen til at sikre en samplingsfrekvens svarende til den konfigurerede på ICen. Derfor vil MCUen hente data ind hele tiden, hurtigere end ICen kan sample nye samples. Der skal derfor oprettes et delay på MCUen som sørger for, at der kun hentes data fra ICen med en frekvens på 476~Hz. Ved en frekvens på 476~Hz, er der 0,002101~sekunder mellem hver sample. For at kunne bestemme det delay som sikrer, at der samples med 476~Hz for MCUens vedkommende, da undersøges antallet af bytes modtaget uden delay. Real Term benyttes til at måle det antal karakterer som modtages over en periode på 30~sekunder. Yderligere er der tale om modtagelse at low byte og high byte. Det fremgår heraf, at Real Term modtager 109.521 karakterer på 30~sekunder. Det kan derfor bestemmes hvilken varighed der er mellem disse samples, hvilket fremgår af \eqref{}.
+MCuen skal kunne modtage data fra sensoren, hvilket udførs ved at implementere en algoritme i MCUen. Algoritmen skriver til den hexadresse, som er registeradressens dataoutout for accelerometeret og gyroskopet. Således kan MCUen som master skrive til selve accelerometret eller gyroskopet. Der ønskes ydermere, at benytte en samplingsfrekvens på 476~Hz og et arbejdsområde på $\pm$16~g for accelerometeret. Det fremgår af registeret, at der skal skrives til hexadressen 'A8' for at konfigurere accelerometeret til disse indstillinger. Der benyttes dog ikke interrupt på MCUen til at sikre en samplingsfrekvens svarende til den konfigurerede på ICen. Derfor vil MCUen hente data ind hele tiden, hurtigere end ICen kan sample nye samples. Der skal derfor oprettes et delay på MCUen som sørger for, at der kun hentes data fra ICen med en frekvens på 476~Hz. Ved en frekvens på 476~Hz, er der 0,002101~sekunder mellem hver sample. For at kunne bestemme det delay som sikrer, at der samples med 476~Hz for MCUens vedkommende, da undersøges antallet af bytes modtaget uden delay. Real Term benyttes til at måle det antal karakterer som modtages over en periode på 30~sekunder. Yderligere er der tale om modtagelse at low byte og high byte. Det fremgår heraf, at Real Term modtager 109.521 karakterer på 30~sekunder. Det kan derfor bestemmes hvilken varighed der er mellem disse samples, hvilket fremgår af \eqref{fucking_delay}.
 \begin{equation}
-\frac{1~sekund}{\left(\left(\frac{109.521~karakterer}{30~sekunder}\right)2\right)} = 0,000548~sekukunder
-\end{equation}
-Det ses, at der er 0,000548~sekunder mellem hver sample for MCUen, 
-
-delay(1553) mikro
-
-
-
-
-
-Yderligere fremgår det, at hexkoden '79' konfiguerer gyroskopet til de ønskede indstillinger på 2000~dps og en samplingsfrekvens på 119~Hz. \citep{STMicroelectronics2016}
+\frac{1~sekund}{\left(\frac{\frac{109.521~karakterer}{30~sekunder}}{2}\right)} = 0,000548~sekunder
+\end{equation} \label{fucking_delay}
+Det ses, at der er 0,000548~sekunder mellem hver sample for MCUen. Derfor er der en forskellen, mellem ICens og MCUens, varigheder mellem sample på:
+\begin{equation}
+0,002101~sekunder~-~0,000548~sekunder~=~0,001553~sekunder
+\end{equation} 
+Det fremgår af ovenstående ligning, at forskellen mellem de to varigheder er på 0,001553~sekunder. Derfor vil et delay i MCUens opsætning på 0,001553~sekunder medføre en tilsvarende samlingsfrekvens på 476~Hz på MCUen, i forhold til dataopsamling fra ICen.
+\\
+Ydermere fremgår det, at hexkoden '79' konfiguerer gyroskopet til de ønskede indstillinger på 2000~dps og en samplingsfrekvens på 119~Hz. \citep{STMicroelectronics2016}
 
 \subsection{Test}
 ICen testes med henblik på at undersøge ICens senorer og deres funktionalitet samt tilhørende afvigelser opstillet i henholdsvis \secref{krav:acc} og \secref{krav:gyro}. Kravene til accelerometeret og gyroskopet er som følger;
