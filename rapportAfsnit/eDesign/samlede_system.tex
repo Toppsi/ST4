@@ -57,7 +57,7 @@ Resultatet fra de forskellige tests ses i \tabref{tab:samlet_sys_test1}
 		\end{tabular}
 		\caption{I tabellen ses resultaterne fra de tre tests af det samlede system. Derudover er afvigelsen for hver detektion af fysisk aktivitet blevet udregnet.}
 		\label{tab:samlet_sys_test1}
-\end{table}
+\end{table}{-0.5cm}
 Der ses i \tabref{tab:samlet_sys_test1}, at GUIen optager mest gangsignal under gang, mest løbesignal under løb og udelukkende signal for cykling, når forsøgspersonen cyklede. Det fremgår ikke af tabellen, men for hver forsøgsperson ved stilstående måling blev der ikke detekteret nogen aktivitet af GUIen. \\
 Den største afvigelse i detektion af den bestemte aktivitet er på 5,13\%. Dermed overholder systemet kravet om, at der må være en maks afvigelse på 10\%. Der ses dog også i \tabref{tab:samlet_sys_test1}, at GUIen detekterer cirka 40 sekunders data $pm$1 sekund, selvom dataopsamlingen varer i 60 sekunder. Dette vurderes imidlertid ikke være en faktor, der gør, at systemet vurderes til at være ikke funktionel, da samtlige krav undtagen pulsdetektering opfyldes. Årsagen til at systemet tilsyndeladende ikke sampler en tredjedel af signalet vil blive forklaret og diskuteret i \secref{sec:diskussion}.
 
@@ -89,12 +89,36 @@ Denne fremgangsmåde testes yderligere, hvor forsøgspersonen skal løbe ved sam
 		\end{tabular}
 	\caption{I tabellen ses resultaterne fra en test, hvor forsøgspersonerne skulle henholdsvis gå eller løbe ved samme hastighed. Der ses yderligere, at afvigelserne ved en mellemting mellem gang og løb er betydeligt mere signifikante, end ved klar gang eller løb. Dette går især ud over detektering af aktiviteten gang.}
 	\label{tab:samletsys_8kmt}
-\end{table}
-Der ses i \tabref{tab:samletsys_8kmt}, at når tempoet for aktiviteten ikke er klar gang eller løb for forsøgspersonen, så vil den procentvise fordeling stige meget drastisk for gang data. Dette grunder i, at 8 km/t vurderes som værende meget rask gang fra hver forsøgsperson. Derfor vil g påvirkningen af accelerometerets y akse også blive påvirket med mere kræft end ved langsom gang. Der ses, at forsøgsperson 1 og 2 har lavere afvigelse for gangsignalet end forsøgsperson 3 til 5. Dette kan skyldes, at forsøgsperson 1 og 2 er mænd mens 3 til 5 er kvinder, hvor mændene er højere end kvinderne  Dette diskuteres ligeledes i \secref{sec:diskussion}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nye diskutterede ting under forsøget
-% Vi tager 1 minuts måling for hver person, hvor de ikke laver nogen aktivitet. Her påvises det, at der ikke detekteres nogen aktivitet.
+\end{table}{-0.5cm}
+Der ses i \tabref{tab:samletsys_8kmt}, at når tempoet for aktiviteten ikke er klar gang eller løb for forsøgspersonen, så vil den procentvise fordeling stige meget drastisk for gang data. Dette grunder i, at 8 km/t vurderes som værende meget rask gang fra hver forsøgsperson. Derfor vil g påvirkningen af accelerometerets y akse også blive påvirket med mere kræft end ved langsom gang. Der ses, at forsøgsperson 1 og 2 har lavere afvigelse for gangsignalet end forsøgsperson 3 til 5. Dette kan skyldes, at forsøgsperson 1 og 2 er mænd mens 3 til 5 er kvinder, hvor mændene er højere end kvinderne, har derved længere ben og muligvis en anden gangart end kvinderne. Dette diskuteres ligeledes i \secref{sec:diskussion}.
 
-
+Afslutningsvis testes spændingsforbruget af den eksterne spændingsforsyning, som beskrevet i \secref{spaendingsforsyning}. Dette gøres nu, da en test heraf kræver, at systemet er samlet og under brug for at give en mere realistisk måling. Testen foregik således, at den eksterne spændingsforsyning fik udskiftet batterier og herefter målt outputspændingsniveauet. Efterfølgende blev spændingsforbruget målt hver halve time under samlet systemtest. Der antages, at spændingsforbruget er lineært faldende, hvorfor en gennemsnitsværdi for forbrug per time udregnes. \\
+Spændingsforsyningen leverede 3,19 V fra starten af testen. Resultatet af de efterfølgende fem målinger ses i \tabref{tab:samlet_sys_batteri}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\cellcolor[HTML]{C0C0C0}Måling & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Spændingsniveau 1 time\\ inden måling {[}V{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Nuværende \\ spændingsniveau {[}V{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}Spændingsforbrug {[}V{]} \\ \hline
+		1 & 3,19 & 3,104 & 0,086 \\ \hline	
+		2 & 3,104 & 3,052 & 0,052 \\ \hline	
+		3 & 3,052 & 3,016 & 0,036 \\ \hline
+		4 & 3,016 & 2,969 & 0,047 \\ \hline
+		5 & 2,969 & 2,951 & 0,018 \\ \hline
+	\end{tabular}
+	\caption{I tabellen ses resultatet fra målingerne af spændingsforbruget for den eksterne spændingsforsyning. Der ses yderligere det beregnede spændingsforbrug for hver måling.}
+	\label{tab:samlet_sys_batteri}
+\end{table}\vspace{-0.5cm}
+I \tabref{tab:samlet_sys_batteri} ses spændingsforbruget over fem målinger med en halv times interval. Da det antages, at spændingsforbruget har et lineært forhold, bliver en gennemsnit beregnet i \eqref{eq:samlet_sys1}
+\begin{equation}
+\frac{0,086 + 0,052 + 0,036 + 0,047 + 0,018}{5} \cdot 2 = 0,0956~V
+\label{eq:samlet_sys1}
+\end{equation}
+Med antagelse af lineært forhold vil spændingsforsyningen falde med 0,0956 V per time. Da startspændingen var 3,19 V og den endelige spænding, hvormed MCUen ikke længere er funktionel, er 1,71 V, må det maksimale forbrug være $3,19 - 1,71 = 1,48$ V. Derfor er levetiden for den eksterne spændingsforsyning udregnet til:
+\begin{equation}
+\frac{1,48}{0,0956} = 15,481~timer.
+\label{eq:samlet_sys2}
+\end{equation}
+I \eqref{eq:samlet_sys2} ses det, at den eksterne spændingsforsyning teoretisk kan få det samlede sytem til at være funktionel i 15,481 timer. Derfor overholder det samlede system kravet om, at det skal besidde batterilevetid for en hel dag svarende til 15 timer.
 %
 %
 %\begin{table}[H]
