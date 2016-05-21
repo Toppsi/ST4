@@ -9,7 +9,7 @@ Hvis MATLAB registrerer accelerometerets ID, findes peakværdien til detektion a
 Registreres gyroskopets ID, som den første byte, påbegyndes databehandlingen for pakken bestående af anden og tredje byte. Denne databehandling foregår i MATLAB, som beskrevet i \secref{sec:algocykel}. Giver resultatet af en værdi over 70\%, overføres fire sekunder til tidsvariablen for cykling til GUIen.\\ 
 
 Hver aktivitet belønnes forskelligt, da cykling og løb har højere intensitetsniveau end gang. Herved stiger pulsen igennem disse aktiviteter, hvilket giver et andet fysiologisk udbytte end ved lav puls. Derfor omregnes tiden til point ved at multiplicere tiden for løb med 3, for cykling med 2 og for gang med 1.\\ 
-Pointene visualiseres i GUI ud for den enkelte aktivitet, hvorved barnet kan se, hvor mange point vedkommende har opnået ved udførsel af hver aktivitet igennem en hel dag. For at give barnet bedre visualisering af udført aktivitet over en periode summeres pointene for hver dag og plottes i en graf. Pointene vises grafisk som en søjle med individuelle farver for hver aktivitet, hvormed barnet yderligere kan se, hvor stor en del hver aktivitet har udgjort af dagens totale point.  
+Pointene visualiseres i GUI ud for den enkelte aktivitet, hvorved barnet kan se, hvor mange point vedkommende har opnået ved udførsel af hver aktivitet igennem en hel dag. For at give barnet bedre visualisering af udført aktivitet over en periode summeres pointene for hver dag og plottes i en graf. Pointene vises grafisk via tre søjler for hver aktivitet i individuelle farver, hvormed barnet yderligere kan se, hvor stor en del hver aktivitet har udgjort af dagens totale point.  
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{figures/cDesign/pseudo_GUI.png}
@@ -18,7 +18,7 @@ Pointene visualiseres i GUI ud for den enkelte aktivitet, hvorved barnet kan se,
 \end{figure}
 
 \subsection{Implementering}
-GUI implementeres ved at skabe en figur i MATLAB, hvori brugerens tid og point printes i en tabel for hver aktivitet. Derudover fremkommer en tabel, som visualiserer dagens samlede aktiviteter. Hertil plottes et søjlediagram over brugerens point for dagen, som plottes i tre forskellige farver alt efter aktiviteten. %Dette plottes for tre dages aktivitet således, at brugeren kan følge sin progression. 
+GUI implementeres ved at skabe en figur i MATLAB, hvori brugerens tid og point printes i en tabel for hver aktivitet. Derudover fremkommer en tabel, som visualiserer dagens samlede aktiviteter. Hertil plottes et søjlediagram over brugerens point for dagen, som plottes i tre forskellige søjler og farver alt efter aktiviteten. %Dette plottes for tre dages aktivitet således, at brugeren kan følge sin progression. 
 %GUI implementeres ved at anvende MATLABs funktion Graphical User Interface Design Environment (GUIDE). GUIDE er en funktion, der gør det muligt at lave en specifik brugerflade med indbyggede funktioner.
 
 Programmet starter idet der trykkes 'run' i MATLAB, hvorved indhentning af data fra mikrokontrolleren begynder. Programmet benytter, ved hjælp af if løkker, IDet for data til at adskille accelerometerdata og gyroskopdata. Er den første byte 2 i det indhentede array, registreres mikrokontrollerens data som værende accelerometerdata. Den anden og tredje byte i arrayet er en repræsentation af en pakke for hvor mange samples der er mellem hvert peak. Denne skal omregnes til minutter og lægges over i tidsvariablen for den pågældende aktivitet. Omregning udføres som det ses i \eqref{eq:tidsvariabel}. Den fjerde og femte byte angiver peakværdien, hvilken indikerer om aktiviteten er gang eller løb. \\
@@ -36,7 +36,7 @@ Pointvariabel = Tidsvariabel \cdot Aktivitetspoint
 \label{eq:pointvariabel}
 \end{equation}
 Tidsvariablen og pointvariablen for de enkelte aktiviteter lægges over i forskellige static text felter. Disse tilhører henholdsvis point og tid for de tre forskellige aktivitetstyper. Ydermere er der to forskellige static text, hvor der i den ene samles tidsvariablerne for hele dagen, og i den anden samles point opnået gennem hele dagen. \\
-Der implementeres et søjlediagram med faste axis værdier, hvor data plottes. I denne samles point fra gang, løb og cykling, som plottes oven på hinanden med forskellige farver. Dette gør det muligt at se, hvilke aktiviteter der er udført, og hvor mange point de summeret giver for en dag. I programmet er der aktiveret en timer, som gør det muligt at skifte til en ny dag efter 24 timer. Ved begyndelse på en ny dag nulstilles alle variabler, og der plottes i den næste dag.\\ 
+Der implementeres et søjlediagram med faste axis værdier, hvor data plottes. I denne samles point fra gang, løb og cykling, som plottes ved siden af hinanden med forskellige farver. Dette gør det muligt at se, hvilke aktiviteter der er udført, og hvor mange point de summeret giver for en dag. I programmet er der aktiveret en timer, som gør det muligt at skifte til en ny dag efter 24 timer. Ved begyndelse på en ny dag nulstilles alle variabler, og der plottes i den næste dag.\\ 
 Afslutningsvist kan programmet stoppes ved at der trykkes 'Q' på tastaturet. Herved stoppes dataindhentningen og optællingen af aktivitetstid samt tilhørende point, hvorfor figuren fryses og derefter lukkes. 
 
 \subsection{Test}
@@ -45,9 +45,9 @@ Testen udføres på baggrund af de opstillede krav og tilhørende tilladte afvig
 	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling.  
 \end{itemize}
 
-Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype.
-Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal trigge de forskellige aktiviteter. For gang indsendes [2 473(lowbyte) 473(highbyte) 1050(lowbyte) 1050(highbyte)], for løb indsendes [2 473(lowbyte) 473(highbyte) 1150(lowbyte) 1150(highbyte)] og for cykling indsendes [3 (simuleret_sinus)(lowbyte) simuleret_sinus(highbyte) ]. Gang og løb simuleres samtidig med et sekunds delay gennem forskellige arrays fra PSoC. Den simulerede sinus laves i MATLAB, hvorfra det direkte benyttes i GUI. Alle de simulerede data indsendes i MATLAB, hvor de hver har en varighed af 30 sekunder. \\
-Resultatet af GUIs design medfører at forskellige aktivitetsformer bidrager til en forskellig mængde point, grundet deres multiplikationsfaktor, hvilket kan ses i \eqref{eq:pointvariabel}. Resultatet af at sende de simulerede data gennem GUI ses i \tabref{test_GUI} og på \figref{fig:GUI2}. Derudover lægges point for de forskellige aktiviteter i et søjlediagram, hvilket ligeledes kan ses på \figref{fig:GUI2}.
+Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype. Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal ramme tærskelværdien og derved optælles som de forskellige aktiviteter. For gang indsendes [2 473(lowbyte) 473(highbyte) 1050(lowbyte) 1050(highbyte)], for løb indsendes [2 473(lowbyte) 473(highbyte) 1150(lowbyte) 1150(highbyte)] og for cykling indsendes [3 (simuleret\_sinus)(lowbyte) simuleret\_sinus(highbyte) ]. Gang og løb simuleres samtidig med et sekunds delay gennem forskellige arrays fra PSoC. Den simulerede sinus laves i MATLAB, hvorfra det direkte benyttes i GUI. Alt det simulerede data indsendes i MATLAB, hvor det hver har en varighed af 30 sekunder.
+
+Resultatet af GUIs design medfører, at forskellige aktivitetsformer bidrager til en forskellig mængde point grundet multiplikationsfaktoren, hvilket kan ses i \eqref{eq:pointvariabel}. Resultatet af at sende de simulerede data gennem GUI ses i \tabref{test:GUI} og på \figref{fig:GUI2}. Derudover lægges point for de forskellige aktiviteter i et søjlediagram, hvilket ligeledes kan ses på \figref{fig:GUI2}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -58,15 +58,14 @@ Resultatet af GUIs design medfører at forskellige aktivitetsformer bidrager til
 		Løb 	& 30 & 30 \\ \hline
 		Cykling & 30 & 30 \\ \hline
 	\end{tabular}
-	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
+	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point som resultat af den indsendte simulerede data.}
 	\label{test:GUI}
-\end{table}\vspace{-.5cm}
+\end{table}\vspace{-.2cm}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.7]{figures/cDesign/test_GUI.png}
-	\caption{På figuren ses et udklip af GUI en simulering af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
+	\includegraphics[scale=0.35]{figures/cDesign/test_GUI.png}
+	\caption{På figuren ses et udklip af GUI, hvor en simulering af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
 	\label{fig:GUI2}
-\end{figure}
-
-Efterfulgt af design, implementering og test af GUI, kan det konkluderes at denne opfylder kravene heraf. GUI er i stand til at visualisere tidsforbruget samt antal point opnået, for alle aktiviteterne. GUI opdaterede kontinuert i testen hver gang et nyt input blev indsendt, hvoraf kravet vedrørende opdatering af GUI mindst hvert femtende minut, ligeledes er opfyldt.
+\end{figure}\vspace{-.5cm}
+Efterfulgt af design, implementering og test af GUI kan det konkluderes, at denne opfylder kravene heraf. GUI er i stand til at visualisere tidsforbruget samt antal opnåede point for alle aktiviteterne. GUI opdaterede kontinuert i testen hver gang et nyt input bliver indsendt, hvoraf kravet vedrørende opdatering af GUI mindst hvert femtende minut ligeledes er opfyldt.
