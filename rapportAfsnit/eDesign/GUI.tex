@@ -45,30 +45,27 @@ Testen udføres på baggrund af de opstillede krav og tilhørende tilladte afvig
 	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling.  
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GAMMELT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Testen udføres ved at indsende kendte værdier, hvoraf hver aktivitet kan testes individuelt i forhold til multiplikation som følge af aktivitetstype.
-Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal trigge de forskellige aktiviteter. For gang indsendes [2 512 1050], for løb indsendes [2 512 1150] og for cykling indsendes [3 (35$\cdot$sin(2$\pi$)$\cdot$0,5$\cdot$(2t))+60) 4]. De forskellige aktiviteter simuleres 60$\cdot$6 gange, hvormed et simuleret signal på 6 minutter opnås.
-
-Resultatet af GUIs design gør at forskellige aktivitetsformer bidrager til en forskellig mængde point. Ligeledes er varigheden og intensiteten  af aktiviteten afgørende for mængden af opnåede point, på baggrund af deres multiplikationsfaktor, hvilket kan ses i \eqref{eq:pointvariabel}
+Igennem testen indsendes et datasæt med simuleret input fra algoritmen, som skal trigge de forskellige aktiviteter. For gang indsendes [2 473(lowbyte) 473(highbyte) 1050(lowbyte) 1050(highbyte)], for løb indsendes [2 473(lowbyte) 473(highbyte) 1150(lowbyte) 1150(highbyte)] og for cykling indsendes [3 (simuleret_sinus)(lowbyte) simuleret_sinus(highbyte) ]. Gang og løb simuleres samtidig med et sekunds delay gennem forskellige arrays fra PSoC. Den simulerede sinus laves i MATLAB, hvorfra det direkte benyttes i GUI. Alle de simulerede data indsendes i MATLAB, hvor de hver har en varighed af 30 sekunder. \\
+Resultatet af GUIs design medfører at forskellige aktivitetsformer bidrager til en forskellig mængde point, grundet deres multiplikationsfaktor, hvilket kan ses i \eqref{eq:pointvariabel}. Resultatet af at sende de simulerede data gennem GUI ses i \tabref{test_GUI} og på \figref{fig:GUI2}. Derudover lægges point for de forskellige aktiviteter i et søjlediagram, hvilket ligeledes kan ses på \figref{fig:GUI2}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
 		\hline
 		\rowcolor[HTML]{C0C0C0} 
 		Aktivitet 	& Forventet antal point & Optalt antal point \\ \hline
-		Gang 	&  6 & 6  \\ \hline
-		Løb 	& 18 & 18 \\ \hline
-		Cykling & 12 & 12 \\ \hline
+		Gang 	&  30 & 30  \\ \hline
+		Løb 	& 30 & 30 \\ \hline
+		Cykling & 30 & 30 \\ \hline
 	\end{tabular}
 	\caption{I tabellen ses sammenhængen mellem forventede antal point og optalt antal point, som resultat af den indsendte simulerede data.}
 	\label{test:GUI}
 \end{table}\vspace{-.5cm}
-På baggrund af testen, konkluderes det at GUIen fungerer efter hensigten. De forventede antal point og optalt antal point var nøjagtig det samme. Disse optjente point visualiseres i et søjlediagram som beskrevet i design. Varigheden af hver aktivitet visualiseres som en værdi, der summeres op hver gang et aktivitetsresultat bliver behandlet. Resultatet af at indsende det simulerede data afspejlet i GUI kan ses på \figref{fig:GUI2}\fxnote{lav ny figur!!!}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.7]{figures/cDesign/test_GUI.png}
-	\caption{På figuren ses et udklip af GUI hvor udførslen af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
+	\caption{På figuren ses et udklip af GUI en simulering af aktiviteterne gang, løb og cykling visualiseres. Aktiviteternes samlede antal point og udført varighed ses på figuren.}
 	\label{fig:GUI2}
 \end{figure}
 
