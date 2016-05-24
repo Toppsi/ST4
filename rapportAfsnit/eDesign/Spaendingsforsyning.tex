@@ -1,31 +1,20 @@
 \section{Spændingsforsyning}\label{spaendingsforsyning}
-\textit{Dette afsnit beskriver design, implementering og test af spændingsforsyningen til MCUen, der agerer som GAP peripheral. Dette gøres med henblik på at opfylde kravene til den eksterne spændingsforsyning, som ses i \secref{krav_spaendingsf}.}
-
-Design, implementering og test af spændingsforsyningen udføres med hensyn til de krav, der er opstillet i \secref{krav_spaendingsf}. \newline
-Denne komponent skal derfor kunne levere et spændingsoutput, som overholder MCUens inputspænding for aktivering samtidig med, at komponenten overholder krav til mobilitet og brugersikkerhed. Ydermere skal spændingsforsyningen kunne levere den påkrævede spænding i mindst 15 timer. \newline
-Den eksterne spændingsforsyning er en udleveret komponent, hvormed design af hardware ikke beskrives. 
-%-	Levere mindst 1,71 V og maks 5,5 V til MCU'en21. Der accepteres ikke en spænding
-%under minimumsgrænsen eller over maksimumsgrænsen.
-%-	Være i stand til at levere denne spænding i mindst 15 timer. Der accepteres ikke, at
-%spændingsforsyningen leverer under 1,71 V eller over 5,5 V i mindre end 15 timer.
-%-	Være mobil og dermed besidde en opsætning udenom elnettet, hvilket gør systemet mere
-%elektrisk sikkert. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke
-%være mobilt.
+\textit{Dette afsnit beskriver design, implementering og test af spændingsforsyningen til MCUen, der agerer GAP peripheral.}
 
 \subsection{Design}
-MCUen er funktionel ved en spændingstilførsel på 1,71-5,5~V \citep{Semiconductor20164200M,Semiconductor2016PRoC}. GAP central tilsluttes USB, hvormed den får en spænding på 5~V herigennem \citep{Semiconductor2016}. Derimod skal MCUen GAP peripheral tilkobles en spændingskilde, da denne skal være en ekstern enhed. Spændingsforsyningen skal derfor levere en spænding indenfor det foreskrevne interval. Ydermere vil det blot være MCUens targetboard, som er funktionel ved en ekstern spændingsforsyning.
+MCUen er funktionel ved en spændingstilførsel på 1,71-5,5~V \citep{Semiconductor20164200M,Semiconductor2016PRoC}. GAP central tilsluttes USB, hvormed den får en spænding på 5~V \citep{Semiconductor2016}. Derimod skal GAP peripheral tilkobles en ekstern spændingskilde. Spændingsforsyningen skal derfor levere en spænding indenfor det foreskrevne interval. Ydermere vil det blot være MCUens targetboard, som er funktionel ved en ekstern spændingsforsyning.
 
-Den eksterne spændingsforsyning er en batteriholder til to AAA 1,5~V batterier, som har tilkoblet jord og spændingsoutput. Denne komponent er dermed ikke tilkoblet elnettet, hvorfor der er minimal risiko for et farligt elektrisk shock. Yderligere er spændingsforsyningen mobilt, hvilket gør den anvendelig i et mobilt system.
+Den eksterne spændingsforsyning er en batteriholder til to AAA 1,5~V batterier, som har tilkoblet jord og spændingsoutput. Denne komponent er dermed ikke tilkoblet elnettet, hvorfor der er minimal risiko for et farligt elektrisk shock. Yderligere er spændingsforsyningen mobil, hvilket gør den anvendelig i et mobilt system.
 
 \subsection{Implementering}
-For at kunne forsyne targetboardet på GAP peripheral med spænding skal pins fra spændingsforsyningen forbindes med pins på MCUen. Spændingsforsyningens to pins (GND og V$_{out}$) bliver tilkoblet pinrække J1 på targeboardet, hvor pin VDD og GND bliver benyttet.
+For at kunne forsyne targetboardet på GAP peripheral skal spændingsforsyningens to ledninger forbindes med pins på MCUen. Spændingsforsyningens to ledninger (GND og Vout) bliver tilkoblet pinrække J1 på targeboardet, hvor pin VDDIO og GND bliver benyttet. De benyttede pins fremgår i \appref{MCU_stor}.
 
 \subsection{Test} 
-Testen udføres med henhold til de opstillede krav og tilhørende tilladte afvigelser opstillet i \secref{krav_spaendingsf}. Kravene beskriver, at spændingsforsyningen skal:
+Testen udføres på baggrund af de opstillede krav og tilhørende afvigelser opstillet i \secref{krav_spaendingsf}. Kravene beskriver, at spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71~V og maksimalt 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-	\item Levere spænding i intervallet 1,71-5,5~V i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
-	\item Være mobil og dermed besidde en opsætning som ikke involverer elnettet. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
+	\item Levere mindst 1,71~V og maksimalt 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for MCUen.}. Der accepteres ikke en spænding uden for grænseværdierne.
+	\item Levere minimum 1,71~V i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71~V i mindre end 15 timer.
+	\item Være mobil og dermed besidde en opsætning som ikke involverer elnettet. Der accepteres ikke en afvigelse i forhold til dette krav.
 \end{itemize}
-Det undersøges hvilket spændingsoutput den udleverede komponent har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at komponenten har et spændingsoutput på 3,14~V ved disse betingelser.\newline
-Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V. Hvorvidt spændingsforsyningen kan levere den pågældende spænding i dette tidsinterval undersøges i \secref{sec:samlet_system}. Det samlede system skal være funktionelt og komplet før endtest heraf kan fortages.
+Det undersøges hvilket output spændingsforsyningen har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at spændingsforsyningen har et output på 3,19~V ved disse betingelser.\newline
+Spændingsforsyningen overholder dermed kravet om, at levere en spænding til MCUen i intervallet 1,7-5,5~V. Hvorvidt spændingsforsyningen kan levere den pågældende spænding i dette tidsinterval undersøges i \secref{sec:samlet_system}. Det samlede system skal være funktionelt og komplet før en test kan foretages.
