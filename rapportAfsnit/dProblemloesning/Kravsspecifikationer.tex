@@ -1,61 +1,57 @@
 \section{Kravspecifikationer}\label{Sec:krav}
-\textit{I det følgende afsnit vil kravene til systemets blokke blive beskrevet. Kravene tager udgangspunkt i pilotforsøget samt den underbyggende teori. Det opstilles ligeledes afvigelser til opstillede krav, som sikrer systemet opfylder de tiltænkte formål. Kravene er benyttes senere til at designe, implementere og teste systemets blokke, samt det samlede system.}
+\textit{Det følgende afsnit beskriver kravene til systemets blokke. Disse tager udgangspunkt i pilotforsøget samt den underbyggende teori. Der opstilles ligeledes afvigelser til opstillede krav, som sikrer systemet opfylder de tiltænkte formål. Kravene benyttes til design, implementering og test af systemets blokke samt det samlede system.}
 
 Formålet med aktivitetsmåleren er at kunne detektere og adskille aktivitetsformerne gang, løb og cykling. Aktivitetsmåleren vil dermed indeholde hardware og software, som tilsammen kan opsamle analoge signaler og udføre digital signalbehandling. Det samlede system skal have et potentiale til at opfylde de funktionelle krav for systemet, beskrevet i \secref{funktionellekrav}. \\
-Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i resultaterne fra de udførte pilotforsøg, hvilke er opsummeret i \secref{opsamling_pilot}.
-%
-%\subsection{Krav til hardware}
-%Aktivitetsmålerens hardware består af to sensorer, spændingsforsyning og en ADC. Disse elementer benyttes til en signalopsamling og -konvertering, hvoraf det digitale signal efterfølgende bliver behandlet af aktivitetsmålerens software.
+Endvidere vil nedenstående kravspecifikationer tage udgangspunkt i resultaterne fra de udførte pilotforsøg, hvilke ses i \appref{pilot}.
 
 \subsection{Spændingsforsyning} \label{krav_spaendingsf}
-MCUen påkræver en spændingstilkobling for at være funktionel, hvilket kan opnås gennem en USB port eller en ekstern spændingsforsyning.\\
-MCUen påsat brugeren skal derfor benytte en ekstern spændingsforsyning. Denne spændingsforsyning skal kunne forsyne MCUen i en hel dag samt være elektrisk sikker for brugeren. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
+MCUen påkræver en spændingstilkobling for at være funktionel, hvilket kan opnås gennem en USB port eller en ekstern spændingsforsyning. Den benyttede MCU er funktionel i et spændingsinterval på 1,71-5,5~V.\\
+MCUen påsat brugeren skal derfor benytte en ekstern spændingsforsyning. Denne spændingsforsyning skal kunne forsyne MCUen i en hel dag samt være elektrisk sikker for brugeren. Det vurderes, at målgruppen er vågne i 15 timer om dagen. %Det samlede system skal benytte elektroniske komponenter, hvorfor en spændingsforsyning er nødvendig. Spændingsforsyningen skal tage hensyn til mobilitet samt brugersikkerhed.
 
 \textbf{Krav til spændingsforsyning} \newline 
 Spændingsforsyningen skal:
 \begin{itemize}
-	\item Levere mindst 1,71~V og maksimalt 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-	\item Levere spænding i intervallet 1,71-5,5~V i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71 V eller over 5,5~V i mindre end 15 timer.
-	\item Være mobil og dermed besidde en opsætning som ikke involverer elnettet. Der accepteres ikke, at systemet skal kobles til elnettet og derved ikke være mobilt.
+	\item Levere mindst 1,71~V og maksimalt 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for mikroprocessoren.}. Der accepteres ikke en spænding uden for grænseværdierne.
+	\item Levere minimum 1,71~V i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71~V i mindre end 15 timer.
+	\item Være mobil og dermed besidde en opsætning som ikke involverer elnettet. Der accepteres ikke en afvigelse i forhold til dette krav.
 \end{itemize}
 
 \subsection{Mikrokontroller} \label{krav_mikro_spaending}
-En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til ICen samt pulssensoren, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_design_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til ICen samt pulssensoren, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_de_im_te_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
 
-\textbf{Krav til mikrokontrolleren} \newline 
+\textbf{Krav til mikrokontroller} \newline 
 Mikrokontrolleren skal:
 \begin{itemize}
-	\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
-	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding under minimumsgrænsen eller over maksimumsgrænsen.
+	\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding uden for grænseværdierne.
+	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding uden for grænseværdierne.
 \end{itemize}
 
-\subsection{Analog til Digital konverter} \label{krav_adc}
+\subsection{Analog-til-digital konverter} \label{krav_adc}
 %Pilotforsøget undersøgte frekvensområdet for de pågældende aktiviteter, i forhold til de sensorer som er påtænkt til at detektere den givne aktivitet.\newline
-For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være <211 BPM. Dette er med udgangspunkt i beregningen, at en persons maksimale puls bestemmes ved: \citep{CooperBlair2005} 
+For at sikre at der registreres en valid puls for brugeren af systemet, skal den beregnede puls være mindre end 211 BPM. Dette er med udgangspunkt i beregningen af en persons maksimale puls, som bestemmes ved: \citep{CooperBlair2005} 
 \begin{equation}
-220~[BPM] - Alder~[\text{Å}r]~=~Maksimale~puls~[BPM]
+220~-~Alder~=~Maksimal~puls
 \end{equation}
-Samplingsfrekvensen bestemmes med antagelse om, at målgruppens maksimale puls er <211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, i henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}
+Samplingsfrekvensen bestemmes med antagelse om, at målgruppens maksimale puls er mindre end 211, hvilket svarer til 3,5 hjerteslag i sekundet. Derfor skal samplingsfrekvensen konfigureres til 35~Hz, i henhold til en praktisk samplingsfrekvens som er 10 gange større end den maksimale frekvens for det optagede signal. \citep{Webster2011}\\
+Det digitale signal skal være konverteret repræsentativt for at opnå en valid gengivelse af det analoge signal.
 
-\textbf{Krav til analog til digital konverter} \newline
+\textbf{Krav til analog-til-digital konverter} \newline
 ADCen skal:
 \begin{itemize}
 	\item Sample pulssensorens output med mindst 35~Hz. Der accepteres ikke en samplingsfrekvens under 35~Hz. 
-	\item Repræsentere det analoge signal med maksimalt 5\% afvigelse. 
+	\item Repræsentere det analoge signal korrekt. Der accepteres en maksimal afvigelse på 5\%. 
 \end{itemize}
 
 \subsection{Accelerometer}\label{krav:acc}
-% Et accelerometer kræver en given spænding for at kunne optage data. Accelerometret i  LSM9DS1 kræver 3,3 V for at være operativt. %Sensoren skal være i stand til at optage data ved tilførslen af en DC spænding med baggrund i spændingsforsyningens krav. Arbejdsområdet for et accelerometer er angivet i g, og er derfor påvirkelig overfor den accelerationen som sensoreren udsættes for. Den påvirkning som udøves på sensoren er dermed afhængig af flere faktorer såsom vægt, bevægelsens hastighed og bevægelsens mønster. \newline
 ICen, LSM9DS1, vælges til dette projekt, idet specifikationerne for denne overholder de ønskede formål. Sensoren beskrives yderligere i \secref{sec_design_LSM9DS1}. \\
-Accelerometret i LSM9DS1 benyttes til at detektere gang og løb, hvis frekvensområde er cirka 45~Hz, som det ses i \appref{pilot}. Ifølge Nyquist skal accelerometeret på ICen have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde. %ICen skal derfor sample accelerometeret med 90~Hz \citep{Webster2011}.
-I praksis benyttes dog en samplingshastighed, der er ti gange større end det maksimale frekvensområde. Derfor skal ICens ADC have en samplingsfrekvens på mindst 450~Hz for accelerometret. Det kan dog være fordelagtig at oversample, da dette giver mindre støj på signalet, da Nyquist frekvensen derved rykkes og fjerner aliasing. \citep{Webster2011} \\
-Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation, n=4, med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med mere end 16~g. 
+Accelerometret i LSM9DS1 benyttes til at detektere gang og løb, hvor frekvensområdet er cirka 45~Hz. Ifølge Nyquist skal accelerometeret på ICen have en samlingshastighed, der er dobbelt så stor som det maksimale frekvensområde. I praksis benyttes dog en samplingshastighed, der er ti gange større end det maksimale frekvensområde. Derfor skal ICens ADC have en samplingsfrekvens på mindst 450~Hz for accelerometret. Det kan dog være fordelagtig at oversample, idet Nyquist frekvensen rykkes og fjerner aliasing. \citep{Webster2011} \\
+Pilotforsøget viste en maksimal acceleration på +16,95 g og -8,83 g. Den maksimale positive g-værdi antages derfor som værende den største acceleration, som accelerometret vil blive påvirket af som prototype. Dog er pilotforsøget udført på en forsøgspopulation, n=4, med voksne mennesker. Det antages derfor, at den gennemsnitlige vægt er større end målgruppens, hvorfor et barn ikke vil kunne påvirke accelerometret med mere end 16~g.\fxnote{Vi vil ikke miste noget ved, at den måler over 16 g - det er ikke relevant for os, da signalet skal overskride en tærskelværdi for at kunne detekteres.}
 
 \textbf{Krav til accelerometer} \newline 
 Accelerometeret skal:
 \begin{itemize}
-\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke et arbejdsområde på under $\pm$16~g.
-\item Angive korrekt g påvirkning under kontrollerede forhold. Der accepteres en afvigelse på 5\%.
+\item Have et arbejdsområde på $\pm$16 g. Der accepteres ikke et mindre arbejdsområde.
+\item Angive korrekt g-påvirkning under kontrollerede forhold. Der accepteres en afvigelse på 5\%.
 \item ICens ADC skal have en samplingsfrekvens på mindst 450~Hz. Der accepteres ikke en samplingsfrekvens under 450~Hz.
 \end{itemize}
 
@@ -79,66 +75,59 @@ Yderligere skal pulssensoren kunne opfange brugerens pulssignaler med henblik p�
 \textbf{Krav til pulssensor og tilhørende algoritme} \newline
 Pulsmåleren skal:
 \begin{itemize}
-%\item Være operativ mellem 3 V og 5 V. Der accepteres ikke, at pulssensoren modtager en spænding under minimumsgrænsen eller over maksimumsgrænsen.\fxnote{MCUen leverer ca. 4,6 V fra sin VDD output}% eller ikke er funktionel i dette spændingsinterval.
-\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse af pulsen på 10\%.
+\item Kunne detektere brugerens puls ved fysisk aktivitet. Der accepteres en afvigelse på 10\%.
 \end{itemize}
-%
-%\subsection{Krav til software}
-%Aktivitetsmålerens software består af algoritmedesign til MCUens mikroprocessorer 4200M og EZ-BLE PRoC på henholdsvis GAP central og GAP peripheral, hvilket giver fire algoritmedesigns. Derudover skal disse to enheder kommunikere med hinanden, og en GUI designes for at give brugeren en visualisering af det behandlede data.
 
 \subsection{Algoritme til detektion af fysisk aktivitet} \label{krav_algoritme}
-To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til deres BLE forbindelse. Dette opnås via et standard kodeeksempel fra Cypress, som skal debugges på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en PC skal være GAP central. \\
-Algoritmedesignet består af to algoritmer, som kan detektere henholdsvis gang og løb og cykling. Heraf skal den ene algoritme benyttes til detektering af gang og løb ved hjælp af data fra accelerometeret, mens den anden algoritme benyttes til detektering af cykling ved hjælp af data fra gyroskopet. Det vurderes på baggrund af data fra pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere forskellen mellem aktiviteterne. Derudover fremgår det, at peaket for hælnedslag har større amplitude under løb end ved gang, hvorfor en mulighed for detektion og adskillelse herimellem kunne være at indsætte en tærskelværdi. Ligeledes ses det, at procentfordelingen af frekvensindhold centreres omkring én frekvens ved cykling, mens det ved gang og løb centreres omkring flere frekvenser, hvorfor denne information kan benyttes til adskillelse af cykling fra gang og løb. 
+To MCUer skal agere som henholdsvis GAP central og GAP peripheral i forhold til BLE forbindelsen. Dette opnås ved brug af et standard kodeeksempel fra Cypress, som skal programmeres på hver af de to BLE PRoC på MCUerne. Enheden, som skal optage data fra brugeren, skal agere som GAP peripheral, mens MCUen tilkoblet en computer skal være GAP central. \\
+Algoritmedesignet består af to algoritmer: en algoritme til detektering af gang og løb samt en algoritme til detektering af cykling. Heraf skal den ene algoritme benyttes til detektering af gang og løb ved hjælp af data fra accelerometeret. Den anden algoritme benyttes til detektering af cykling ved hjælp af data fra gyroskopet. Det vurderes på baggrund af pilotforsøget i \appref{pilot}, at signalerne kræver databehandling førend en algoritme kan detektere aktiviteterne. Derudover fremgår det, at peaket for hælnedslag har større amplitude under løb end ved gang. En mulighed for detektion og adskillelse af aktiviteterne er at indsætte en tærskelværdi. Ligeledes ses det, at procentfordelingen af frekvensindhold centreres omkring én frekvens ved cykling, mens det ved gang og løb centreres omkring flere frekvenser. Denne information benyttes til adskillelse af cykling fra gang og løb. 
 
 \textbf{Krav til algoritme til detektering af gang og løb} \newline 
-Algoritmedesignet skal:
+Algoritmen til detektering af gang og løb skal:
 \begin{itemize}
 	\item Behandle data fra accelerometret, således hælnedslag fremstår som et markant peak.
-	\item Være i stand til at detektere gang og løb ved brug af tærskelværdier. Det accepteres ingen afvigelse ved detektering af den pågældende aktivitet.
+	\item Være i stand til at detektere gang og løb ved brug af tærskelværdier. Det accepteres ikke, at systemet ikke kan detektere og adskille gang og løb fra cykling.
 \end{itemize}
 
 \textbf{Krav til algoritme til detektering af cykling} \newline 
-Algoritmedesignet skal:
+Algoritmen til detektering af cykling skal:
 \begin{itemize}
 	\item Behandle data fra gyroskopet, således frekvensindholdet fra signalet fremstår.
 	\item Være i stand til at detektere cykling ved procentfordeling af frekvensindhold. Det accepteres ikke, at systemet ikke kan detektere og adskille cykling fra gang og løb.
 \end{itemize}
 
 \subsection{Trådløs kommunikation via Bluetooth Low Energy}\label{krav_BLE}
-Den trådløse kommunikation mellem GAP Central og GAP Peripheral skal foregå ved brug af BLE. Denne type trådløse kommunikation er den implementerede på den udleverede MCU, hvorfor denne ikke er mulig at ændre.\\
-De to enheder skal ydermere kunne sende data til hinanden indenfor en afstand på 3 meter. \fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter}. 
+Den trådløse kommunikation mellem GAP Central og GAP Peripheral skal foregå ved brug af BLE. Denne type trådløse kommunikation benyttes på baggrund af, at den er implementeret på MCUen.\\
+De to enheder skal ydermere kunne sende data til hinanden indenfor en afstand på 2 meter. \fxnote{Bloetooth er maksimalt 100 meter, mens BLE er maksimalt 10 meter. 2 meter er valgt, fordi der vurderes, at der maks er 2 meter fra en computer til sensoren.} 
 
 \textbf{Krav til den trådløse kommunikation via Bluetooth Low Energy} \newline 
 Den trådløse kommunikation skal:
 \begin{itemize}
-%	\item Foregå via BLE imellem de to GAP peripheral og GAP central. Der accepteres ikke andre former for trådløs kommunikation.
-	\item Være i stand til at sende data indenfor en rækkevidde på 3 meter. Der accepteres ikke en kortere rækkevidde.
+	\item Være i stand til at sende data indenfor en rækkevidde på 2 meter. Der accepteres ikke en kortere rækkevidde.
 \end{itemize}
 
 \subsection{Grafisk Bruger Interface}\label{krav_GUI}
-GUIen skal være en motiverende faktor for brugeren, da denne netop skal motivere målgruppen til et øget fysisk aktivitetsniveau. Den skal visualisere tiden og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. %Hvert 15. minutter kan interfacet opdateres, da GAP peripheral afsender data til GAP central i dette tidsinterval.
+GUIen skal være en motiverende faktor for brugeren, idet denne skal motivere målgruppen til et øget fysisk aktivitetsniveau. Den skal visualisere tiden og intensiteten af henholdsvis gang, løb og cykling i løbet af en dag. Tiden og intensiteten omregnes til point, som skal visualiseres.
 
 \textbf{Krav til Grafisk Bruger Interface} \newline 
 GUIen skal:
 \begin{itemize}
-	\item Kunne visualisere tidsforbruget og point opnået ved henholdsvis gang, løb og cykling. 
-%	\item Være i stand til at opdatere interfacet senest hvert 15. minut, hvis dette ønskes af brugeren. Der accepteres en forsinkelse på 5 minutter.
+	\item Kunne visualisere tidsforbruget, intensitet og point opnået ved henholdsvis gang, løb og cykling. Der accepteres inden andre former for visualisering.
 \end{itemize}
 
 \subsection{Det samlede system} \label{krav_samlet_sys}
 Kravene til det samlede system er med antagelse om, at de enkelte blokke overholder de opstillede krav.\\
-Kravene hertil vil derfor tage udgangspunkt i \secref{funktionellekrav} med accepterede afvigelser. Men eftersom systemet anses som en prototype vurderes det, at nogle krav fra \secref{funktionellekrav} ikke kan testes og dermed muligvis ikke opfyldes. %Dette blev ikke implementeret, da systemet er en prototype, hvoraf fokus er på dets funktionalitet. 
-Eksempelvis er det inden for projektperioden ikke muligt at teste for, om systemet er komfortabelt og motiverende for børn i aldersgruppen 9-12 år.
+Kravene hertil vil derfor tage udgangspunkt i \secref{funktionellekrav} med accepterede afvigelser. Systemet anses som værende en prototype. Det vurderes derfor, at nogle krav fra \secref{funktionellekrav} ikke kan testes og muligvis ikke kan opfyldes. Eksempelvis er det inden for projektperioden ikke muligt at teste for, om systemet er komfortabelt og motiverende for børn i aldersgruppen 9-12 år.
 
 \textbf{Krav til det samlede system} \newline
 Det samlede system skal:
 \begin{itemize}
-	\item Kunne detektere aktiviteterne gang, løb og cykling ved brug af gyroskop og accelerometer. Der accepteres ikke brug af andre sensorer.
+	\item Kunne detektere aktiviteterne gang, løb og cykling ved brug af et gyroskop og et accelerometer. Der accepteres ikke brug af andre sensorer.
 	\item Kunne lave automatisk adskillelse af gang, løb og cykling ved hjælp af algoritmer. Der accepteres en afvigelse på 10\% i forhold til fejlvurdering af aktivitet og varighed.
-	\item Kunne detektere puls ved brug af pulssensor og tilhørende algoritme samt derefter kategorisere intensiteten af en given aktivitet. Der accepteres en pulsafvigelse på 10\%.
+	\item Kunne detektere puls ved brug af pulssensor og tilhørende algoritme samt derefter kategorisere intensiteten af en given aktivitet. Der accepteres en afvigelse på 10\%.
 	\item Videresende signaler til en ekstern enhed ved hjælp af BLE. Der accepteres ikke andre trådløse kommunikationsformer.
 	\item Besidde batterilevetid for en hel dag svarende til 15 timer. Der accepteres ikke en batterilevetid på mindre end 15 timer.
-	\item Repræsentere varigheden og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering. 
+	\item Repræsentere varigheden og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering.	
 \end{itemize}
 
 %Afspejling af en eventuel motiverende faktor, 
