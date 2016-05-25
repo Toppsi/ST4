@@ -221,15 +221,6 @@
   Owner                    = {LineSofie}
 }
 
-@Electronic{CenterforDiseaseControlandPrevention2015,
-  Title                    = {The Benefits of Physical Activity},
-  Author                   = {CenterforDiseaseControlandPrevention},
-  Url                      = {http://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#ControlWeight},
-  Year                     = {2015},
-
-  Owner                    = {MortenLarsen}
-}
-
 @Article{Cho2015,
   Title                    = {Performance analysis of device discovery of Bluetooth Low Energy (BLE) networks},
   Author                   = {Cho, Keuchul and Park, Gisu and Cho, Wooseong et. al.},
@@ -367,6 +358,15 @@
   Url                      = {https://www.ieee.li/pdf/viewgraphs/introduction_to_ble_system_design.pdf}
 }
 
+@Electronic{CenterforDiseaseControlandPrevention2015,
+  Title                    = {The Benefits of Physical Activity},
+  Author                   = {Center for Disease Control and Prevention},
+  Url                      = {http://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#ControlWeight},
+  Year                     = {2015},
+
+  Owner                    = {MortenLarsen}
+}
+
 @Electronic{DiseaseControl2015,
   Title                    = {About Child and Teen BMI},
   Author                   = {Centers for Disease Control and Prevention},
@@ -381,7 +381,7 @@
 
 @Article{Ekelund2015,
   Title                    = {Physical activity and all-cause mortality across levels of overall and abdominal adiposity in European men and women: the European Prospective Investigation into Cancer and Nutrition Study},
-  Author                   = {Ekelund, Ulf et. al.},
+  Author                   = {Ekelund, Ulf and Ward, Heather A. and Norat et. al., Teresa},
   Journal                  = {the American Society for Nutrition},
   Year                     = {2015},
 
@@ -617,7 +617,7 @@
 
 @Article{Kiens2007,
   Title                    = {Fysisk inaktivitet – konsekvenser og sammenhænge},
-  Author                   = {Kiens, Bente and Beyer, Nina and Brage, Søren et. al.},
+  Author                   = {Kiens, Bente and Beyer, Nina and Brage et. al., Søren},
   Journal                  = {Motions- og Ernæringsrådet, Sundhedsstyrrelsen},
   Year                     = {2007},
 
@@ -988,8 +988,7 @@
   Journal                  = {Postgraduate Medical Journal},
   Year                     = {2006},
 
-  Doi                      = {10.1136/pgmj.2005.043836},
-  Url                      = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2563774/}
+  Doi                      = {10.1136/pgmj.2005.043836}
 }
 
 @Article{Reshma2002,
@@ -1311,17 +1310,6 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.05.06},
   Url                      = {https://cdn.sparkfun.com/assets/learn_tutorials/3/7/3/LSM9DS1_Datasheet.pdf}
-}
-
-@Article{Strohrmann2011,
-  Title                    = {Out of the Lab and Into the Woods: Kinematic Analysis in Running Using Wearable Sensors},
-  Author                   = {Strohrmann, Christina and Harms, Holger and Troster et. al., Gerhard},
-  Journal                  = {Ubiquitous Computing 2011},
-  Year                     = {2011},
-
-  Doi                      = {10.1145/2030112.2030129},
-  Owner                    = {Cecilie},
-  Timestamp                = {2016.05.24}
 }
 
 @Electronic{Sundhedsministeriet2007,

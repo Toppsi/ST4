@@ -105,9 +105,9 @@ I \tabref{tab:samlet_sys_batteri} ses spændingsforbruget over fem målinger med
 \frac{(0,086 + 0,052 + 0,036 + 0,047 + 0,018)~V}{5 \text{målinger}} \cdot 2 = \text{0,0956~V/t}
 \label{eq:samlet_sys1}
 \end{equation}
-Med antagelse af lineært forhold vil spændingsforsyningen falde med 0,0956 V per time. Spændingen ved start er 3,19 V og den endelige spænding, hvormed MCUen ikke længere er funktionel, er 1,71 V. Det maksimale spændingsinterval er derfor $3,19~V - 1,71~V = 1,48~V$. Derfor er levetiden for den eksterne spændingsforsyning udregnet til:
+Med antagelse af lineært forhold vil spændingsforsyningen falde med 0,0956 V per time. Spændingen ved start er 3,19 V og den endelige spænding, hvormed MCUen ikke længere er funktionel, er 1,71 V. Det maksimale spændingsinterval er derfor $3,19~V - 2,40~V = 0,79~V$. Derfor er levetiden for den eksterne spændingsforsyning udregnet til:
 \begin{equation}
-\frac{1,48~V}{0,0956~V/t} = \text{15,481~t}
+\frac{0,79~V}{0,0956~V/t} = \text{8,3~t}
 \label{eq:samlet_sys2}
 \end{equation}
-I \eqref{eq:samlet_sys2} ses det, at den eksterne spændingsforsyning teoretisk kan få det samlede sytem til at være funktionel i 15,481 timer. Derfor overholder det samlede system kravet om, at det skal besidde batterilevetid til 15 timer. 
+I \eqref{eq:samlet_sys2} ses det, at den eksterne spændingsforsyning teoretisk kan få det samlede sytem til at være funktionel i 8,3 timer. Derfor overholder det samlede system ikke kravet om, at det skal besidde batterilevetid i op til 15 timer. 
