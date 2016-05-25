@@ -36,7 +36,7 @@ Efter konfigurering af UART og ADC i topdesignet skal de korrekte pins indstille
 Med udgangspunkt i ovenstående elementer bliver der implementeret en algoritme til pulsdetekteringen, som det ses på \figref{fig:puls_pseudo_c}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{figures/cDesign/Puls_ckode.png}
+	\includegraphics[scale=0.4]{figures/cDesign/Pulssensor.png}
 	\caption{På figuren ses et flowchart over pulssensorens algoritme udført i C kode. Data fra pulssensoren AD konverteres, hvorefter en signalbehandling muliggør en detektering af pulsen. Afslutningsvis sendes den beregnede puls med BLE og benyttede variabler nulstilles. Når data er klar, startes proceduren forfra.}
 	\label{fig:puls_pseudo_c}
 \end{figure} \vspace{-.25cm}
@@ -61,7 +61,7 @@ Algoritmen er bestemt til at nulstille time counteren hver gang der registreres 
 Ved at indsende det simulerede signal fremgår det af \figref{fig:timecounter_puls_realterm}, hvordan time counteren nulstilles, når der er registreret fem tilfælde. Ydermere ses det i \tabref{tab:test_puls_realterm}, at Realterm har printet de forventede værdier for pulsen.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.34]{figures/cDesign/puls_taerskel.png}
+	\includegraphics[scale=0.34]{figures/cDesign/timecounter_puls_pic.png}
 	\caption{På figuren ses algoritmens time counter, som tæller op, indtil en sample på det femte pulsslag er gået under tærskelværdien. Efterfulgt af dette vil time counteren nulstilles og genstarte optælling af samples.}
 	\label{fig:timecounter_puls_realterm}
 \end{figure}\vspace{-.25cm}
