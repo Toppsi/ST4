@@ -17,12 +17,12 @@ Spændingsforsyningen skal:
 \end{itemize}
 
 \subsection{Mikrokontroller} \label{krav_mikro_spaending}
-En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til ICen samt pulssensoren, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_de_im_te_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
+En specifik, udleveret MCU benyttes til udarbejdelsen af rapporten. Der kan derfor ikke stilles krav til selve hardwaren hertil. Dog skal MCUen fungere som spændingsforsyning til et integrated circuit (IC) samt en pulssensor, hvorfor der skal stilles krav hertil. I \secref{sec_design_LSM9DS1} og \secref{sec_de_im_te_puls} beskrives de specifikke sensorer for dette projekt, hvorfor spændingsforsyningen hertil er bestemt.
 
 \textbf{Krav til mikrokontroller} \newline 
 Mikrokontrolleren skal:
 \begin{itemize}
-	\item Levere mindst 1,9~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding uden for grænseværdierne.
+	\item Levere mindst 2,4~V til maksimalt 3,6~V til ICen. Der accepteres ikke en spænding uden for grænseværdierne.
 	\item Levere mindst 3~V til maksimalt 5~V til pulssensoren. Der accepteres ikke en spænding uden for grænseværdierne.
 \end{itemize}
 
@@ -129,33 +129,3 @@ Det samlede system skal:
 	\item Besidde batterilevetid for en hel dag svarende til 15 timer. Der accepteres ikke en batterilevetid på mindre end 15 timer.
 	\item Repræsentere varigheden og pointfordelingen af en given aktivitet i GUI. Der accepteres ikke en anden form for visualisering.	
 \end{itemize}
-
-%Afspejling af en eventuel motiverende faktor, 
-%	- Vise data fra en hel dag. 
-%Notes: 
-%- Trådløs overførsel af data
-%	- BLE
-%	- Mellem GAP Central og GAP Peripheral
-%- Algoritmedesign 
-%	- Aktivitet
-%		- Detektere gang 
-%			- (Detektere skridt)
-%		- Detektere løb
-%			- (Detektere skridt)
-%		- Detektere cykling
-%		- Detektere puls 
-%		- Adskillese af ovenstående
-%		- Digital filtrering 
-%	- Strømbesparelse 
-%		- Lowpower mode
-%		- Gyroskop vs. accelerometer
-%- MATLAB GUI
-%	- Afspejling af en eventuel motiverende faktor, 
-%	- Vise data fra en hel dag. 
-%Aktivitetsmålerens software skal:
-%\begin{itemize}
-%\item Anvende digitale filtre til filtrering.
-%\item Detektere og adskille aktiviteterne; gang, løb og cykling. 
-%\item Trådløs overførsel.
-%\item Gemme en hel dags aktiviteter. 
-%\end{itemize}
