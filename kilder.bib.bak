@@ -3,9 +3,10 @@
 
 
 @Electronic{DTU2014,
-  Title                    = {Transportvaneundersøgelsen},
+  Title                    = {Transportvane undersøgelsen},
   Author                   = {DTU transport},
   Organization             = {DTU transport, Institut for transport},
+  Url                      = {http://www.modelcenter.transport.dtu.dk/Transportvaneundersoegelsen/TU-udgivelser/Faktaark-om-boern-og-unges-transportvaner-2014},
   Year                     = {2014},
 
   Owner                    = {Frederik}
@@ -102,7 +103,8 @@
   Journal                  = {Idrættens analyseinstitut},
   Year                     = {2013},
 
-  Owner                    = {Frederik}
+  Owner                    = {Frederik},
+  Url                      = {http://www.idan.dk/vidensbank/downloads/danskernes-motions-og-sportsvaner-2011/5f85b653-3bc0-4749-a385-a1b10098a64a}
 }
 
 @Manual{Badiger2016,
@@ -437,6 +439,15 @@
   Comment                  = {ISBN: 978-87-7899-121-8}
 }
 
+@Electronic{GjensidigeForsikring2014,
+  Title                    = {Antallet af smartphones og tablets i skolen stiger og stiger},
+
+  Address                  = {https://www.gjensidige.dk/om-os/presse/_attachment/55079?_ts=147c4e28b98},
+  Author                   = {Gjensidige Forsikring},
+  Url                      = {https://www.gjensidige.dk/om-os/presse/pressearkiv/_attachment/55079?_ts=147c4e28b98},
+  Year                     = {2014}
+}
+
 @Electronic{Fuhu_tech2015,
   Title                    = {Tech Specs},
   Author                   = {Fuhu, inc.},
@@ -457,15 +468,6 @@
 
   Owner                    = {Line Hald},
   Timestamp                = {2016.02.25}
-}
-
-@Electronic{GjensidigeForsikring2014,
-  Title                    = {Antallet af smartphones og tablets i skolen stiger og stiger},
-
-  Address                  = {https://www.gjensidige.dk/om-os/presse/_attachment/55079?_ts=147c4e28b98},
-  Author                   = {GjensidigeForsikring},
-  Url                      = {https://www.gjensidige.dk/om-os/presse/pressearkiv/_attachment/55079?_ts=147c4e28b98},
-  Year                     = {2014}
 }
 
 @Article{Goodrich2013,
@@ -498,18 +500,6 @@
   Owner                    = {Cecilie},
   Timestamp                = {2016.04.12},
   Url                      = {ISBN: 978-1608075799}
-}
-
-@Electronic{Heartratejournal2015,
-  Title                    = {The Myth of Losing Weight in Fat Burning Zones},
-  Author                   = {HeartRateJournal},
-  Month                    = {November},
-  Organization             = {Heart Rate Journal},
-  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
-  Year                     = {2015},
-
-  Owner                    = {Cecilie},
-  Timestamp                = {2016.02.25}
 }
 
 @Electronic{Hjerteforeningen,
@@ -580,6 +570,18 @@
   Year                     = {2016},
 
   Owner                    = {LineSofie}
+}
+
+@Electronic{Heartratejournal2015,
+  Title                    = {The Myth of Losing Weight in Fat Burning Zones},
+  Author                   = {Heart Rate Journal},
+  Month                    = {November},
+  Organization             = {Heart Rate Journal},
+  Url                      = {http://www.heartratejournal.com/the-myth-of-losing-weight-in-fat-burning-zones/},
+  Year                     = {2015},
+
+  Owner                    = {Cecilie},
+  Timestamp                = {2016.02.25}
 }
 
 @Book{JuelSoerensenBroennum-Hansen2006,
@@ -735,7 +737,7 @@
 @Article{Marin-PerianuMarin-Perianu2013,
   Title                    = {A performance analysis of a wireless body-area network monitoring system for professional cycling},
   Author                   = {Marin-Perianu, Raluca and Marin-Perianu, Miahi and Havinga et al., Paul},
-  Journal                  = {Springer},
+  Journal                  = {Springerlink},
   Year                     = {2013},
 
   Doi                      = {10.1007/s00779-011-0486-x},
@@ -1465,7 +1467,7 @@
   Year                     = {2011},
   Edition                  = {4},
 
-  Doi                      = {978-0471676003},
+  Comment                  = {ISBN: 978-0471676003},
   Owner                    = {mortenlarsen}
 }
 
