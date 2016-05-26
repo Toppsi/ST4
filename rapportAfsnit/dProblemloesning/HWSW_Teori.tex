@@ -89,7 +89,7 @@ En CY8CKIT-043 PSoC 4-M besidder 32 interrupt linjer (IRQ), IRQ[0] til og med IR
 Inden et interrupt er programmet i tread mode, hvilket ses på \figref{fig:interrupt}. Når et interrupt finder sted, vil en pin gå høj, og processoren overfører information til den nuværende stack. Dette kaldes for stacking, hvilket får main filen til at gå i handler mode. Her skifter pointeren også stilling fra Main Stack Pointer (MSP) til Process Stack Pointer (PSP). Dette betyder, at den pågældende funktion gemmes og sættes på pause. Det er derved muligt at vende tilbage til præcis samme sted i processen efter interruptet. Koden for ISR eksekveres, hvorefter pinen lægges ned igen og unstacking foregår. Main filen går igen i tread mode, pointeren skifter til MSP og hovedarbejdet fortsættes.~\citep{Tanenbaum2006,Badiger2016}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.68]{figures/bProblemloesning/interrupt.png}
+	\includegraphics[scale=0.61]{figures/bProblemloesning/interrupt.png}
 	\caption{På figuren ses effekten af et interrupt. Det fremgår, at et interrupt afbryder CPUens main rutine, for dermed at eksekvere den kode som er tilhørende ISR. Når ISR er udført vender CPUen tilbage til eksekveringen af main rutinen.~\citep{Tanenbaum2006}}
 	\label{fig:interrupt}
 \end{figure}\vspace{-0.25cm}

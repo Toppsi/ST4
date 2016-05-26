@@ -16,7 +16,7 @@ Sensorens opbygning fremgår af \figref{fig:IC_pins}, hvor der er fire pins på 
 De fire pins på venstre side af ICen bliver benyttet til spændingstilkobling samt til at læse sensorens outputdata. GND og VDD er pins til henholdsvis jord og spændingsforsyning, mens SDA er I$^2$C datapin, hvor data bliver sendt og modtaget. SCL er en seriel clock, der blandt andet sørger for synkron dataopsamling.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.3]{figures/cDesign/accelerometeret.png}
+	\includegraphics[scale=0.23]{figures/cDesign/accelerometeret.png}
 	\caption{Figuren viser pinkonfigurationen af LSM9DS1.~\citep{Jimb02016}~(Modificeret)}
 	\label{fig:IC_pins}
 \end{figure}\vspace{-0.25cm}
@@ -33,7 +33,7 @@ For at kunne benytte I$^{2}$C bussen er det yderligere påkrævet at kode ICen, 
 \end{figure}\vspace{-0.25cm}
 Det fremgår af \figref{Fig:master_slave}, at MCUen skriver en startkode (ST) til ICen for at påbegynde kommunikationen mellem master og slave. Herefter skriver masteren en adresse til slaven (SAD + W) for at starte kommunikationen. Slaven godkender (SAK) oprettelsen af kommunikationen, hvorefter masteren sender en adresse (SUB) til slaven, som bestemmer hvorfra sensoren skal sende data. Når slaven har godkendt (SAK) dette, hentes data over på masteren (DATA). Slaven fortæller, at én byte er sendt (SAK). Afslutningsvist skriver masteren en stop kode til slaven (SP), hvorefter kommunikationen afbrydes.
 
-Gyroskopet i LSM9DS1 forbruger 4~mA og accelerometeret forbruger 0,6~mA, når begge sensorer benyttes under normale forhold~\citep{Jimb02016}\fxnote{hvor Vdd er forsynet med 2,2~V og temperaturen er 25 grader}. For at sikre en høj batterilevetid, er det væsentligt at gyroskopet er aktiveret så kort tid som muligt. Det fremgår af databladet for ICen, at det er muligt at slukke begge sensorer, at benytte accelerometeret alene eller benytte accelerometeret og gyroskopet sammen. Der kan yderligere spares strøm ved brug af gyroskopet, hvis der vælges en lavere samplerate. Disse apspekter vil blive omtalt i \secref{sec:diskussion} samt \secref{sec:perspektivering}\\ % alt efter hvor 
+Gyroskopet i LSM9DS1 forbruger 4~mA og accelerometeret forbruger 0,6~mA, når begge sensorer benyttes under normale forhold~\citep{Jimb02016}\fxnote{hvor Vdd er forsynet med 2,2~V og temperaturen er 25 grader}. For at sikre en høj batterilevetid, er det væsentligt at gyroskopet er aktiveret så kort tid som muligt. Det fremgår af databladet for ICen, at det er muligt at slukke begge sensorer, at benytte accelerometeret alene eller benytte accelerometeret og gyroskopet sammen. Der kan yderligere spares strøm ved brug af gyroskopet, hvis der vælges en lavere samplerate. Disse apspekter vil blive omtalt i \secref{sec:diskussion} samt \secref{sec:perspektivering} % alt efter hvor 
  
 \subsection{Implementering}
 MCUen kræver to eksterne pull-up modstande tilkoblet for at opsætte I$^{2}$C bussen, hvilket fremgår af \secref{design_lsm}. To eksterne modstande på 4,7~$k\Omega$ forbinder henholdsvis SCL og VDD samt SDA og VDD, hvilket gør I$^{2}$C bussen tilgængelig for dataoverførsel.

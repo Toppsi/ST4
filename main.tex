@@ -1,6 +1,7 @@
 % !TeX spellcheck = da_DK
 %implementing document formatting:
 \input{preambleNy.tex}
+\raggedbottom
 \input{macros.tex}
 \begin{document}
 
@@ -39,7 +40,7 @@
 \input{rapportAfsnit/cProblemanalyse/motivation_boern}
 \input{rapportAfsnit/cProblemanalyse/aktivitetsmaalere_til_boeren}
 \input{rapportAfsnit/cProblemanalyse/Problemformulering}
-
+\cleardoublepage
 \chapter{Problemløsning}\vspace{-.75cm}
 \input{rapportAfsnit/dProblemloesning/xLoesningsstrategi}
 \input{rapportAfsnit/dProblemloesning/xFunktionelle_krav}
@@ -53,20 +54,20 @@
 \input{rapportAfsnit/dProblemloesning/xDigitaleFiltre}
 \input{rapportAfsnit/dProblemloesning/opsamling_pilotforsoeg}
 \input{rapportAfsnit/dProblemloesning/Kravsspecifikationer}
-
+\cleardoublepage
 \chapter{Design, implementering og test}\vspace{-.75cm}
 \input{rapportAfsnit/eDesign/Opstart}
 \input{rapportAfsnit/eDesign/Spaendingsforsyning}
-\input{rapportAfsnit/eDesign/Mikrokontroller}
+\input{rapportAfsnit/eDesign/Mikrokontroller} \clearpage
 \input{rapportAfsnit/eDesign/ADC}
-\input{rapportAfsnit/eDesign/LSM9DS1}
+\input{rapportAfsnit/eDesign/LSM9DS1} \clearpage
 \input{rapportAfsnit/eDesign/Pulssensor}
 \input{rapportAfsnit/eDesign/ny_algo_gang_loeb}
 \input{rapportAfsnit/eDesign/algoritme_cykling}
 \input{rapportAfsnit/eDesign/Bluetooth}
 \input{rapportAfsnit/eDesign/GUI}
 \input{rapportAfsnit/eDesign/samlede_system}
-
+\cleardoublepage
 \chapter{Syntese}\vspace{-.75cm}
 \input{rapportAfsnit/fSyntese/Diskussion}
 \input{rapportAfsnit/fSyntese/Konklusion}
@@ -78,7 +79,7 @@
 \bibliographystyle{unsrtnat}
 \bibliography{kilder}
 \endgroup
-
+\cleardoublepage
 \begin{appendices}
 	\input{rapportAfsnit/qBilag/pilotforsoeg}
 	\input{rapportAfsnit/qBilag/MCU}

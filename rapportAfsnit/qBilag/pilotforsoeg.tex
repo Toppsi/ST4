@@ -96,7 +96,7 @@ Forud for pilotforsøgets målinger blev Shimmer3 kalibreret og testet. For at u
 Når Shimmer3 er placeret i en kalibreringsboks på et bord med henblik på en respektiv akse, bør accelerometeret blive påvirket med $\pm$1~g, mens de resterende akser ikke bør påvirkes.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.68]{figures/qBilag/kalibreringsdata}
+	\includegraphics[width=1\textwidth]{figures/qBilag/kalibreringsdata}
 	\caption{På figuren ses kalibreringsdataene tilhørende accelerometerets x-, y- og z-akse.}
 	\label{fig:Ap_Kalibrering}
 \end{figure}
@@ -235,7 +235,7 @@ Databehandling tager udgangspunkt i de maksimale værdier fra placering A. Dette
 Gyroskopets data viser ligeledes, at det er muligt at benytte placering A, da denne viser at cykling ikke resulterer i en høj dps. På baggrund af dette vil der i det resterende databehandling tages udgangspunkt i placering A, som kan ses i fem sekunders interval for hver af de fire forsøgspersoner på \figref{raa_data}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.38]{figures/qBilag/raa_data}
+	\includegraphics[width=1\textwidth]{figures/qBilag/raa_data}
 	\caption{På figuren ses det ubehandlede data fra de tre aktivitetstyper gang, løb og cykling, hvoraf data for gang og løb er fra accelerometret mens data for cykling er fra gyroskopet ved placering A.}
 	\label{raa_data}
 \end{figure}\vspace{-.25cm}
@@ -244,7 +244,7 @@ Gyroskopets data viser ligeledes, at det er muligt at benytte placering A, da de
 Dataene fra aktiviteterne gang og løb behandles for at bestemme signalernes frekvensindhold. Resultatet af dette muliggør bestemmelsen af samplingsfrekvensen vedrørende accelerometeret og gyroskopet. Der foretages en frekvensdomæne analyse, hvilket muliggør visualisering af signalets magnitude ved forskellige frekvenser, hvoraf energien af signalet kommer til udtryk.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{figures/qBilag/fft_f1_loeb}
+	\includegraphics[width=1\textwidth]{figures/qBilag/fft_f1_loeb}
 	\caption{På figuren ses frekvensdomænet af aktiviteten løb for forsøgsperson 1. Den fuldstændige magnitude for de lave frekvenser vises ikke til fulde. Hvis dette skulle være tilfældet ville de mindste magnituder på figuren blive udskalleret.}
 	\label{fig:Ap_FFt}
 \end{figure}\vspace{-.25cm}
@@ -253,7 +253,7 @@ Frekvensdomæneanalysen vises kun for løb af F1, da frekvensspektrummet er stø
 Data fra aktiviteten, cykling behandles for at bestemme signalernes frekvensindhold, med henblik på bestemmelsen af samplingsfrekvensen vedrørende gyroskopet.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{figures/qBilag/cykling_frekvens}
+	\includegraphics[width=1\textwidth]{figures/qBilag/cykling_frekvens}
 	\caption{På figuren ses frekvensdomænet af aktiviteten cykling for alle forsøgspersoner. Den fuldstændige magnitude for de lave frekvenser vises ikke til fulde. Hvis dette skulle være tilfældet ville de mindste magnituder på figuren blive udskalleret.}
 	\label{fig:Ap_cyklingfrekvens}
 \end{figure}\vspace{-.25cm}
@@ -262,14 +262,14 @@ Data fra aktiviteten, cykling behandles for at bestemme signalernes frekvensindh
 Dataene fra aktiviteten gang og løb behandles med henblik på bestemmelse af signalets karakteristika, således en sammenligning og senere algoritmedesign muliggøres. Dataene fra accelerometerets y-akse blev for alle forsøgspersoner lavpasfiltreret ved 45~Hz grundet frekvensspektret på \figref{fig:Ap_FFt}. Derudover blev signalet differentieret, hvorved områderne med størst hældningskoefficient kommer til udtryk. Herigennem fremhæves hælnedslag og tåafsæt, idet disse events har en stor hældning.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/qBilag/gang_diff}
+	\includegraphics[width=1\textwidth]{figures/qBilag/gang_diff}
 	\caption{På figuren ses det filtrerede og differentierede data fra aktiviteten gang for alle forsøgspersoner.}
 	\label{fig:Ap_gangdiff}
 \end{figure}\vspace{-.25cm}
 Det ses på \figref{fig:Ap_gangdiff}, at hælnedslag og tåafsæt fremgår tydligere end på \figref{raa_data} for både gang og løb. Ydermere ses det på \figref{fig:Ap_loebdiff}, at amplituderne for hælnedslag og tåafsæt øges ved løb.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/qBilag/loeb_diff}
+	\includegraphics[width=1\textwidth]{figures/qBilag/loeb_diff}
 	\caption{På figuren ses det filtrerede differentierede data fra aktiviteten løb for alle forsøgspersoner.}
 	\label{fig:Ap_loebdiff}
 \end{figure}\vspace{-.25cm}
@@ -278,21 +278,21 @@ Det ses på \figref{fig:Ap_gangdiff}, at hælnedslag og tåafsæt fremgår tydli
 Dataene fra aktiviteterne gang, løb og cykling behandles med henblik på bestemmelse af signalets karakteristika. Dette udføres ved at sammensætte forsøgspersonernes data, således en sammenligning muliggøres. Aktiviteterne gang og løb behandles for at sikre dette ikke har tilsvarende karakteristika som cykling, med henblik på algoritmedesign. Dataene behandles med henblik på gyroskopets z-akse, som resultat af \secref{bevaegelse}. Dette kan ses på \figref{fig:Ap_cykling1}, \figref{fig:Ap_cykling2} og \figref{fig:Ap_cykling3}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/qBilag/gang_gyro}
+	\includegraphics[width=1\textwidth]{figures/qBilag/gang_gyro}
 	\caption{På figuren ses dataene fra gang ved 4,8 km/t fra de fire forsøgspersoner. Dataene er fra gyroskopets z-akse.}
 	\label{fig:Ap_cykling1}
 \end{figure}\vspace{-.25cm}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/qBilag/loeb_gyro}
+	\includegraphics[width=1\textwidth]{figures/qBilag/loeb_gyro}
 	\caption{På figuren ses dataene fra løb ved 11,3 km/t fra de fire forsøgspersoner. Dataene er fra gyroskopets z-akse.}
 	\label{fig:Ap_cykling2}
 \end{figure}\vspace{-.25cm}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/qBilag/cykling_gyro}
+	\includegraphics[width=1\textwidth]{figures/qBilag/cykling_gyro}
 	\caption{På figuren ses dataene fra cykling ved 20,9 km/t fra de fire forsøgspersoner. Dataene er fra gyroskopets z-akse.}
 	\label{fig:Ap_cykling3}
 \end{figure}\vspace{-.25cm}
