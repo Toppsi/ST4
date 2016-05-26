@@ -102,7 +102,7 @@ Spændingsforsyningen leverede 3,19 V fra starten af testen. Resultatet af de ef
 \end{table}\vspace{-.25cm}
 I \tabref{tab:samlet_sys_batteri} ses spændingsforbruget over fem målinger med en halv times interval. Det antages, at spændingsforbruget har et lineært forhold, bliver en gennemsnit beregnet i \eqref{eq:samlet_sys1}.
 \begin{equation}
-\frac{(0,086 + 0,052 + 0,036 + 0,047 + 0,018)~V}{5 \text{målinger}} \cdot 2 = \text{0,0956~V/t}
+\frac{(0,086 + 0,052 + 0,036 + 0,047 + 0,018)~V}{5~\text{målinger}} \cdot 2 = \text{0,0956~V/t}
 \label{eq:samlet_sys1}
 \end{equation}
 Med antagelse af lineært forhold vil spændingsforsyningen falde med 0,0956 V per time. Spændingen ved start er 3,19 V og den endelige spænding, hvormed MCUen ikke længere er funktionel, er 1,71 V. Det maksimale spændingsinterval er derfor $3,19~V - 2,40~V = 0,79~V$. Derfor er levetiden for den eksterne spændingsforsyning udregnet til:
