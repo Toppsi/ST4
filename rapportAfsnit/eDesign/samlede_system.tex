@@ -22,21 +22,21 @@ Formålet med testen af det samlede system er at undersøge, hvorledes de rester
 	\caption{På figuren ses henholdsvis opsætningen af den perifere del af det endelige system på en forsøgsperson samt det samlede system taget ud af holderen. Det ses, at EZ\_BLE modulet er frit tilgængeligt i bunden til venstre i selve opsætningen.}
 	\label{fig:samlede_system_opstilling}
 \end{figure}\vspace{-.25cm}
-Ved test af det samlede system skal en forsøgsperson udføre tre aktiviteter: gang med 4,8~km/t, løb med 11,3~km/t og cykling med 20,9~km/t. Hver aktivitet skal udføres i 60 sekunder, og dataopsamlingen skal påbegyndes, når forsøgspersonen vurderer at have en homogen cyklus. Forinden tages en 60 sekunders måling, hvor forsøgspersonen står stille på løbebåndet. Fremgangsmåden for første test af systemet med gang ses herunder: 
+Ved test af det samlede system skal en forsøgsperson udføre tre aktiviteter: gang med 4,8~km/t, løb med 11,3~km/t og cykling med 20,9~km/t. Hver aktivitet skal udføres i 60~sekunder, og dataopsamlingen skal påbegyndes, når forsøgspersonen vurderer at have en homogen cyklus. Forinden tages en 60~sekunders måling, hvor forsøgspersonen står stille på løbebåndet. Fremgangsmåden for første test af systemet med gang ses herunder: 
 \begin{itemize}
 \item GAP peripheral med IC og en spændingsforsyning placeres proximalt for den laterale malleolus, som ses på \figref{fig:samlede_system_opstilling}.
 \item GAP central kobles til en computer.
 \item Forsøgspersonen skal opnå en homogen cyklus på løbebåndet, som indstilles til 4,8~km/t. 
 \item Et stopur startes samtidig med GUI.
-\item Efter 60 sekunder på stopuret stoppes målingen.
+\item Efter 60~sekunder på stopuret stoppes målingen.
 \end{itemize}
-Dette forsøg udføres for gang og løb, hvorefter testen vedrørende cykling udføres. Fremgangsmåden er tilsvarende for cykling, hvoraf denne aktivitet udføres på en motionscykel. Resultatet fra denne test forekommer som en fordeling af aktiviteter i GUIen, som ikke bør opfange andre aktiviteter end den udførte aktivitet. GUI bør ligeledes registrere 60 sekunder af hver aktivitet, hvis algoritmen fungerer efter hensigten. \\
+Dette forsøg udføres for gang og løb, hvorefter testen vedrørende cykling udføres. Fremgangsmåden er tilsvarende for cykling, hvoraf denne aktivitet udføres på en motionscykel. Resultatet fra denne test forekommer som en fordeling af aktiviteter i GUIen, som ikke bør opfange andre aktiviteter end den udførte aktivitet. GUI bør ligeledes registrere 60~sekunder af hver aktivitet, hvis algoritmen fungerer efter hensigten. \\
 Resultatet fra de forskellige tests ses i \tabref{tab:samlet_sys_test1}
 \begin{table}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
 	\begin{tabular}{ccccccc}
-			\cellcolor[HTML]{C0C0C0}Aktivitet & 	\cellcolor[HTML]{C0C0C0} Forsøgsperson & 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ gang {[}s{]} \end{tabular} & 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ løb {[}s{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ cykling {[}s{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Afvigelse i detektering\\ af aktivitet {[}\%{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Afvigelse af varighed \\ på 60 sekunder {[}\%{]} \end{tabular} \\ \hline
+			\cellcolor[HTML]{C0C0C0}Aktivitet & 	\cellcolor[HTML]{C0C0C0} Forsøgsperson & 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ gang {[}s{]} \end{tabular} & 	\cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ løb {[}s{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Detektion af \\ cykling {[}s{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Afvigelse i detektering\\ af aktivitet {[}\%{]} \end{tabular} & \cellcolor[HTML]{C0C0C0}\begin{tabular}[c]{@{}c@{}} Afvigelse af varighed \\ på 60~sekunder {[}\%{]} \end{tabular} \\ \hline
         \multirow{5}{*}{Gang}                                                     & F1             & 39,9                                                                                                & 1,1                                                                                              & 0  & 2,8   & -31,7                                                                                                \\
 		& F2             & 40,6                                                                                                & 0                                                                                                & 0   & 0      & -32,3                                                                                            \\
 		& F3             & 39                                                                                                  & 2                                                                                                & 0       & 5,1    & -31,7                                                                                          \\
@@ -58,7 +58,7 @@ Resultatet fra de forskellige tests ses i \tabref{tab:samlet_sys_test1}
 		\label{tab:samlet_sys_test1}
 \end{table}\vspace{-.25cm}
 Der ses i \tabref{tab:samlet_sys_test1}, at GUIen hovedsageligt optager den pågældende aktivitet. Ved målingen, hvor der ikke blev udført en aktivitet, bliver der ikke detekteret nogen aktivitet i GUIen. Dette fremgår imidlertid ikke i \tabref{tab:samlet_sys_test1}. \\
-Overordnet for detekteringen af aktiviteterne er den største afvigelse på 5,13\%. Dermed overholder systemet kravet om, at der må være en maksimal afvigelse på 10\% i forhold til detektion af aktivitet. Der ses dog også i \tabref{tab:samlet_sys_test1}, at GUIen detekterer cirka 40 sekunders data $\pm$1 sekund, selvom dataopsamlingen varer i 60 sekunder. Dette giver en maksimal afvigelse på -40\% af den totale detekterede varighed i forhold til varigheden fra systemets start. Systemet overholder dermed ikke kravet om, at der må være en maksimal afvigelse på 10\% i forhold til detektering af varighed.
+Overordnet for detekteringen af aktiviteterne er den største afvigelse på 5,13\%. Dermed overholder systemet kravet om, at der må være en maksimal afvigelse på 10\% i forhold til detektion af aktivitet. Der ses dog også i \tabref{tab:samlet_sys_test1}, at GUIen detekterer cirka 40~sekunders data $\pm$1~sekund, selvom dataopsamlingen varer i 60~sekunder. Dette giver en maksimal afvigelse på -40\% af den totale detekterede varighed i forhold til varigheden fra systemets start. Systemet overholder dermed ikke kravet om, at der må være en maksimal afvigelse på 10\% i forhold til detektering af varighed.
 
 Der foretages yderligere en test af systemet, hvor forsøgspersonerne først skal forsøge at gå ved en bestemt hastighed og derefter løbe ved samme hastighed. Derved testes systemet ved en hastighed, som både kan være gang og løb, for at undersøge systemets reaktion herfra. Fremgangsmåden for testen er tilsvarende forrige test, hvor hastigheden til denne test er 8~km/t. Hastigheden vælges på baggrund af pilotforsøget samt studier. I pilotforsøget skiftede hver forsøgsperson fra gang til løb under hastighedsstigningen mellem 8~km/t og 10~km/t. Derudover hævder studier, at 6,4~km/t svarer til rask gang mens 9,7~km/t er langsomt løb. 8~km/t vælges derfor, da denne hastighed ligger mellem gang og løb. \citep{Miles2007} Resultatet fra denne test ses i \tabref{tab:samletsys_8kmt}
 \begin{table}[H]
@@ -84,7 +84,7 @@ Der foretages yderligere en test af systemet, hvor forsøgspersonerne først ska
 Der ses i \tabref{tab:samletsys_8kmt}, at når hastigheden for aktiviteten ikke er klar gang eller løb for forsøgspersonen, så vil den procentvise afvigelse stige markant vedrørende resultatet for gang. Dette grunder i, at 8~km/t vurderes som værende meget rask gang fra hver forsøgsperson. Derfor vil g-påvirkningen af accelerometerets y-akse også blive påvirket med mere kraft end ved normal gang. Der ses, at forsøgsperson 1 og 2 har lavere afvigelse for gangsignalet end forsøgsperson 3 til 5.
 
 Afslutningsvis testes spændingsforbruget af den eksterne spændingsforsyning, som beskrevet i \secref{spaendingsforsyning}. Testen foregår således, at den eksterne spændingsforsyning indeholder nyudskiftede batterier og herefter måles outputspændingsniveauet. Efterfølgende bliver spændingsforbruget målt hver halve time under den samlede systemtest. Der antages, at spændingsforbruget er lineært faldende, hvorfor en gennemsnitsværdi for spændingsforbruget per time udregnes. \\
-Spændingsforsyningen leverede 3,19~V fra starten af testen. Resultatet af de efterfølgende fem målinger ses i \tabref{tab:samlet_sys_batteri}
+Spændingsforsyningen leverede 3,19~V fra starten af testen. Resultatet af de efterfølgende fem målinger ses i \tabref{tab:samlet_sys_batteri}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -110,4 +110,4 @@ Med antagelse af lineært forhold vil spændingsforsyningen falde med 0,0956~V p
 \frac{0,79~V}{0,0956~V/t} = \text{8,3~t}
 \label{eq:samlet_sys2}
 \end{equation}
-I \eqref{eq:samlet_sys2} ses det, at den eksterne spændingsforsyning teoretisk kan få det samlede sytem til at være funktionel i 8,3~timer. Derfor overholder det samlede system ikke kravet om, at det skal besidde batterilevetid i op til 15~timer. 
+I \eqref{eq:samlet_sys2} ses det, at den eksterne spændingsforsyning teoretisk kan få det samlede system til at være funktionel i 8,3~timer. Derfor overholder det samlede system ikke kravet om, at det skal besidde batterilevetid i op til 15~timer. 
