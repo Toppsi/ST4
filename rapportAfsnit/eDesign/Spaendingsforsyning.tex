@@ -2,7 +2,7 @@
 \textit{Dette afsnit beskriver design, implementering og test af spændingsforsyningen til MCUen, der agerer GAP peripheral.}
 
 \subsection{Design}
-MCUen er funktionel ved en spændingstilførsel på 1,71-5,5~V \citep{Semiconductor20164200M,Semiconductor2016PRoC}. GAP central tilsluttes USB, hvormed den får en spænding på 5~V \citep{Semiconductor2016}. Derimod skal GAP peripheral tilkobles en ekstern spændingskilde. Spændingsforsyningen skal derfor levere en spænding indenfor det foreskrevne interval. Ydermere vil det blot være MCUens targetboard, som er funktionel ved en ekstern spændingsforsyning.
+MCUen er funktionel ved en spændingstilførsel på 1,71-5,5~V~\citep{Semiconductor20164200M,Semiconductor2016PRoC}. GAP central tilsluttes USB, hvormed den får en spænding på 5~V~\citep{Semiconductor2016}. Derimod skal GAP peripheral tilkobles en ekstern spændingskilde. Spændingsforsyningen skal derfor levere en spænding indenfor det foreskrevne interval. Ydermere vil det blot være MCUens targetboard, som er funktionel ved en ekstern spændingsforsyning.
 
 Den eksterne spændingsforsyning er en batteriholder til to AAA 1,5~V batterier, som har tilkoblet jord og spændingsoutput. Denne komponent er dermed ikke tilkoblet elnettet, hvorfor der er minimal risiko for et farligt elektrisk shock. Yderligere er spændingsforsyningen mobil, hvilket gør den anvendelig i et mobilt system.
 
@@ -13,7 +13,7 @@ For at kunne forsyne targetboardet på GAP peripheral skal spændingsforsyningen
 Testen udføres på baggrund af de opstillede krav og tilhørende afvigelser opstillet i \secref{krav_spaendingsf}. Kravene beskriver, at spændingsforsyningen skal:
 \begin{itemize}
 	\item Levere mindst 1,71~V og maksimalt 5,5~V til MCUen\fxnote{Alle mikroprocessorer kræver 1,71-5,5~V for at kunne fungere, selvom der står 3,3-5,5~V i databladet for MCUen.}. Der accepteres ikke en spænding uden for grænseværdierne.
-	\item Levere minimum 1,71~V i mindst 15 timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71~V i mindre end 15 timer.
+	\item Levere minimum 1,71~V i mindst 15~timer. Der accepteres ikke, at spændingsforsyningen leverer under 1,71~V i mindre end 15~timer.
 	\item Være mobil og dermed besidde en opsætning som ikke involverer elnettet. Der accepteres ikke en afvigelse i forhold til dette krav.
 \end{itemize}
 Det undersøges hvilket output spændingsforsyningen har, ved benyttelse af to nye AAA 1,5~V batterier. Testen viser her, at spændingsforsyningen har et output på 3,19~V ved disse betingelser.\newline
