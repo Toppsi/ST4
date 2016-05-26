@@ -20,9 +20,9 @@ Signalbehandlingen har til formål at tydeliggøre hælnedslag for derefter at k
 Første del af signalbehandlingen er en filtrering med et elliptisk båndpasfilter, som benyttes til at dæmpe støj. Dette skal være et fjerde ordens elliptisk båndpasfilter med et pasbånd fra 20~Hz til 50~Hz og med en dæmpning på 60~dB\fxnote{og 0.5 dB peak-to-peak ripples - frekvenserne for gang og løb lå mellem 25 og 45}. Båndpasfiltrets knækfrekvenser er valgt ud fra pilotforsøget i \appref{pilot}, hvorfra det vurderes at hælnedslag har en frekvens på 25~Hz til 45~Hz. Ved at benytte et båndpass filter bliver det ønskede signal i frekvensområdet 25-45~Hz bevaret, og andre frekvenser dæmpes.\\
 Dernæst bliver signalet behandlet ved brug af en division, som har til formål at sænke amplituden af mindre peaks i signalet. Idet hælnedslaget besidder den største amplitude i signalet, bliver amplituden for hælnedslaget fortsat større end de mindre peaks. Efter signalet er blevet divideret, kvadreres signalet for at øge amplituden af de fremtrædende peaks i signalet. Dermed minimeres de mindre peaks, som ikke er relateret til hælnedslaget, og selve hælnedslaget forstærkes og tydeliggøres. Afslutningsvis filtreres signalet med et moving average filter, som udglatter signalet, hvorved små udslag ikke opfattes, og signalets hælnedslag vil fremstå som et enkelt peak.
 
-Ovenstående signalbehandling bidrager til et signal med peaks, hvormed det er muligt at implementere tærskelværdier til adskillelse af gang og løb. Førend en værdi for denne tærskelværdi kan fastsættes skal dataet fra pilotforsøgets omregnes til ICens enhed for outputdata. ICens arbejdsområde er opgivet i bytes som følge af ICens 16 bits ADC arbejdsområde. Pilotforsøgets data skal derfor omregnes til bytes, idet data fra pilotforsøget er optaget med Shimmer3, som har enheden $m/s^{2}$. Derfor bliver pilotforsøgets data først omregnet til g ved at dividere med tyngdekræften. Herefter omregnes denne værdi i forhold til opløsningen for den 12 bits ADC, som findes i Shimmer3. For at gøre dette benyttes accelerometerets sensitivitet, som er 0,012 g/LSB. Data fra Shimmer3 skal divideres med accelerometerets sensitivitet. Outputet fra Shimmer3 og ICen besidder samme enhed, når data fra Shimmer3 er multipliceret med 16, som det fremgår af \eqref{eq:bitsammenhaeng}.
+Ovenstående signalbehandling bidrager til et signal med peaks, hvormed det er muligt at implementere tærskelværdier til adskillelse af gang og løb. Førend en værdi for denne tærskelværdi kan fastsættes skal dataet fra pilotforsøgets omregnes til ICens enhed for outputdata. ICens arbejdsområde er opgivet i bytes som følge af ICens 16~bits ADC arbejdsområde. Pilotforsøgets data skal derfor omregnes til bytes, idet data fra pilotforsøget er optaget med Shimmer3, som har enheden $m/s^{2}$. Derfor bliver pilotforsøgets data først omregnet til g ved at dividere med tyngdekraften. Herefter omregnes denne værdi i forhold til opløsningen for den 12~bits ADC, som findes i Shimmer3. For at gøre dette benyttes accelerometerets sensitivitet, som er 0,012~g/LSB. Data fra Shimmer3 skal divideres med accelerometerets sensitivitet. Outputet fra Shimmer3 og ICen besidder samme enhed, når data fra Shimmer3 er multipliceret med 16, som det fremgår af \eqref{eq:bitsammenhaeng}.
 \begin{equation}
-\frac{32~g \cdot 2^{16}}{32~g \cdot 2^{12}} = 16
+\frac{32~g~\cdot~2^{16}}{32~g~\cdot~2^{12}}~=~16
 \label{eq:bitsammenhaeng}
 \end{equation}
 Data fra Shimmer3 skal derfor multipliceres med 16, hvilke medfører samme enhed for de to systemer. Det er derefter muligt at vurdere, hvilket tærskelværdier som kan benyttes til at detektere og adskille gang og løb.\\
@@ -45,7 +45,7 @@ De behandlede signaler fra pilotforsøget benyttes med henblik på fastsættelse
 	\caption{I tabellen ses tærskelværdierne for forsøgspersonerne ved aktiviteterne gang og løb.}
 	\label{tab:individuel_taerskel}
 \end{table}\vspace{-0.25cm}
-De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet over et fem sekunders vindue for hver forsøgsperson. Heraf antages det, at tærskelværdierne er repræsentative for den fysiske aktivitet, idet aktiviteten blev udført ved konstant hastighed. Ydermere skal systemet være gældende for en stor population, hvormed en given tærskelværdierne for gang og løb skal være dækkende for alle forsøgspersoner. En samlet tærskelværdi, der er dækkende for samtlige forsøgspersoners data, ses i \tabref{tab:faelles_taerskel}.
+De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet over et fem~sekunders vindue for hver forsøgsperson. Heraf antages det, at tærskelværdierne er repræsentative for den fysiske aktivitet, idet aktiviteten bliver udført ved konstant hastighed. Ydermere skal systemet være gældende for en stor population, hvormed en given tærskelværdierne for gang og løb skal være dækkende for alle forsøgspersoner. En samlet tærskelværdi, der er dækkende for samtlige forsøgspersoners data, ses i \tabref{tab:faelles_taerskel}.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -85,10 +85,10 @@ Algoritmen er designet og implementeret således, at denne kan detektere, hvis b
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/ingen_aktivitet_gl_pseudo.png}
-	\caption{På figuren ses flowchartet over den algoritme, som er ansvarlig for detekteringen af ingen fysisk aktivitet. Algoritmen registrerer, at brugeren ikke er aktiv, når 'time\_count' er større end 1428 samples svarende til 3 sekunder.}
+	\caption{På figuren ses flowchartet over den algoritme, som er ansvarlig for detekteringen af ingen fysisk aktivitet. Algoritmen registrerer, at brugeren ikke er aktiv, når 'time\_count' er større end 1428~samples svarende til tre~sekunder.}
 	\label{fig:ingen_ak_pseudo}
 \end{figure}\vspace{-0.25cm}
-Algoritmen detekterer, at brugeren ikke er fysisk aktiv, hvis time counteren opnår et antal samples, som er større end tre sekunders sampling. Hvis dette er tilfældet, bliver de pågældende variabler nulstillet og tæller forfra.
+Algoritmen detekterer, at brugeren ikke er fysisk aktiv, hvis time counteren opnår et antal samples, som er større end tre~sekunders sampling. Hvis dette er tilfældet, bliver de pågældende variabler nulstillet og tæller forfra.
 
 Algoritmen benytter tærskelværdier til at bestemme, hvorvidt brugeren går eller løber. \Figref{fig:gang_pseudo} viser algoritmens opbygning i forhold til detektering af gang ved brug af tærskelværdier.
 \begin{figure}[H]
@@ -120,14 +120,14 @@ Testen udføres på baggrund af de opstillede krav og tilhørende afvigelser ops
 \end{itemize}
 Algoritmens funktioner testes individuelt og samlet. Dette gøres ved at indsende et simuleret signal, hvis funktion er at simulere gang, løb eller ingen aktivitet. Det simulerede signal er et absolut sinussignal med varierende amplitude. Amplituden for det simulerede signal afgør, hvorvidt signalet simulerer gang, løb eller ingen aktivitet. Et sinussignal er valgt, da dette grundlæggende har samme karateristik som et behandlet gang- eller løbesignal. Der ønskes et ideelt signal, som går over og under tærskelværdierne og derved kan aktivere timeren i algoritmen.
 
-Først testes algoritmens time counter, der giver et udtryk for, om algoritmen detekterer gang korrekt. Der indsendes et absolut sinussignal samplet med 512 Hz, en frekvens på 0,5 Hz og en amplitude på 100. Dette resulterede i tre halvbølger med en amplitude på 100 på 1536 samples, hvilket kan ses som den sorte kurve på \figref{fig:testgraf_timecounter}.
+Først testes algoritmens time counter, der giver et udtryk for, om algoritmen detekterer gang korrekt. Der indsendes et absolut sinussignal samplet med 512~Hz, en frekvens på 0,5~Hz og en amplitude på 100. Dette resulterede i tre halvbølger med en amplitude på 100 på 1536~samples, hvilket kan ses som den sorte kurve på \figref{fig:testgraf_timecounter}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\textwidth]{figures/cDesign/test_timecount_gang.png}
 	\caption{På figuren ses algoritmen for gang, løb og ingen aktivitet vedrørende time counteren. Denne tæller op, indtil en sample har passeret under tærskelværdien, hvorefter den nulstilles. Den sorte kurve illustrerer det simulerede gangsignal, og den røde kurve er time counteren for algoritmen.}
 	\label{fig:testgraf_timecounter}
 \end{figure}\vspace{-0.25cm}
-Algoritmens time counter starter, når signalet bliver indsendt og nulstilles efter en sample går under tærskelværdien. Heraf kan det ses, at varigheden fra en sample er gået over og under en tærskelværdi til, at en sample igen er gået over og under en tærskelværdi er 512 samples. En af algoritmens funktioner er at frasortere det første detekterede peak og dermed nulstille time counter værdien samt peak værdien. Det testes yderligere, om den første peak tælles med i videresendt data. I \tabref{tab:test_res_timecount} ses der, at selvom den første peak visualiseres i \figref{fig:testgraf_timecounter}, medregnes den ikke i de endelige værdier. Disse værdier fås ved hjælp af programmet Realterm, som visualiserer data fra MCUen.
+Algoritmens time counter starter, når signalet bliver indsendt og nulstilles efter en sample går under tærskelværdien. Heraf kan det ses, at varigheden fra en sample er gået over og under en tærskelværdi til, at en sample igen er gået over og under en tærskelværdi er 512~samples. En af algoritmens funktioner er at frasortere det første detekterede peak og dermed nulstille time counter værdien samt peak værdien. Det testes yderligere, om den første peak tælles med i videresendt data. I \tabref{tab:test_res_timecount} ses der, at selvom den første peak visualiseres i \figref{fig:testgraf_timecounter}, medregnes den ikke i de endelige værdier. Disse værdier fås ved hjælp af programmet Realterm, som visualiserer data fra MCUen.
 \begin{table}[H]
 	\centering
 	\begin{tabular}{ccc}
@@ -139,7 +139,7 @@ Algoritmens time counter starter, når signalet bliver indsendt og nulstilles ef
 	\caption{I tabellen ses resultaterne for testen af algoritmens time counter. $\emptyset$ indikerer, at der ikke er modtaget en værdi.}
 	\label{tab:test_res_timecount}
 \end{table}\vspace{-0.25cm}
-Algoritmen er blevet testet på tre halvbølger. Det forventede resultat at varigheden af første peak blev ikke medregnet og videresendt, som et resultat. Algoritmens timer counter fungerer som forventet, og videresender kun det forventede resultat uden afvigelse. Denne del af algoritmen accepteres og er klar til implementering i det samlede system.
+Algoritmen bliver testet på tre halvbølger. Det forventede resultat at varigheden af første peak bliver ikke medregnet og videresendt, som et resultat. Algoritmens timer counter fungerer som forventet, og videresender kun det forventede resultat uden afvigelse. Denne del af algoritmen accepteres og er klar til implementering i det samlede system.
 
 I anden test af algoritmen tjekkes der for, om algoritmen giver korrekt værdi for detektering af den maksimale peak. Denne er designet således, at algoritmen ikke skal registre det første peak i et signal, som første test påviste. På \figref{fig:test_peak_gang} ses resultatet af testen.
 \begin{figure}[H]
@@ -166,14 +166,14 @@ Algoritmen er blevet testet på tre halvbølger, og dermed er det forventede res
 
 Algoritmen for løb bliver ligeledes testet med hensyn til funktionaliteten af time counter og peak detektering. Ved denne test bliver der indsendt et absolut sinussignal med en højere amplitude, som overskrider tærskelværdien vedrørende detektering af løb. Resultaterne af disse test medfører resultater af samme nøjagtighed, som ved detektering af gang. Algoritmen fungerer efter hensigten til detektering af gang og løb.
 
-Algoritmen bør altså undersøge, hvorvidt data fra accelerometret klassificeres som ingen aktivitet, gang eller løb ved hjælp af tærskelværdier. I testen heraf indsendes et simuleret signal, som først overskrider tærskelværdierne for gang på 50. Herefter forekommer en periode på tre sekunder, hvor hverken gang eller løbs tærskelværdi overskrides, hvorfor time counteren vil nulstille efter tre sekunder uden overskridelse af nogen tærskelværdier. Afslutningsvis indsendes værdier, som overskrider tærskelværdierne vedrørende løb på 400. Herigennem bliver både time count og detektering af peaks testet, hvilket fremgår i \figref{fig:test_inaktiv_time} og \figref{fig:test_inaktiv_peak}. 
+Algoritmen bør altså undersøge, hvorvidt data fra accelerometret klassificeres som ingen aktivitet, gang eller løb ved hjælp af tærskelværdier. I testen heraf indsendes et simuleret signal, som først overskrider tærskelværdierne for gang på 50. Herefter forekommer en periode på tre~sekunder, hvor hverken gang eller løbs tærskelværdi overskrides, hvorfor time counteren vil nulstille efter tre~sekunder uden overskridelse af nogen tærskelværdier. Afslutningsvis indsendes værdier, som overskrider tærskelværdierne vedrørende løb på 400. Herigennem bliver både time count og detektering af peaks testet, hvilket fremgår i \figref{fig:test_inaktiv_time} og \figref{fig:test_inaktiv_peak}. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.27]{figures/cDesign/test_timecount_inaktiv.png}
 	\caption{På figuren ses algoritmens time counter, som ved detektering på et simuleret gang-, inaktiv- og løbesignal. Den sorte kurve er det simulerede signal, og den røde kurve viser algoritmens time counter af samples.}
 	\label{fig:test_inaktiv_time}
 \end{figure}\vspace{-0.25cm}
-Der ses i midten af \figref{fig:test_inaktiv_time}, at time counteren nulstilles efter tre sekunder selvom inden tærskelværdier er overskredet. Det er derfor fordelagtigt at smide værdien ud for første detekterede maksimale peak herefter.
+Der ses i midten af \figref{fig:test_inaktiv_time}, at time counteren nulstilles efter tre~sekunder selvom inden tærskelværdier er overskredet. Det er derfor fordelagtigt at smide værdien ud for første detekterede maksimale peak herefter.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.7\textwidth]{figures/cDesign/test_peak_inaktiv.png}
