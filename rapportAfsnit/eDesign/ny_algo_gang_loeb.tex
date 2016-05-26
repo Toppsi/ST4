@@ -64,10 +64,10 @@ Implementeringen af algoritmen for detektering af gang og løb tager udgangspunk
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/cDesign/Algoritme_g_l_basic.png}
-	\caption{På figuren ses et flowchart over den implementerede C kode, som muliggør detektering af ingen fysisk aktivitet, gang og løb. Detektering af maksimalt peak er gældende for alle aktiviteterne. De markerede kasser indeholder yderligere C kode, som forklares uddybende efterfølgende.}
+	\caption{På figuren ses et flowchart over den implementerede C~kode, som muliggør detektering af ingen fysisk aktivitet, gang og løb. Detektering af maksimalt peak er gældende for alle aktiviteterne. De markerede kasser indeholder yderligere C~kode, som forklares uddybende efterfølgende.}
 	\label{fig:basic_algo_g_l}
 \end{figure}\vspace{-0.25cm}
-Algoritmen henter low og high byte fra ICens outputdata, hvorefter de enkelte samples gennemgår en signalbehandling. Denne signalbehandling og den tilhørende C kode forklares yderligere i \figref{fig:signalbehandling_g_l}. Efter samples er blevet behandlet, bliver time counteren startet således, at denne tæller antallet af samples mellem bestemte if løkker i algoritmen. De behandlede samples gemmes i variabel 'Value[0]', hvortil den foregående behandlede sample bliver gemt i variabel 'Value[1]'. På denne måde kan algoritmen undersøge disse variabler i forhold til en tærskelværdi. \\
+Algoritmen henter low og high byte fra ICens outputdata, hvorefter de enkelte samples gennemgår en signalbehandling. Denne signalbehandling og den tilhørende C~kode forklares yderligere i \figref{fig:signalbehandling_g_l}. Efter samples er blevet behandlet, bliver time counteren startet således, at denne tæller antallet af samples mellem bestemte if løkker i algoritmen. De behandlede samples gemmes i variabel 'Value[0]', hvortil den foregående behandlede sample bliver gemt i variabel 'Value[1]'. På denne måde kan algoritmen undersøge disse variabler i forhold til en tærskelværdi. \\
 Efter den nye og foregående sample er placeret i separate variabler, er det muligt at benytte tærskelværdier til at detektere, hvorvidt der er gang, løb eller ingen aktivitet. Disse elementer af algoritmen forklares yderligere i \figref{fig:ingen_ak_pseudo}, \figref{fig:gang_pseudo} og \figref{fig:loeb_pseudo}. Tærskelværdierne for de pågældende fysiske aktiviteter er bestemt i \secref{design_algo_g_l}. \\ 
 Yderligere bliver den maksimale peak bestemt, da denne værdi initialiserer, om det er gang eller løb i GUIen. Dette gøres ved at sammenligne, om den forrige sample er større end den nuværende. Hvis dette er tilfældet, betegnes den forrige sample som værende den maksimale peak værdi. %Når kurven derimod er faldende, vil detektering af maksimale peak ikke udføres.
 
@@ -75,10 +75,10 @@ Algoritmens signalbehandling involverer fire elementer; elliptisk filtrering, di
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.5]{figures/cDesign/Signalbehandling_gl_pesudo.png}
-	\caption{På figuren ses flowchartet over algoritmens signalbehandling udført i C kode. Signalbehandlingen involverer elliptisk filtrering, dividering, kvadrering og en moving average filtrering.}
+	\caption{På figuren ses flowchartet over algoritmens signalbehandling udført i C~kode. Signalbehandlingen involverer elliptisk filtrering, dividering, kvadrering og en moving average filtrering.}
 	\label{fig:signalbehandling_g_l}
 \end{figure}\vspace{-0.25cm}
-Efter datamodtagelse fra ICen bliver samples IIR filtreret ved hjælp af a og b koefficienter for et elliptisk filter. Efterfølgende retureneres de behandlede samples, hvormed disse er klar til næste del af signalbehandlingen. De pågældende a og b koefficienter bestemmes i MATLAB, hvor filterets knækfrekvenser og dæmpning benyttes til at bestemme det elliptiske filters koefficienter. Disse koefficienter skrives i C koden for algoritmen, således filtreringen udføres i henhold til det ønskede filter designet i MATLAB.\\
+Efter datamodtagelse fra ICen bliver samples IIR filtreret ved hjælp af a og b koefficienter for et elliptisk filter. Efterfølgende retureneres de behandlede samples, hvormed disse er klar til næste del af signalbehandlingen. De pågældende a og b koefficienter bestemmes i MATLAB, hvor filterets knækfrekvenser og dæmpning benyttes til at bestemme det elliptiske filters koefficienter. Disse koefficienter skrives i C~koden for algoritmen, således filtreringen udføres i henhold til det ønskede filter designet i MATLAB.\\
 High byte for hver sample bliver herefter bitshiftet med 5, hvilket svarer til at dividere med 32\fxnote{2 opløftet i 5}. Derudover bliver hver sample med både high og low byte kvadreret. Afslutningsvis filtreres hver sample med et moving average filter, hvilket medfører en blødere kurve, som ses på \figref{fig:algoritme_behandling}.
 
 Algoritmen er designet og implementeret således, at denne kan detektere, hvis brugeren ikke er fysisk aktiv. Denne del af algoritmen fremgår af \figref{fig:ingen_ak_pseudo}.
