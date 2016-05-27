@@ -23,7 +23,7 @@ Dataet fra pulssensoreren signalbehandles i form af division med 32 og kvadrerin
 Der ses på \figref{fig:behandlet_puls}, at resultatet af signalbehandlingen er, at amplituden på det behandlede signal er forøget, hvorimod de mindre peaks er formindsket. De største peaks i signalet repræsenterer den systoliske periode i hjertecyklussen, hvilket er det peak, der benyttes til at bestemme pulsen i signalet. For at kunne bestemme pulsen implementeres en tærskelværdi. Denne værdi skal signalet overskride og efterfølgende gå under for at blive detekteret som et systolisk peak. Tærskelværdien for algoritmen bestemmes med udgangspunkt i en pulsmåling, hvor sensoren er placeret på øreflippen. Dette fremgår af \figref{fig:taerskel_puls}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.29]{figures/cDesign/puls_taerskel.png}
+	\includegraphics[scale=0.27]{figures/cDesign/puls_taerskel.png}
 	\caption{På figuren ses en pulsmåling foretaget på øreflippen. Den røde kurve er en signalbehandlet pulsmåling fra øreflippen, og den sorte stiplede linje er algoritmens tærskelværdi, som har en værdi på 400.}
 	\label{fig:taerskel_puls}
 \end{figure}\vspace{-.25cm}

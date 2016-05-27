@@ -1,0 +1,42 @@
+\BOOKMARK [0][-]{titelblad.0}{Titelblad}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Introduktion}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Indledning}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Initierende problemstilling}{chapter.1}% 4
+\BOOKMARK [0][-]{chapter.2}{Problemanalyse}{}% 5
+\BOOKMARK [1][-]{section.2.1}{Fysiologisk effekt af fysisk aktivitet og inaktivitet for b\370rn}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.2}{Udsat aldersgruppe for fysisk inaktivitet}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.3}{Motivationsfaktor til \370get fysisk aktivitet}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.4}{Aktivitetsm\345lere til b\370rn}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.5}{Problemformulering}{chapter.2}% 10
+\BOOKMARK [0][-]{chapter.3}{Probleml\370sning}{}% 11
+\BOOKMARK [1][-]{section.3.1}{L\370sningsstrategi}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Funktionelle krav}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Bev\346gelsesanalyse}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Brugersikkerhed}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.5}{Hardware teori}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.6}{Software teori}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.7}{Resume af pilotfors\370g}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.8}{Kravspecifikationer}{chapter.3}% 19
+\BOOKMARK [0][-]{chapter.4}{Design, implementering og test}{}% 20
+\BOOKMARK [1][-]{section.4.1}{Sp\346ndingsforsyning}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.2}{Mikrokontroller}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.3}{Analog til digital konvertering}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.4}{Bev\346gelsessensor}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.5}{Pulssensor med tilh\370rende algoritme}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.6}{Algoritme til detektering af gang og l\370b}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.7}{Algoritme til detektering af cykling}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.8}{Tr\345dl\370s kommunikation via Bluetooth Low Energy}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.9}{Grafisk bruger interface}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.10}{Det samlede system}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Syntese}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Diskussion}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Konklusion}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.3}{Perspektivering}{chapter.5}% 34
+\BOOKMARK [0][-]{section*.91}{Litteratur}{}% 35
+\BOOKMARK [0][-]{chapter.A}{Pilotfors\370g}{}% 36
+\BOOKMARK [1][-]{section.A.1}{Form\345l}{chapter.A}% 37
+\BOOKMARK [1][-]{section.A.2}{Metode}{chapter.A}% 38
+\BOOKMARK [1][-]{section.A.3}{Databehandling}{chapter.A}% 39
+\BOOKMARK [1][-]{section.A.4}{Diskussion}{chapter.A}% 40
+\BOOKMARK [1][-]{section.A.5}{Konklusion}{chapter.A}% 41
+\BOOKMARK [0][-]{chapter.B}{CY8CKIT-043 PSoC 4-M-Series Prototyping Kit}{}% 42

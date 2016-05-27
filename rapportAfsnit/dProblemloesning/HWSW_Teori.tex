@@ -62,7 +62,7 @@ Mikroprocessorens strømforbrug afhænger yderligere af, hvor meget af indholdet
 	}
 	\caption{I tabellen ses hvilke subsystemer, der er henholdsvis aktive, tilbageholdte, deaktiverede eller frosset under de fem forskellige power modes. Hvis en funktion tilbageholdes, fungerer dens centrale konfiguration ikke, men alle eksterne funktioner er aktive. Når GPIO er frosset, er alle pins låst og kan derfor ikke modtage input- eller sende outputinformation.~\citep{Semiconductor2016PowerMode} (Modificeret)}
 	\label{tab:aktiv_inaktiv_CPU}
-\end{table}\vspace{-0.25cm}
+\end{table}\vspace{-0.245cm}
 I sleep mode tilbageholdes CPUen, hvilket betyder at den venter på ethvert interrupt eller manuel genstart for at vågne op. RAMen bevares, men CPUen skriver eller læser ikke fra den, hvorfor CPUen ikke kører instruktionerne.\fxnote{Den sover ikke helt eller er ikke helt inaktiv - man kan sige, at den sover meget let, for den er til dels inaktiv, men den vækkes meget let.} Denne tilstand er fordelagtig til at reducere strømforbruget mellem hændelser som eksempelvis AD-konvertering.~\citep{Semiconductor2016PowerMode} \\
 Under deep-sleep er højfrekvente clocks deaktiveret, og da ADCen kræver sådanne clocks, er den ligeledes inaktiv under tilstanden. Deep-sleep mode kan benyttes, hvis høj ydeevne i analoge eller digitale enheder ikke kræves for funktionen. Tilstanden deep-sleep kræver specifikke interrupts for at vågne, som eksempelvis et I$^{2}$C eller GPIO interrup. Disse operationssystemer er aktive og fortsat fungerende som slave, hvormed de kan skabe et interrupt.~\citep{Semiconductor2016PowerMode} \\
 Når mikroprocessoren er i hibernate mode, er alle clocks og eksterne enheder deaktiveret. RAMen gemmes, men når et specifikt interrupt vækker mikroprocessoren, nulstilles og genstartes hele enheden. Denne tilstand kan vælges, hvis der kun er behov for periodiske opvågninger, og enheden skal bruge under 1~$\mu$A strøm.~\citep{Semiconductor2016PowerMode} \\
@@ -73,10 +73,10 @@ En UART er en enhed, der implementerer seriel data og er dermed et led mellem et
 Overførsel af data sker asynkront, som det ses på \figref{fig:asynkron}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/bProblemloesning/asynkron.png}
+	\includegraphics[scale=0.42]{figures/bProblemloesning/asynkron.png}
 	\caption{På figuren ses en asynkron dataoverførsel mellem en afsender TX og en modtager RX. Dataenhederne sendes ved brug af et start- og stopbit for alle afsendte enheder.~\citep{Jimb02016} (Modificeret)}
 	\label{fig:asynkron}
-\end{figure}\vspace{-0.25cm}
+\end{figure}\vspace{-0.28cm}
 Ved denne kommunikationsform opererer RX og TX ved to forskellige clocks. For at opnå synkront data sættes et startbit og stopbit\fxnote{alt udenfor disse overføres ikke}, hvilket illustreres på \figref{fig:asynkron}. Data i gaps mellem stop- og startbit kasseres. UARTens opgave er at læse parallel data fra FIFO, som laves om til seriel data. Dette data kan efterfølgende sendes til andre enheder. Når RX i en anden enhed modtager et startbit, laves data om fra seriel til parallel data, hvorefter data kan skrives til modtager-FIFO.~\citep{Jimb02016a,Chun-zhiYin-shuiLun-yao2011}
 
 Nogle enheder indeholder mere end én seriel-linje, og disse enheder fungerer enten som fuld-duplex eller halv-duplex. Fuld-duplex enheder kan både sende og modtage data på samme tid. Halv-duplex enheder sender og modtager data på skift.~\citep{Jimb02016a,Chun-zhiYin-shuiLun-yao2011}
@@ -89,7 +89,7 @@ En CY8CKIT-043 PSoC 4-M besidder 32 interrupt linjer (IRQ), IRQ[0] til og med IR
 Inden et interrupt er programmet i tread mode, hvilket ses på \figref{fig:interrupt}. Når et interrupt finder sted, vil en pin gå høj, og processoren overfører information til den nuværende stack. Dette kaldes for stacking, hvilket får main filen til at gå i handler mode. Her skifter pointeren også stilling fra Main Stack Pointer (MSP) til Process Stack Pointer (PSP). Dette betyder, at den pågældende funktion gemmes og sættes på pause. Det er derved muligt at vende tilbage til præcis samme sted i processen efter interruptet. Koden for ISR eksekveres, hvorefter pinen lægges ned igen og unstacking foregår. Main filen går igen i tread mode, pointeren skifter til MSP og hovedarbejdet fortsættes.~\citep{Tanenbaum2006,Badiger2016}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.61]{figures/bProblemloesning/interrupt.png}
+	\includegraphics[scale=0.55]{figures/bProblemloesning/interrupt.png}
 	\caption{På figuren ses effekten af et interrupt. Det fremgår, at et interrupt afbryder CPUens main rutine, for dermed at eksekvere den kode som er tilhørende ISR. Når ISR er udført vender CPUen tilbage til eksekveringen af main rutinen.~\citep{Tanenbaum2006}}
 	\label{fig:interrupt}
 \end{figure}\vspace{-0.25cm}

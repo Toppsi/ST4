@@ -42,9 +42,9 @@ De behandlede signaler fra pilotforsøget benyttes med henblik på fastsættelse
 		\rowcolor[HTML]{FFFFFF} 
 		F4 & 150 & 1000 \\ \hline
 	\end{tabular}
-	\caption{I tabellen ses tærskelværdierne for forsøgspersonerne ved aktiviteterne gang og løb.}
+	\caption{I tabellen ses tærskelværdierne for gang og løb.}
 	\label{tab:individuel_taerskel}
-\end{table}\vspace{-0.25cm}
+\end{table}\vspace{-0.50cm}
 De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet over et fem~sekunders vindue for hver forsøgsperson. Heraf antages det, at tærskelværdierne er repræsentative for den fysiske aktivitet, idet aktiviteten bliver udført ved konstant hastighed. Ydermere skal systemet være gældende for en stor population, hvormed en given tærskelværdierne for gang og løb skal være dækkende for alle forsøgspersoner. En samlet tærskelværdi, der er dækkende for samtlige forsøgspersoners data, ses i \tabref{tab:faelles_taerskel}.
 \begin{table}[H]
 	\centering
@@ -56,14 +56,14 @@ De individuelle tærskelværdier i \tabref{tab:individuel_taerskel} er fundet ov
 	\end{tabular}
 	\caption{I tabellen ses de tærskelværdier, som for alle forsøgspersoner vil kunne detektere og adskille gang og løb.}
 	\label{tab:faelles_taerskel}
-\end{table}\vspace{-0.25cm}
+\end{table}\vspace{-0.5cm}
 Fastsættelsen af den fælles tærskelværdi bør sikre, at gang og løb er mulige at detektere samt adskille for forsøgspersonernes data. Behandlingen af data fra pilotforsøget påviser, at tærskelværdierne i \tabref{tab:faelles_taerskel} er dækkende for alle forsøgspersonerne, hvorfor disse bibeholdes.
 
 \subsection{Implementering}
 Implementeringen af algoritmen for detektering af gang og løb tager udgangspunkt i data fra pilotforsøget og de designmæssige aspekter, som er beskrevet i \secref{design_algo_g_l}. Algoritmen er designet og implementeret, som det ses på \figref{fig:basic_algo_g_l}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.5]{figures/cDesign/Algoritme_g_l_basic.png}
+	\includegraphics[scale=0.46]{figures/cDesign/Algoritme_g_l_basic.png}
 	\caption{På figuren ses et flowchart over den implementerede C~kode, som muliggør detektering af ingen fysisk aktivitet, gang og løb. Detektering af maksimalt peak er gældende for alle aktiviteterne. De markerede kasser indeholder yderligere C~kode, som forklares uddybende efterfølgende.}
 	\label{fig:basic_algo_g_l}
 \end{figure}\vspace{-0.25cm}

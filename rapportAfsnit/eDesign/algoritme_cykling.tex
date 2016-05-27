@@ -27,7 +27,7 @@ Efter ovenstående signalbehandlingen implementeres signalgenkendelsen, som best
 	\end{tabular}
 	\caption{I tabellen ses det, hvor stor en procentdel de største magnituder udgør af hele frekvensdomænet. Den største procentdel er at finde ved cykling.}
 	\label{tab:individuel_procent}
-\end{table}\vspace{-0.25cm}
+\end{table}\vspace{-0.45cm}
 Mængden af energi ved den maksimale magnitude er markant større for cykling i forhold til gang og løb, hvilket er illustreret i \tabref{tab:individuel_procent}. Dette resulterer i, at 85\% til 91,9\% af energien ligger $\pm$1~Hz omkring den fundne frekvens med den største magnitude. Procentfordelingen bliver ligeledes behandlet for gang og løb for at sikre, at disse ikke har samme spredning i frekvensområdet, hvormed en mulig tærskelværdi til detektering af cykling kan fastsættes. Resultatet heraf viser, at ved gang befinder energien omkring den fundne maksimale peak sig mellem 35,9\% til 48,5\% i forhold til det samlede frekvensspektrum. Ved løb befinder energien omkring den fundne frekvens sig mellem 38,6\% til 60,6\%. Denne forskel benyttes til at adskille cykling fra gang og løb ved at implementere et tærskelværdi på 70\%. Summeringen af magnituden omkring den største magnitude skal dermed udgøre mindst 70\% for at blive klassificeret som cykling. 
 \begin{figure}[H]
 	\centering
